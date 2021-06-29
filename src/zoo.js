@@ -1,4 +1,4 @@
-const data = require('./data');
+const data = require("./data");
 
 function getSpeciesByIds(ids) {
   // seu código aqui
@@ -9,7 +9,7 @@ function getAnimalsOlderThan(animal, age) {
 }
 
 function getEmployeeByName(employeeName) {
-  // seu código aqui
+  if (!employeeName) return {};
 }
 
 function createEmployee(personalInfo, associatedWith) {
