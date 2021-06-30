@@ -9,13 +9,16 @@ function getSpeciesByIds(...ids) {
 function getAnimalsOlderThan(animal, age) {
   // seu código aqui
   const { species } = data;
-  return species.find((specie) => specie.name === animal).residents.every((resident) => resident.age >= age);
+  return species.find((specie) => specie.name === animal)
+    .residents.every((resident) => resident.age >= age);
 }
 
 function getEmployeeByName(employeeName) {
   // seu código aqui
   const { employees } = data;
-  return employees.find(({ firstName, lastName }) => firstName === employeeName || lastName === employeeName) || {};
+  return employees.find(({ firstName, lastName }) =>
+    firstName === employeeName || lastName === employeeName)
+    || {};
 }
 
 function createEmployee(personalInfo, associatedWith) {
@@ -26,7 +29,7 @@ function createEmployee(personalInfo, associatedWith) {
 function isManager(id) {
   // seu código aqui
   const { employees } = data;
-  return employees.find(({ managers }) => managers.includes(id)) ? true : false;
+  return !!employees.find(({ managers }) => managers.includes(id));
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
