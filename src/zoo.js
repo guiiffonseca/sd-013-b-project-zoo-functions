@@ -99,7 +99,9 @@ function getAnimalMap(options) {
   //   return animalsLocation
   // }
 }
+
 const { hours } = data;
+
 function getSchedule(dayName) {
   if (dayName === undefined) {
     const fullSchedule = {
@@ -129,17 +131,21 @@ function getOldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  data.prices.Adult *= ((percentage / 100) + 1);
-  data.prices.Adult = parseFloat(data.prices.Adult.toFixed(2));
-  data.prices.Senior *= ((percentage / 100) + 1);
-  data.prices.Senior = parseFloat(data.prices.Senior.toFixed(2));
-  data.prices.Child *= ((percentage / 100) + 1);
-  data.prices.Child = parseFloat(data.prices.Child.toFixed(2));
+  data.prices.Adult *= percentage + 100;
+  data.prices.Adult = Math.ceil(data.prices.Adult) / 100;
+  data.prices.Senior *= percentage + 100;
+  data.prices.Senior = Math.ceil(data.prices.Senior) / 100;
+  data.prices.Child *= percentage + 100;
+  data.prices.Child = Math.ceil(data.prices.Child) / 100;
   return data.prices;
 }
 
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+  // if (idOrName === undefined) {
+  //   const newObj = {}
+  //   data.employees.forEach((employee, index) => newObj[`${employee.firstName} ${employee.lastName}`] = data.employees[index].responsibleFor);
+  //   return newObj
+  // }
 }
 
 module.exports = {
