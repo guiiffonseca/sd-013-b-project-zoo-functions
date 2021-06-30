@@ -3,7 +3,7 @@ const data = require('./data');
 
 function getSpeciesByIds(...ids) {
   const testArray = [];
-  especies.forEach((atual) => {
+  species.forEach((atual) => {
     if (ids.includes(atual.id) === true) {
       testArray.push(atual);
     }
@@ -12,10 +12,10 @@ function getSpeciesByIds(...ids) {
 }
 
 function getAnimalsOlderThan(animal, age) {
-  // const animalEcontrado = especies.find((atual) => atual.name === animal);
-  // const resposta = animalEcontrado.residents.every((atual) => atual.age === age);
+  const animalEcontrado = species.find((atual) => atual.name === animal);
+  const resposta = animalEcontrado.residents.every((atual) => atual.age > age);
+  return resposta;
 }
-console.log(species);
 
 function getEmployeeByName(employeeName) {
   // seu código aqui
