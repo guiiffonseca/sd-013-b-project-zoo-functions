@@ -75,17 +75,27 @@ const getSchedule = (dayName) => {
   return week;
 };
 
-function getOldestFromFirstSpecies(id) {
-  // seu código aqui
-}
+// seu código aqui
+const getOldestFromFirstSpecies = (id) => {
+  const employeeId = employees.filter((employee) => employee.id === id);
+  const employeeLeader = employeeId[0].responsibleFor;
+  const speciesId = (...responsibleFor) => species.filter((specie) =>
+    responsibleFor.includes(specie.id));
+  const specieId = speciesId(...employeeLeader).reduce((accumulator, curr) => {
+    const { residents } = curr;
+    accumulator.push(...residents);
+    return accumulator;
+  }, []).sort((value1, value2) => value2.age - value1.age);
+  return Object.values(specieId[0]);
+};
 
-function increasePrices(percentage) {
-  // seu código aqui
-}
+// seu código aqui
+const increasePrices = (percentage) => {
+};
 
-function getEmployeeCoverage(idOrName) {
-  // seu código aqui
-}
+// seu código aqui
+const getEmployeeCoverage = (idOrName) => {
+};
 
 module.exports = {
   calculateEntry,
