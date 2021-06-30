@@ -120,9 +120,8 @@ function increasePrices(percentage) {
   prices.Senior = Math.ceil(prices.Senior * (100 + percentage)) / 100;
 }
 
-const getSpeciesNamesInOrder = (...ids) => {
-  return ids.map((id) => species.find((specie) => specie.id === id).name);
-};
+const getSpeciesNamesInOrder = (...ids) => ids.map((id) =>
+  species.find((specie) => specie.id === id).name);
 
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
