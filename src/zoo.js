@@ -12,7 +12,6 @@ function getSpeciesByIds(...ids) {
 se todos os animais daquela espécie possuem a idade mínima especificada */
 
 function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
   const findAnimals = data.species.find((animals) => animals.name === animal);
   const isOlder = findAnimals.residents.every((each) => each.age >= age);
   return isOlder;
@@ -22,7 +21,10 @@ function getAnimalsOlderThan(animal, age) {
  primeiro ou do último nome delas */
 
 function getEmployeeByName(employeeName) {
-  // seu código aqui
+  if (employeeName === undefined) return {};
+  const findEmployees = data.employees.find((employee) =>
+    employee.firstName === employeeName || employee.lastName === employeeName);
+  return findEmployees;
 }
 
 /* 4. A função, a partir de informações recebidas nos parâmetros, é capaz de
