@@ -101,7 +101,6 @@ function calculateEntry(entrants) {
   const valores = data.prices;
   const total = valores.Adult * adult + valores.Child * child + valores.Senior * senior;
   return total;
-
 }
 
 function getAnimalMap(options) {
