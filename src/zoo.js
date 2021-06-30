@@ -52,8 +52,10 @@ function countAnimals(species) {
     allSpecies.reduce((speciesCounter, { name, residents }) => ({ ...speciesCounter, [name]: residents.length }), {});
 }
 
-function calculateEntry(entrants) {
+function calculateEntry({ Adult = 0, Child = 0 , Senior = 0 } = {}) {
   // seu código aqui
+  const { prices } = data;
+  return (Adult * prices.Adult) + (Child * prices.Child) + (Senior * prices.Senior);
 }
 
 function getAnimalMap(options) {
