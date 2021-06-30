@@ -5,6 +5,9 @@ const { species } = data;
 const { employees } = data;
 
 const { prices } = data;
+
+const { hours } = data;
+
 // seu código aqui
 const getSpeciesByIds = (...ids) => {
   if (ids.length === 0) return [];
@@ -54,13 +57,23 @@ const calculateEntry = (entrants) => {
   return total;
 };
 
-function getAnimalMap(options) {
-  // seu código aqui
-}
+// seu código aqui
+const getAnimalMap = (options) => {
+};
 
-function getSchedule(dayName) {
-  // seu código aqui
-}
+// seu código aqui
+const getSchedule = (dayName) => {
+  const days = Object.keys(hours);
+  const week = days.reduce((accumulator, curr) => {
+    accumulator[curr] = `Open from ${hours[curr].open}am until ${hours[curr].close - 12}pm`;
+    return accumulator;
+  }, {});
+  week.Monday = 'CLOSED';
+  if (days.includes(dayName) === true) {
+    return { [dayName]: week[dayName] };
+  }
+  return week;
+};
 
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
