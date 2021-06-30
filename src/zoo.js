@@ -23,12 +23,11 @@ function getEmployeeByName(employeeName) {
   retorno = { ...find };
   return retorno;
 }
-const a = getEmployeeByName('Emery');
-console.log(a);
-// console.log(employees[0]);
+
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  let newObj = {...personalInfo , ...associatedWith}
+  return newObj;
 }
 
 function isManager(id) {
