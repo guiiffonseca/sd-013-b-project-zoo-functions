@@ -39,12 +39,28 @@ function isManager(idParam) {
   // seu código aqui
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   // seu código aqui
+  employees.push({
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  });
 }
 
 function countAnimals(speciesParam) {
   // seu código aqui
+  if (!speciesParam) {
+    const output = {};
+    species.forEach((specie) => {
+      output[specie.name] = specie.residents.length;
+    });
+    return output;
+  }
+  const specieSelected = species.find((specie) => speciesParam === specie.name);
+  return specieSelected.residents.length;
 }
 
 function calculateEntry(entrants) {
