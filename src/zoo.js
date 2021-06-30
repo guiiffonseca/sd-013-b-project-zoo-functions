@@ -1,5 +1,4 @@
 const { species, employees } = require('./data');
-const data = require('./data');
 
 function getSpeciesByIds(...ids) {
   const result = [];
@@ -48,7 +47,11 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 function countAnimals(speciess) {
-  // seu código aqui
+  return speciess
+    ? species.find(({ name }) => name === speciess).residents.length
+    : species.reduce((totalBySpecie, { name, residents }) =>
+      ({ ...totalBySpecie, [name]: residents.length }),
+    {});
 }
 
 function calculateEntry(entrants) {
