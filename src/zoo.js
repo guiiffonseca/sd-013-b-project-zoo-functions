@@ -1,5 +1,5 @@
 /* eslint-disable editorconfig/editorconfig */
-const data = require('./data');
+const data = require("./data");
 
 function getSpeciesByIds(...ids) {
   if (ids === null) {
@@ -20,7 +20,7 @@ function getEmployeeByName(employeeName) {
   }
   return data.employees.find(
     (employee) =>
-      employee.firstName === employeeName || employee.lastName === employeeName,
+      employee.firstName === employeeName || employee.lastName === employeeName
   );
 }
 
@@ -32,18 +32,26 @@ function isManager(id) {
   return data.employees.some((employee) => employee.managers.includes(id));
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  const newEmployee = {
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  };
+  return data.employees.push(newEmployee);
 }
 
 function countAnimals(species) {
   if (!species) {
-    return data.species.reduce((acc, curr) => { 
+    return data.species.reduce((acc, curr) => {
       acc[curr.name] = curr.residents.length;
       return acc;
     }, {});
   }
-  return data.species.find((specie) => specie.name === species).residents.length;
+  return data.species.find((specie) => specie.name === species).residents
+    .length;
 }
 
 function calculateEntry(entrants) {
