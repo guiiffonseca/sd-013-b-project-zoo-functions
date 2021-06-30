@@ -8,7 +8,9 @@ function getSpeciesByIds(...ids) {
 }
 
 function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
+  return data.species.find((specie) => specie.name === animal).residents.every((resident) => resident.age >= age);
+  // data é objeto, .species retorna array, 
+  // Fiz este requisito acompanhando o raciocinio do Nikolai no plantão do Panta no dia 30/06.
 }
 
 function getEmployeeByName(employeeName) {
