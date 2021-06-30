@@ -113,17 +113,22 @@ function getOldestFromFirstSpecies(id) {
     .find(({ id: emId }) => emId === id)
     .responsibleFor[0];
   const oldestFirst = species
-    .find(({ id }) => id === firstSpecies).residents
-    .reduce((oldest, resident) => resident.age > oldest.age ? resident : oldest);
+    .find(({ id: spcId }) => spcId === firstSpecies).residents
+    .reduce((oldest, resident) => {
+      if (resident.age > oldest.age) {
+        return resident;
+      }
+      return oldest;
+    });
   return Object.values(oldestFirst);
 }
 
 function increasePrices(percentage) {
   // seu código aqui
   const { prices } = data;
-  prices.Adult = Math.ceil(prices.Adult * (100 + percentage))/100;
-  prices.Child = Math.ceil(prices.Child * (100 + percentage))/100;
-  prices.Senior = Math.ceil(prices.Senior * (100 + percentage))/100;
+  prices.Adult = Math.ceil(prices.Adult * (100 + percentage)) / 100;
+  prices.Child = Math.ceil(prices.Child * (100 + percentage)) / 100;
+  prices.Senior = Math.ceil(prices.Senior * (100 + percentage)) / 100;
 }
 
 const getSpeciesNamesInOrder = (...ids) => {
@@ -135,10 +140,15 @@ function getEmployeeCoverage(idOrName) {
   // seu código aqui
   const { employees } = data;
   return employees
-    .filter(({id, firstName, lastName }) => !idOrName || idOrName === id || idOrName === firstName || idOrName === lastName)
+    .filter(({ id, firstName, lastName }) =>
+      !idOrName
+      || idOrName === id
+      || idOrName === firstName
+      || idOrName === lastName)
+
     .reduce((coverage, { firstName, lastName, responsibleFor }) => ({
-    ...coverage,
-    [`${firstName} ${lastName}`]: getSpeciesNamesInOrder(...responsibleFor),
+      ...coverage,
+      [`${firstName} ${lastName}`]: getSpeciesNamesInOrder(...responsibleFor),
     }), {});
 }
 
