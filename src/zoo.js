@@ -1,18 +1,19 @@
 const data = require('./data');
 
+const { species, employees } = data;
+
 function getSpeciesByIds(...ids) {
-  return data.species.filter((specie) => ids.includes(specie.id));
+  return species.filter((specie) => ids.includes(specie.id));
 }
 
 function getAnimalsOlderThan(animal, age) {
-  const getAnimal = data.species.find((specie) => specie.name === animal);
-  return getAnimal.residents.every((resident) => resident.age >= age);
+  return species.find((specie) =>
+    specie.name === animal).residents.every((resident) =>
+    resident.age >= age);
 }
 
 function getEmployeeByName(employeeName) {
-  if (!employeeName) {
-    return {};
-  }
+  if (!employeeName) return {};
   return data.employees.find((employee) =>
     employee.firstName === employeeName
     || employee.lastName === employeeName);
@@ -27,24 +28,23 @@ function isManager(id) {
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-  const newEmployee = { id, firstName, lastName, managers, responsibleFor };
-  data.employees.push(newEmployee);
+  employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
 
 function countAllAnimals() {
   const counter = {};
-  data.species.forEach((specie) => {
+  species.forEach((specie) => {
     counter[specie.name] = specie.residents.length;
   });
   return counter;
 }
 
-function countAnimals(species) {
-  if (!species) {
+function countAnimals(animalSpecies) {
+  if (!animalSpecies) {
     return countAllAnimals();
   }
-  return data.species.find((specie) =>
-    (specie.name === species)).residents.length;
+  return species.find((specie) =>
+    (specie.name === animalSpecies)).residents.length;
 }
 
 function calculateEntry(entrants) {
@@ -59,9 +59,54 @@ function calculateEntry(entrants) {
   return Adult + Child + Senior;
 }
 
-function getAnimalMap(options) {
-  // seu código aqui
+function byLocation(name, _) {
+  return name;
 }
+
+function byName(name, residents) {
+  return { [name]: residents.reduce((acc, resident) => {
+    acc.push(resident.name);
+    return acc;
+  }, []) };
+}
+
+function categorized(callback) {
+  return data.species.reduce((acc, specie) => {
+    const { name, location, residents } = specie;
+    if (Object.keys(acc).includes(location)) {
+      acc[location].push(callback(name, residents));
+    } else {
+      acc[location] = [callback(name, residents)];
+    }
+    return acc;
+  }, {});
+}
+
+function filterAndSorted(sex, sorted) {
+  const categorizedByName = categorized(byName);
+  // if (sex) {
+
+  // }
+  // if (sorted) {
+
+  // }
+  return categorizedByName;
+}
+
+// { includeNames: true, sex: 'female', sorted: true }
+function getAnimalMap(options) {
+  if (!options) {
+    return categorized(byLocation);
+  }
+  const { includeNames = false, sex = false, sorted = false } = options;
+  if (!includeNames) {
+    return categorized(byLocation);
+  }
+  if (includeNames) {
+    filterAndSorted(sex, sorted);
+  }
+}
+console.log(getAnimalMap({ includeNames: true, sex: 'female', sorted: true }));
 
 function getSchedule(dayName) {
   // seu código aqui
