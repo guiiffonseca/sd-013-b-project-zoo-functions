@@ -50,7 +50,7 @@ function countAnimals(speciesP) {
   species.forEach((specie) => {
     count[specie.name] = specie.residents.length;
   });
-  if (count[speciesP]) {
+  if (speciesP) {
     return count[speciesP];
   }
   return count;
