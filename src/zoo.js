@@ -132,8 +132,8 @@ function getSchedule(dayName) {
 }
 
 function getOldestFromFirstSpecies(id) {
-  const colab = data.employees.find((colab) => colab.id === id).responsibleFor[0];
-  const especie = data.species.find((idFunc) => idFunc.id === colab).residents;
+  const colaborator = data.employees.find((colab) => colab.id === id).responsibleFor[0];
+  const especie = data.species.find((idFunc) => idFunc.id === colaborator).residents;
 
   const oldest = especie.reduce((acc, curr) => ((acc.age < curr.age) ? curr : acc));
 
