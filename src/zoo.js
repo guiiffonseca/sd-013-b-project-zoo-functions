@@ -127,7 +127,7 @@ function getSchedule(dayName) {
     return days;
   }
   return {
-    [dayName]: `${days[dayName]}`;
+    [dayName]: `${days[dayName]}`
   }
 
 }
