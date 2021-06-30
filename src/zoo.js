@@ -114,11 +114,11 @@ function allDays() {
     if (data.hours[dia].open === 0 && data.hours[dia].close === 0) {
       horario[`${dia}`] = 'CLOSED';
     } else {
-      horario[`${dia}`] = `Open from ${data.hours[dia].open}am until ${data.hours[dia].close - 12}pm`;
+      horario[`${dia}`] = `Open from ${data.hours[dia].open}am until 
+      ${data.hours[dia].close - 12}pm`;
     }
   });
   return horario;
-
 }
 
 function getSchedule(dayName) {
@@ -129,7 +129,6 @@ function getSchedule(dayName) {
   return {
     [dayName]: `${days[dayName]}`,
   };
-
 }
 
 function getOldestFromFirstSpecies(id) {
