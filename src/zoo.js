@@ -21,8 +21,9 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  // seu código aqui
+  return employees.some((person) => person.managers.includes(id));
 }
+// https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/includes
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
