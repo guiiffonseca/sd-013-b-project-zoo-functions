@@ -88,7 +88,7 @@ function countAnimals(species) {
     if (atual.name === species) quant = atual.residents.length;
   });
 
-  return quant
+  return quant;
 }
 
 function calculateEntry(entrants) {
