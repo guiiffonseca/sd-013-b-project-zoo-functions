@@ -39,8 +39,31 @@ function createEmployee(personalInfo, associatedWith) {
   return { ...personalInfo, ...associatedWith };
 }
 
+function getManagers() {
+  const lista = [];
+  data.employees.forEach((atual) => {
+    atual.managers.forEach((gerente) => { lista.push(gerente); });
+  });
+
+  return lista;
+
+}
+
 function isManager(id) {
-  // seu código aqui
+  const managers = getManagers();
+  const result = [];
+  const filtro = (atual) => {
+    managers.forEach((manager) => {
+      if (atual.id === manager && id === manager) result.push(atual);
+    });
+  };
+
+  data.employees.filter(filtro);
+  console.log(result.length);
+
+  if (result.length === 0) return false;
+
+  return true;
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
