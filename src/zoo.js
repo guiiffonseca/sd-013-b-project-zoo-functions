@@ -45,8 +45,14 @@ Quando provido o último nome do funcionário, retorna o objeto do funcionário
  */
 
 function getEmployeeByName(employeeName) {
-  // seu código aqui
+  if (!employeeName) {
+    return {};
+  }
+  const empregados = (empregado) => empregado.firstName === employeeName || empregado.lastName === employeeName;
+  return employees.find(empregados);
 }
+
+console.log(getEmployeeByName('Emery'));
 
 /* 4. IMPLEMENTE A FUNÇÃO createEmployee
 A função, a partir de informações recebidas nos parâmetros, é capaz de criar um objeto equivalente ao de uma pessoa colaboradora, retornando-o
