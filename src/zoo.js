@@ -59,13 +59,13 @@ const sortResidents = ({ residents, sorted, sex }) => { // Função para auxilia
 
 const getAnimalMap = ({ includeNames = false, sorted = false, sex = '' } = {}) => // Default parameters do objeto options.
   species.reduce((accumulador, { name, location, residents }) => {
-    const auxiliarAcc = accumulador;
-    if (!auxiliarAcc[location]) { auxiliarAcc[location] = []; }
-    if (includeNames) {
-      auxiliarAcc[location].push({
+    const auxiliarAcc = accumulador; // Constante para armazenar o auxiliador.
+    if (!auxiliarAcc[location]) { auxiliarAcc[location] = []; } // Negação da constante para reatribuir um array vazio no auxiliar no index da localização
+    if (includeNames) { // Se includeNames for true
+      auxiliarAcc[location].push({ // Adiciona os animais em ordem alfabetica
         [name]: sortResidents({ residents, sorted, sex }),
       });
-    } else {
+    } else { // Senão adiciona eles na ordem normal.
       auxiliarAcc[location].push(name);
     }
     return auxiliarAcc;
