@@ -1,7 +1,8 @@
 const data = require('./data');
 
-function getSpeciesByIds(ids) {
-  
+function getSpeciesByIds(...ids) {
+  if (!ids) return [] // retorna vazio se nãontrar parametro
+  return data.species.filter((specie) => specie.id === i)
 }
 
 function getAnimalsOlderThan(animal, age) {
@@ -9,8 +10,10 @@ function getAnimalsOlderThan(animal, age) {
 }
 
 function getEmployeeByName(employeeName) {
-  // seu código aqui
+if (!employeeName) return {};
+return data.employees.find((employee) => employee.firstName === employeeName || employee.lastName === employeeName)
 }
+
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
