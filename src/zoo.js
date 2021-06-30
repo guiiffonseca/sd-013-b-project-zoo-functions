@@ -1,7 +1,17 @@
-const data = require("./data");
+const data = require('./data');
 
 function getSpeciesByIds(...idsArr) {
   if (idsArr.length === 0) return [];
+  let speciesArr = [];
+  data.species.forEach((specie) => {
+    idsArr.forEach((id) => {
+      if (specie.id === id) {
+        speciesArr = [...speciesArr, specie];
+      }
+    });
+  });
+
+  return speciesArr;
 }
 
 function getAnimalsOlderThan(animal, age) {
