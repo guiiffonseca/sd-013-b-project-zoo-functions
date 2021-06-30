@@ -109,15 +109,15 @@ function getAnimalMap(options) {
 
 function allDays() {
   const chaves = Object.keys(data.hours);
-    const horario = {};
-    chaves.forEach((dia) => {
-      if (data.hours[dia].open === 0 && data.hours[dia].close === 0) {
-        horario[`${dia}`] = 'CLOSED';
-      } else {
-        horario[`${dia}`] = `Open from ${data.hours[dia].open}am until ${data.hours[dia].close - 12}pm`;
-      }
-    });
-    return horario;
+  const horario = {};
+  chaves.forEach((dia) => {
+    if (data.hours[dia].open === 0 && data.hours[dia].close === 0) {
+      horario[`${dia}`] = 'CLOSED';
+    } else {
+      horario[`${dia}`] = `Open from ${data.hours[dia].open}am until ${data.hours[dia].close - 12}pm`;
+    }
+  });
+  return horario;
 
 }
 
@@ -127,8 +127,8 @@ function getSchedule(dayName) {
     return days;
   }
   return {
-    [dayName]: `${days[dayName]}`
-  }
+    [dayName]: `${days[dayName]}`,
+  };
 
 }
 
