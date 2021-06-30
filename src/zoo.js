@@ -47,18 +47,12 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 
 function countAnimals(specie) {
   if (specie === undefined) {
-    return {
-      lions: data.species.find((lion) => lion.name === 'lions').residents.length,
-      tigers: data.species.find((tiger) => tiger.name === 'tigers').residents.length,
-      bears: data.species.find((bear) => bear.name === 'bears').residents.length,
-      penguins: data.species.find((penguin) => penguin.name === 'penguins').residents.length,
-      otters: data.species.find((otter) => otter.name === 'otters').residents.length,
-      frogs: data.species.find((frog) => frog.name === 'frogs').residents.length,
-      snakes: data.species.find((snake) => snake.name === 'snakes').residents.length,
-      elephants: data.species.find((elephant) => elephant.name === 'elephants').residents.length,
-      giraffes: data.species.find((giraffe) => giraffe.name === 'giraffes').residents.length,
-    };
-  }
+    const animals = data.species.reduce((key, value) => {
+      key[value.name] = value.residents.length;
+      return key
+    }, {})
+    return animals
+  };
   return data.species.find((animal) => animal.name === specie).residents.length;
 }
 
