@@ -29,6 +29,9 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
+  const managers = data.employees.map((employee) => employee.managers);
+  const arrayManager = managers.reduce((acc, curr) => acc.concat(curr));
+  return arrayManager.some((employeeId) => employeeId === id);
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
