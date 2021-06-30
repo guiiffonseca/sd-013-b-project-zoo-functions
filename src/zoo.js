@@ -52,7 +52,7 @@ function getEmployeeByName(employeeName) {
   return employees.find(empregados);
 }
 
-console.log(getEmployeeByName('Emery'));
+// console.log(getEmployeeByName('Emery'));
 
 /* 4. IMPLEMENTE A FUNÇÃO createEmployee
 A função, a partir de informações recebidas nos parâmetros, é capaz de criar um objeto equivalente ao de uma pessoa colaboradora, retornando-o
@@ -66,8 +66,16 @@ O que será avaliado
 Cria um novo colaborador a partir de objetos contendo informações pessoais e gerentes e animais gerenciados. */
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  return{
+    id: personalInfo.id,
+    firstName: personalInfo.firstName,
+    lastName: personalInfo.lastName,
+    managers: associatedWith.managers,
+    responsibleFor: associatedWith.responsibleFor
+  }
 }
+
+//console.log(createEmployee(personalInfo, associatedWith));
 
 /* 5. IMPLEMENTE A FUNÇÃO isManager
 Verifica se uma pessoa colaboradora, a partir de seu id, ocupa cargo de gerência.
