@@ -2,7 +2,7 @@ const data = require('./data');
 
 function getSpeciesByIds(...ids) {
   if (ids === '') return [];
-  let final = [];
+  const final = [];
   let acctual = '';
   const filtro = (valor) => valor.id === acctual;
 
