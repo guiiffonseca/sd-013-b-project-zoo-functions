@@ -19,7 +19,12 @@ function getEmployeeByName(employeeName) {
   // entender melhor a desestruturacao
   const { employees } = data;
   // console.log(employees);
-  return employees.find(({ firstName, lastName }) => firstName === employeeName || lastName === employeeName ) || {};
+  return (
+    employees.find(
+      ({ firstName, lastName }) =>
+        firstName === employeeName || lastName === employeeName
+    ) || {}
+  );
 }
 
 function createEmployee(personalInfo, associatedWith) {
