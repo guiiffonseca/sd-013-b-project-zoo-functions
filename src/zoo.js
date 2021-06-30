@@ -2,8 +2,8 @@ const data = require('./data');
 
 const especies = data.species;
 const { employees } = require('./data');
-/* const { hours } = require('./data');
-const { prices } = require('./data'); */
+/* const { hours } = require('./data'); */
+const { prices } = require('./data');
 
 function getSpeciesByIds(...specieId) {
   return specieId.map((especie) => especies.find((especieFind) => especie === especieFind.id));
@@ -45,7 +45,12 @@ function countAnimals(species) {
 }
 
 function calculateEntry(entrants) {
-  // seu código aqui
+  if (entrants) {
+    const visitor = Object.keys(entrants);
+    return visitor.reduce((acumulator, currentValue) =>
+      acumulator + (data.prices[currentValue] * entrants[currentValue]), 0);
+  }
+  return 0;
 }
 
 function getAnimalMap(options) {
