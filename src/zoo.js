@@ -25,7 +25,7 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 }
 
 function countAnimals(species) {
-  // seu código aqui
+  // seu código aqui 
 }
 
 function calculateEntry(entrants) {
