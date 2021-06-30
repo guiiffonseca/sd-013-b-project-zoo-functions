@@ -46,15 +46,29 @@ function countAnimals(specie) {
   if (specie === undefined) {
     const animals = data.species.reduce((key, value) => {
       key[value.name] = value.residents.length;
-      return key
-    }, {})
-    return animals
-  };
+      return key;
+    }, {});
+    return animals;
+  }
   return data.species.find((animal) => animal.name === specie).residents.length;
 }
 
 function calculateEntry(entrants) {
-  // seu código aqui
+  if (entrants === undefined || Object.keys(entrants).length === 0) {
+    return 0;
+  }
+
+  let adult = Object.entries(entrants).find((arr) => arr[0] === 'Adult');
+  adult === undefined ? adult = 0 : adult = data.prices.Adult * adult[1];
+
+  let child = Object.entries(entrants).find((arr) => arr[0] === 'Child');
+  child === undefined ? child = 0 : child = data.prices.Child * child[1];
+
+  let senior = Object.entries(entrants).find((arr) => arr[0] === 'Senior');
+  senior === undefined ? senior = 0 : senior = data.prices.Senior * senior[1];
+
+  const total = adult + child + senior;
+  return total;
 }
 
 function getAnimalMap(options) {
