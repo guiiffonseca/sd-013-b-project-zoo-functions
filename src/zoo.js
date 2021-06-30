@@ -1,10 +1,5 @@
 const data = require('./data');
 
-
-
-
-
-
 function getSpeciesByIds(...ids) {
 
 }
