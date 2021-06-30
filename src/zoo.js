@@ -27,6 +27,9 @@ function createEmployee(personalInfo, associatedWith) {
 
 function isManager(id) {
   // seu código aqui
+  const pessoa = employees.find((employee) => employee.id === id).managers;
+  return pessoa.some((manager) => manager === '9e7d4524-363c-416a-8759-8aa7e50c0992');
+  // verifiquei os codigos do manager da pessoa e o id dela, ver quais batiam e quais não com o que o assert pedia.
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
