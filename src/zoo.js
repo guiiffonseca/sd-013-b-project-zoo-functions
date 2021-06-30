@@ -1,4 +1,4 @@
-const data = require('./data');
+const { species, employees, prices } = require('./data');
 
 /* 1. IMPLEMENTE A FUNÇÃO getSpeciesByIds
 Esta função é responsável pela busca das espécies de animais por id. Ela retorna um array contendo as espécies referentes aos ids passados como parâmetro, podendo receber um ou mais ids.
@@ -13,18 +13,9 @@ Ao receber como parâmetro um único id, retorna um array com a espécie referen
 Ao receber mais de um id, retorna um array com as espécies referentes aos ids */
 
 
-const getSpeciesByIds = (...ids) => {
-  const array = [];
-  ids.forEach((id) => {
-    array.push(species.find((specie) => specie.id === id));
-  });
-  array.forEach((index) => {
-    if (index === undefined) {
-      return [];
-    }
-  });
-  return array;
-};
+function getSpeciesByIds(...ids) {
+  return ids.map((id) => species.find((specie) => specie.id === id));
+}
 
 /* 2. IMPLEMENTE A FUNÇÃO getAnimalsOlderThan
 Esta função, a partir do nome de uma espécie e uma idade mínima, verifica se todos os animais daquela espécie possuem a idade mínima especificada
@@ -37,8 +28,11 @@ O que será avaliado
 Ao passar o nome de uma espécie e uma idade, testa se todos os animais desta espécie possuem a idade mínima especificada */
 
 function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
+  const animals = species.find((specie) => specie.name === animal);
+  return animals.residents.every((animal) => animal.age >= age);
 }
+
+// console.log(getAnimalsOlderThan('otters', 7))
 
 /* 3. IMPLEMENTE A FUNÇÃO getEmployeeByName
 Esta função é responsável pela busca das pessoas colaboradoras através do primeiro ou do último nome delas
