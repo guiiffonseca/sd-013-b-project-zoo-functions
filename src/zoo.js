@@ -31,7 +31,10 @@ function getEmployeeByName(employeeName) {
  criar um objeto equivalente ao de uma pessoa colaboradora, retornando-o */
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  return {
+    ...personalInfo,
+    ...associatedWith,
+  };
 }
 
 /* 5. Verifica se uma pessoa colaboradora, a partir de seu id, ocupa cargo de
