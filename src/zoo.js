@@ -11,17 +11,13 @@ function getSpeciesByIds(...ids) {
 // console.log(species);
 // console.log(Array.isArray(data.species));
 function getAnimalsOlderThan(animal, age) {
- let retorno = species.find((value)=> {
-    return value.name === animal;
-  });
-  let arrayInfo = retorno.residents;
-   let BolleanValue = arrayInfo.every((value)=>{
-    return value.age >= age;
-  })
-  return BolleanValue ;
+  const retorno = species.find((value) => value.name === animal);
+  const arrayInfo = retorno.residents;
+  const BolleanValue = arrayInfo.every((value) => value.age >= age);
+  return BolleanValue;
 }
-let a = getAnimalsOlderThan('penguins', 10); //false
-let b = getAnimalsOlderThan('otters', 7); //true
+const a = getAnimalsOlderThan('penguins', 10); // false
+const b = getAnimalsOlderThan('otters', 7); // true
 console.log(`tem que dar false ${a} \n tem que dar true ${b}`);
 
 function getEmployeeByName(employeeName) {
