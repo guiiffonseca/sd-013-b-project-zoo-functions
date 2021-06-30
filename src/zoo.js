@@ -7,9 +7,11 @@ const getSpeciesByIds = (...ids) => {
   return species.filter((specie) => ids.includes(specie.id));
 };
 
-function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
-}
+// seu código aqui
+const getAnimalsOlderThan = (animal, age) => {
+  const animalName = species.find((specie) => specie.name === animal);
+  return animalName.residents.every((resident) => resident.age >= age);
+};
 
 function getEmployeeByName(employeeName) {
   // seu código aqui
