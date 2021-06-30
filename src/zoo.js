@@ -14,6 +14,20 @@ function getSpeciesByIds(...ids) {
 
 function getAnimalsOlderThan(animal, age) {
   // seu código aqui
+  let returnBollean = true;
+  species.reduce((_, currentValue) => {
+    if (currentValue.name === animal) {
+      currentValue.residents.reduce((acumulador, currentValueResidents) => {
+        if (currentValueResidents.age <= age) {
+          returnBollean = false;
+        }
+        return undefined;
+      }, []);
+    }
+    return undefined;
+  }, []);
+
+  return returnBollean;
 }
 
 function getEmployeeByName(employeeName) {
