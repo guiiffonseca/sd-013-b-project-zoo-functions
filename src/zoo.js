@@ -8,7 +8,7 @@ como parâmetro, podendo receber um ou mais ids. */
 function getSpeciesByIds(...ids) {
   const animalSpecies = [];
   ids.forEach((givenId) =>
-    animalSpecies.push(...species.filter((specimen) => specimen.id === givenId)));
+    animalSpecies.push(...data.species.filter((specimen) => specimen.id === givenId)));
   return animalSpecies;
 }
 
