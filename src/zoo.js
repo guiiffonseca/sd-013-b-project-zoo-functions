@@ -1,3 +1,4 @@
+const { employees } = require('./data');
 const data = require('./data');
 
 /* 1. Esta função é responsável pela busca das espécies de animais por id.
@@ -41,7 +42,9 @@ function createEmployee(personalInfo, associatedWith) {
  gerência. */
 
 function isManager(id) {
-  // seu código aqui
+  const isLeader = employees.some((worker) =>
+    worker.managers.find((workerId) => workerId === id));
+  return isLeader;
 }
 
 /* 6. A função irá adicionar uma nova pessoa colaboradora ao array employees,
