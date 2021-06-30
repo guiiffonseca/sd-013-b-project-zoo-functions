@@ -18,7 +18,8 @@ function getAnimalsOlderThan(animal, idade) {
 function getEmployeeByName(employeeName) {
   if (employeeName) {
     // eslint-disable-next-line max-len
-    return employees.find((employee) => employee.firstName === employeeName || employee.lastName === employeeName);
+    return employees.find((employee) => employee.firstName === employeeName 
+    || employee.lastName === employeeName);
   }
   return {};
 }
