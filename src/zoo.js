@@ -1,4 +1,4 @@
-const { species } = require('./data');
+const { species, employees } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -13,23 +13,25 @@ function getSpeciesByIds(...ids) {
 }
 
 function getAnimalsOlderThan(animal, age) {
-  let result = true;
   const currentSpecie = species.find((specie) => specie.name === animal);
 
-  currentSpecie.residents.forEach((resident) => {
-    if (resident.age < age) {
-      result = false;
-    }
-  });
+  let result = currentSpecie.residents.every((resident) => resident.age >= age);
 
   return result;
 }
 
-getAnimalsOlderThan('penguins', 90);
-
 function getEmployeeByName(employeeName) {
-  // seu código aqui
+  let result = {};
+
+  employees.forEach((employee) => {
+    if (employee.firstName === employeeName || employee.lastName === employeeName) {
+      result = employee;
+    }
+  })
+  
+  return result;
 }
+// ||
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
