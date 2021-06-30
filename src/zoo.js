@@ -8,10 +8,21 @@ function getSpeciesByIds(...ids) {
 
   // console.log(GuardaID);
 }
-
+// console.log(species);
+// console.log(Array.isArray(data.species));
 function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
+ let retorno = species.find((value)=> {
+    return value.name === animal;
+  });
+  let arrayInfo = retorno.residents;
+   let BolleanValue = arrayInfo.every((value)=>{
+    return value.age >= age;
+  })
+  return BolleanValue ;
 }
+let a = getAnimalsOlderThan('penguins', 10); //false
+let b = getAnimalsOlderThan('otters', 7); //true
+console.log(`tem que dar false ${a} \n tem que dar true ${b}`);
 
 function getEmployeeByName(employeeName) {
   // seu código aqui
