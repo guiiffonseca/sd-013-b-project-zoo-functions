@@ -7,12 +7,15 @@ function getSpeciesByIds(...getId) {
 }
 
 function getAnimalsOlderThan(animal, age) {
-  return data.species.find((id) => id.name === animal)
-  .residents.every((resident) => resident.age > age);
+  return data
+    .species.find((id) => id.name === animal)
+    .residents.every((resident) => resident.age > age);
 }
 
 function getEmployeeByName(employeeName) {
-  if (typeof employeeName === 'undefined') return {};
+  if (typeof employeeName === 'undefined') {
+  return {};
+  }
   return data.employees.find((employee) => employee.firstName === employeeName || employee.lastName === employeeName);
 }
 
