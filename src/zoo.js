@@ -77,7 +77,24 @@ function getAnimalMap(options) {
 }
 
 function getSchedule(dayName) {
-  // seu código aqui
+  const objeto = {};
+  const { hours } = data;
+  Object.keys(hours).forEach((day) => {
+    if (hours[day].close - hours[day].open === 0) {
+      objeto[day] = 'CLOSED';
+      return;
+    }
+    objeto[day] = `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`;
+  });
+
+  if (!dayName) {
+    return objeto;
+  }
+
+  const total = {};
+  total[dayName] = objeto[dayName];
+
+  return total;
 }
 
 function getOldestFromFirstSpecies(id) {
