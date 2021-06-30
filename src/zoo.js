@@ -1,8 +1,14 @@
 const data = require('./data');
 
-function getSpeciesByIds(ids) {
+// função auxiliar para getSpeciesByIds. Poderia ficar dentro da função mensionada,
+// mas optei por deixar fora para que possa ser usada em outro momento, se necessário
+const getSpecieById = (id) => data.species.filter((specie) => (specie.id === id));
+
+function getSpeciesByIds(...ids) {
   // seu código aqui
-  
+  // return ids.map((id) => data.species.filter((specie) => (specie.id === id)));
+  // o MAP não funcionou, porque retornou um array do array [[{ lista }]]
+  return ids.reduce((acc, currentValue) => acc.concat(getSpecieById(currentValue)), []);
 }
 
 function getAnimalsOlderThan(animal, age) {
