@@ -4,15 +4,17 @@ function getSpeciesByIds(...ids) {
   const species = [];
 
   ids.forEach((id) => {
-    const filteredSpecies = data.species.filter((kind) => kind.id === id);
-    species.push(...filteredSpecies);
+    const foundSpecies = data.species.find((kind) => kind.id === id);
+    species.push(foundSpecies);
   });
 
   return species;
 }
 
-function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
+function getAnimalsOlderThan(speciesName, age) {
+  const { residents } = data.species.find(({ name }) => name === speciesName);
+
+  return residents.every((animal) => animal.age >= age);
 }
 
 function getEmployeeByName(employeeName) {
