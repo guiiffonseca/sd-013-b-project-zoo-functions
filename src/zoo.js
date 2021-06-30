@@ -22,7 +22,7 @@ function getEmployeeByName(employeeName) {
   return (
     employees.find(
       ({ firstName, lastName }) =>
-        firstName === employeeName || lastName === employeeName
+        firstName === employeeName || lastName === employeeName,
     ) || {}
   );
 }
