@@ -1,7 +1,7 @@
-const data = require('./data');
+const data = require("./data");
 
-function getSpeciesByIds(ids) {
-  // seu código aqui
+function getSpeciesByIds(...idsArr) {
+  if (idsArr.length === 0) return [];
 }
 
 function getAnimalsOlderThan(animal, age) {
