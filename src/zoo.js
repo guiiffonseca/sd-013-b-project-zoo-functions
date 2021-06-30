@@ -114,8 +114,8 @@ function allDays() {
     if (data.hours[dia].open === 0 && data.hours[dia].close === 0) {
       horario[`${dia}`] = 'CLOSED';
     } else {
-      horario[`${dia}`] = `Open from ${data.hours[dia].open}am until 
-      ${data.hours[dia].close - 12}pm`;
+      const open = `Open from ${data.hours[dia].open}am`;
+      horario[`${dia}`] = `${open} until ${data.hours[dia].close - 12}pm`;
     }
   });
   return horario;
