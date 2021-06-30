@@ -61,9 +61,16 @@ function countAnimals(species) {
 }
 
 function calculateEntry(entrants) {
-  // seu código aqui
-}
+  if (entrants === undefined) {
+    return 0;
+  }
+  let entryTotal = 0;
+  Object.keys(entrants).forEach((personType) => {
+    entryTotal += data.prices[personType] * entrants[personType];
+  });
 
+  return entryTotal;
+}
 function getAnimalMap(options) {
   // seu código aqui
 }
