@@ -33,7 +33,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 function countAnimals(especies) {
   const quantity = {};
   if (!especies) {
-    species.forEach((animal) => (quantity[animal.name] = animal.residents.length));
+    species.forEach((animal) => { quantity[animal.name] = animal.residents.length });
     return quantity;
   } return species.find((specie) => specie.name === especies).residents.length;
 }
@@ -43,8 +43,8 @@ function calculateEntry(entrants) {
   const senPrice = prices.Senior;
   const chiPrice = prices.Child;
 
-  if (!entrants || Object.entries(entrants).length === 0 ) return 0;
-  else {
+  if (!entrants || Object.entries(entrants).length === 0) return 0;
+  {
     const { Adult = 0, Child = 0, Senior = 0 } = entrants;
     return Adult * adPrice + Child * chiPrice + Senior * senPrice;
   }
