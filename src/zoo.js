@@ -17,7 +17,6 @@ function getEmployeeByName(employeeName) {
   if (!employeeName) {
     return {};
   }
-
 }
 
 function createEmployee(personalInfo, associatedWith) {
