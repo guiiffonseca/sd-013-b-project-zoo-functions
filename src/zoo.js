@@ -44,9 +44,9 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 
 function countAnimals(specie) {
   if (specie === undefined) {
-    const animals = data.species.reduce((key, value) => {
-      key[value.name] = value.residents.length;
-      return key;
+    const animals = data.species.reduce((acc, value) => {
+      acc[value.name] = value.residents.length;
+      return acc;
     }, {});
     return animals;
   }
@@ -57,10 +57,10 @@ function calculateEntry(entrants) {
   if (entrants === undefined || Object.keys(entrants).length === 0) {
     return 0;
   }
-  const adultPrice = data.prices.Adult
-  const childPrice = data.prices.Child
-  const seniorPrice = data.prices.Senior
-  const { Adult = 0, Child = 0, Senior = 0 } = entrants
+  const adultPrice = data.prices.Adult;
+  const childPrice = data.prices.Child;
+  const seniorPrice = data.prices.Senior;
+  const { Adult = 0, Child = 0, Senior = 0 } = entrants;
   const total = (adultPrice * Adult) + (childPrice * Child) + (seniorPrice * Senior);
   return total;
 }
