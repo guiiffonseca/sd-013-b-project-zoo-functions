@@ -1,21 +1,18 @@
-const data = require('./data');
+const { employees, hours, prices, species } = require('./data');
 
 function getSpeciesByIds(...ids) {
   // seu código aqui
-  const { species } = data;
   return species.filter((specie) => ids.includes(specie.id));
 }
 
 function getAnimalsOlderThan(animal, age) {
   // seu código aqui
-  const { species } = data;
   return species.find((specie) => specie.name === animal)
     .residents.every((resident) => resident.age >= age);
 }
 
 function getEmployeeByName(employeeName) {
   // seu código aqui
-  const { employees } = data;
   return employees.find(({ firstName, lastName }) =>
     firstName === employeeName || lastName === employeeName)
     || {};
@@ -28,13 +25,11 @@ function createEmployee(personalInfo, associatedWith) {
 
 function isManager(id) {
   // seu código aqui
-  const { employees } = data;
   return !!employees.find(({ managers }) => managers.includes(id));
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   // seu código aqui
-  const { employees } = data;
   employees.push({
     id,
     firstName,
@@ -44,19 +39,17 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   });
 }
 
-function countAnimals(species) {
+function countAnimals(specie) {
   // seu código aqui
-  const { species: allSpecies } = data;
-  return species
-    ? allSpecies.find(({ name }) => name === species).residents.length
-    : allSpecies.reduce((speciesCounter, { name, residents }) =>
+  return specie
+    ? species.find(({ name }) => name === specie).residents.length
+    : species.reduce((speciesCounter, { name, residents }) =>
       ({ ...speciesCounter, [name]: residents.length }),
     {});
 }
 
 function calculateEntry({ Adult = 0, Child = 0, Senior = 0 } = {}) {
   // seu código aqui
-  const { prices } = data;
   return (Adult * prices.Adult) + (Child * prices.Child) + (Senior * prices.Senior);
 }
 
@@ -73,7 +66,6 @@ const sortResidents = ({ residents, sorted, sex }) => {
 
 function getAnimalMap({ includeNames = false, sorted = false, sex = '' } = {}) {
   // seu código aqui
-  const { species } = data;
   return species.reduce((animalMap, { name, location, residents }) => {
     const animalMapAux = animalMap;
     if (!animalMapAux[location]) { animalMapAux[location] = []; }
@@ -97,7 +89,6 @@ const formatDay = ({ open, close }) => {
 
 function getSchedule(dayName) {
   // seu código aqui
-  const { hours } = data;
   return dayName
     ? { [dayName]: formatDay(hours[dayName]) }
     : Object.keys(hours).reduce((schedule, day) => ({
@@ -108,7 +99,6 @@ function getSchedule(dayName) {
 
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
-  const { species, employees } = data;
   const firstSpecies = employees
     .find(({ id: emId }) => emId === id)
     .responsibleFor[0];
@@ -125,20 +115,17 @@ function getOldestFromFirstSpecies(id) {
 
 function increasePrices(percentage) {
   // seu código aqui
-  const { prices } = data;
   prices.Adult = Math.ceil(prices.Adult * (100 + percentage)) / 100;
   prices.Child = Math.ceil(prices.Child * (100 + percentage)) / 100;
   prices.Senior = Math.ceil(prices.Senior * (100 + percentage)) / 100;
 }
 
 const getSpeciesNamesInOrder = (...ids) => {
-  const { species } = data;
   return ids.map((id) => species.find((specie) => specie.id === id).name);
 };
 
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
-  const { employees } = data;
   return employees
     .filter(({ id, firstName, lastName }) =>
       !idOrName
