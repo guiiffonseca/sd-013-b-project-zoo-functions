@@ -1,18 +1,16 @@
 const { species } = require('./data');
 const data = require('./data');
 
-function getSpeciesByIds(...ids) { // ids = [arr]
+function getSpeciesByIds(...ids) {
   const result = [];
 
   ids.forEach((id) => {
-    const specie = species.find((specie) => specie.id === id);
-    result.push(specie)
+    const specie = species.find((animal) => animal.id === id);
+    result.push(specie);
   });
-  
+
   return result;
 }
-
-getSpeciesByIds();
 
 function getAnimalsOlderThan(animal, age) {
   // seu código aqui
@@ -34,7 +32,7 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
 }
 
-function countAnimals(species) {
+function countAnimals(speciess) {
   // seu código aqui
 }
 
