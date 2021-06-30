@@ -1,5 +1,5 @@
 const data = require('./data');
-// iniciando projeto
+
 function getSpeciesByIds(ids) {
   // seu código aqui
 }
