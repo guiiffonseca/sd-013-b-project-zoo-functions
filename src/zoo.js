@@ -29,11 +29,22 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  // seu código aqui
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+  const checkPerson = (element) => {
+    if (element === undefined) {
+      return [];
+    } return element;
+  };
+  const fullInfos = {
+    id,
+    firstName,
+    lastName,
+    managers: checkPerson(managers),
+    responsibleFor: checkPerson(responsibleFor),
+  };
+  return data.employees.push(fullInfos);
 }
 
 function countAnimals(species) {
