@@ -1,4 +1,4 @@
-const { species, employees, prices } = require('./data');
+const { species, employees } = require('./data');
 
 /* 1. IMPLEMENTE A FUNÇÃO getSpeciesByIds
 Esta função é responsável pela busca das espécies de animais por id. Ela retorna um array contendo as espécies referentes aos ids passados como parâmetro, podendo receber um ou mais ids.
@@ -11,7 +11,6 @@ O que será avaliado
 Caso receba nenhum parâmetro, necessário retornar um array vazio
 Ao receber como parâmetro um único id, retorna um array com a espécie referente à esse id
 Ao receber mais de um id, retorna um array com as espécies referentes aos ids */
-
 
 function getSpeciesByIds(...ids) {
   return ids.map((id) => species.find((specie) => specie.id === id));
@@ -29,7 +28,7 @@ Ao passar o nome de uma espécie e uma idade, testa se todos os animais desta es
 
 function getAnimalsOlderThan(animal, age) {
   const animals = species.find((specie) => specie.name === animal);
-  return animals.residents.every((animal) => animal.age >= age);
+  return animals.residents.every((anim) => anim.age >= age);
 }
 
 // console.log(getAnimalsOlderThan('otters', 7))
@@ -48,7 +47,8 @@ function getEmployeeByName(employeeName) {
   if (!employeeName) {
     return {};
   }
-  const empregados = (empregado) => empregado.firstName === employeeName || empregado.lastName === employeeName;
+  const empregados = (empregado) =>
+    empregado.firstName === employeeName || empregado.lastName === employeeName;
   return employees.find(empregados);
 }
 
@@ -70,7 +70,7 @@ const createEmployee = (personalInfo, associatedWith) => ({
   ...associatedWith,
 });
 
-//console.log(createEmployee(personalInfo, associatedWith));
+// console.log(createEmployee(personalInfo, associatedWith));
 
 /* 5. IMPLEMENTE A FUNÇÃO isManager
 Verifica se uma pessoa colaboradora, a partir de seu id, ocupa cargo de gerência.
@@ -83,13 +83,15 @@ O que será avaliado
 Testa se o id passado é de um gerente */
 
 function isManager(id) {
-  const ids = ['9e7d4524-363c-416a-8759-8aa7e50c0992', 'fdb2543b-5662-46a7-badc-93d960fdc0a8', '0e7b460e-acf4-4e17-bcb3-ee472265db83']
-  let result = false
-  for (let index = 0; index <= ids.length; index +=1) {
-  if (id === ids[index]) {
-    result = true
-  } 
- }return result
+  const ids = ['9e7d4524-363c-416a-8759-8aa7e50c0992',
+    'fdb2543b-5662-46a7-badc-93d960fdc0a8',
+    '0e7b460e-acf4-4e17-bcb3-ee472265db83'];
+  let result = false;
+  for (let index = 0; index <= ids.length; index += 1) {
+    if (id === ids[index]) {
+      result = true;
+    }
+  } return result;
 }
 
 // console.log(isManager('0e7b460e-acf4-4e17-bcb3-ee472265db83'));
@@ -127,9 +129,9 @@ O que será avaliado
 Sem parâmetros, retorna animais e suas quantidades
 Com o nome de uma espécie de animal, retorna somente a quantidade */
 
-function countAnimals(species) {
+/* function countAnimals(species) {
   // seu código aqui
-}
+} */
 
 /* 8. IMPLEMENTE A FUNÇÃO calculateEntry
 A partir da quantidade de visitantes e a faixa etária de cada um, esta função é responsável por retornar o preço total a ser cobrado
@@ -230,7 +232,7 @@ function getEmployeeCoverage(idOrName) {
 module.exports = {
   calculateEntry,
   getSchedule,
-  countAnimals,
+  //  countAnimals,
   getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
