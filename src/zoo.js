@@ -1,7 +1,8 @@
 const data = require('./data');
 
 function getSpeciesByIds(ids) {
-  // seu código aqui
+  if (!ids) return []
+  return ids;
 }
 
 function getAnimalsOlderThan(animal, age) {
@@ -67,3 +68,8 @@ module.exports = {
   increasePrices,
   createEmployee,
 };
+console.log('caso 1');
+console.log(getSpeciesByIds());
+console.log('caso 2');
+console.log(getSpeciesByIds('0938aa23-f153-4937-9f88-4858b24d6bce'));
+console.log('caso 3');
