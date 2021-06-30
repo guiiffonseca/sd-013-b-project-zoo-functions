@@ -40,14 +40,26 @@ function isManager(id) {
   return employees.some(({ managers }) => checkManager(managers, id));
 }
 
-function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+function addEmployee(id, firstName, lastName, mngrs = [], respFor = []) {
   employees.push(
-    createEmployee({ id, firstName, lastName }, { managers, responsibleFor }),
+    createEmployee({ id, firstName, lastName }, { mngrs, respFor }),
   );
 }
 
-function countAnimals(animals) {
-  // seu código aqui
+function countAnimals(speciesName) {
+  if (speciesName) {
+    const foundSpecies = species.find(({ name }) => name === speciesName);
+
+    return foundSpecies.residents.length;
+  }
+
+  const animalCount = {};
+
+  species.forEach(({ name, residents }) => {
+    animalCount[name] = residents.length;
+  });
+
+  return animalCount;
 }
 
 function calculateEntry(entrants) {
