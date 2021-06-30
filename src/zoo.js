@@ -57,17 +57,11 @@ function calculateEntry(entrants) {
   if (entrants === undefined || Object.keys(entrants).length === 0) {
     return 0;
   }
-
-  let adult = Object.entries(entrants).find((arr) => arr[0] === 'Adult');
-  adult === undefined ? adult = 0 : adult = data.prices.Adult * adult[1];
-
-  let child = Object.entries(entrants).find((arr) => arr[0] === 'Child');
-  child === undefined ? child = 0 : child = data.prices.Child * child[1];
-
-  let senior = Object.entries(entrants).find((arr) => arr[0] === 'Senior');
-  senior === undefined ? senior = 0 : senior = data.prices.Senior * senior[1];
-
-  const total = adult + child + senior;
+  const adultPrice = data.prices.Adult
+  const childPrice = data.prices.Child
+  const seniorPrice = data.prices.Senior
+  const { Adult = 0, Child = 0, Senior = 0} = entrants
+  const total = (adultPrice * Adult) + (childPrice * Child) + (seniorPrice * Senior);
   return total;
 }
 
