@@ -1,10 +1,10 @@
-const { species } = require('./data');
+// const { species } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
   const newArray = [];
   ids.forEach((id) => {
-    const speciesFilter = species.filter((specie) => specie.id === id);
+    const speciesFilter = data.species.filter((specie) => specie.id === id);
     newArray.push(...speciesFilter);
   });
   return newArray;
