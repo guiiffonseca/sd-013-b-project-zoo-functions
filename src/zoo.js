@@ -1,4 +1,4 @@
-const { species, employees } = require('./data');
+const { species, employees, prices } = require('./data');
 
 /* 1. IMPLEMENTE A FUNÇÃO getSpeciesByIds
 Esta função é responsável pela busca das espécies de animais por id. Ela retorna um array contendo as espécies referentes aos ids passados como parâmetro, podendo receber um ou mais ids.
@@ -129,9 +129,16 @@ O que será avaliado
 Sem parâmetros, retorna animais e suas quantidades
 Com o nome de uma espécie de animal, retorna somente a quantidade */
 
-/* function countAnimals(species) {
-  // seu código aqui
-} */
+const countAnimals = (animal) => {
+  if (!animal) {
+    const obj = {};
+    species.forEach((specie) => {
+      obj[`${specie.name}`] = specie.residents.length;
+    });
+    return obj;
+  }
+  return species.find((specie) => specie.name === animal).residents.length;
+};
 
 /* 8. IMPLEMENTE A FUNÇÃO calculateEntry
 A partir da quantidade de visitantes e a faixa etária de cada um, esta função é responsável por retornar o preço total a ser cobrado
@@ -232,7 +239,7 @@ function getEmployeeCoverage(idOrName) {
 module.exports = {
   calculateEntry,
   getSchedule,
-  //  countAnimals,
+  countAnimals,
   getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
