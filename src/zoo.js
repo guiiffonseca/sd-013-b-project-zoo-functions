@@ -35,7 +35,7 @@ function isManager(id) {
   return data.employees.some((idM) => idM.managers.find((idT) => idT === id));
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   return data.employees.push({
     id,
     firstName,
