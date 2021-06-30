@@ -1,4 +1,4 @@
-const { species, employees, prices, hours } = require('./data');
+const { species, employees, prices } = require('./data');
 
 /* 1. IMPLEMENTE A FUNÇÃO getSpeciesByIds
 Esta função é responsável pela busca das espécies de animais por id. Ela retorna um array contendo as espécies referentes aos ids passados como parâmetro, podendo receber um ou mais ids.
@@ -203,9 +203,9 @@ function getSchedule(dayName) {
     Friday: 'Open from 10am until 8pm',
     Saturday: 'Open from 8am until 10pm',
     Sunday: 'Open from 8am until 8pm',
-    Monday: 'CLOSED'
-  }
-  if(!dayName){
+    Monday: 'CLOSED',
+  };
+  if (!dayName) {
     return cronogram;
   } return { [dayName]: cronogram[dayName] };
 }
