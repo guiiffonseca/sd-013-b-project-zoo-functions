@@ -74,7 +74,8 @@ function getOldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  const porcentagem = percentage / 100;
+  return prices.Adult * porcentagem && prices.Child * porcentagem && prices.Senior * porcentagem; 
 }
 
 function getEmployeeCoverage(idOrName) {
