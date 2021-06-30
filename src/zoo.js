@@ -24,9 +24,8 @@ function getEmployeeByName(employeeName) {
   return retorno;
 }
 
-
 function createEmployee(personalInfo, associatedWith) {
-  let newObj = {...personalInfo , ...associatedWith}
+  const newObj = { ...personalInfo, ...associatedWith };
   return newObj;
 }
 
