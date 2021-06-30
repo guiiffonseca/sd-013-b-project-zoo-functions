@@ -71,14 +71,28 @@ function calculateEntry(entrants) {
 
   return entryTotal;
 }
+
 function getAnimalMap(options) {
-  // seu código aqui
+
 }
 
 function getSchedule(dayName) {
-  // seu código aqui
+  const fullSchedule = {};
+  Object.keys(data.hours).forEach((key) => {
+    if (data.hours[key].open === data.hours[key].close) {
+      fullSchedule[key] = 'CLOSED';
+    } else {
+      fullSchedule[key] = `Open from ${data.hours[key].open}am \
+until ${data.hours[key].close - 12}pm`;
+    }
+  });
+  if (dayName === undefined) {
+    return fullSchedule;
+  }
+  return { [dayName]: fullSchedule[dayName] };
 }
 
+console.log(getSchedule());
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
 }
