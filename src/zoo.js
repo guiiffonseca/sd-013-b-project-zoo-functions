@@ -54,8 +54,22 @@ function getAnimalMap(options) {
   // seu código aqui
 }
 
+function createPhrase({ open, close }) {
+  return open && close ? `Open from ${open}am until ${close - 12}pm` : 'CLOSED';
+}
+
 function getSchedule(dayName) {
-  // seu código aqui
+  const { hours } = data;
+  const schedule = {};
+  if (dayName) {
+    schedule[dayName] = createPhrase(hours[dayName]);
+    return schedule;
+  }
+  const keys = Object.keys(hours);
+  keys.forEach((key) => {
+    schedule[key] = createPhrase(hours[key]);
+  });
+  return schedule;
 }
 
 function getOldestFromFirstSpecies(id) {
