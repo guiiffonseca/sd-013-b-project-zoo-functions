@@ -27,8 +27,6 @@ function createEmployee(personalInfo, associatedWith) {
   return { ...personalInfo, ...associatedWith };
 }
 
-// console.log(employees)
-// verificar se tem manager e se tiver verificar se o manager tem manager aih ele e um gerente, senao ela nao e
 function isManager(id) {
   const employeFind = employees.find(({ id: employeId }) => employeId === id);
   const employeManager = employeFind.managers[0];
@@ -39,11 +37,18 @@ function isManager(id) {
   return false;
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  employees.push({
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  });
+  return employees;
 }
 
-function countAnimals(species) {
+function countAnimals(speciess) {
   // seu código aqui
 }
 
