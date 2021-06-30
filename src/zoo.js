@@ -5,7 +5,7 @@ function getSpeciesByIds(...ids) {
   if (ids === undefined) {
     return [];
   }
-  const specieId = species.filter((specie) => specie.id === ids[0] || specie.id === ids[1]);
+  const specieId = species.find((specie) => specie.id === ids[0] || specie.id === ids[1]);
   return specieId;
 }
 
@@ -15,8 +15,14 @@ function getAnimalsOlderThan(animal, age) {
   return nameAnimal.every((nameA) => nameA.age > age);
 }
 
+const { employees } = require('./data');
+
 function getEmployeeByName(employeeName) {
-  // seu código aqui
+  if (employeeName === undefined) {
+    return {};
+  }
+  // p = pessoa
+  return employees.find((p) => p.firstName === employeeName || p.lastName === employeeName);
 }
 
 function createEmployee(personalInfo, associatedWith) {
