@@ -30,8 +30,21 @@ function isManager(id) {
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
 }
-function countAnimals(/* species */) {
+
+function countAnimals(specie) {
   // seu código aqui
+  const objeto = {};
+  species.forEach((valor, index) => {
+    objeto[valor.name] = valor.residents.length;
+  });
+  if (specie === undefined) {
+    return objeto;
+  }
+  let counter = 0;
+  species.forEach((valor, index) => {
+    if (valor.name === specie) counter = valor.residents.length;
+  });
+  return counter;
 }
 
 function calculateEntry(entrants) {
