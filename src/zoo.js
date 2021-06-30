@@ -1,7 +1,16 @@
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
+  if (ids === '') return [];
+  let final = [];
+  let acctual = '';
+  const filtro = (valor) => valor.id === acctual;
 
+  ids.forEach((atual) => {
+    acctual = atual;
+    final.push(data.species.filter(filtro)[0]);
+  });
+  return final;
 }
 
 function getAnimalsOlderThan(animal, age) {
