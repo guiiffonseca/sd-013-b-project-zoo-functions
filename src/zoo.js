@@ -14,7 +14,13 @@ function getAnimalsOlderThan(animal, age) {
 }
 
 function getEmployeeByName(employeeName) {
-  // seu código aqui
+  if (employeeName === undefined) { // verifica se tem parametro se não tem retorna objeto vazio
+    return {};
+  }
+  return data.employees.find(((employee) => employee.firstName === employeeName
+  || employee.lastName === employeeName));
+  // procura o parametro na chave de primeiro nome ou ultimo nome do objeto empregado
+  // se achar retorna o objeto.
 }
 
 function createEmployee(personalInfo, associatedWith) {
