@@ -15,9 +15,8 @@ function getAnimalsOlderThan(animal, age) {
 
 function getEmployeeByName(employeeName) {
   const employeeSearch = employees.filter((employee) => 
-    employee.name === employeeName || 
-    employee.lastName === employeeName)
-  .reduce((accumulator, currentValue) => Object.assign(accumulator, currentValue), {});
+    employee.name === employeeName || employee.lastName === employeeName)
+    .reduce((accumulator, currentValue) => Object.assign(accumulator, currentValue), {});
   return employeeSearch;
 }
 
@@ -33,7 +32,7 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
 }
 
-function countAnimals(species) {
+function countAnimals() {
   // seu código aqui
 }
 
