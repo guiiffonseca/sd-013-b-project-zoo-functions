@@ -18,9 +18,8 @@ function getEmployeeByName(employeeName) {
   // Inspirado em Code Review do Rafael Nery Machado
   // entender melhor a desestruturacao
   const { employees } = data;
-  //console.log(employees);
-  const objectEmployee = employees.find(({ firstName, lastName }) => firstName === employeeName || lastName === employeeName ) || {};
-  return objectEmployee;
+  // console.log(employees);
+  return employees.find(({ firstName, lastName }) => firstName === employeeName || lastName === employeeName ) || {};
 }
 
 function createEmployee(personalInfo, associatedWith) {
