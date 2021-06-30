@@ -82,11 +82,43 @@ function calculateEntry(entrants) {
 }
 
 function getAnimalMap(options) {
-  // seu código aqui
+  // const animalsLocation = {};
+  // if (options === undefined) {
+  //   animalsLocation.NE = data.species.filter((specie) => specie.location === 'NE').map((specie) => specie.name);
+  //   animalsLocation.NW = data.species.filter((specie) => specie.location === 'NW').map((specie) => specie.name);
+  //   animalsLocation.SE = data.species.filter((specie) => specie.location === 'SE').map((specie) => specie.name);
+  //   animalsLocation.SW = data.species.filter((specie) => specie.location === 'SW').map((specie) => specie.name);
+  //   return animalsLocation
+  // }
+  // if (options.includeNames === true) {
+  //   animalsLocation.NE = data.species.filter((specie) => specie.location === 'NE').map((specie) => {
+  //     let animalObj = {}
+  //     animalObj[specie.name] = data[specie.residents.filter((resident) => resident.name)]
+  //     return animalsLocation.NE[animalObj]
+  //   });
+  //   return animalsLocation
+  // }
 }
-
+const { hours } = data;
 function getSchedule(dayName) {
-  // seu código aqui
+  if (dayName === undefined) {
+    const fullSchedule = {
+      Tuesday: `Open from ${hours.Tuesday.open}am until ${hours.Tuesday.close - 12}pm`,
+      Wednesday: `Open from ${hours.Wednesday.open}am until ${hours.Wednesday.close - 12}pm`,
+      Thursday: `Open from ${hours.Thursday.open}am until ${hours.Thursday.close - 12}pm`,
+      Friday: `Open from ${hours.Friday.open}am until ${hours.Friday.close - 12}pm`,
+      Saturday: `Open from ${hours.Saturday.open}am until ${hours.Saturday.close - 12}pm`,
+      Sunday: `Open from ${hours.Sunday.open}am until ${hours.Sunday.close - 12}pm`,
+      Monday: 'CLOSED',
+    };
+    return fullSchedule;
+  } if (dayName === 'Monday') {
+    return { Monday: 'CLOSED' };
+  } const newObj = {};
+  const scheduleEntries = Object.entries(data.hours);
+  const dayAndHour = scheduleEntries.find((day, index) => day[index] === dayName);
+  newObj[dayAndHour[0]] = `Open from ${dayAndHour[1].open}am until ${dayAndHour[1].close - 12}pm`;
+  return newObj;
 }
 
 function getOldestFromFirstSpecies(id) {
@@ -97,12 +129,11 @@ function getOldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  const newPercentage = (percentage / 100) + 1;
-  data.prices.Adult *= newPercentage;
+  data.prices.Adult *= ((percentage / 100) + 1);
   data.prices.Adult = parseFloat(data.prices.Adult.toFixed(2));
-  data.prices.Senior *= newPercentage;
+  data.prices.Senior *= ((percentage / 100) + 1);
   data.prices.Senior = parseFloat(data.prices.Senior.toFixed(2));
-  data.prices.Child *= newPercentage;
+  data.prices.Child *= ((percentage / 100) + 1);
   data.prices.Child = parseFloat(data.prices.Child.toFixed(2));
   return data.prices;
 }
