@@ -1,3 +1,4 @@
+const { employees } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -17,6 +18,8 @@ function getEmployeeByName(employeeName) {
   if (!employeeName) {
     return {};
   }
+  return data.employees
+    .find((employee) => employee.firstName === employeeName || employee.lastName === employeeName);
 }
 
 function createEmployee(personalInfo, associatedWith) {
