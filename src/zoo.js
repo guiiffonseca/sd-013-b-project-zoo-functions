@@ -6,8 +6,10 @@ function getSpeciesByIds(...ids) {
 }
 // console.log(getSpeciesByIds('e8481c1d-42ea-4610-8e11-1752cfc05a46'));
 function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
+  const comparName = species.find((specie) => specie.name === animal);
+  return comparName.residents.every((animalAge) => animalAge.age >= age);
 }
+// console.log(getAnimalsOlderThan('lions', 10));
 
 function getEmployeeByName(employeeName) {
   // seu código aqui
