@@ -35,15 +35,9 @@ function createEmployee(personalInfo, associatedWith) {
   };
 }
 
-function isManager(id) {
+function isManager(idParam) {
   // seu código aqui
-  const employeeSelected = employees.find(({ id }) => id === id);
-  console.log(employeeSelected);
-  if(employeeSelected.managers === []) return false;
-  return true;
 }
-
-isManager('0e7b460e-acf4-4e17-bcb3-ee472265db83');
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
