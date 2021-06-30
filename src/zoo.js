@@ -1,3 +1,4 @@
+/* eslint-disable editorconfig/editorconfig */
 const data = require('./data');
 
 function getSpeciesByIds(ids) {
