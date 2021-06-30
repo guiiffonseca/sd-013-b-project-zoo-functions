@@ -22,6 +22,15 @@ function getEmployeeByName(employeeName) {
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
+  const { id, firstName, lastName } = personalInfo;
+  const { managers, responsibleFor } = associatedWith;
+  return {
+    id: `${id}`,
+    firstName: `${firstName}`,
+    lastName: `${lastName}`,
+    managers: `${managers}`.split(/\s*,\s*/),
+    responsibleFor: `${responsibleFor}`.split(/\s*,\s*/),
+  };
 }
 
 function isManager(id) {
