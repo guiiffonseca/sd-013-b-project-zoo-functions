@@ -1,5 +1,3 @@
-// const { species } = require('./data');
-const { species } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -15,10 +13,10 @@ return data.species.find((specie) => specie.name === animal).residents.every((re
 
 function getEmployeeByName(employeeName) {
   // seu código aqui
-  if(!employeeName) {
-    return employeeName = {}
+  if (!employeeName) {
+    employeeName = {};
   }
-  
+  return employeeName;
 }
 
 function createEmployee(personalInfo, associatedWith) {
