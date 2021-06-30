@@ -1,4 +1,4 @@
-const { species } = require('./data');
+const { species, prices } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -56,8 +56,9 @@ function countAnimals(speciesP) {
   return count;
 }
 
-function calculateEntry(entrants) {
+function calculateEntry({Adult = 0, Child = 0, Senior = 0} = {}) {
   // seu código aqui
+  return (Adult * prices.Adult) + (Child * prices.Child) + (Senior * prices.Senior);
 }
 
 function getAnimalMap(options) {
