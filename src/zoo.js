@@ -8,14 +8,15 @@ function getSpeciesByIds(...specieId) {
 
 function getAnimalsOlderThan(animal, age) {
   // seu código aqui
-  return species.some((valor) => {
-    if (valor.name === animal) return valor.residents.every((idade) => idade.age > age);
-  });
+  return species.filter((ani) => ani.name === animal)
+    .every((valor, index) => valor.residents[index].age > age);
 }
 function getEmployeeByName(employeeName) {
   // seu código aqui
-  if(employeeName === undefined) return {}
-  return employees.find((nome) => nome.firstName === employeeName || nome.lastName === employeeName)
+  if (employeeName === undefined) return {};
+  return employees.find((nome) => (
+    nome.firstName === employeeName || nome.lastName === employeeName
+  ));
 }
 
 function createEmployee(personalInfo, associatedWith) {
@@ -30,7 +31,7 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
 }
 
-function countAnimals(species) {
+function countAnimals(/* species */) {
   // seu código aqui
 }
 
