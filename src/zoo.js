@@ -18,11 +18,7 @@ function getEmployeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // return personalInfo = {
-  //   id,
-  //   firstName,
-  //   lastName,
-  // };
+  return { ...personalInfo, ...associatedWith };
 }
 
 function isManager(id) {
