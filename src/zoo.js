@@ -9,14 +9,19 @@ function getSpeciesByIds(...ids) {
   const especieIds = species.filter((especie) => ids.includes(especie.id));
   return especieIds;
 }
-console.log(getSpeciesByIds('0938aa23-f153-4937-9f88-4858b24d6bce'));
 
 function getAnimalsOlderThan(animal, age) {
   // seu código aqui
+  const { species } = data;
+  const getAnimal = species.find((especie) => especie.name === animal);
+  const checkAge = getAnimal.residents.every((element) => element.age >= age);
+  return checkAge;
 }
+console.log(getAnimalsOlderThan('otters', 7));
 
 function getEmployeeByName(employeeName) {
   // seu código aqui
+
 }
 
 function createEmployee(personalInfo, associatedWith) {
