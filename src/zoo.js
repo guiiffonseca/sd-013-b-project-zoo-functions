@@ -5,7 +5,7 @@ function getSpeciesByIds(...ids) {
   if (ids === undefined) {
     return [];
   }
-  const specieId = species.find((specie) => specie.id === ids[0] || specie.id === ids[1]);
+  const specieId = species.filter((specie) => specie.id === ids[0] || specie.id === ids[1]);
   return specieId;
 }
 
@@ -21,7 +21,6 @@ function getEmployeeByName(employeeName) {
   if (employeeName === undefined) {
     return {};
   }
-  // p = pessoa
   return employees.find((p) => p.firstName === employeeName || p.lastName === employeeName);
 }
 
