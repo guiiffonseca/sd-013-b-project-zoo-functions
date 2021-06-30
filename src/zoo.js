@@ -47,45 +47,63 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 function countAnimals(species) {
   // seu código aqui
   const { species: allSpecies } = data;
-  return species ?
-    allSpecies.find(({ name }) => name === species).residents.length :
-    allSpecies.reduce((speciesCounter, { name, residents }) => ({ ...speciesCounter, [name]: residents.length }), {});
+  return species
+    ? allSpecies.find(({ name }) => name === species).residents.length
+    : allSpecies.reduce((speciesCounter, { name, residents }) =>
+      ({ ...speciesCounter, [name]: residents.length }),
+    {});
 }
 
-function calculateEntry({ Adult = 0, Child = 0 , Senior = 0 } = {}) {
+function calculateEntry({ Adult = 0, Child = 0, Senior = 0 } = {}) {
   // seu código aqui
   const { prices } = data;
   return (Adult * prices.Adult) + (Child * prices.Child) + (Senior * prices.Senior);
 }
 
+const sortResidents = ({ residents, sorted, sex }) => {
+  if (sorted) {
+    return residents
+      .filter(({ sex: resSex }) => sex === '' || resSex === sex)
+      .map(({ name }) => name).sort();
+  }
+  return residents
+    .filter(({ sex: resSex }) => sex === '' || resSex === sex)
+    .map(({ name }) => name);
+};
+
 function getAnimalMap({ includeNames = false, sorted = false, sex = '' } = {}) {
   // seu código aqui
   const { species } = data;
   return species.reduce((animalMap, { name, location, residents }) => {
-    !animalMap[location] && (animalMap[location] = []);
-    includeNames ?
-      animalMap[location]
-        .push({
-          [name]: sorted ?
-            residents
-              .filter(({ sex: resSex }) => sex === '' || resSex === sex)
-              .map(({ name }) => name)
-              .sort() :
-            residents
-              .filter(({ sex: resSex }) => sex === '' || resSex === sex)
-              .map(({ name }) => name),
-        }) :
-      animalMap[location].push(name);
-    return animalMap;
+    const animalMapAux = animalMap;
+    if (!animalMapAux[location]) { animalMapAux[location] = []; }
+    if (includeNames) {
+      animalMapAux[location].push({
+        [name]: sortResidents({ residents, sorted, sex }),
+      });
+    } else {
+      animalMapAux[location].push(name);
+    }
+    return animalMapAux;
   }, {});
 }
+
+const formatDay = ({ open, close }) => {
+  if (open === close) {
+    return 'CLOSED';
+  }
+  return `Open from ${open}am until ${close - 12}pm`;
+};
 
 function getSchedule(dayName) {
   // seu código aqui
   const { hours } = data;
-  return dayName ?
-    { [dayName]: hours[dayName].open === hours[dayName].close ? 'CLOSED' : `Open from ${hours[dayName].open}am until ${hours[dayName].close - 12}pm` } :
-    Object.keys(hours).reduce((schedule, day) => ({...schedule, [day]: hours[day].open === hours[day].close ? 'CLOSED' : `Open from ${hours[day].open}am until ${hours[day].close - 12}pm` }), {});
+  return dayName
+    ? { [dayName]: formatDay(hours[dayName]) }
+    : Object.keys(hours).reduce((schedule, day) => ({
+      ...schedule,
+      [day]: formatDay(hours[day]),
+    }), {});
 }
 
 function getOldestFromFirstSpecies(id) {
