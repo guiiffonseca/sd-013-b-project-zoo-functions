@@ -30,12 +30,20 @@ function isManager(id) {
       .some((manager) => manager === id));
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  data.employees.push({id, firstName, lastName, managers, responsibleFor});
 }
 
 function countAnimals(species) {
-  // seu código aqui
+  const totalOfAnimals = {};
+  if (typeof species === 'undefined') {
+    data.species.forEach((specie) => {
+      totalOfAnimals[specie.name] = specie.residents.length;
+    });
+    return totalOfAnimals;
+  }
+  return data.species.find((specie) => specie.name === species)
+    .residents.length;
 }
 
 function calculateEntry(entrants) {
