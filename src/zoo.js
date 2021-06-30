@@ -1,8 +1,13 @@
+const { species } = require('./data');
 const data = require('./data');
 
-function getSpeciesByIds(ids) {
-  // seu código aqui
+function getSpeciesByIds(...ids) {
+  return ids.map((id) => data.species.find((specie) => specie.id === id));
 }
+
+// map - vai percorrer o array e retorna outro array de acordo com a função passada.
+// rest - pega varias strings e junta num array.
+// se não passar nenhum parâmetro o map vai retornar o array vazio, visto q ele ja retorna um array, independente do parâmetro passado, por isso passa no primeiro teste.
 
 function getAnimalsOlderThan(animal, age) {
   // seu código aqui
