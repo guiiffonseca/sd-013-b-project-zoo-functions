@@ -18,7 +18,7 @@ function getEmployeeByName(employeeName) {
   if (employeeName === undefined) {
     return {};
   }
-  return employees.find((work) => work.firstName === employeeName || work.lastName === employeeName);
+  return employees.find((wrk) => wrk.firstName === employeeName || wrk.lastName === employeeName);
 }
 
 function createEmployee(personalInfo, associatedWith) {
