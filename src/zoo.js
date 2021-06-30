@@ -90,11 +90,21 @@ function getSchedule(dayName) {
 }
 
 function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+  const speciesID = data.employees.find((employee) => employee.id === id).responsibleFor[0];
+  const sortedArray = data.species.find((specie) => specie.id === speciesID)
+    .residents.sort((residentA, residentB) => residentB.age - residentA.age);
+  return [sortedArray[0].name, sortedArray[0].sex, sortedArray[0].age];
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  const newPercentage = (percentage / 100) + 1;
+  data.prices.Adult *= newPercentage;
+  data.prices.Adult = parseFloat(data.prices.Adult.toFixed(2));
+  data.prices.Senior *= newPercentage;
+  data.prices.Senior = parseFloat(data.prices.Senior.toFixed(2));
+  data.prices.Child *= newPercentage;
+  data.prices.Child = parseFloat(data.prices.Child.toFixed(2));
+  return data.prices;
 }
 
 function getEmployeeCoverage(idOrName) {
