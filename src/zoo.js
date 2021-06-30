@@ -1,9 +1,4 @@
-const data = require('./data');
-
-const { species } = data;
-const { employees } = data;
-
-// console.log(species)
+const { species, employees } = require('./data');
 
 function getSpeciesByIds(...ids) {
   if (!ids.length) return [];
@@ -32,8 +27,16 @@ function createEmployee(personalInfo, associatedWith) {
   return { ...personalInfo, ...associatedWith };
 }
 
+// console.log(employees)
+// verificar se tem manager e se tiver verificar se o manager tem manager aih ele e um gerente, senao ela nao e
 function isManager(id) {
-  // seu código aqui
+  const employeFind = employees.find(({ id: employeId }) => employeId === id);
+  const employeManager = employeFind.managers[0];
+  if (employeFind.managers.length === 1) {
+    const boss = employees.find(({ id: employeId }) => employeId === employeManager);
+    if (!boss.managers.length) return true;
+  }
+  return false;
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
