@@ -2,22 +2,24 @@ const { species, employees } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
-  const speciesSearch = ids.filter((id) => {
-    const getSpecies = species.find((specie) => id === specie.id);
-    return getSpecies;
-  });
-  return species;
+ // fazer essa ainda
 }
 
 function getAnimalsOlderThan(animal, age) {
-  // const verifyAnimal = (animal === species.name) ? verifyAnimal : animal;
+  const verifyAgeAnimal = species.find((specie) =>
+    specie.name === animal)
+    .residents.every((resident) =>
+      resident.age >= age);
+  return verifyAgeAnimal;
 }
 
 function getEmployeeByName(employeeName) {
-  const employeeSearch = employees.filter((employee) => 
-    employee.name === employeeName || employee.lastName === employeeName)
-    .reduce((accumulator, currentValue) => Object.assign(accumulator, currentValue), {});
-  return employeeSearch;
+  if (employeeName === undefined) {
+    return {};
+  }
+  const employeedName = employees.find((employee) =>
+    employee.firstName === employeeName || employee.lastName === employeeName);
+  return employeedName;
 }
 
 function createEmployee(personalInfo, associatedWith) {
@@ -25,11 +27,14 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  // seu código aqui
+  const thatIsTheManager = employees.find((employee) => employee.id)
+    .managers.some((manager) => manager.includes(id));
+  return thatIsTheManager;
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  const newEmployee = { id, firstName, lastName, managers, responsibleFor };
+  employees.push(newEmployee);
 }
 
 function countAnimals() {
