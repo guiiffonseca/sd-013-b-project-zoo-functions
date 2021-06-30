@@ -1,3 +1,4 @@
+const { prices } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -41,7 +42,11 @@ function countAnimals(species) {
 }
 
 function calculateEntry(entrants) {
-
+  if (typeof entrants === 'undefined' || Object.keys(entrants).length === 0) return 0;
+  const { Adult = 0, Child = 0, Senior = 0 } = entrants;
+  const values = data.prices;
+  const result = values.Adult * Adult + values.Child * Child + values.Senior * Senior;
+  return result;
 }
 
 function getAnimalMap(options) {
