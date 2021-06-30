@@ -3,8 +3,7 @@ const data = require('./data');
 
 function getSpeciesByIds(...ids) {
   // seu código aqui
-  const newSpecieis = ids.map((id) => data.species.find((specie) => specie.id === id))
-  
+  const newSpecieis = ids.map((id) => data.species.find((specie) => specie.id === id));
   return newSpecieis;
 }
 
