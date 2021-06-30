@@ -1,6 +1,7 @@
 const data = require('./data');
 
 const { species } = data;
+const { employees } = data;
 
 function getSpeciesByIds(...ids) {
   return species.filter((objc) =>
@@ -17,9 +18,14 @@ function getAnimalsOlderThan(animal, age) {
   return input;
 }
 
+//value.firstName || employeeName === value.lastName
+
 function getEmployeeByName(employeeName) {
-  // seu código aqui
+  return (employeeName === undefined) ? { ...employeeName } : employees
+    .filter((value) => employeeName === value.firstName || employeeName === value.lastName)[0];
 }
+
+console.log(getEmployeeByName());
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
@@ -33,7 +39,7 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
 }
 
-function countAnimals(species) {
+function countAnimals(specie) {
   // seu código aqui
 }
 
