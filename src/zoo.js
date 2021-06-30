@@ -4,6 +4,7 @@ function getSpeciesByIds(ids) {
   // seu código aqui
 }
 
+//teste 
 function getAnimalsOlderThan(animal, age) {
   // seu código aqui
 }
