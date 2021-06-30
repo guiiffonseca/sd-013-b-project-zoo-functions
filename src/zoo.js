@@ -15,7 +15,7 @@ function getSpeciesByIds(...ids) {
 function getAnimalsOlderThan(animal, age) {
   const currentSpecie = species.find((specie) => specie.name === animal);
 
-  let result = currentSpecie.residents.every((resident) => resident.age >= age);
+  const result = currentSpecie.residents.every((resident) => resident.age >= age);
 
   return result;
 }
@@ -27,8 +27,8 @@ function getEmployeeByName(employeeName) {
     if (employee.firstName === employeeName || employee.lastName === employeeName) {
       result = employee;
     }
-  })
-  
+  });
+
   return result;
 }
 
@@ -42,9 +42,9 @@ function createEmployee(personalInfo, associatedWith) {
     lastName,
     managers,
     responsibleFor,
-  }
+  };
   employees.push(newEmployee);
-  
+
   return newEmployee;
 }
 
