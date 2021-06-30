@@ -88,8 +88,16 @@ O que será avaliado
 Testa se o id passado é de um gerente */
 
 function isManager(id) {
-  // seu código aqui
+  const ids = ['9e7d4524-363c-416a-8759-8aa7e50c0992', 'fdb2543b-5662-46a7-badc-93d960fdc0a8', '0e7b460e-acf4-4e17-bcb3-ee472265db83']
+  let result = false
+  for (let index = 0; index <= ids.length; index +=1) {
+  if (id === ids[index]) {
+    result = true
+  } 
+ }return result
 }
+
+console.log(isManager('0e7b460e-acf4-4e17-bcb3-ee472265db83'));
 
 /* 6. IMPLEMENTE A FUNÇÃO addEmployee
 A função irá adicionar uma nova pessoa colaboradora ao array employees, presente no arquivo data.js.
