@@ -70,12 +70,12 @@ function getSchedule(dayName) {
 }
 
 function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+  // seu código aqui.
 }
 
 function increasePrices(percentage) {
   const porcentagem = percentage / 100;
-  return prices.Adult * porcentagem && prices.Child * porcentagem && prices.Senior * porcentagem; 
+  return prices.Adult * porcentagem && prices.Child * porcentagem && prices.Senior * porcentagem;
 }
 
 function getEmployeeCoverage(idOrName) {
