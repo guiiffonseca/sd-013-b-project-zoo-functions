@@ -2,6 +2,7 @@ const data = require('./data');
 
 const { species } = data;
 const { employees } = data;
+const { prices } = data;
 
 function getSpeciesByIds(...ids) {
   return species.filter((objc) =>
@@ -55,9 +56,17 @@ function countAnimals(specie) {
   return (specie === undefined) ? notParameter() : withParameter(specie);
 }
 
-function calculateEntry(entrants) {
-  // seu código aqui
+function calculateEntry(entrants = []) {
+  const entradas = Object.entries(entrants);
+  const arrayPrice = Object.entries(prices);
+  // eslint-disable-next-line no-unused-expressions
+  const total = entradas.map((entrada) => arrayPrice.reduce((acc, value) => {
+    return (value[0] === entrada[0]) ? value[1] * entrada[1] : acc;
+  }, 0));
+  return total.reduce((acc, value) => acc + value, 0);
 }
+
+console.log(calculateEntry());
 
 function getAnimalMap(options) {
   // seu código aqui
