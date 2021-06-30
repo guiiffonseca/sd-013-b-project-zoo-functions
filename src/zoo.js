@@ -42,8 +42,17 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   data.employees.push(newPerson);
 }
 
+const withParameter = (specie) => species
+  .filter((objc) => objc.name === specie).map(({ residents }) => residents.length)[0];
+
+const notParameter = () => species
+  .reduce((acc, objc) => {
+    const object = { [objc.name]: objc.residents.length };
+    return { ...acc, ...object };
+  }, {});
+
 function countAnimals(specie) {
-  // seu código aqui
+  return (specie === undefined) ? notParameter() : withParameter(specie);
 }
 
 function calculateEntry(entrants) {
