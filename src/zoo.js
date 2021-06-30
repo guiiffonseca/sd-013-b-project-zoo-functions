@@ -8,7 +8,13 @@ function getSpeciesByIds(...ids) {
 }
 
 function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
+  let input = false;
+  species
+    .filter((value) => value.name === animal)
+    .forEach(({ residents }) => {
+      input = residents.every((animalSingle) => animalSingle.age >= age);
+    });
+  return input;
 }
 
 function getEmployeeByName(employeeName) {
