@@ -15,7 +15,12 @@ function getAnimalsOlderThan(animal, age) {
 }
 
 function getEmployeeByName(employeeName) {
-  // seu código aqui
+  // Inspirado em Code Review do Rafael Nery Machado
+  // entender melhor a desestruturacao
+  const { employees } = data;
+  //console.log(employees);
+  const objectEmployee = employees.find(({ firstName, lastName }) => firstName === employeeName || lastName === employeeName ) || {};
+  return objectEmployee;
 }
 
 function createEmployee(personalInfo, associatedWith) {
