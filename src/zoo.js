@@ -1,14 +1,15 @@
 const data = require('./data');
+const { species } = data;
 
 function getSpeciesByIds(...ids) {
   // seu código aqui
-  const newSpecieis = ids.map((id) => data.species.find((specie) => specie.id === id));
+  const newSpecieis = ids.map((id) => species.find((specie) => specie.id === id));
   return newSpecieis;
 }
 
 function getAnimalsOlderThan(animal, age) {
   // seu código aqui
-  return data.species.find((specie) => specie.name === animal)
+  return species.find((specie) => specie.name === animal)
     .residents.every((resident) => resident.age >= age);
 }
 
@@ -23,6 +24,8 @@ function getEmployeeByName(employeeName) {
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
+  const newEmployee = {personalInfo, associatedWith}
+  return newEmployee;
 }
 
 function isManager(id) {
