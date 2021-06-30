@@ -40,8 +40,20 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   });
 }
 
-function countAnimals() {
-  // seu código aqui
+function countAnimals(animal) {
+  const animals = {
+    lions: species[0].residents.length,
+    tigers: species[1].residents.length,
+    bears: species[2].residents.length,
+    penguins: species[3].residents.length,
+    otters: species[4].residents.length,
+    frogs: species[5].residents.length,
+    snakes: species[6].residents.length,
+    elephants: species[7].residents.length,
+    giraffes: species[8].residents.length,
+  };
+  const size = species.find((ani) => ani.name === animal);
+  return animal !== undefined ? size.residents.length : animals;
 }
 
 function calculateEntry(entrants) {
