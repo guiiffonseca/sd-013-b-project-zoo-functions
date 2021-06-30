@@ -7,11 +7,13 @@ function getSpeciesByIds(...ids) {
 }
 
 function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
+  return data.species
+    .find((id) => id.name === animal)
+    .residents.every((resident) => resident.age > age);
 }
 
 function getEmployeeByName(employeeName) {
-  // seu código aqui
+
 }
 
 function createEmployee(personalInfo, associatedWith) {
