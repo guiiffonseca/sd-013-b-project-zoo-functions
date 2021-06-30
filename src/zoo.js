@@ -8,7 +8,9 @@ function getSpeciesByIds(...ids) {
 }
 
 function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
+  const findAnimal = data.species.find((type) => type.name === animal); // busca o objeto do animal escolhido
+  const animais = findAnimal.residents; // guarda o array dos animais daquela especie (fuinha)
+  return animais.every((resident) => resident.age >= age); // verifica se as idades de todos animais possuem a idade minima.
 }
 
 function getEmployeeByName(employeeName) {
