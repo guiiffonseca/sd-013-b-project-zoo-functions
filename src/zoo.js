@@ -3,29 +3,26 @@ const data = require('./data');
 
 function getSpeciesByIds(...ids) {
   const speciesSearch = ids.filter((id) => {
-    const getSpecies = species.find((specie) => id === specie.id)
+    const getSpecies = species.find((specie) => id === specie.id);
     return getSpecies;
   });
   return species;
 }
 
 function getAnimalsOlderThan(animal, age) {
-  const verifyAnimal = (animal === species.name) ? verifyAnimal : animal;
-
+  // const verifyAnimal = (animal === species.name) ? verifyAnimal : animal;
 }
 
 function getEmployeeByName(employeeName) {
   const employeeSearch = employees.filter((employee) => 
     employee.name === employeeName || 
     employee.lastName === employeeName)
-    .reduce((accumulator, currentValue) => 
-      Object.assign(accumulator, currentValue) ,{});
-    return employeeSearch;
-
+  .reduce((accumulator, currentValue) => Object.assign(accumulator, currentValue), {});
+  return employeeSearch;
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  return {...personalInfo, ...associatedWith};
+  return { ...personalInfo, ...associatedWith };
 }
 
 function isManager(id) {
