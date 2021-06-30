@@ -189,13 +189,48 @@ function increasePrices(percentage) {
   const rate = percentage / 100;
 
   Object.keys(data.prices).forEach((group) => {
-    // data.prices[group] = (data.prices[group] * (1 + rate)).toFixed(2);
     data.prices[group] = Math.round(data.prices[group] * (1 + rate) * 100) / 100;
   });
 }
 
+function getEmployeeInfo(employee) {
+  const fullName = `${employee.firstName} ${employee.lastName}`;
+  const animalsArr = [];
+  employee.responsibleFor.forEach((animalId) => {
+    data.species.forEach((specie) => {
+      if (animalId === specie.id) {
+        animalsArr.push(specie.name);
+      }
+    });
+  });
+  return { fullName, animalsArr };
+}
+
+function getEmployeesObject(employee) {
+  const obj = {};
+
+  if (employee) {
+    const { fullName, animalsArr } = getEmployeeInfo(employee);
+    obj[fullName] = animalsArr;
+  } else {
+    data.employees.forEach((el) => {
+      const { fullName, animalsArr } = getEmployeeInfo(el);
+      obj[fullName] = animalsArr;
+    });
+  }
+
+  return obj;
+}
+
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+  if (!idOrName) {
+    return getEmployeesObject();
+  }
+  const selectedEmployee = data.employees
+    .find((employee) => employee.id === idOrName
+    || employee.firstName === idOrName || employee.lastName === idOrName);
+
+  return getEmployeesObject(selectedEmployee);
 }
 
 module.exports = {
