@@ -5,7 +5,7 @@ function getSpeciesByIds(ids) {
 }
 
 function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
+  // seu código aqu
 }
 
 function getEmployeeByName(employeeName) {
