@@ -45,13 +45,21 @@ function isManager(id) {
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
-  const { employees } = data;
-  const add = data.employees.push({id, firstName, lastName, managers, responsibleFor});
-  return add;
+  const addPeople = data.employees.push({ id, firstName, lastName, managers, responsibleFor });
+  return addPeople;
 }
 
-function countAnimals(species) {
+function countAnimals(especies) {
   // seu código aqui
+  const { species } = data;
+  const creatList = species.reduce((acc, curr) => {
+    acc[curr.name] = curr.residents.length;
+    return acc;
+  }, {});
+  if (typeof especies === 'undefined') {
+    return creatList;
+  }
+  return creatList[especies];
 }
 
 function calculateEntry(entrants) {
