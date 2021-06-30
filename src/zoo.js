@@ -32,7 +32,7 @@ function getEmployeeByName(employeeName) {
 
   const filtro = (atual) => employeeName === atual.firstName || employeeName === atual.lastName;
 
-  return data.employees.filter(filtro);
+  return data.employees.filter(filtro)[0];
 }
 
 function createEmployee(personalInfo, associatedWith) {
