@@ -21,23 +21,40 @@ function getEmployeeByName(employeeName) {
     .find((pessoa) => pessoa.firstName === employeeName || pessoa.lastName === employeeName);
 }
 /* -------------------------------------------------------------------- */
-
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  // Combina dois parametros com base Spread Operator (...), criando um novo objeto.
+  return { ...personalInfo, ...associatedWith };
 }
-
+/* -------------------------------------------------------------------- */
 function isManager(id) {
-  // seu código aqui
+  return employees.some((func, index) => id === func.managers[index]);
 }
-
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+/* -------------------------------------------------------------------- */
+function addEmployee(...rest) {
+  // console.log(employees.push({...rest}));
 }
-
-// function countAnimals(species) {
-//   // seu código aqui
-// }
-
+/* -------------------------------------------------------------------- */
+function countAnimals(specie) {
+  const obj = {};
+  species.forEach((animal) => {
+    obj[animal.name] = [animal.residents.length];
+  });
+  // se o parametro passado for vazio, retorna o um obj com o nome e quant de cada espécie, objeto esse preenchido pelo forEach acima.
+  if (specie === undefined) {
+    return obj;
+  }
+  // Cont p/ contar a quant da espécie passada no parâmetro.
+  let cont = 0;
+  // percorre o obj Species e seta em cont a quantidade de cada espécie.
+  species.forEach((bicho) => {
+    if (specie === bicho.name) {
+      cont = bicho.residents.length;
+    }
+  });
+  return cont;
+}
+console.log(countAnimals('bears'));
+// --------------------------------------------------------------------------
 function calculateEntry(entrants) {
   // seu código aqui
 }
