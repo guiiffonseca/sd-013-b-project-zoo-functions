@@ -92,10 +92,19 @@ until ${data.hours[key].close - 12}pm`;
   return { [dayName]: fullSchedule[dayName] };
 }
 
-console.log(getSchedule());
 function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+  const employeeFound = data.employees.find((employee) => employee.id === id);
+  const animalsFound = data.species.find((specie) => specie.id === employeeFound.responsibleFor[0]);
+  let oldestAnimal = animalsFound.residents[0];
+  animalsFound.residents.forEach((resident) => {
+    if (resident.age > oldestAnimal.age) {
+      oldestAnimal = resident;
+    }
+  });
+  return Object.values(oldestAnimal);
 }
+
+getOldestFromFirstSpecies('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1');
 
 function increasePrices(percentage) {
   // seu código aqui
