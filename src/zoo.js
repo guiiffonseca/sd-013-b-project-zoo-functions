@@ -60,7 +60,7 @@ function calculateEntry(entrants) {
   const adultPrice = data.prices.Adult
   const childPrice = data.prices.Child
   const seniorPrice = data.prices.Senior
-  const { Adult = 0, Child = 0, Senior = 0} = entrants
+  const { Adult = 0, Child = 0, Senior = 0 } = entrants
   const total = (adultPrice * Adult) + (childPrice * Child) + (seniorPrice * Senior);
   return total;
 }
