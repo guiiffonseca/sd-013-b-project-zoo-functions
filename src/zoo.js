@@ -39,8 +39,20 @@ function createEmployee(personalInfo, associatedWith) {
   return newEmployee(id, firstName, lastName, managers, responsibleFor);
 }
 
+function flatten(arrays) {
+  // escreva seu código aqui
+  return arrays.reduce((accumulator, currentValue) => {
+    for (let i = 0; i < currentValue.length; i += 1) {
+      accumulator.push(currentValue[i]);
+    }
+    return accumulator;
+  });
+}
+
 function isManager(id) {
   // seu código aqui
+  const managers = data.employees.map((person) => person.managers);
+  return flatten(managers).some((manager) => manager === id);
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
