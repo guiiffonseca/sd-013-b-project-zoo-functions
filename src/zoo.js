@@ -4,14 +4,16 @@ const data = require('./data');
 function getSpeciesByIds(...ids) {
   const array = [];
   ids.forEach((id) => {
-    const newSpecie = species.find((specie) => specie.id === id);
-    array.push(newSpecie);
+    const getSpecie = species.find((specie) => specie.id === id);
+    array.push(getSpecie);
   });
   return array;
 }
 
 function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
+  const getSpecie = species.find((specie) => specie.name === animal);
+  const isOlderThan = getSpecie.residents.every((specie) => specie.age > age);
+  return isOlderThan;
 }
 
 function getEmployeeByName(employeeName) {
