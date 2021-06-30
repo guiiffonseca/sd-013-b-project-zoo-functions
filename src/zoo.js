@@ -38,7 +38,16 @@ function countAnimals(species) {
 }
 
 function calculateEntry(entrants) {
-  // seu código aqui
+  if (!entrants || Object.values(entrants).length === 0) {
+    return 0;
+  }
+  const keys = Object.keys(entrants);
+  const { prices } = data;
+  let total = 0;
+  keys.forEach((key) => {
+    total += (entrants[key] * prices[key]);
+  });
+  return total;
 }
 
 function getAnimalMap(options) {
