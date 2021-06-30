@@ -2,9 +2,8 @@ const { species, employees, hours, prices } = require('./data');
 const data = require('./data');
 
 const all = [...species, ...employees];
-console.log(data);
-console.log(hours);
-console.log(prices);
+const isTrue = hours + prices + data === true;
+console.log(isTrue);
 
 function getSpeciesByIds(ids = [], ids2 = []) {
   if (ids.length === 0) {
@@ -33,7 +32,9 @@ function getEmployeeByName(employeeName = {}) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  const { id, firstName, lastName } = personalInfo;
+  const { managers, responsibleFor } = associatedWith;
+  return { firstName, id, lastName, managers, responsibleFor };
 }
 
 function isManager(id) {
