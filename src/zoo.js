@@ -3,8 +3,8 @@ const data = require('./data');
 function getSpeciesByIds(...ids) {
   const species = [];
 
-  ids.forEach((id) => {
-    const foundSpecies = data.species.find((kind) => kind.id === id);
+  ids.forEach((searchId) => {
+    const foundSpecies = data.species.find(({ id }) => id === searchId);
     species.push(foundSpecies);
   });
 
@@ -17,8 +17,12 @@ function getAnimalsOlderThan(speciesName, age) {
   return residents.every((animal) => animal.age >= age);
 }
 
-function getEmployeeByName(employeeName) {
-  // seu código aqui
+function getEmployeeByName(name) {
+  const employee = data.employees.find(
+    ({ firstName, lastName }) => firstName === name || lastName === name,
+  );
+
+  return employee || {};
 }
 
 function createEmployee(personalInfo, associatedWith) {
