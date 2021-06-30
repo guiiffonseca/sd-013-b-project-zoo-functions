@@ -58,8 +58,26 @@ function calculateEntry({ Adult = 0, Child = 0 , Senior = 0 } = {}) {
   return (Adult * prices.Adult) + (Child * prices.Child) + (Senior * prices.Senior);
 }
 
-function getAnimalMap(options) {
+function getAnimalMap({ includeNames = false, sorted = false, sex = '' } = {}) {
   // seu código aqui
+  const { species } = data;
+  return species.reduce((animalMap, { name, location, residents }) => {
+    !animalMap[location] && (animalMap[location] = []);
+    includeNames ?
+      animalMap[location]
+        .push({
+          [name]: sorted ?
+            residents
+              .filter(({ sex: resSex }) => sex === '' || resSex === sex)
+              .map(({ name }) => name)
+              .sort() :
+            residents
+              .filter(({ sex: resSex }) => sex === '' || resSex === sex)
+              .map(({ name }) => name),
+        }) :
+      animalMap[location].push(name);
+    return animalMap;
+  }, {});
 }
 
 function getSchedule(dayName) {
