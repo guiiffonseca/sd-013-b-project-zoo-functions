@@ -3,13 +3,15 @@ const data = require('./data');
 
 function getSpeciesByIds(...ids) {
   // seu código aqui
-  const array = [];
-  ids.forEach((id) => array.push(species.find((specie) => specie.id === id)));
-  return array;
+  const arr = [];
+  ids.forEach((id) => arr.push(species.find((specie) => specie.id === id)));
+  return arr;
 }
 
 function getAnimalsOlderThan(animal, age) {
   // seu código aqui
+  const selected = species.find((specie) => specie.name === animal);
+  return selected.residents.every((resident) => resident.age >= age);
 }
 
 function getEmployeeByName(employeeName) {
