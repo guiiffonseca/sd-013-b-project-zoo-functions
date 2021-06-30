@@ -19,7 +19,10 @@ function getSpeciesByIds(ids = [], ids2 = []) {
 }
 
 function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
+  // primeiro usamos o filter para obter o elemento que tenha a propriedade .name igual ao parametro 'animal'
+  // depos pegamos o index 0 e recebemos um objeto. Percorremos este objeto com o every e perguntamos se
+  // a propriedade .age é maior que o parametro 'age'.
+  return species.filter((e) => e.name === animal)[0].residents.every((e) => e.age > age);
 }
 
 function getEmployeeByName(employeeName) {
