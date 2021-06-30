@@ -153,7 +153,7 @@ Retorna 0 se um objeto vazio for passado
 Retorna o preço total a ser cobrado dado o número de adultos, crianças e idosos */
 
 function calculateEntry(entrants) {
-  let result = 0
+  let result = 0;
   if (!entrants) return 0;
   const { Adult = 0, Child = 0, Senior = 0 } = entrants;
   const adults = Adult * prices.Adult;
