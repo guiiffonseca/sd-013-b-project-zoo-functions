@@ -88,12 +88,84 @@ function calculateEntry(entrants) {
   return Adult * 49.99 + Child * 20.99 + Senior * 24.99;
 }
 
+// function getAnimalsSortedByLocation() {
+//   const obj = {
+//     NE: [],
+//     NW: [],
+//     SE: [],
+//     SW: [],
+//   };
+
+//   data.species.forEach((specie) => {
+//     if (specie.location === 'NE') obj.NE.push(specie.name);
+//     if (specie.location === 'NW') obj.NW.push(specie.name);
+//     if (specie.location === 'SE') obj.SE.push(specie.name);
+//     if (specie.location === 'SW') obj.SW.push(specie.name);
+//   });
+
+//   return obj;
+// }
+
+// function getResidentNames(animalName, sorted) {
+//   const namesArr = [];
+//   data.species.forEach((specie) => {
+//     if (specie.name === animalName) {
+//       specie.residents.forEach((resident) => {
+//         namesArr.push(resident.name);
+//       });
+//     }
+//   });
+//   if (sorted) namesArr.sort();
+//   return { animalName: namesArr };
+// }
+
+// function getAnimalsWithNames(sorted = false) {
+//   const animals = Object.values(getAnimalsSortedByLocation());
+
+//   animals.forEach((regionAnimals) => {
+//     regionAnimals.map((animalName) => getResidentNames(animalName, sorted));
+//   });
+
+//   return {
+//     NE: animals[0],
+//     NW: animals[1],
+//     SE: animals[2],
+//     SW: animals[3],
+//   };
+// }
+
 function getAnimalMap(options) {
-  // seu código aqui
+  // if (!options) {
+  //   return getAnimalsSortedByLocation();
+  // }
+
+  // const { includeNames, sorted } = options;
+
+  // if (includeNames) {
+  //   if (sorted) getAnimalsWithNames(true);
+  //   if (!sorted) getAnimalsWithNames();
+  // }
 }
 
 function getSchedule(dayName) {
-  // seu código aqui
+  const obj = {};
+  const { hours } = data;
+  Object.keys(hours).forEach((day) => {
+    if (hours[day].close - hours[day].open === 0) {
+      obj[day] = 'CLOSED';
+      return;
+    }
+    obj[day] = `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`;
+  });
+
+  if (!dayName) {
+    return obj;
+  }
+
+  const singleProp = {};
+  singleProp[dayName] = obj[dayName];
+
+  return singleProp;
 }
 
 function getOldestFromFirstSpecies(id) {
