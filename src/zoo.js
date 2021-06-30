@@ -23,8 +23,8 @@ function createEmployee(personalInfo, associatedWith) {
   return { ...personalInfo, ...associatedWith };
 }
 
-function isManager(id) {
-  // seu código aqui
+function isManager(number) {
+  return employees.some(({ managers }) => managers.some((element) => element === number));
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
