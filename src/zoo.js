@@ -17,11 +17,16 @@ function getAnimalsOlderThan(animal, age) {
   const checkAge = getAnimal.residents.every((element) => element.age >= age);
   return checkAge;
 }
-console.log(getAnimalsOlderThan('otters', 7));
 
 function getEmployeeByName(employeeName) {
   // seu código aqui
-
+  const { employees } = data;
+  if (typeof employeeName === 'undefined') {
+    return {};
+  }
+  const returnName = employees.find((element) =>
+    employeeName === element.firstName || employeeName === element.lastName);
+  return returnName;
 }
 
 function createEmployee(personalInfo, associatedWith) {
