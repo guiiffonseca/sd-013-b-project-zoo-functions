@@ -13,8 +13,21 @@ function getSpeciesByIds(...ids) {
   return result;
 }
 
-function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
+function getAnimalsOlderThan(animal, minAge) {
+  let result = true;
+  species.forEach((element) => {
+    if (element.name === animal) {
+      element.residents.forEach((obj) => {
+        if (obj.age >= minAge) {
+          result = true;
+        } else {
+          result = false;
+          return result;
+        }
+      });
+    }
+  });
+  return result;
 }
 
 function getEmployeeByName(employeeName) {
