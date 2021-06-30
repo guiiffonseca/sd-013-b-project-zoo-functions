@@ -10,7 +10,9 @@ function getSpeciesByIds(...ids) {
 }
 
 function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
+  const specieChosen = species.find((specie) => specie.name === animal);
+  const nameAnimal = specieChosen.residents;
+  return nameAnimal.every((nameA) => nameA.age > age);
 }
 
 function getEmployeeByName(employeeName) {
@@ -31,6 +33,7 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 
 function countAnimals(speciees) {
   // seu código aqui
+  // trocar o 'speciees' por 'species'
 }
 
 function calculateEntry(entrants) {
