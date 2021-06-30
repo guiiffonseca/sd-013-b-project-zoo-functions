@@ -25,7 +25,9 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  // seu código aqui
+  const array = employees.find((person) => person.managers.includes(id));
+  if (array !== undefined) return true;
+  return false;
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
