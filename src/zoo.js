@@ -1,11 +1,16 @@
 const data = require('./data');
+const { species, employees, hours, prices } = data;
 
-function getSpeciesByIds(ids) {
-  // seu código aqui/
-}
+// function getSpeciesByIds(...ids) {
+//   species.filter((specie) => ids.find((id) => specie.id === id))
+// }
+
+// console.log(getSpeciesByIds('0938aa23-f153-4937-9f88-4858b24d6bce'));
 
 function getAnimalsOlderThan(animal, age) {
   // seu código aqui
+  const searchedSpecies = species.find((animals) => (animals.name === animal));
+  return searchedSpecies.residents.every((resident) => resident.age > age);
 }
 
 function getEmployeeByName(employeeName) {
@@ -57,7 +62,7 @@ module.exports = {
   getSchedule,
   countAnimals,
   getAnimalMap,
-  getSpeciesByIds,
+  // getSpeciesByIds,
   getEmployeeByName,
   getEmployeeCoverage,
   addEmployee,
