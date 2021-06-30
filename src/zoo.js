@@ -56,7 +56,7 @@ function countAnimals(speciesP) {
   return count;
 }
 
-function calculateEntry({Adult = 0, Child = 0, Senior = 0} = {}) {
+function calculateEntry({ Adult = 0, Child = 0, Senior = 0 } = { }) {
   // seu código aqui
   return (Adult * prices.Adult) + (Child * prices.Child) + (Senior * prices.Senior);
 }
