@@ -1,31 +1,50 @@
 const data = require('./data');
 
-function getSpeciesByIds(ids) {
-  // seu código aqui.
+function getSpeciesByIds(...ids) {
+  return data.species.filter((specie) => ids.some((id) => specie.id === id));
 }
 
 function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
+  const animalsBySpecie = data.species.find((specie) => specie.name === animal).residents;
+  return animalsBySpecie.every((residentAnimal) => residentAnimal.age >= age);
 }
 
 function getEmployeeByName(employeeName) {
-  // seu código aqui
+  if (!employeeName) return {}; // verifica a função recebe parâmetro. Se não recebe retorna um objeto vazio;
+  return data.employees.find((employee) => employee.firstName === employeeName
+  || employee.lastName === employeeName); // verifica se o nome ou o sobrenome do colaborador é igual ao parâmetro, caso seja, retorna o objeto que contém as infos do colaborador;
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  return { ...personalInfo, ...associatedWith };
 }
 
 function isManager(id) {
-  // seu código aqui
+  return data.employees.find((employee) => employee.id).managers.some((manager) => manager === id);
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  return data.employees.push({
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  });
 }
+
+// função para contabilizar todos os animais;
+const allAnimalsCount = () => {
+  const allAnimalCount = {};
+  data.species.forEach((specie) => {
+    allAnimalCount[specie.name] = specie.residents.length;
+  });
+  return allAnimalCount;
+};
 
 function countAnimals(species) {
-  // seu código aqui
+  if (!species) return allAnimalsCount();
+  return data.species.find((specie) => specie.name === species).residents.length;
 }
 
 function calculateEntry(entrants) {
