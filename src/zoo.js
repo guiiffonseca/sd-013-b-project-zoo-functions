@@ -223,7 +223,10 @@ O que será avaliado
 Ao passar uma porcentagem, incrementa todos os preços, arrendondados em duas casas decimais */
 
 function increasePrices(percentage) {
-  // seu código aqui
+  const increase = percentage / 100;
+  prices.Adult = Math.round(((prices.Adult * increase) + prices.Adult) * 100) / 100;
+  prices.Child = Math.round(((prices.Child * increase) + prices.Child) * 100) / 100;
+  prices.Senior = Math.round(((prices.Senior * increase) + prices.Senior) * 100) / 100;
 }
 
 /* 13. IMPLEMENTE A FUNÇÃO getEmployeeCoverage
