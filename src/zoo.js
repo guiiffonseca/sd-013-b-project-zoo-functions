@@ -146,7 +146,7 @@ function increasePrices(percentage) {
   chaves.forEach((chave) => {
     const atual = data.prices[chave];
     const final = atual + (atual * (percentage / 100));
-    data.prices[chave] = Math.round(final.toFixed(2) * 100) / 100;
+    data.prices[chave] = Math.ceil(final.toFixed(4) * 100) / 100;
   });
 }
 
