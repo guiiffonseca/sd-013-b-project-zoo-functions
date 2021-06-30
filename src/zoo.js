@@ -1,12 +1,12 @@
 const data = require('./data');
 
-const especies = data.species;
-const employees = data.employees;
-const hours = data.hours;
-const prices = data.prices;
+const { species } = require('./data');
+const { employees } = require('./data');
+const { hours } = require('./data');
+const { prices } = require('./data');
 
 function getSpeciesByIds(...specieId) {
-  return specieId.map((objectMap) => especies.find((objectFind) => objectMap === objectFind.id));
+  return specieId.map((especie) => species.find((especieFind) => especie === especieFind.id));
 }
 
 function getAnimalsOlderThan(animal, age) {
