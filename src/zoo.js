@@ -31,12 +31,17 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   data.employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
 
-function countAnimals(speciies) {
-  // seu código aqui
+function countAnimals(species) {
+  const allAnimals = {};
+  if (typeof species === 'undefined') {
+    data.species.forEach((specie) => { allAnimals[specie.name] = specie.residents.length; });
+    return allAnimals;
+  }
+  return data.species.find((specie) => specie.name === species).residents.length;
 }
 
 function calculateEntry(entrants) {
-  // seu código aqui
+
 }
 
 function getAnimalMap(options) {
