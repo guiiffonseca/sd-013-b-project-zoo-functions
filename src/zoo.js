@@ -22,14 +22,9 @@ function getEmployeeByName(employeeName) {
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
-  const { id, firstName, lastName } = personalInfo;
-  const { managers, responsibleFor } = associatedWith;
   return {
-    id: `${id}`,
-    firstName: `${firstName}`,
-    lastName: `${lastName}`,
-    managers: `${managers}`.split(/\s*,\s*/),
-    responsibleFor: `${responsibleFor}`.split(/\s*,\s*/),
+    ...personalInfo,
+    ...associatedWith,
   };
 }
 
@@ -43,6 +38,14 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 
 function countAnimals(speciesP) {
   // seu código aqui
+  const count = {};
+  species.forEach((specie) => {
+    count[specie.name] = specie.residents.length;
+  });
+  if (count[speciesP]) {
+    return count[speciesP];
+  }
+  return count;
 }
 
 function calculateEntry(entrants) {
