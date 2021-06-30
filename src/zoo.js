@@ -1,4 +1,3 @@
-const { species } = require('./data');
 const data = require('./data');
 
 /* 1. Esta função é responsável pela busca das espécies de animais por id.
@@ -6,10 +5,7 @@ Ela retorna um array contendo as espécies referentes aos ids passados
 como parâmetro, podendo receber um ou mais ids. */
 
 function getSpeciesByIds(...ids) {
-  const animalSpecies = [];
-  ids.forEach((givenId) =>
-    animalSpecies.push(...data.species.filter((specimen) => specimen.id === givenId)));
-  return animalSpecies;
+  return ids.map((speciesId) => data.species.find((eachSpecies) => speciesId === eachSpecies.id));
 }
 
 /* 2. Esta função, a partir do nome de uma espécie e uma idade mínima, verifica
