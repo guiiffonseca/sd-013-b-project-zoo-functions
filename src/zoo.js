@@ -12,9 +12,19 @@ Caso receba nenhum parâmetro, necessário retornar um array vazio
 Ao receber como parâmetro um único id, retorna um array com a espécie referente à esse id
 Ao receber mais de um id, retorna um array com as espécies referentes aos ids */
 
-function getSpeciesByIds(ids) {
-  // seu código aqui
-}
+
+const getSpeciesByIds = (...ids) => {
+  const array = [];
+  ids.forEach((id) => {
+    array.push(species.find((specie) => specie.id === id));
+  });
+  array.forEach((index) => {
+    if (index === undefined) {
+      return [];
+    }
+  });
+  return array;
+};
 
 /* 2. IMPLEMENTE A FUNÇÃO getAnimalsOlderThan
 Esta função, a partir do nome de uma espécie e uma idade mínima, verifica se todos os animais daquela espécie possuem a idade mínima especificada
