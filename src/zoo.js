@@ -46,7 +46,6 @@ function getManagers() {
   });
 
   return lista;
-
 }
 
 function isManager(id) {
