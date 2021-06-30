@@ -53,8 +53,7 @@ const countAnimals = (animalSpecie) => {
 const calculateEntry = (entrants) => {
   if (!entrants || entrants === {}) return 0;
   const { Adult: adult = 0, Child: child = 0, Senior: senior = 0 } = entrants;
-  const total = ((adult * prices.Adult) + (child * prices.Child) + (senior * prices.Senior));
-  return total;
+  return ((adult * prices.Adult) + (child * prices.Child) + (senior * prices.Senior));
 };
 
 // seu código aqui
@@ -71,17 +70,15 @@ const getSchedule = (dayName) => {
   week.Monday = 'CLOSED';
   if (days.includes(dayName) === true) {
     return { [dayName]: week[dayName] };
-  }
-  return week;
+  } return week;
 };
 
+const speciesId = (...responsibleFor) => species.filter((specie) =>
+  responsibleFor.includes(specie.id));
 // seu código aqui
 const getOldestFromFirstSpecies = (id) => {
-  const employeeId = employees.filter((employee) => employee.id === id);
-  const employeeLeader = employeeId[0].responsibleFor;
-  const speciesId = (...responsibleFor) => species.filter((specie) =>
-    responsibleFor.includes(specie.id));
-  const specieId = speciesId(...employeeLeader).reduce((accumulator, curr) => {
+  const employeeId = employees.find((employee) => employee.id === id).responsibleFor;
+  const specieId = speciesId(...employeeId).reduce((accumulator, curr) => {
     const { residents } = curr;
     accumulator.push(...residents);
     return accumulator;
@@ -100,8 +97,25 @@ const increasePrices = (percentage) => {
   });
 };
 
+const animalId = (id) => species.find((specie) => specie.id === id).name;
 // seu código aqui
 const getEmployeeCoverage = (idOrName) => {
+  if (!idOrName) {
+    const dude = employees.reduce((accumulator, curr) => {
+      const animals = curr.responsibleFor.map(animalId);
+      accumulator[`${curr.firstName} ${curr.lastName}`] = animals;
+      return accumulator;
+    }, {});
+    return dude;
+  }
+  const request = employees.filter(({ id, firstName, lastName }) =>
+    id === idOrName || firstName === idOrName || lastName === idOrName);
+  const result = request.reduce((accumulator, curr) => {
+    const animals2 = curr.responsibleFor.map(animalId);
+    accumulator[`${curr.firstName} ${curr.lastName}`] = animals2;
+    return accumulator;
+  }, {});
+  return result;
 };
 
 module.exports = {
