@@ -65,15 +65,10 @@ O que será avaliado
 
 Cria um novo colaborador a partir de objetos contendo informações pessoais e gerentes e animais gerenciados. */
 
-function createEmployee(personalInfo, associatedWith) {
-  return{
-    id: personalInfo.id,
-    firstName: personalInfo.firstName,
-    lastName: personalInfo.lastName,
-    managers: associatedWith.managers,
-    responsibleFor: associatedWith.responsibleFor
-  }
-}
+const createEmployee = (personalInfo, associatedWith) => ({
+  ...personalInfo,
+  ...associatedWith,
+});
 
 //console.log(createEmployee(personalInfo, associatedWith));
 
@@ -97,7 +92,7 @@ function isManager(id) {
  }return result
 }
 
-console.log(isManager('0e7b460e-acf4-4e17-bcb3-ee472265db83'));
+// console.log(isManager('0e7b460e-acf4-4e17-bcb3-ee472265db83'));
 
 /* 6. IMPLEMENTE A FUNÇÃO addEmployee
 A função irá adicionar uma nova pessoa colaboradora ao array employees, presente no arquivo data.js.
@@ -106,9 +101,19 @@ O que será avaliado
 
 Adiciona um funcionário no fim da lista */
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
-}
+const addEmployee = (id, firstName, lastName, managers, responsibleFor) => {
+  let man = managers;
+  let res = responsibleFor;
+  if (man === undefined) man = [];
+  if (res === undefined) res = [];
+  employees.push({
+    id,
+    firstName,
+    lastName,
+    managers: man,
+    responsibleFor: res,
+  });
+};
 
 /* 7. IMPLEMENTE A FUNÇÃO countAnimals
 Esta função é responsável por contabilizar a quantidade de animais.
