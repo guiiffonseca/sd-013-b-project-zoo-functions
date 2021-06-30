@@ -1,7 +1,12 @@
+const { species } = require('./data');
 const data = require('./data');
 
-function getSpeciesByIds(ids) {
-  // seu código aqui/
+function getSpeciesByIds(...ids) {
+  const GuardaID = species.filter((VSpecies) => ids.some((VId) => VSpecies.id === VId));
+  console.log(GuardaID);
+  return GuardaID;
+
+  // console.log(GuardaID);
 }
 
 function getAnimalsOlderThan(animal, age) {
