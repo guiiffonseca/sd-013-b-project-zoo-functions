@@ -1,21 +1,13 @@
 const { species } = require('./data');
 const data = require('./data');
 
-const getIdAnimals = () => {
-  const returnAnimals = [];
-  species.reduce((accumulator, currentValue, index) => {
-    const { id } = currentValue;
-    return returnAnimals.push(id);
-  }, []);
-  return returnAnimals;
-};
-
 function getSpeciesByIds(...ids) {
   const idSpecies = ids;
-  const animal = getIdAnimals();
-  const returnSpecies = animal.reduce((accumulator, currentValue) => {
-    const filterId = idSpecies.filter((animalId) => currentValue === animalId);
-    return filterId;
+  const returnSpecies = [];
+  species.reduce((_, currentValue, index) => {
+    const verificaId = idSpecies.filter((animalId) => currentValue.id === animalId);
+    if (verificaId[0] === species[index].id) returnSpecies.push(species[index]);
+    return undefined;
   }, []);
   return returnSpecies;
 }
