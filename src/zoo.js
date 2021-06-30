@@ -2,11 +2,11 @@
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
-  return ids.map((id) => species.find((value) => value.id === id));
+  return ids.map((id) => data.species.find((value) => value.id === id));
 }
 
 function getAnimalsOlderThan(animal, age) {
-  return species.find((value) => value.name === animal).residents
+  return data.species.find((value) => value.name === animal).residents
     .every((value) => value.age >= age);
 }
 
