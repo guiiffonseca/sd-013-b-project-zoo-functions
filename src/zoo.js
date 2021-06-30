@@ -31,16 +31,20 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  // seu código aqui
+  const managers = employees
+    .map((employee) => employee.managers)
+    .reduce((employee, actual) => employee + actual
+      .some((frase) => frase === id), 0) > 0;
+  return managers;
 }
 
 function addEmployee(id = [], firstName = [], lastName = [], managers = [], responsibleFor = []) {
-  const newPerson = { id,
+  const lastEmployee = { id,
     firstName,
     lastName,
     managers,
     responsibleFor };
-  employees.push(newPerson);
+  employees.push(lastEmployee);
 }
 
 function countAnimals(speciesP) {
