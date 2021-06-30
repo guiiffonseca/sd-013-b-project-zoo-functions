@@ -11,16 +11,20 @@ function getSpeciesByIds(...ids) {
 function getAnimalsOlderThan(animal, age) {
   // seu código aqui
   const getAnimal = data.species.find((Animal) => Animal.name === animal);
-  getAnimal
-  return getAnimal.residents.every((animal) => animal.age >= age);
+  return getAnimal.residents.every((foundAnimal) => foundAnimal.age >= age);
 }
 
 function getEmployeeByName(employeeName) {
   // seu código aqui
+  if (typeof employeeName != 'string') {
+    return {};
+  }
+  return data.employees.find((employee) => employee.firstName === employeeName || employee.lastName === employeeName);
 }
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
+
 }
 
 function isManager(id) {
