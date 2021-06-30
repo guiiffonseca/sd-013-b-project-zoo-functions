@@ -13,6 +13,9 @@ se todos os animais daquela espécie possuem a idade mínima especificada */
 
 function getAnimalsOlderThan(animal, age) {
   // seu código aqui
+  const findAnimals = data.species.find((animals) => animals.name === animal);
+  const isOlder = findAnimals.eachAnimal.every((each) => each.age >= age);
+  return isOlder;
 }
 
 /* 3. Esta função é responsável pela busca das pessoas colaboradoras através do
