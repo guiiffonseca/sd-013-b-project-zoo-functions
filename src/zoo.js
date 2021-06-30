@@ -1,10 +1,25 @@
+const { species } = require('./data');
 const data = require('./data');
 
-function getSpeciesByIds(ids) {
-  // seu código aqui
+const getIdAnimals = () => {
+  const returnAnimals = [];
+  species.reduce((accumulator, currentValue, index) => {
+    const { id } = currentValue;
+    return returnAnimals.push(id);
+  }, []);
+  return returnAnimals;
+};
+
+function getSpeciesByIds(...ids) {
+  const idSpecies = ids;
+  const animal = getIdAnimals();
+  const returnSpecies = animal.reduce((accumulator, currentValue) => {
+    const filterId = idSpecies.filter((animalId) => currentValue === animalId);
+    return filterId;
+  }, []);
+  return returnSpecies;
 }
 
-//teste 
 function getAnimalsOlderThan(animal, age) {
   // seu código aqui
 }
