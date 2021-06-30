@@ -31,10 +31,21 @@ function getEmployeeByName(employeeName) {
   
   return result;
 }
-// ||
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  const [id, firstName, lastName] = Object.values(personalInfo);
+  const [managers, responsibleFor] = Object.values(associatedWith);
+
+  const newEmployee = {
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  }
+  employees.push(newEmployee);
+  
+  return newEmployee;
 }
 
 function isManager(id) {
