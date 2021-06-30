@@ -1,30 +1,25 @@
-const { species , employees } = require('./data');
+const { species, employees } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...idAnimal) {
   /* compara cada espécie com o id atual passado no parâmetro  */
-  return species.filter((specie,index) => specie.id === idAnimal[index]);
+  return species.filter((specie, index) => specie.id === idAnimal[index]);
 }
 /* -------------------------------------------------------------------- */
 function getAnimalsOlderThan(animal, age) {
-/* Verifica se o parâmentro passado está presente no obj, e
-e verifica com o every se as idades em todas as posições atendem 
-o paramentro mínimo solitado de idade */
+/* Verifica se o parâmentro passado está presente no obj, e verifica com o every se as idades em todas as posições atendem o paramentro mínimo solitado de idade */
   return species
     .filter((pet) => pet.name === animal)
-    .every((bicho,index) => bicho.residents[index].age > age)   
+    .every((bicho, index) => bicho.residents[index].age > age);
 }
 /* -------------------------------------------------------------------- */
 function getEmployeeByName(employeeName) {
-/*Se o parâmentro passado for vazio, retorna um obj vazi,
-caso contrário retorna o primeiro elemento que seja igual 
-ao passado no parâmetro. */
+/* Se o parâmentro passado for vazio, retorna um obj vazio, caso contrário retorna o primeiro elemento que seja igual ao passado no parâmetro. */
   if (employeeName === undefined) {
     return {};
-  } else {
-  return employees
-  .find((pessoa) => pessoa.firstName === employeeName || pessoa.lastName === employeeName )
-  }}
+  } return employees
+    .find((pessoa) => pessoa.firstName === employeeName || pessoa.lastName === employeeName);
+}
 /* -------------------------------------------------------------------- */
 
 function createEmployee(personalInfo, associatedWith) {
@@ -39,9 +34,9 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
 }
 
-function countAnimals(species) {
-  // seu código aqui
-}
+// function countAnimals(species) {
+//   // seu código aqui
+// }
 
 function calculateEntry(entrants) {
   // seu código aqui
@@ -70,7 +65,7 @@ function getEmployeeCoverage(idOrName) {
 module.exports = {
   calculateEntry,
   getSchedule,
-  countAnimals,
+  // countAnimals,
   getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
