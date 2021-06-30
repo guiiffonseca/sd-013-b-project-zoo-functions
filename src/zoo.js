@@ -19,7 +19,7 @@ const getEmployeeByName = (employeeName) => {
 };
 
 // seu código aqui
-const createEmployee = (personalInfo, associatedWith) => ({ ...personalInfo, ...associatedWith }); // Criando um novo employee, usando o rest no retorno dos parametros inseridos para que possa englobar todos os parametros passados nas variáveis.
+const createEmployee = (personalInfo, associatedWith) => ({ ...personalInfo, ...associatedWith }); // Criando um novo employee(objeto), usando o spread no retorno dos parametros inseridos para que possa englobar todos os parametros passados nas variáveis.
 
 // seu código aqui
 const isManager = (id) => employees.some((employee) => employee.managers.some((ids) => ids === id)); // Usando um some para verificar se algum employee possui um mananger na verificação dos ids que os managers possuem.
@@ -48,8 +48,28 @@ const calculateEntry = (entrants) => {
 };
 
 // seu código aqui
-const getAnimalMap = (options) => { // Ainda estou pensando numa lógica.
+const sortResidents = ({ residents, sorted, sex }) => { // Função para auxiliar a animalMap e sortear os residents.
+  if (sorted) { // Se sorted for true
+    return residents.filter(({ sex: sortSex }) => sex === '' || sortSex === sex) // Retorna os nomes dos animais ordenadamente.
+      .map(({ name }) => name).sort();
+  }
+  return residents.filter(({ sex: sortSex }) => sex === '' || sortSex === sex) // Senão retorna sem ordenação.
+    .map(({ name }) => name);
 };
+
+const getAnimalMap = ({ includeNames = false, sorted = false, sex = '' } = {}) => // Default parameters do objeto options.
+  species.reduce((accumulador, { name, location, residents }) => {
+    const auxiliarAcc = accumulador;
+    if (!auxiliarAcc[location]) { auxiliarAcc[location] = []; }
+    if (includeNames) {
+      auxiliarAcc[location].push({
+        [name]: sortResidents({ residents, sorted, sex }),
+      });
+    } else {
+      auxiliarAcc[location].push(name);
+    }
+    return auxiliarAcc;
+  }, {});
 
 // seu código aqui
 const getSchedule = (dayName) => {
