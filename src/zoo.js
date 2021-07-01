@@ -1,6 +1,4 @@
-const data = require('./data');
-
-const { species, employees, hours } = data;
+const { species, employees, hours, prices } = require('./data');
 
 function getSpeciesByIds(...ids) {
   return species.filter((specie) => ids.includes(specie.id));
@@ -14,7 +12,7 @@ function getAnimalsOlderThan(animal, age) {
 
 function getEmployeeByName(employeeName) {
   if (!employeeName) return {};
-  return data.employees.find((employee) =>
+  return employees.find((employee) =>
     employee.firstName === employeeName
     || employee.lastName === employeeName);
 }
@@ -24,7 +22,7 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  return data.employees.some((employee) => employee.managers.includes(id));
+  return employees.some((employee) => employee.managers.includes(id));
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
@@ -52,9 +50,9 @@ function calculateEntry(entrants) {
     return 0;
   }
   let { Adult = 0, Child = 0, Senior = 0 } = entrants;
-  Adult *= data.prices.Adult;
-  Child *= data.prices.Child;
-  Senior *= data.prices.Senior;
+  Adult *= prices.Adult;
+  Child *= prices.Child;
+  Senior *= prices.Senior;
 
   return Adult + Child + Senior;
 }
@@ -155,8 +153,15 @@ function getOldestFromFirstSpecies(id) {
   return Object.values(oldAnimal);
 }
 
+function calculateNewPrice(price, percentage) {
+  return Math.round((price * 100) + (price * percentage)) / 100;
+}
+
 function increasePrices(percentage) {
-  // seu código aqui
+  const { Adult, Senior, Child } = prices;
+  prices.Adult = calculateNewPrice(Adult, percentage);
+  prices.Senior = calculateNewPrice(Senior, percentage);
+  prices.Child = calculateNewPrice(Child, percentage);
 }
 
 function getEmployeeCoverage(idOrName) {
