@@ -1,29 +1,48 @@
 const data = require('./data');
 
+// O ...ids transforma a entrada em array variável (Parâmetro Dinâmico com rest)
+// Usei o map pra percorrer esse array porque a saída que quer é em array.
+// Usei o find porque id tem um pra cada espécie.
+// No find vou comparar o id do parâmetro com o id da espécie.
+// Retorna um array com a especie do id do parâmetro.
 function getSpeciesByIds(...ids) {
   return ids.map((idParam) => data.species.find(({ id }) => id === idParam));
 }
 
+// Tô procurando a espécie que tem o nome do animal passado como parâmetro.
+// Na chave residents eu vejo com o every se todos os animais possuem a idade mínima passada como parâmentro.
+// Retorna true ou false.
 function getAnimalsOlderThan(animal, age) {
   return data.species.find(({ name }) =>
     name === animal).residents.every((resident) => resident.age >= age);
 }
 
+// Se não passar nenhum parâmetro, retorna um objeto vazio.
+// O parâmetro pode ser tanto o primeiro nome, como o último nome.
+// No array employees, procuro o objeto com o nome ou sobrenome passado como parâmetro.
+// Retorna o objeto com as informações do empregado.
 function getEmployeeByName(employeeName) {
   if (!employeeName) return {};
   return data.employees.find(({ firstName, lastName }) =>
     firstName === employeeName || lastName === employeeName);
 }
 
+// Usa o spread pra juntar os dois objetos passados por parâmetro. E retorna um objeto.
 function createEmployee(personalInfo, associatedWith) {
   return { ...personalInfo, ...associatedWith };
 }
 
+// Passo um id de parâmetro, e quero ver se essa pessoa é gerênte. Pra isso preciso ver se ela está como gerênte de alguém.
+// Percorro o array de employees e vejo se no objeto do empregado, na chave managers, inclui o id que eu quero. Se tiver em algum empregado, então que dizer que esse id é de um gerente.
+// Retorna true ou false.
 function isManager(id) {
   return data.employees.some(({ managers }) =>
     managers.includes(id));
 }
 
+// Usei o default parameters para managers e responsibleFor, porque se não tiver nada, eles precisam ser um array vazio.
+// Peguei o array employees e fiz um push pro novo empregado ir pro final.
+// As chaves e valores do objeto foram feitas com object property shorthand.
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   data.employees.push({
     id,
@@ -34,6 +53,9 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   });
 }
 
+// Setei uma constante com um objeto vazio.
+// Se a função receber um parâmetro. Vou buscar o nome desse animal no meu array de especies e retornar o tamanho da chave residentes, ai vai retornar o número de animais que tem nessa especie.
+// Se não colocar parâmetro: percorro o array de espécies e pra cada espécie eu pego o nome dela e o número de animais (tamanho da chave residents) e jogo no objeto vazio.
 function countAnimals(specieAnimal) {
   const result = {};
   if (specieAnimal) {
