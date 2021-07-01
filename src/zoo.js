@@ -48,7 +48,7 @@ function countAnimals(args) {
   return animalsWhitoudArgs;
 }
 
-function calculateEntry(args = 0) {
+function calculateEntry(args) {
   // Object.entries(args).
 }
 
@@ -56,8 +56,25 @@ function getAnimalMap(options) {
   // seu código aqui
 }
 
+const { hours } = data;
 function getSchedule(dayName) {
-  // seu código aqui
+  if (dayName) {
+    return Object.entries(hours).find((day, index) =>
+      day[0] === dayName).reduce((count, _, index, array) => {
+      if (array[0] === 'Monday') {
+        return Object.assign(count, { [array[0]]: 'CLOSED' });
+      }
+      return Object.assign(count,
+        { [array[0]]: `Open from ${array[1].open}am until ${array[1].close - 12}pm` });
+    }, {});
+  }
+  return Object.entries(hours).reduce((count, actual, index) => {
+    if (actual[0] === 'Monday') {
+      return Object.assign(count, { [actual[0]]: 'CLOSED' });
+    }
+    return Object.assign(count,
+      { [actual[0]]: `Open from ${actual[1].open}am until ${actual[1].close - 12}pm` });
+  }, {});
 }
 
 function getOldestFromFirstSpecies(id) {
@@ -74,7 +91,14 @@ function increasePrices(percentage) {
 }
 
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+  if (idOrName) {
+    const getEmployee = employees.find((employee) =>
+      employee.id === idOrName || employee.firstName === idOrName
+      || employee.lastName === idOrName);
+    return { [`${getEmployee.firstName} ${getEmployee.lastName}`]: getEmployee.responsibleFor };
+  }
+  employees.reduce((acc, value) =>
+    Object.assign(acc, { [`${value.firstName} ${value.lastName}`]: value.responsibleFor }), {});
 }
 
 module.exports = {
