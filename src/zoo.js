@@ -14,11 +14,10 @@ function getAnimalsOlderThan(animal, age) {
     .residents.every((elemento) => elemento.age >= age);
 }
 
-function getEmployeeByName(employeeName = {}) {
-/*
-  return employees
-  .find((employee) => (employee.firstName === employeeName || employee.lastName === employeeName));
-*/
+function getEmployeeByName(employeeName) {
+  const getEmployee = employees
+    .find(({ firstName, lastName }) => (firstName === employeeName || lastName === employeeName));
+  return (employeeName === undefined ? {} : getEmployee);
 }
 
 function createEmployee(personalInfo, associatedWith) {
