@@ -41,6 +41,14 @@ function createEmployee(personalInfo, associatedWith) {
 
 function isManager(id) {
   // seu código aqui
+  const eGerente = data.employees.reduce((acc, curr) => {
+    const g = curr.managers.find((manager) => manager === id);
+    if (g) {
+      acc.push(g);
+    }
+    return acc;
+  }, []);
+  return eGerente.length > 0;
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
