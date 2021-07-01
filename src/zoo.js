@@ -4,6 +4,7 @@ const { species, employees, hours, prices } = require('./data');
 const all = [...species, ...employees];
 const isTrue = hours + prices === true;
 console.log(isTrue);
+const { Adult, Senior, Child } = prices;
 
 function getSpeciesByIds(ids = [], ids2 = []) {
   if (ids.length === 0) {
@@ -70,8 +71,12 @@ function countAnimals(species2 = {}) {
   return species.find((e) => e.name === species2).residents.length;
 }
 
-function calculateEntry(entrants) {
-  // seu código aqui
+function calculateEntry(entrants = {}) {
+  if (Object.keys(entrants).length < 1) {
+    return 0;
+  }
+  const { Adult: guestOne = 0, Senior: guestTwo = 0, Child: guestThree = 0 } = entrants;
+  return guestOne * Adult + guestTwo * Senior + guestThree * Child;
 }
 
 function getAnimalMap(options) {
@@ -91,7 +96,7 @@ function increasePrices(percentage) {
 }
 
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+  // ! seu código aqui
 }
 
 module.exports = {
