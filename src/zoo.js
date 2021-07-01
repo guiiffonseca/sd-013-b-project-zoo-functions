@@ -119,6 +119,7 @@ function getAnimalMap(options) {
   return animals;
 }
 
+// getSchedule
 function convertTime(time) {
   if (time === 0) return 0;
 
@@ -148,6 +149,7 @@ function getSchedule(dayName) {
   return { [dayName]: formattedSchedule[dayName] };
 }
 
+// getOldestFromFirstSpecies
 function findOldest(animals) {
   let oldest = { age: -Infinity };
 
@@ -168,12 +170,45 @@ function getOldestFromFirstSpecies(id) {
   return Object.values(findOldest(firstSpecies.residents));
 }
 
+// increasePrices
+function calculateValue(oldValue, percentage) {
+  const newValue = oldValue + oldValue * (percentage / 100);
+  return Math.ceil(newValue * 100) / 100;
+}
+
 function increasePrices(percentage) {
-  // seu código aqui
+  prices.Adult = calculateValue(prices.Adult, percentage);
+  prices.Senior = calculateValue(prices.Senior, percentage);
+  prices.Child = calculateValue(prices.Child, percentage);
+}
+
+// getEmployeeCoverage
+function getAssignedAnimals(animals) {
+  return animals.map(
+    (animalId) => species.find(({ id }) => id === animalId).name,
+  );
+}
+
+function findByIdOrName({ id, firstName, lastName }, idOrName) {
+  return id === idOrName || firstName === idOrName || lastName === idOrName;
 }
 
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+  if (idOrName) {
+    const { firstName, lastName, responsibleFor } = employees
+      .find((employee) => findByIdOrName(employee, idOrName));
+
+    return { [`${firstName} ${lastName}`]: getAssignedAnimals(responsibleFor) };
+  }
+
+  const assignedAnimals = {};
+
+  employees.forEach(({ firstName, lastName, responsibleFor }) => {
+    const key = `${firstName} ${lastName}`;
+    assignedAnimals[key] = getAssignedAnimals(responsibleFor);
+  });
+
+  return assignedAnimals;
 }
 
 module.exports = {
