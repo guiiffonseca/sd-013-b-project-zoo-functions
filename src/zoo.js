@@ -12,17 +12,20 @@ function getSpeciesByIds(...ids) {
 
 function getAnimalsOlderThan(animal, age) {
   const animals = data.species.find((obj) => obj.name === animal).residents;
-  let allOlder = true;
+  let areOlder = true;
   animals.forEach((indiviual) => {
     console.log(indiviual.age);
-    if (indiviual.age < age) allOlder = false;
+    if (indiviual.age < age) areOlder = false;
   });
-  return allOlder;
-  // seu código aqui
+  return areOlder;
 }
 
 function getEmployeeByName(employeeName) {
-  // seu código aqui
+  const { employees } = data;
+  const selectedEmployee = employees.find((employee) => (
+    employee.firstName === employeeName || employee.lastName === employeeName
+  ));
+  return selectedEmployee === undefined ? {} : selectedEmployee;
 }
 
 function createEmployee(personalInfo, associatedWith) {
