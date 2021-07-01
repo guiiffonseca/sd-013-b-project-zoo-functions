@@ -4,12 +4,7 @@ const { prices } = data;
 
 function getSpeciesByIds(...ids) {
   // seu código aqui
-  const { species } = data;
-  if (typeof ids === 'undefined') {
-    return [];
-  }
-  const especieIds = species.filter((especie) => ids.includes(especie.id));
-  return especieIds;
+  return data.species.filter((especie) => ids.includes(especie.id));
 }
 
 function getAnimalsOlderThan(animal, age) {
@@ -93,6 +88,7 @@ function getSchedule(dayName) {
 
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
+
 }
 
 function increasePrices(percentage) {
