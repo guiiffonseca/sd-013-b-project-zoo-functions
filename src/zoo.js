@@ -69,13 +69,13 @@ function getSchedule(dayName) {
     if (day === 'Monday') {
       acc[day] = 'CLOSED';
       return acc;
-    };
+    }
     acc[day] = `Open from ${hour.open}am until ${hour.close - 12}pm`;
     return acc;
-    }, {});
+  }, {});
   if (!dayName) return schedule;
-  return { [dayName]: schedule[dayName]};
-  }
+  return { [dayName]: schedule[dayName] };
+}
 
 function getOldestFromFirstSpecies(id) {
   // const animalFound = employees.find((person) => person.id === id).responsibleFor
