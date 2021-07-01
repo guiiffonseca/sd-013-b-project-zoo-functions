@@ -56,6 +56,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 // Setei uma constante com um objeto vazio.
 // Se a função receber um parâmetro. Vou buscar o nome desse animal no meu array de especies e retornar o tamanho da chave residentes, ai vai retornar o número de animais que tem nessa especie.
 // Se não colocar parâmetro: percorro o array de espécies e pra cada espécie eu pego o nome dela e o número de animais (tamanho da chave residents) e jogo no objeto vazio.
+// Ao invés de usar specie.name e specie.residents, fiz o destructuring.
 function countAnimals(specieAnimal) {
   const result = {};
   if (specieAnimal) {
@@ -68,8 +69,17 @@ function countAnimals(specieAnimal) {
   return result;
 }
 
+// Se não receber parâmetro ou um objeto vazio, vai retornar 0.
+// Peguei as entradas(chave, valor) do parâmetro.
+// Fiz o reduce, percorrendo cada par de chave e valor do parâmetro.
+// Busquei a chave do valor atual no objeto de preços e peguei o valor.
+// Multipliquei o número de pessoas pelo preço.
 function calculateEntry(entrants) {
-  // seu
+  if (!entrants || Object.entries(entrants).length === 0) return 0;
+  const entrantsEntries = Object.entries(entrants);
+  return entrantsEntries.reduce((acc, entrantType) =>
+    acc + entrantType[1] * data.prices[entrantType[0]],
+  0);
 }
 
 function getAnimalMap(options) {
