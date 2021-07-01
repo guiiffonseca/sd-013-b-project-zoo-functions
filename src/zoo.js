@@ -1,4 +1,4 @@
-const { species, employees } = require('./data');
+const { species, employees, prices } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -55,8 +55,13 @@ function countAnimals(speciesName) {
   // demorei mais entendi ,não era o popularity que devia contar e sim quantidade de animais/residentes usei entao o length
 }
 
-function calculateEntry(entrants) {
+function calculateEntry(...entrants) {
   // seu código aqui
+  if (entrants === undefined || entrants.length === 0) return 0;
+  return prices.reduce((acc, person, index) => {
+    const conta = acc + (person * entrants[index]);
+    return conta;
+  }, 0);
 }
 
 function getAnimalMap(options) {
