@@ -65,11 +65,11 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 
 function countAnimals(species) {
   const getName = data.species.find((animal) => animal.name === species);
-  const animalList = ((aniList, { name, residents }) => {
+  const listofAnimals = (aniList, { name, residents }) => {
     aniList[name] = residents.length;
     return aniList;
   };
-  return species ? getName.residents.length : data.species.reduce(animalList, {});
+  return species ? getName.residents.length : data.species.reduce(listofAnimals, {});
 }
 
 /* 8. A partir da quantidade de visitantes e a faixa etária de cada um, esta
