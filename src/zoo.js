@@ -46,11 +46,10 @@ function countAnimals(...args) {
   const animalsWhitoudArgs = species.reduce((accumulator, currentValue) =>
     Object.assign(accumulator, { [currentValue.name]: currentValue.residents.length }), {});
   return animalsWhitoudArgs;
-
 }
 
 function calculateEntry({ Adult = 0, Child = 0, Senior = 0 } = 0) {
-  // começar essa
+  // começar essa aqui
 }
 
 function getAnimalMap(options) {
