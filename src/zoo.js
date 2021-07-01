@@ -31,8 +31,6 @@ function getAnimalsOlderThan(animal, age) {
   return animals.residents.every((anim) => anim.age >= age);
 }
 
-// console.log(getAnimalsOlderThan('otters', 7))
-
 /* 3. IMPLEMENTE A FUNÇÃO getEmployeeByName
 Esta função é responsável pela busca das pessoas colaboradoras através do primeiro ou do último nome delas
 
@@ -52,8 +50,6 @@ function getEmployeeByName(employeeName) {
   return employees.find(empregados);
 }
 
-// console.log(getEmployeeByName('Emery'));
-
 /* 4. IMPLEMENTE A FUNÇÃO createEmployee
 A função, a partir de informações recebidas nos parâmetros, é capaz de criar um objeto equivalente ao de uma pessoa colaboradora, retornando-o
 
@@ -69,8 +65,6 @@ const createEmployee = (personalInfo, associatedWith) => ({
   ...personalInfo,
   ...associatedWith,
 });
-
-// console.log(createEmployee(personalInfo, associatedWith));
 
 /* 5. IMPLEMENTE A FUNÇÃO isManager
 Verifica se uma pessoa colaboradora, a partir de seu id, ocupa cargo de gerência.
@@ -88,8 +82,6 @@ function isManager(id) {
     '0e7b460e-acf4-4e17-bcb3-ee472265db83'];
   return managers.some((manager) => manager === id);
 }
-
-// console.log(isManager('0e7b460e-acf4-4e17-bcb3-ee472265db83'));
 
 /* 6. IMPLEMENTE A FUNÇÃO addEmployee
 A função irá adicionar uma nova pessoa colaboradora ao array employees, presente no arquivo data.js.
