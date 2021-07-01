@@ -74,22 +74,21 @@ function getSchedule(dayName) {
   // seu código aqui
   const objeto = {};
   Object.keys(hours).forEach((day) => {
-    // preenchendo objeto p/ usar caso o parametro venha undef.
+    // ABAIXO serve pro dia que estiver Closed receber valor diferente dos outros.
+    if (hours[day].open - hours[day].close === 0) {
+      objeto[day] = 'CLOSED';
+      return objeto;
+    }
+    // preenchendo o objeto.
     objeto[day] = `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`;
   });
   // abaixo é caso venha com parametro undefined
   if (dayName === undefined) return objeto;
-  // ABAIXO é caso o dia nao tenha horarios (sejam 0) retorna objeto com dia e seu valor fechado;
-  if (hours[dayName].open - hours[dayName].close === 0) {
-    objeto[dayName.substring()] = 'CLOSED';
-    return objeto;
-  }
-  // Abaixo se passar apenas um dia ,retorna um objeto com chave c/ nome passado e horario legivel(criado no objeto anterior) referente ao dia;
-  const apenasUmaPessoa = {};
-  apenasUmaPessoa[dayName.substring()] = objeto[dayName];
-  return apenasUmaPessoa;
+  // Abaixo se passar um dia normal
+  const diaNormal = {};
+  diaNormal[dayName.substring()] = objeto[dayName];
+  return diaNormal;
 }
-console.log(getSchedule('Tuesday'));
 
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
