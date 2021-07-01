@@ -82,13 +82,24 @@ function increasePrices(percentage) {
   function porcentagem(valor) {
     return (Math.ceil((valor * 100) * (((percentage / 100) + 1))) / 100).toFixed(2);
   }
-  Object.entries(prices).forEach((key, value) => {
-    prices[key] = porcentagem(parseFloat(value));
-  });
+  const novoAdult = porcentagem(prices.Adult);
+  const novoChild = porcentagem(prices.Child);
+  const novoSenior = porcentagem(prices.Senior);
+  prices.Adult = parseFloat(novoAdult, 10);
+  prices.Child = parseFloat(novoChild, 10);
+  prices.Senior = parseFloat(novoSenior, 10);
 }
 
-function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+function getEmployeeCoverage(...idOrName) {
+  if (idOrName) {
+    //
+  }
+  return employees.map((worker) => {
+    const nome = `${worker.firstName} ${worker.lastName}`;
+    return {
+      [nome]: [...worker.responsibleFor],
+    };
+  });
 }
 
 module.exports = {
