@@ -1,4 +1,5 @@
-const { species, employees, prices } = require('./data');
+const { species, employees, prices, hours } = require('./data');
+
 const locations = ['NE', 'NW', 'SE', 'SW'];
 
 function getSpeciesByIds(...ids) {
@@ -61,57 +62,59 @@ function countAnimals(specie) {
 }
 
 function calculateEntry(entrants = {}) {
-  return Object.keys(entrants).length < 1 ? 0 : (
-    Object.keys(entrants).map((key) => prices[key] * entrants[key])
-      .reduce((result, entrys) => result + entrys));
+  return Object.keys(entrants).length < 1 ? 0
+    : Object.keys(entrants).map((key) => prices[key] * entrants[key])
+      .reduce((result, entrys) => result + entrys);
 }
 
 function includeNames(result, options) {
   const rslt = result;
-
   locations.forEach((location) => {
     rslt[location] = rslt[location].map((animal) => {
+      let opt = 0;
       const keysAndName = {};
-
-      
       const anySex = species.find((spc) => spc.name === animal)
-      .residents.map((resident) => resident.name);
+        .residents.map((resident) => resident.name);
 
       const sexFilter = species.find((spc) => spc.name === animal)
-      .residents.filter((resident) => resident.sex === options.sex)
-      .map((resident) => resident.name);
-      
-      
-      let opt = anySex;
-      options.sex ? opt = sexFilter : opt = anySex;
-      options.sorted === true ? keysAndName[animal] = opt.sort() : keysAndName[animal] = opt;
+        .residents.filter((resident) => resident.sex === options.sex)
+        .map((resident) => resident.name);
+
+      opt = options.sex ? sexFilter : anySex;
+      keysAndName[animal] = options.sorted === true ? opt.sort() : opt;
 
       return keysAndName;
     });
   });
-
-  
 }
 
 function getAnimalMap(options) {
-  let result = {};
+  const result = {};
 
   locations.forEach((location) => {
     result[location] = species.filter((specie) => (specie.location === location))
       .map((spc) => spc.name);
   });
 
-  if (options !== undefined) {
-    if (options.includeNames === true) {
-      includeNames(result, options);
-    }
+  if (options !== undefined && options.includeNames === true) {
+    includeNames(result, options);
   }
 
   return result;
 }
 
 function getSchedule(dayName) {
-  // seu código aqui
+  const schedule = {};
+  const getSchedule = (day) => schedule[day] = day === 'Monday' ? 'CLOSED'
+  : `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`;
+
+  if (dayName !== undefined) {
+    getSchedule(dayName);
+  } else {
+    Object.keys(hours).forEach((day) => getSchedule(day));
+  }
+
+  return schedule;
 }
 
 function getOldestFromFirstSpecies(id) {
