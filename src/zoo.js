@@ -55,13 +55,14 @@ function countAnimals(speciesName) {
   // demorei mais entendi ,não era o popularity que devia contar e sim quantidade de animais/residentes usei entao o length
 }
 
-function calculateEntry(...entrants) {
+function calculateEntry(entrants) {
   // seu código aqui
   if (entrants === undefined || entrants.length === 0) return 0;
-  return prices.reduce((acc, person, index) => {
-    const conta = acc + (person * entrants[index]);
-    return conta;
-  }, 0);
+  const { Adult = 0, Senior = 0, Child = 0 } = entrants;
+  // em vez de usar spread operator (...?) no parametro
+  // usei Default Destructuring no object para dar valores padroes.
+  return Adult * prices.Adult + Senior * prices.Senior + Child * prices.Child;
+  // retornei com um calcuro simples e direto dos valores do object e os do prices.
 }
 
 function getAnimalMap(options) {
