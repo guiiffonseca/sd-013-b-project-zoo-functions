@@ -57,16 +57,19 @@ function getAnimalMap(options) {
 }
 
 const { hours } = data;
+const suportGetSchedule = (dayName) =>
+  Object.entries(hours).find((day, index) =>
+    day[0] === dayName).reduce((count, _, index, array) => {
+    if (array[0] === 'Monday') {
+      return Object.assign(count, { [array[0]]: 'CLOSED' });
+    }
+    return Object.assign(count,
+      { [array[0]]: `Open from ${array[1].open}am until ${array[1].close - 12}pm` });
+  }, {});
+
 function getSchedule(dayName) {
   if (dayName) {
-    return Object.entries(hours).find((day, index) =>
-      day[0] === dayName).reduce((count, _, index, array) => {
-      if (array[0] === 'Monday') {
-        return Object.assign(count, { [array[0]]: 'CLOSED' });
-      }
-      return Object.assign(count,
-        { [array[0]]: `Open from ${array[1].open}am until ${array[1].close - 12}pm` });
-    }, {});
+    return suportGetSchedule(dayName);
   }
   return Object.entries(hours).reduce((count, actual, index) => {
     if (actual[0] === 'Monday') {
@@ -97,10 +100,10 @@ function getEmployeeCoverage(idOrName) {
       || employee.lastName === idOrName);
     return { [`${getEmployee.firstName} ${getEmployee.lastName}`]: getEmployee.responsibleFor };
   }
-  employees.reduce((acc, value) =>
+  return employees.reduce((acc, value) =>
     Object.assign(acc, { [`${value.firstName} ${value.lastName}`]: value.responsibleFor }), {});
 }
-
+console.log(getEmployeeCoverage());
 module.exports = {
   calculateEntry,
   getSchedule,
