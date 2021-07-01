@@ -65,8 +65,13 @@ function getAnimalMap(options) {
   // seu código aqui
 }
 
-function getSchedule(dayName) {
+// const turn12Hour = (valor) => valor % 12;
 
+function getSchedule(dayName) {
+  // const { } = hours;
+  // return array.find((dia) => {
+  //   dia === dayName
+  // });
 }
 
 function getOldestFromFirstSpecies(id) {
@@ -74,10 +79,12 @@ function getOldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // console.log(prices);
-  // const porcentagem = 1 + percentage / 100;
-  // console.log(porcentagem);
-  // return prices.reduce((idade, atual) => atual * porcentagem, 0);
+  function porcentagem(valor) {
+    return (Math.ceil((valor * 100) * (((percentage / 100) + 1))) / 100).toFixed(2);
+  }
+  Object.entries(prices).forEach((key, value) => {
+    prices[key] = porcentagem(parseFloat(value));
+  });
 }
 
 function getEmployeeCoverage(idOrName) {
