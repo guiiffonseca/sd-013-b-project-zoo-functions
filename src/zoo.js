@@ -39,10 +39,23 @@ function isManager(id) {
   }
   return false;
 }
+// cria um objeto e coloca detro do employess
+function addEmployee(idN, firstNameN, lastNameN, managersN = [], responsibleForN = []) {
+  const novoObjeto = {
+    id: idN,
+    firstName: firstNameN,
+    lastName: lastNameN,
+    managers: managersN,
+    responsibleFor: responsibleForN,
+  };
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+  employees.push(novoObjeto);
 }
+console.log(employees);
+
+// parametros / id / primeiro nome / ultimo nome
+
+// função de objetos
 
 function countAnimals(speciess) {
   // seu código aqui
