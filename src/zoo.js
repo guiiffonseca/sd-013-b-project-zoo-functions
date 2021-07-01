@@ -167,12 +167,30 @@ function getSchedule(dayName) {
   }
   return obj;
 }
+const createFrase = (objc) => {
+  let animalMaisVelho = objc.reduce((acc, { residents }) => {
+    acc.push(residents.sort((a, b) => b.age - a.age)[0]);
+    return acc;
+  }, []);
+  animalMaisVelho = { ...animalMaisVelho.sort((a, b) => b.age - a.age)[0] };
 
-console.log(getSchedule());
+  return [animalMaisVelho.name, animalMaisVelho.sex, animalMaisVelho.age];
+};
 
 function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+  const pessoaId = employees.filter((person) => person.id === id);
+  let responsible = [];
+  pessoaId.forEach(({ responsibleFor }) => { responsible = responsibleFor; });
+  const animais = responsible.reduce((acc, valueId) => {
+    species.forEach((value) => {
+      if (value.id === valueId) acc.push(value);
+    });
+    return acc;
+  }, []);
+  return createFrase(animais);
 }
+
+getOldestFromFirstSpecies('4b40a139-d4dc-4f09-822d-ec25e819a5ad');
 
 function increasePrices(percentage) {
   // seu código aqui
