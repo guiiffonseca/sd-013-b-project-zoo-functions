@@ -81,23 +81,82 @@ function calculateEntry(entrants) {
   return calculateTotalPrice(entrants);
 }
 
+const regions = ['NE', 'NW', 'SE', 'SW'];
+const animalMap = {};
+const { species } = data;
+
+const optionsUndefined = () => {
+  regions.forEach((region) => {
+    animalMap[region] = species.filter((specie) => specie.location === region)
+      .map((specie) => specie.name);
+  });
+  return animalMap;
+};
+
+const sexFemaleSorted = (options) => {
+  regions.forEach((region) => {
+    animalMap[region] = species.filter((specie) => specie.location === region)
+      .map((specie) => ({ [specie.name]: specie.residents
+        .filter((resident) => resident.sex === 'female')
+        .map((resident) => resident.name).sort() }));
+  });
+  return animalMap;
+};
+
+const includeNamesAndSorted = () => {
+  regions.forEach((region) => {
+    animalMap[region] = species.filter((specie) => specie.location === region)
+      .map((specie) => ({ [specie.name]: specie.residents
+        .map((resident) => resident.name).sort() }));
+  });
+  return animalMap;
+};
+
+const sexFemale = (options) => {
+  regions.forEach((region) => {
+    animalMap[region] = species.filter((specie) => specie.location === region)
+      .map((specie) => ({ [specie.name]: specie.residents
+        .filter((resident) => resident.sex === 'female')
+        .map((resident) => resident.name) }));
+  });
+  return animalMap;
+};
+
+const includeNames = () => {
+  regions.forEach((region) => {
+    animalMap[region] = species.filter((specie) => specie.location === region)
+      .map((specie) => ({ [specie.name]: specie.residents
+        .map((resident) => resident.name) }));
+  });
+  return animalMap;
+};
+
+const optionsWithSorted = (options) => {
+  if (options.sex === 'female') {
+    return sexFemaleSorted(options);
+  } return includeNamesAndSorted();
+};
+
+const optionsWithoutSorted = (options) => {
+  if (options.sex === 'female') {
+    return sexFemale(options);
+  } return includeNames();
+};
+
+const optionsDefined = (options) => {
+  if (options.includeNames === true && options.sorted === true) {
+    return optionsWithSorted(options);
+  }
+  if (options.includeNames === true) {
+    return optionsWithoutSorted(options);
+  }
+};
+
 function getAnimalMap(options) {
-  // const animalsLocation = {};
-  // if (options === undefined) {
-  //   animalsLocation.NE = data.species.filter((specie) => specie.location === 'NE').map((specie) => specie.name);
-  //   animalsLocation.NW = data.species.filter((specie) => specie.location === 'NW').map((specie) => specie.name);
-  //   animalsLocation.SE = data.species.filter((specie) => specie.location === 'SE').map((specie) => specie.name);
-  //   animalsLocation.SW = data.species.filter((specie) => specie.location === 'SW').map((specie) => specie.name);
-  //   return animalsLocation
-  // }
-  // if (options.includeNames === true) {
-  //   animalsLocation.NE = data.species.filter((specie) => specie.location === 'NE').map((specie) => {
-  //     let animalObj = {}
-  //     animalObj[specie.name] = data[specie.residents.filter((resident) => resident.name)]
-  //     return animalsLocation.NE[animalObj]
-  //   });
-  //   return animalsLocation
-  // }
+  if (options === undefined || options.includeNames === undefined) {
+    return optionsUndefined();
+  }
+  return optionsDefined(options);
 }
 
 const { hours } = data;
