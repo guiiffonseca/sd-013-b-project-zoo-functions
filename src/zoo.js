@@ -111,8 +111,23 @@ function getAnimalMap(options = {}) {
   return map;
 }
 
+function hourHumanfy(hourObj) {
+  console.log(hourObj);
+  const open = hourObj[1].open > 12 ? `${hourObj[1].open - 12}pm` : `${hourObj[1].open}am`;
+  const close = hourObj[1].close > 12 ? `${hourObj[1].close - 12}pm` : `${hourObj[1].close}am`;
+  if (open === close) return 'CLOSED';
+  return `Open from ${open} until ${close}`;
+}
+
 function getSchedule(dayName) {
-  // seu código aqui
+  const scheduleDays = dayName === undefined
+    ? Object.entries(data.hours)
+    : [[dayName, data.hours[dayName]]];
+  const scheduleDaysRead = {};
+  scheduleDays.forEach((day) => {
+    scheduleDaysRead[day[0]] = hourHumanfy(day);
+  });
+  return scheduleDaysRead;
 }
 
 function getOldestFromFirstSpecies(id) {
