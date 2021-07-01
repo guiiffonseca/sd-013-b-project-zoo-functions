@@ -1,17 +1,23 @@
 const data = require('./data');
 
-const { species } = data;
+const { species, employees } = data;
 
-const getSpeciesByIds = (...idSpecies) => idSpecies
-  .map((id) => species.find((specie) => specie.id === id));
+const getSpeciesByIds = (...idSpecies) =>
+  idSpecies.map((id) => species.find((specie) => specie.id === id));
 
-function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
-}
+// species[0].residents[0].age;
+// Array.isArray(species.find((specie) => specie.name === animal));
+// |======| RETORNOS |======|
+// filter, map, sort -> array
+// some, every -> boolean
+// find -> object
 
-function getEmployeeByName(employeeName) {
-  // seu código aqui
-}
+const getAnimalsOlderThan = (animal, age) => species
+  .find((specie) => specie.name === animal).residents.every((resident) => resident.age >= age);
+
+const getEmployeeByName = (...employeeName) => (employeeName.length !== 0 ? employees
+  .find((employee) => `${employee.firstName} ${employee.lastName}`
+    .includes(employeeName.join())) : {});
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
