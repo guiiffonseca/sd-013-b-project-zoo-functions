@@ -1,4 +1,4 @@
-const { species, employees, prices } = require('./data');
+const { species, employees, prices, hours } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -32,10 +32,9 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 
 function countAnimals(especies) {
   const quantity = {};
-  if (!especies) {
-    species.forEach((animal) => { quantity[animal.name] = animal.residents.length; });
-    return quantity;
-  } return species.find((specie) => specie.name === especies).residents.length;
+  species.forEach(({ name, residents }) => { quantity[name] = residents.length; });
+  if (!especies) return quantity;
+  return quantity[especies];
 }
 
 function calculateEntry(entrants) {
@@ -51,12 +50,32 @@ function calculateEntry(entrants) {
 }
 
 function getAnimalMap(options) {
-  // seu código aqui
+  // const animalLocation = {};
+  // if (!options) {
+  //   animalLocation.NE = species.filter(({ location, name })  => {
+  //     if (location === 'NE') return name;
+  //   });
+  //   animalLocation.NW = species.filter(({ location }) => location === 'NW')
+  //     .map((animal) => animal.name);
+  //   animalLocation.SW = species.filter(({ location }) => location === 'SW')
+  //     .map((animal) => animal.name);
+  //   animalLocation.SE = species.filter(({ location }) => location === 'SW')
+  //     .map((animal) => animal.name);
+  // };
 }
 
 function getSchedule(dayName) {
-  // if (!dayName) return hours;
-}
+  const schedule = Object.entries(hours).reduce((acc, [day, hour]) => {
+    if (day === 'Monday') {
+      acc[day] = 'CLOSED';
+      return acc;
+    };
+    acc[day] = `Open from ${hour.open}am until ${hour.close - 12}pm`;
+    return acc;
+    }, {});
+  if (!dayName) return schedule;
+  return { [dayName]: schedule[dayName]};
+  }
 
 function getOldestFromFirstSpecies(id) {
   // const animalFound = employees.find((person) => person.id === id).responsibleFor
@@ -71,7 +90,9 @@ function increasePrices(percentage) {
 }
 
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+  // const allEmp = {};
+  // if (!idOrName) return employees.forEach((person) => { allEmp[`${person.firstName} ${person.lastName}`] = (person.responsibleFor) });
+  // return allEmp;
 }
 
 module.exports = {
