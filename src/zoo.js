@@ -9,35 +9,27 @@ function getSpeciesByIds(...ids) {
 
 function getAnimalsOlderThan(animal, age) {
   // seu código aqui
-  const { species } = data;
-  const getAnimal = species.find((especie) => especie.name === animal);
-  const checkAge = getAnimal.residents.every((element) => element.age >= age);
-  return checkAge;
+  const getAnimal = data.species.find((especie) => especie.name === animal);
+  return getAnimal.residents.every((element) => element.age >= age);
 }
 
 function getEmployeeByName(employeeName) {
   // seu código aqui
-  const { employees } = data;
-  if (typeof employeeName === 'undefined') {
+  if (!employeeName) { // "!employeeName" sugestao dada no plantao do baeta.
     return {};
   }
-  const returnName = employees.find((element) =>
+  return data.employees.find((element) =>
     employeeName === element.firstName || employeeName === element.lastName);
-  return returnName;
 }
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
-  return { ...personalInfo, ...associatedWith };
+  return { ...personalInfo, ...associatedWith};
 }
 
 function isManager(id) {
   // seu código aqui
-  const employe = data.employees.find((element) => element.managers.includes(id));
-  if (employe) {
-    return true;
-  }
-  return false;
+  const 
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
