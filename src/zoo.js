@@ -5,11 +5,12 @@ function getSpeciesByIds(...ids) {
 }
 
 // map - vai percorrer o array e retorna outro array de acordo com a função passada.
-// rest - pega varias strings e junta num array.
+// rest - pega strings e junta num array.
 // se não passar nenhum parâmetro o map vai retornar o array vazio, visto q ele ja retorna um array, independente do parâmetro passado, por isso passa no primeiro teste.
 
 function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
+  return data.species.find((specie) => specie.name === animal)
+    .residents.every((resident) => resident.age >= age);
 }
 
 function getEmployeeByName(employeeName) {
