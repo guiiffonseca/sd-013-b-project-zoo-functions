@@ -91,6 +91,7 @@ function increasePrices(percentage) {
   keys.forEach((key) => {
     prices[key] = Math.round(prices[key] * (1 + percentage / 100) * 100) / 100;
   });
+}
 
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
