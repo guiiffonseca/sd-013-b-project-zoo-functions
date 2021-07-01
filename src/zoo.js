@@ -57,14 +57,48 @@ function countAnimals(animal) {
 }
 
 function calculateEntry(entrants = 0) {
-  // seu código aqui
   const { Adult = 0, Child = 0, Senior = 0 } = entrants;
   return (Adult * prices.Adult) + (Child * prices.Child) + (Senior * prices.Senior);
 }
 
-function getAnimalMap(options) {
-  // seu código aqui
+// Animal Map //
+
+const allAni = {
+  NE: species.filter((aniName) => aniName.location === 'NE').map((ani) => `${ani.name}`),
+  NW: species.filter((aniName) => aniName.location === 'NW').map((ani) => `${ani.name}`),
+  SE: species.filter((aniName) => aniName.location === 'SE').map((ani) => `${ani.name}`),
+  SW: species.filter((aniName) => aniName.location === 'SW').map((ani) => `${ani.name}`),
+};
+
+const getAnimalsNames = (name, sex, sorted) => {
+  const animalObj = species.find((arg) => arg.name === name);
+  let animalNames = animalObj.residents.map((ani) => `${ani.name}`);
+  if (sex) {
+    animalNames = animalObj.residents.filter((ani) => ani.sex === sex).map((arg) => `${arg.name}`);
+  }
+  if (sorted) {
+    animalNames.sort();
+  }
+  return animalNames;
+};
+
+function getAnimalMap(options = '') {
+  const { includeNames = false, sorted = false, sex = false } = options;
+  const AniNames = {
+    NE: [{ [allAni.NE[0]]: getAnimalsNames('lions', sex, sorted) },
+      { [allAni.NE[1]]: getAnimalsNames('giraffes', sex, sorted) }],
+    NW: [{ [allAni.NW[0]]: getAnimalsNames('tigers', sex, sorted) },
+      { [allAni.NW[1]]: getAnimalsNames('bears', sex, sorted) },
+      { [allAni.NW[2]]: getAnimalsNames('elephants', sex, sorted) }],
+    SE: [{ [allAni.SE[0]]: getAnimalsNames('penguins', sex, sorted) },
+      { [allAni.SE[1]]: getAnimalsNames('otters', sex, sorted) }],
+    SW: [{ [allAni.SW[0]]: getAnimalsNames('frogs', sex, sorted) },
+      { [allAni.SW[1]]: getAnimalsNames('snakes', sex, sorted) }],
+  };
+  return includeNames !== false && options !== '' ? AniNames : allAni;
 }
+
+console.log(getAnimalMap({ includeNames: true, sex: 'female' }).NE[0]);
 
 function getSchedule(dayName) {
   // seu código aqui
