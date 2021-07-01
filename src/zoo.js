@@ -56,10 +56,15 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   });
 }
 
+// //////////////////// 7ª Função ////////////////////
 function countAnimals(species) {
-  // seu código aqui
+  const allSpecies = {};
+  data.species.forEach((v) => { allSpecies[v.name] = v.residents.length; });
+  if (!species) return allSpecies;
+  return allSpecies[species];
 }
 
+// //////////////////// 8ª Função ////////////////////
 function calculateEntry(entrants) {
   // seu código aqui
 }
