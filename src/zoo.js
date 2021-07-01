@@ -20,7 +20,7 @@ function getEmployeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  return { ...personalInfo, ...associatedWith }
+  return { ...personalInfo, ...associatedWith };
 }
 
 function isManager(id) {
@@ -39,7 +39,7 @@ function addEmployee(id = [], firstName = [], lastName = [], managers = [], resp
     managers,
     responsibleFor,
   };
-  data.employees.push(newEmployee)
+  data.employees.push(newEmployee);
 }
 
 function countAnimals(species) {
