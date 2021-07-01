@@ -53,7 +53,7 @@ function countAnimals(species) {
 }
 
 function calculateEntry(entrants) {
-  
+
 }
 
 function getAnimalMap(options) {
