@@ -1,6 +1,6 @@
-const data = require("./data");
+const data = require('./data');
 
-const { species, employees } = data;
+const { employees } = data;
 
 function getSpeciesByIds(...ids) {
   return ids.map((id) => data.species.find((specie) => specie.id === id));
@@ -11,7 +11,7 @@ function getSpeciesByIds(...ids) {
 
 function getAnimalsOlderThan(animal, age) {
   const residentAges = data.species.find(
-    (specie) => specie.name === animal
+    (specie) => specie.name === animal,
   ).residents;
   return residentAges.every((resident) => resident.age >= age);
   // data é objeto, .species retorna array.
@@ -21,12 +21,12 @@ function getAnimalsOlderThan(animal, age) {
 function getEmployeeByName(employeeName) {
   // Inspirado em Code Review do Rafael Nery Machado
   // entender melhor a desestruturacao
-  const { employees } = data;
+  // const { employees } = data;
   // console.log(employees);
   return (
     employees.find(
       ({ firstName, lastName }) =>
-        firstName === employeeName || lastName === employeeName
+        firstName === employeeName || lastName === employeeName,
     ) || {}
   );
 }
@@ -50,7 +50,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
     firstName,
     lastName,
     managers,
-    responsibleFor
+    responsibleFor,
   });
 }
 
