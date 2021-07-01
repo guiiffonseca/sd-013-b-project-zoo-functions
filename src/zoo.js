@@ -64,12 +64,14 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 /* 7. Esta função é responsável por contabilizar a quantidade de animais. */
 
 function countAnimals(species) {
-  const getName = data.species.find((animal) => animal.name === species);
-  const listofAnimals = (aniList, { name, residents }) => {
-    aniList[name] = residents.length;
-    return aniList;
-  };
-  return species ? getName.residents.length : data.species.reduce(listofAnimals, {});
+  if (species === undefined) {
+    const animalObject = {};
+    data.species.forEach((namedAnimal) => {
+      animalObject[`${namedAnimal.name}`] = namedAnimal.residents.length;
+    });
+    return animalObject;
+  }
+  return data.species.find((namedAnimal) => namedAnimal.name === species).residents.length;
 }
 
 /* 8. A partir da quantidade de visitantes e a faixa etária de cada um, esta
