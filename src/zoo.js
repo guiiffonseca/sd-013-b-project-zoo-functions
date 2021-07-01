@@ -1,22 +1,22 @@
-const { species } = require('./data');
-const { employees } = require('./data');
+const { species, employees, prices } = require('./data');
 
 const data = require('./data');
-
+//  Rest the parameter if there is more than one, using a map and find the same id as the 'idd' of map. 
 function getSpeciesByIds(...ids) {
   return ids.map((idd) => species.find((specie) => (specie.id === idd)));
 }
 
 const getAnimalsOlderThan = (animal, age) => species
+//  fining the specie name, same as the parameter.
   .find((specie) => specie.name === animal).residents
+//  comparing if all the residents have at least the age parameter.
   .every((resident) => resident.age > age);
-
-const employeesFunction = (empName) => employees
-  .find((eName) => eName.firstName === empName || eName.lastName === empName);
 
 function getEmployeeByName(employeeName) {
   if (!employeeName) return {};
-  return employeesFunction(employeeName);
+  return employees.find(
+    (eName) => eName.firstName === employeeName || eName.lastName === employeeName,
+  );
 }
 
 function createEmployee(personalInfo, associatedWith) {
@@ -47,8 +47,13 @@ function countAnimals(speciespar) {
   return species.find((specie) => specie.name === speciespar).residents.length;
 }
 
+const calculateAllPeople = (entrants) => (prices.Adult * entrants.Adult || 0)
++ (prices.Child * entrants.Child || 0)
++ (prices.Senior * entrants.Senior || 0);
+
 function calculateEntry(entrants) {
-  // seu código aqui
+  if (!entrants || entrants === {}) return 0;
+  return calculateAllPeople(entrants);
 }
 
 function getAnimalMap(options) {
