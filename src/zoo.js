@@ -1,20 +1,20 @@
 const data = require('./data');
 
+const { employees, species, prices } = data;
 function getSpeciesByIds(...ids) {
-  const { species } = data;
   return species.filter(({ id }) => ids.includes(id));
 }
 
 function getAnimalsOlderThan(animal, age) {
   // seu código aqui
-  const especie = data.species.find((bixo) => bixo.name === animal);
+  const especie = species.find((bixo) => bixo.name === animal);
   return especie.residents.every((idade) => idade.age >= age);
 }
 
 function getEmployeeByName(employeeName) {
   // seu código aqui
   if (!employeeName) return {};
-  return data.employees.find(({ firstName, lastName }) =>
+  return employees.find(({ firstName, lastName }) =>
     firstName === employeeName || lastName === employeeName);
 }
 
@@ -23,7 +23,7 @@ const createEmployee = (personalInfo, associatedWith) => ({
 
 function isManager(id) {
   // seu código aqui
-  return data.employees.some(({ managers }) => managers.includes(id));
+  return employees.some(({ managers }) => managers.includes(id));
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
@@ -35,18 +35,18 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
     managers,
     responsibleFor,
   };
-  data.employees.push(employee);
+  employees.push(employee);
 }
 
-function countAnimals(species) {
+function countAnimals(animal) {
   // seu código aqui
-  if (species === undefined) {
-    return data.species.reduce((acc, curr) => {
+  if (animal === undefined) {
+    return species.reduce((acc, curr) => {
       acc[curr.name] = curr.residents.length;
       return acc;
     }, {});
   }
-  return data.species.find(({ name }) => name === species).residents.length;
+  return species.find(({ name }) => name === animal).residents.length;
 }
 
 function calculateEntry(entrants) {
@@ -71,6 +71,14 @@ function getOldestFromFirstSpecies(id) {
 
 function increasePrices(percentage) {
   // seu código aqui
+  const perc = (100 + percentage) / 100;
+  const keys = Object.keys(prices);
+  keys.forEach((key) => {
+    const num = parseFloat((prices[key] * perc).toFixed(3));
+    const int = Math.floor(num);
+    const decimal = Math.ceil((num - int) * 100) / 100;
+    data.prices[key] = int + decimal;
+  });
 }
 
 function getEmployeeCoverage(idOrName) {
