@@ -3,14 +3,14 @@ const data = require('./data');
 const especies = data.species;
 
 const getSpeciesByIds = (...ids) => {
-  // seu código aqui
-  let busca;
-  busca = especies.filter((especie) => especie.id === ids.find((value) => especie.id === value));
+  // seu código aqui  
+  const busca = especies.filter((especie) => especie.id === ids.find((value) => especie.id === value));
   return busca;
 };
 
 function getAnimalsOlderThan(animal, age) {
   // seu código aqui
+
 }
 
 function getEmployeeByName(employeeName) {
