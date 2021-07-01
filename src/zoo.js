@@ -7,7 +7,7 @@ const getSpeciesByIds = (...ids) => {
   let busca;
   busca = especies.filter((especie) => especie.id === ids.find((value) => especie.id === value));
   return busca;
-}
+};
 
 function getAnimalsOlderThan(animal, age) {
   // seu código aqui
