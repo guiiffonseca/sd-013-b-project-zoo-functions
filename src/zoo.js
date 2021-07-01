@@ -52,7 +52,6 @@ function countAnimals(specie) {
   });
   return cont;
 }
-countAnimals();
 /* -------------------------------------------------------------------- */
 function calculateEntry(entrants = 0) {
   const { Child = 0, Senior = 0, Adult = 0 } = entrants;
@@ -83,7 +82,7 @@ function getEmployeeCoverage(idOrName) {
 module.exports = {
   calculateEntry,
   getSchedule,
-  // countAnimals,
+  countAnimals,
   getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
