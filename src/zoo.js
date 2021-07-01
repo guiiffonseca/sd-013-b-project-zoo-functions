@@ -2,25 +2,21 @@ const data = require('./data');
 
 function getSpeciesByIds(...ids) {
   // seu código aqui
-  // const array = [];
-  // let valorAtual;
-  // const filtro = (value) => value.id === valorAtual;
-
-  // ids.forEach((atual) => {
-  //   valorAtual = atual;
-  //   array.push(data.species.filter(filtro)[0]);
-  // });
-  // return array;
+  const arrayOfSpecies = [];
+  ids.forEach((id, index, array) => {
+    const specie = data.species.filter((tipo) => tipo.id === id);
+    arrayOfSpecies.push(...specie);
+  });
+  return arrayOfSpecies;
 }
 
 function getAnimalsOlderThan(animal, age) {
   // seu código aqui
-  const chaveAnimal = data.species.find(({ name }) => name === animal);
-  const { residents } = chaveAnimal;
-  const checkAge = residents.every((animalName) => animalName.age >= age);
-  return checkAge;
+  const especies = data.species;
+  const targetSpecie = especies.find((especie) => especie.name === animal);
+  const { residents } = targetSpecie;
+  return residents.every((resident) => resident.age >= age);
 }
-getAnimalsOlderThan('otters', 7);
 
 function getEmployeeByName(employeeName) {
   // seu código aqui
