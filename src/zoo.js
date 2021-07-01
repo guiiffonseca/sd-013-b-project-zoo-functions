@@ -79,11 +79,36 @@ function calculateEntry(entrants) {
 }
 
 function getAnimalMap(options) {
-  // seu código aqui
+  // if (!options) {
+  //   const locationAndName = data.species.reduce((acc, curr, index) => {
+  //     acc[curr.location] = [curr.name];
+  //     if (curr.name.length >= 1) {
+  //       acc[curr.location].push(curr.name);
+  //     }
+  //     return acc;
+  //   }, {});
+  //   return locationAndName;
+  // }
 }
 
 function getSchedule(dayName) {
-  // seu código aqui
+  const daysAndLanguage = Object.entries(data.hours).reduce((acc, curr) => {
+    if (curr[1].open === 0 && curr[1].close === 0) {
+      acc[curr[0]] = 'CLOSED';
+      return acc;
+    }
+    acc[curr[0]] = `Open from ${curr[1].open}am until ${curr[1].close - 12}pm`;
+    return acc;
+  }, {});
+  if (!dayName) {
+    return daysAndLanguage;
+  }
+  const result = {};
+  const objectOfParameter = Object.entries(daysAndLanguage)
+    .filter((elemento) => elemento[0] === dayName)[0];
+  const [key2, value] = objectOfParameter;
+  result[key2] = value;
+  return result;
 }
 
 function getOldestFromFirstSpecies(id) {
@@ -91,7 +116,12 @@ function getOldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  const preco = data.prices;
+  const chave = Object.keys(preco);
+  chave.forEach((elemento) => {
+    const novoPreco = preco[elemento] + (preco[elemento] * (percentage / 100));
+    preco[elemento] = Math.round(novoPreco * 100) / 100;
+  });
 }
 
 function getEmployeeCoverage(idOrName) {
