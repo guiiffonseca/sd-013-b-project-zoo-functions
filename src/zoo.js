@@ -50,8 +50,15 @@ function isManager(id) {
 /* 6. A função irá adicionar uma nova pessoa colaboradora ao array employees,
  presente no arquivo data.js. */
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  const newEmployee = {
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  };
+  employees.push(newEmployee);
 }
 
 /* 7. Esta função é responsável por contabilizar a quantidade de animais. */
