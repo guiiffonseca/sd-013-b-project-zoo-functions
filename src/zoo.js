@@ -25,10 +25,12 @@ function getEmployeeByName(employeeName) {
   return findEmployee === undefined ? {} : findEmployee;
 }
 
-console.log(getEmployeeByName());
-
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
+  const newEmployee = {};
+  Object.assign(newEmployee, personalInfo, associatedWith);
+  data.employees.push(newEmployee);
+  return newEmployee;
 }
 
 function isManager(id) {
