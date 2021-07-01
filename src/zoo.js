@@ -78,9 +78,10 @@ function getSchedule(dayName) {
 }
 
 function getOldestFromFirstSpecies(id) {
-  // const animalFound = employees.find((person) => person.id === id).responsibleFor
-  // .find((animal) => animal[0]);
-  // return
+  const getResp = employees.find((person) => person.id === id).responsibleFor[0];
+  const animals = species.find((specie) => specie.id === getResp);
+  const ordened = animals.residents.sort((an1, an2) => an2.age - an1.age);
+  return Object.values(ordened[0]);
 }
 
 function increasePrices(percentage) {
@@ -90,11 +91,17 @@ function increasePrices(percentage) {
 }
 
 function getEmployeeCoverage(idOrName) {
-  // const allEmp = {};
-  // if (!idOrName) return employees.forEach((person) => { allEmp[`${person.firstName} ${person.lastName}`] = (person.responsibleFor) });
-  // return allEmp;
+  // const personResp = employees
+  //   .reduce((acc, { firstName, lastName, responsibleFor }) => {
+  //     acc[`${firstName} ${lastName}`] = responsibleFor;
+  //     return acc;
+  // }, {});
+  // if (!idOrName) return personResp;
+  // return employees.find(({ firstName, lastName, id }) => {
+  //   firstName === idOrName || lastName === idOrName || id === idOrName;
+  // });
 }
-
+// console.log(getEmployeeCoverage('Stephanie'));
 module.exports = {
   calculateEntry,
   getSchedule,
