@@ -43,8 +43,22 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   });
 }
 
+// const callbackCount = (acumulador, elemento) => {
+//   const momento = acumulador;
+//   momento[elemento.name] = elemento.residents.length;
+//   return momento;
+// };
+
 function countAnimals(speciesZoo) {
   // seu código aqui
+  if (!speciesZoo) {
+    return species.reduce((acumulador, { name, residents }) => {
+      const momento = acumulador;
+      momento[name] = residents.length;
+      return momento;
+    }, {});
+  }
+  return species.find(({ name }) => name === speciesZoo).residents.length;
 }
 
 function calculateEntry(entrants) {
