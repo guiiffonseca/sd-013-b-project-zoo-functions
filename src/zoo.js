@@ -1,4 +1,4 @@
-const { species } = require('./data');
+const { species, employees } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -29,7 +29,10 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  // seu código aqui
+  return employees
+    .some(({ managers }) => (
+      managers.some((manager) => (manager === id))
+    ));
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
