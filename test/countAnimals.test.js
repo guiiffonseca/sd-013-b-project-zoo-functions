@@ -19,7 +19,6 @@ describe('Implemente a função countAnimals', () => {
 
     assert.deepStrictEqual(actual, expected);
   });
-
   it('Com o nome de uma espécie de animal, retorna somente a quantidade', () => {
     let actual = zoo.countAnimals('lions');
     let expected = 4;
