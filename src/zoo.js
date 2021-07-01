@@ -35,6 +35,14 @@ function createEmployee(personalInfo, associatedWith) {
 
 function isManager(id) {
   // seu código aqui
+  // O código abaixo funcionou, mas não me deixou contente...
+  let isManagerReturn = false;
+  data.employees.forEach((employee) => {
+    if (employee.managers.some((manager) => manager === id)) {
+      isManagerReturn = true;
+    }
+  });
+  return isManagerReturn;
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
