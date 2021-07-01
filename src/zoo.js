@@ -2,10 +2,8 @@ const data = require('./data');
 const especies = data.species;
 
 const getSpeciesByIds = (...ids) => {
-  // seu código aqui  
-  const buscaEspecie = especies.filter((especie) => {
-     return especie.id === ids.find((value) => especie.id === value);
-  });
+  // seu código aqui
+  const buscaEspecie = especies.filter((especie) => especie.id === ids.find((value) => especie.id === value));
   return buscaEspecie;
 }
 
