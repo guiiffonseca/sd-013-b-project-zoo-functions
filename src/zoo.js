@@ -49,7 +49,11 @@ function countAnimals(args) {
 }
 
 function calculateEntry(args) {
-  // Object.entries(args).
+  if (args === undefined || args === {}) {
+    return 0;
+  }
+  return Object.entries(args).reduce((accumulator, currentValue, index) =>
+    accumulator + currentValue[1] * data.prices[currentValue[0]], 0);
 }
 
 function getAnimalMap(options) {
@@ -93,6 +97,13 @@ function increasePrices(percentage) {
   // seu código aqui
 }
 
+const getAnimalIdWithResponsibleFor = () => {
+  const responsable = employees.map((employee) => employee.responsibleFor);
+  console.log(responsable);
+  // const hadouken = species.filter((specie, index) => specie.id[index] === responsable);
+  // console.log(hadouken);
+};
+getAnimalIdWithResponsibleFor();
 function getEmployeeCoverage(idOrName) {
   if (idOrName) {
     const getEmployee = employees.find((employee) =>
@@ -103,7 +114,7 @@ function getEmployeeCoverage(idOrName) {
   return employees.reduce((acc, value) =>
     Object.assign(acc, { [`${value.firstName} ${value.lastName}`]: value.responsibleFor }), {});
 }
-console.log(getEmployeeCoverage());
+// console.log(getEmployeeCoverage());
 module.exports = {
   calculateEntry,
   getSchedule,
