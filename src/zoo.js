@@ -1,8 +1,8 @@
 const { species, employees, hours, prices } = require('./data');
-const data = require('./data');
+// const data = require('./data');
 
 const all = [...species, ...employees];
-const isTrue = hours + prices + data === true;
+const isTrue = hours + prices === true;
 console.log(isTrue);
 
 function getSpeciesByIds(ids = [], ids2 = []) {
@@ -58,8 +58,16 @@ function addEmployee(
   return employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
 
-function countAnimals(species2) {
-  // seu código aqui
+function countAnimals(species2 = {}) {
+  if (Object.keys(species2).length === 0) {
+    const count = {};
+    species.reduce((e, actual) => {
+      count[actual.name] = actual.residents.length;
+      return count;
+    }, 0);
+    return count;
+  }
+  return species.find((e) => e.name === species2).residents.length;
 }
 
 function calculateEntry(entrants) {
