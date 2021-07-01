@@ -47,7 +47,6 @@ function countAnimals(specie) {
   });
   return counter;
 }
-
 function calculateEntry(entrants) {
   // seu código aqui
   if (entrants === undefined) return 0;
@@ -65,10 +64,28 @@ function getSchedule(dayName) {
   // seu código aqui
 }
 
+let rep;
+let array = '';
 function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+  let cont = 0;
+  const post = 0;
+  const array2 = [];
+  employees.forEach((valor) => { if (valor.id === id) rep = valor.responsibleFor[post]; });
+  species.forEach((animal) => {
+    if (rep === animal.id) {
+      animal.residents.forEach((idade, lugar) => {
+        if (idade.age > cont) {
+          cont = idade.age;
+          array = `${idade.name} ${idade.sex} ${idade.age}`;
+        }
+      });
+    }
+  });
+  array = array.split(' ');
+  array2.push(array[0], array[1], parseInt(array[2], Number));
+  return array2;
 }
-
+console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
 function increasePrices(percentage) {
   // seu código aqui
 }
