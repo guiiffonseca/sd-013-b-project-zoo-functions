@@ -26,7 +26,7 @@ function createEmployee(personalInfo, associatedWith) {
 function isManager(id) {
   const manager = data.employees.find((procura) => procura.id === id);
   const gerente = '0e7b460e-acf4-4e17-bcb3-ee472265db83';
-  if(manager.id === gerente) {
+  if (manager.id === gerente) {
     return true;
   } return false;
 }
