@@ -25,7 +25,7 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
 }
 
-function countAnimals(species) {
+function countAnimals(paramSpecies) {
   // seu código aqui
 }
 
