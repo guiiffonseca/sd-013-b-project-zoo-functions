@@ -24,18 +24,21 @@ function getEmployeeByName(employeeName) {
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
-  return { ...personalInfo, ...associatedWith};
+  return { ...personalInfo, ...associatedWith };
 }
 
 function isManager(id) {
   // seu código aqui
-  const 
+  const checkManager = data.employees.find((element) => element.managers.includes(id));
+  if (checkManager) {
+    return true;
+  }
+  return false;
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   // seu código aqui
-  const addPeople = data.employees.push({ id, firstName, lastName, managers, responsibleFor });
-  return addPeople;
+
 }
 
 function countAnimals(especies) {
