@@ -80,8 +80,31 @@ function calculateEntry(entrants = {}) {
   return payOff;
 }
 
-function getAnimalMap(options) {
-  // seu código aqui
+function animalSexFilter(animal, sex) {
+  if (animal.sex === sex || sex === undefined) {
+    return animal.name;
+  }
+}
+
+function getAnimalMap(options = {}) {
+  const map = { NE: [], NW: [], SE: [], SW: [] };
+  data.species.forEach((animal) => {
+    if (options.includeNames) {
+      const animalName = animal.name;
+      const obj = {};
+      const animalNameList = [];
+      animal.residents.forEach((element) => {
+        const checkSex = animalSexFilter(element, options.sex);
+        if (checkSex !== undefined) animalNameList.push(checkSex);
+      });
+      if (options.sorted) animalNameList.sort();
+      obj[animalName] = animalNameList;
+      map[animal.location].push(obj);
+    } else {
+      map[animal.location].push(animal.name);
+    }
+  });
+  return map;
 }
 
 function getSchedule(dayName) {
