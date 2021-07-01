@@ -4,20 +4,21 @@ const data = require('./data');
 function getSpeciesByIds(...ids) {
   return ids.map((id) => species.find((specie) => specie.id === id));
 }
-// console.log(getSpeciesByIds('e8481c1d-42ea-4610-8e11-1752cfc05a46'));
+
 function getAnimalsOlderThan(animal, age) {
   const comparName = species.find((specie) => specie.name === animal);
   return comparName.residents.every((animalAge) => animalAge.age >= age);
 }
-// console.log(getAnimalsOlderThan('lions', 10));
 
 function getEmployeeByName(employee) {
   if (employee === undefined) return {};
   return employees.find((people) => people.firstName === employee || people.lastName === employee);
 }
-// console.log(getEmployeeByName('Elser'));
+
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  const newEmployee = Object.assign(personalInfo, associatedWith);
+  employees.push(newEmployee);
+  return newEmployee;
 }
 
 function isManager(id) {
