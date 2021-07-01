@@ -12,7 +12,7 @@ const getAnimalsOlderThan = (animal, age) => species
   .every((resident) => resident.age > age);
 
 const employeesFunction = (empName) => employees
-  .map((employe) => employe)
+  .map((employee) => employee)
   .find((eName) => eName.firstName === empName || eName.lastName === empName);
 
 function getEmployeeByName(employeeName) {
@@ -24,9 +24,9 @@ function createEmployee(personalInfo, associatedWith) {
   return Object.assign(personalInfo, associatedWith);
 }
 
-function isManager(id) {
-  // seu código aqui
-}
+const isManager = (id) => employees
+  .some((employee) => employee.managers
+    .some((idsEmp) => idsEmp === id));
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
