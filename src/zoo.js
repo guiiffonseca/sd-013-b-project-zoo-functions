@@ -1,7 +1,7 @@
 const { species, prices } = require('./data');
 const data = require('./data');
 
-const { employees, prices } = data;
+const { employees } = data;
 
 function getSpeciesByIds(...ids) {
   return ids.map((id) => data.species.find((specie) => specie.id === id));
