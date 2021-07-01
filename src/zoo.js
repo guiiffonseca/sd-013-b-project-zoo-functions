@@ -11,7 +11,7 @@ function getSpeciesByIds(...ids) {
 }
 
 function getAnimalsOlderThan(animal, age) {
-  const speciesFind = data.species.find((especie) => especie.name === animal);
+  const speciesFind = species.find((especie) => especie.name === animal);
   const residentsForEach = speciesFind.residents.every((resident) => {
     if (resident.age > age) {
       return true;
@@ -30,7 +30,7 @@ function getEmployeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  
 }
 
 function isManager(id) {
