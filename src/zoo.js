@@ -111,23 +111,45 @@ function increasePrices(percentage) {
   prices.Senior = parseFloat(novoSenior, 10);
 }
 
-function getEmployeeCoverage(...idOrName) {
-  // const list = {};
-  // if (idOrName) {
-  //   const work = idOrName.map((id) => employees
-  //     .find((worker) => worker.id === id || worker.firstName === id || worker.lastName === id));
-  //   console.log(work);
-  //   const animais = work.map(({ responsibleFor }) => species
-  //     .find(({ id }) => responsibleFor === id));
-  //   console.log(animais);
-  //   // const { firstName, lastName } = work;
-  //   // const nomeFuncionario = `${firstName} ${lastName}`;
-  //   // list[nomeFuncionario] = [animais.name];
-  // }
-  // return list;
+function seSim(idOrName) {
+  const list = {};
+  const work = employees.find(
+    (worker) => worker.id === idOrName
+      || worker.firstName === idOrName
+      || worker.lastName === idOrName,
+  );
+  const { firstName, lastName, responsibleFor } = work;
+  const animais = responsibleFor.map((animal) => species.find(({ id }) => animal === id));
+  list[`${firstName} ${lastName}`] = [];
+  const valor = Object.values(animais);
+  valor.forEach((animal) => {
+    list[`${firstName} ${lastName}`].push(animal.name);
+  });
+  return list;
 }
 
-// console.log(getEmployeeCoverage('Stephanie'));
+function seNao() {
+  const list = {};
+  employees.forEach((worker) => {
+    const { firstName, lastName } = worker;
+    const animais = worker.responsibleFor.map((animal) => species.find(({ id }) => animal === id));
+    list[`${firstName} ${lastName}`] = [];
+    const valor = Object.values(animais);
+    valor.forEach((animal) => {
+      list[`${firstName} ${lastName}`].push(animal.name);
+    });
+  });
+  return list;
+}
+
+function getEmployeeCoverage(idOrName) {
+  if (idOrName) {
+    return seSim(idOrName);
+  }
+  return seNao();
+}
+
+console.log(getEmployeeCoverage('Stephanie'));
 
 module.exports = {
   calculateEntry,
