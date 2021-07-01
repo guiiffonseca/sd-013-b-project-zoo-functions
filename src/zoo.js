@@ -61,8 +61,35 @@ function countAnimals(speciees) {
   }, {});
 }
 
+const { prices } = require('./data');
+
+// função para verificar se o obj está vazio.
+// Link - https://www.horadecodar.com.br/2020/10/06/como-verificar-se-objeto-esta-vazio-em-javascript/
+function isEmpty(obj) {
+  return Object.keys(obj).length === 0 && obj.constructor === Object;
+}
+
+function calculeteValues(entrants) {
+  let adult = 0;
+  let child = 0;
+  let senior = 0;
+  if (entrants.Adult > 0) {
+    adult = entrants.Adult * prices.Adult;
+  }
+  if (entrants.Child > 0) {
+    child = entrants.Child * prices.Child;
+  }
+  if (entrants.Senior > 0) {
+    senior = entrants.Senior * prices.Senior;
+  }
+  return adult + child + senior;
+}
+
 function calculateEntry(entrants) {
-  // seu código aqui
+  if (entrants === undefined || isEmpty(entrants) === true) {
+    return 0;
+  }
+  return calculeteValues(entrants);
 }
 
 function getAnimalMap(options) {
