@@ -62,12 +62,11 @@ function calculateEntry(entrants = 0) {
 function getAnimalMap(options) {
   // seu código aqui
 }
+/* -------------------------------------------------------------------- */
 function getSchedule(dayName) {
-  // if (dayName === undefined) {
-  //   return {
-  //   }
-  // }
+ // seu código aqui
 }
+/* -------------------------------------------------------------------- */
 function getOldestFromFirstSpecies(id) {
   // pega o id do 1º animal q o func cuida, através da comparação do id do funcionário passado como  como parâmetro.
   const specieId = employees.find((func) => func.id === id).responsibleFor[0];
@@ -87,9 +86,8 @@ function getOldestFromFirstSpecies(id) {
 }
 /* -------------------------------------------------------------------- */
 function increasePrices(percentage) {
-  // seu código aqui
 }
-
+/* -------------------------------------------------------------------- */
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
 }
