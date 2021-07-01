@@ -37,7 +37,6 @@ function createEmployee(personalInfo, associatedWith) {
     managers,
     responsibleFor,
   };
-  employees.push(newEmployee);
 
   return newEmployee;
 }
@@ -46,8 +45,16 @@ function isManager(id) {
   return employees.some((employee) => employee.managers.includes(id));
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  const newEmployee = {
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  };
   
+  employees.push(newEmployee);
 }
 
 function countAnimals(speciess) {
