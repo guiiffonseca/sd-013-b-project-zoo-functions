@@ -29,7 +29,18 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
+  return employees.map((value) => value.managers).some((manager) => {
+    let input = false;
+    if (manager.length > 1) {
+      input = manager.some((value) => value === id);
+    } else {
+      input = manager === id;
+    }
+    return input;
+  });
 }
+
+console.log(isManager('0e7b460e-acf4-4e17-bcb3-ee472265db83'));
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   // seu código aqui
@@ -61,17 +72,68 @@ function calculateEntry(entrants = []) {
   const arrayPrice = Object.entries(prices);
   // eslint-disable-next-line no-unused-expressions
   const total = entradas.map((entrada) => arrayPrice.reduce((acc, value) => {
-    return (value[0] === entrada[0]) ? value[1] * entrada[1] : acc;
+    const retorno = (value[0] === entrada[0]) ? value[1] * entrada[1] : acc;
+    return retorno;
   }, 0));
   return total.reduce((acc, value) => acc + value, 0);
 }
 
-console.log(calculateEntry());
+const getAnimalIncludeOff = () => species.reduce((acc, objc) => {
+  if (acc[objc.location]) {
+    acc[objc.location].push(objc.name);
+  } else {
+    acc[objc.location] = [objc.name];
+  }
+  return acc;
+}, {});
 
-function getAnimalMap(options) {
-  // seu código aqui
+const getAnimalIncludeOn = () => species.reduce((acc, objc) => {
+  if (acc[objc.location]) {
+    acc[objc.location].push({
+      [objc.name]: [...objc.residents.map((value) => value.name)]
+    });
+  } else {
+    acc[objc.location] = [{
+      [objc.name]: [...objc.residents.map((value) => value.name)]
+    }];
+  }
+  return acc;
+}, {});
+
+const getAnimalSorted = () => species.reduce((acc, objc) => {
+  if (acc[objc.location]) {
+    acc[objc.location].push({
+      [objc.name]: [...objc.residents.map((value) => value.name)].sort()
+    });
+  } else {
+    acc[objc.location] = [{
+      [objc.name]: [...objc.residents.map((value) => value.name)].sort()
+    }];
+  }
+  return acc;
+}, {});
+
+const returnSx = (value, sex, accu) => {
+  if (value.sex === sex.sex) accu.push(value.name);
+  return accu;
+};
+
+const getAnimalSex = (sex) => species.reduce((acc, objc) => {
+  if (acc[objc.location]) {
+    acc[objc.location].push([{
+      [objc.name]: objc.residents.reduce((accu, value) => returnSx(value, sex, accu), [])
+    }]);
+  } else {
+    acc[objc.location] = [{
+      [objc.name]: objc.residents.reduce((accu, value) => returnSx(value, sex, accu), [])
+    }];
+  }
+  return acc;
+}, {});
+
+function getAnimalMap(...options) {
+
 }
-
 function getSchedule(dayName) {
   // seu código aqui
 }
