@@ -64,7 +64,7 @@ function getAnimalMap(options) {
 }
 /* -------------------------------------------------------------------- */
 function getSchedule(dayName) {
- // seu código aqui
+  // seu código aqui
 }
 /* -------------------------------------------------------------------- */
 function getOldestFromFirstSpecies(id) {
