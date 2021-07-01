@@ -1,11 +1,14 @@
+const { species } = require('./data');
 const data = require('./data');
 
-function getSpeciesByIds(ids) {
-  // seu código aqui xablau!!
+function getSpeciesByIds(...ids) {
+  // seu código aqui
 }
 
 function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
+  return species
+    .find((specie) => specie.name === animal)
+    .residents.every((elemento) => elemento.age >= age);
 }
 
 function getEmployeeByName(employeeName) {
@@ -24,9 +27,9 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
 }
 
-function countAnimals(species) {
+/* function countAnimals(species) {
   // seu código aqui
-}
+} */
 
 function calculateEntry(entrants) {
   // seu código aqui
@@ -55,7 +58,7 @@ function getEmployeeCoverage(idOrName) {
 module.exports = {
   calculateEntry,
   getSchedule,
-  countAnimals,
+  // countAnimals,
   getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
