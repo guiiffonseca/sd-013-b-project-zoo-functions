@@ -8,7 +8,7 @@ function getSpeciesByIds(...ids) {
 
 function getAnimalsOlderThan(animal, age) {
   const animalArray = data.species.filter((bicho) => bicho.name === animal);
-  const resid = animalArray[0].residents
+  const resid = animalArray[0].residents;
   return resid.every((resi) => resi.age >= age);
 }
 
