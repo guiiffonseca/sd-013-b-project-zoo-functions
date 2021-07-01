@@ -86,6 +86,10 @@ function animalSexFilter(animal, sex) {
   }
 }
 
+function sortAnimalFilter(sort, animalNameList) {
+  if (sort) animalNameList.sort();
+}
+
 function getAnimalMap(options = {}) {
   const map = { NE: [], NW: [], SE: [], SW: [] };
   data.species.forEach((animal) => {
@@ -97,7 +101,7 @@ function getAnimalMap(options = {}) {
         const checkSex = animalSexFilter(element, options.sex);
         if (checkSex !== undefined) animalNameList.push(checkSex);
       });
-      if (options.sorted) animalNameList.sort();
+      sortAnimalFilter(options.sorted);
       obj[animalName] = animalNameList;
       map[animal.location].push(obj);
     } else {
