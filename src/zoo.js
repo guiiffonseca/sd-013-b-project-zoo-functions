@@ -24,15 +24,7 @@ function getEmployeeByName(employeeName) {
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
-  const { id, firstName, lastName } = personalInfo;
-  const { managers, responsibleFor } = associatedWith;
-  return {
-    id: `${id}`,
-    firstName: `${firstName}`,
-    lastName: `${lastName}`,
-    managers: `${managers}`.split(/\s*,\s*/),
-    responsibleFor: `${responsibleFor}`.split(/\s*,\s*/),
-  };
+  return { ...personalInfo, ...associatedWith };
 }
 
 function isManager(idParam) {
@@ -42,13 +34,7 @@ function isManager(idParam) {
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   // seu código aqui
-  employees.push({
-    id,
-    firstName,
-    lastName,
-    managers,
-    responsibleFor,
-  });
+  employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
 
 function countAnimals(speciesParam) {
@@ -78,6 +64,16 @@ function getSchedule(dayName) {
 
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
+  const employeeSelected = employees.find((employee) => id === employee.id);
+  const idAnimal = employeeSelected.responsibleFor[0];
+  const specieSelected = species.find((specie) => idAnimal === specie.id);
+  let oldestAnimal = specieSelected.residents[0];
+  specieSelected.residents.forEach((animal) => {
+    if (animal.age > oldestAnimal.age) {
+      oldestAnimal = animal;
+    }
+  });
+  return [oldestAnimal.name, oldestAnimal.sex, oldestAnimal.age];
 }
 
 function increasePrices(percentage) {
