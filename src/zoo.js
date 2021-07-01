@@ -1,33 +1,51 @@
+// Imports
 const data = require('./data');
 
+// //////////////////// 1ª Função ////////////////////
 function getSpeciesByIds(...ids) {
-  const teste = data.species.reduce((pv, cv) => {
+  return data.species.reduce((pv, cv) => {
     ids.forEach((id) => {
       if (id === cv.id) pv.push(cv);
     });
     return pv;
   }, []);
-  return teste;
 }
 
-console.log(getSpeciesByIds('0938aa23-f153-4937-9f88-4858b24d6bce'));
-
+// //////////////////// 2ª Função ////////////////////
 function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
+  const animalData = data.species.filter((v) => v.name === animal)[0];
+  const requiredAge = animalData.residents.every((v) => v.age > 5);
+  if (animalData && requiredAge) return true;
+  return false;
 }
+
+// //////////////////// 3ª Função ////////////////////
 
 function getEmployeeByName(employeeName) {
-  // seu código aqui
+  let employee = {};
+  data.employees.forEach((v) => {
+    if (v.firstName === employeeName || v.lastName === employeeName) employee = v;
+  });
+  return employee;
 }
 
+// //////////////////// 4ª Função ////////////////////
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  return { ...personalInfo, ...associatedWith };
 }
 
+// //////////////////// 5ª Função ////////////////////
 function isManager(id) {
-  // seu código aqui
+  const repeatedIds = [];
+  data.employees.forEach((cv) => repeatedIds.push(...cv.managers));
+  const cleanedIds = repeatedIds.reduce((pv, cv) => {
+    if (pv.indexOf(cv) === -1) pv.push(cv);
+    return pv;
+  }, []);
+  return cleanedIds.includes(id);
 }
 
+// //////////////////// 5ª Função ////////////////////
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
 }
