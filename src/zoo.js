@@ -37,7 +37,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 function countAnimals(specie) {
   const obj = {};
   species.forEach((animal) => {
-    obj[animal.name] = [animal.residents.length];
+    obj[animal.name] = animal.residents.length;
   });
   // se o parametro passado for vazio, retorna o um obj com o nome e quant de cada espécie, objeto esse preenchido pelo forEach acima.
   if (specie === undefined) {
