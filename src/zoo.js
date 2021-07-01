@@ -59,54 +59,59 @@ function calculateEntry(entrants) {
   return Adult + Child + Senior;
 }
 
-function byLocation(name, _) {
+function byLocation(name) {
   return name;
 }
 
-function byName(name, residents) {
-  return { [name]: residents.reduce((acc, resident) => {
+function filtredBySex(residents, sex) {
+  let filtredResidents = residents;
+  filtredResidents = filtredResidents.filter((resident) => resident.sex === sex);
+  return filtredResidents;
+}
+
+function filtredBySort(residents) {
+  let filtredResidents = residents;
+  filtredResidents = filtredResidents.sort((a, b) => {
+    if (a.name < b.name) return -1;
+    if (a.name > b.name) return 1;
+    return 0;
+  });
+  return filtredResidents;
+}
+
+function byName(name, residents, sex = false, sort = false) {
+  let filtredResidents = residents;
+  if (sex) {
+    filtredResidents = filtredBySex(filtredResidents, sex);
+  }
+  if (sort) {
+    filtredResidents = filtredBySort(filtredResidents);
+  }
+  return { [name]: filtredResidents.reduce((acc, resident) => {
     acc.push(resident.name);
     return acc;
   }, []) };
 }
 
-function categorized(callback) {
-  return data.species.reduce((acc, specie) => {
+function categorized(callback, sex, sort) {
+  return species.reduce((acc, specie) => {
     const { name, location, residents } = specie;
     if (Object.keys(acc).includes(location)) {
-      acc[location].push(callback(name, residents));
+      acc[location].push(callback(name, residents, sex, sort));
     } else {
-      acc[location] = [callback(name, residents)];
+      acc[location] = [callback(name, residents, sex, sort)];
     }
     return acc;
   }, {});
 }
 
-function filterAndSorted(sex, sorted) {
-  const categorizedByName = categorized(byName);
-  // if (sex) {
-
-  // }
-  // if (sorted) {
-
-  // }
-  return categorizedByName;
-}
-
-// { includeNames: true, sex: 'female', sorted: true }
 function getAnimalMap(options) {
-  if (!options) {
+  if (!options || !options.includeNames) {
     return categorized(byLocation);
   }
-  const { includeNames = false, sex = false, sorted = false } = options;
-  if (!includeNames) {
-    return categorized(byLocation);
-  }
-  if (includeNames) {
-    filterAndSorted(sex, sorted);
-  }
+  const { sex, sorted } = options;
+  return categorized(byName, sex, sorted);
 }
-console.log(getAnimalMap({ includeNames: true, sex: 'female', sorted: true }));
 
 function getSchedule(dayName) {
   // seu código aqui
