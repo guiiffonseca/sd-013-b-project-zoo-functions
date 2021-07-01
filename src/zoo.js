@@ -1,4 +1,6 @@
-const data = require('./data');
+const data = require("./data");
+
+const { species, employees } = data;
 
 function getSpeciesByIds(...ids) {
   return ids.map((id) => data.species.find((specie) => specie.id === id));
@@ -8,7 +10,9 @@ function getSpeciesByIds(...ids) {
 }
 
 function getAnimalsOlderThan(animal, age) {
-  const residentAges = data.species.find((specie) => specie.name === animal).residents;
+  const residentAges = data.species.find(
+    (specie) => specie.name === animal
+  ).residents;
   return residentAges.every((resident) => resident.age >= age);
   // data é objeto, .species retorna array.
   // Fiz este requisito acompanhando o raciocinio do Nikolai no plantão do Panta no dia 30/06.
@@ -22,7 +26,7 @@ function getEmployeeByName(employeeName) {
   return (
     employees.find(
       ({ firstName, lastName }) =>
-        firstName === employeeName || lastName === employeeName,
+        firstName === employeeName || lastName === employeeName
     ) || {}
   );
 }
@@ -32,11 +36,22 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  // seu código aqui
+  // o some percorre cada funcionario
+  // executado acompanhando mentoria do Cajueiro dia 1.
+  // fiz destructuring no managers para fazer
+  // verificacao se inclui o id passado pela funcao.
+  return employees.some(({ managers }) => managers.includes(id));
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  // executado acompanhando mentoria do Cajueiro dia 1.
+  employees.push({
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor
+  });
 }
 
 function countAnimals(speciesPar) {
