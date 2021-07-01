@@ -27,6 +27,7 @@ function getEmployeeByName(employeeName) {
       employeeObj = employee;
       return employeeObj;
     }
+    return employeeObj;
   });
   return employeeObj;
 }
