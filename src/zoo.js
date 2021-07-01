@@ -30,8 +30,8 @@ function isManager(id) {
   return employees.some((func, index) => id === func.managers[index]);
 }
 /* -------------------------------------------------------------------- */
-function addEmployee(...rest) {
-  // console.log(employees.push({...rest}));
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  return employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
 /* -------------------------------------------------------------------- */
 function countAnimals(specie) {
@@ -43,7 +43,6 @@ function countAnimals(specie) {
   if (specie === undefined) {
     return obj;
   }
-  // Cont p/ contar a quant da espécie passada no parâmetro.
   let cont = 0;
   // percorre o obj Species e seta em cont a quantidade de cada espécie.
   species.forEach((bicho) => {
@@ -53,8 +52,8 @@ function countAnimals(specie) {
   });
   return cont;
 }
-console.log(countAnimals('bears'));
-// --------------------------------------------------------------------------
+countAnimals();
+/* -------------------------------------------------------------------- */
 function calculateEntry(entrants) {
   // seu código aqui
 }
