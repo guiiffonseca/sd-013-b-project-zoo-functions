@@ -40,10 +40,21 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 
 function countAnimals(species) {
   // seu código aqui
+  if (species === undefined) {
+    return data.species.reduce((acc, curr) => {
+      acc[curr.name] = curr.residents.length;
+      return acc;
+    }, {});
+  }
+  return data.species.find(({ name }) => name === species).residents.length;
 }
 
 function calculateEntry(entrants) {
   // seu código aqui
+  if (typeof entrants === 'undefined' || entrants === {}) return 0;
+  const { Adult = 0, Senior = 0, Child = 0 } = entrants;
+  const { Adult, Senior, Child} = data.prices;
+  return (Adult) + (Senior) + (Child);
 }
 
 function getAnimalMap(options) {
