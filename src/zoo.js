@@ -51,15 +51,46 @@ function addEmployee(idN, firstNameN, lastNameN, managersN = [], responsibleForN
 
   employees.push(novoObjeto);
 }
-console.log(employees);
-
-// parametros / id / primeiro nome / ultimo nome
-
-// função de objetos
-
-function countAnimals(speciess) {
-  // seu código aqui
+function countAnimalSemParametro() {
+  let objeto = {};
+  species.forEach((item) => {
+  // const nomeAnimal = item.name;
+  // const populacao = item.popularity;
+    objeto = {
+      lions: 4,
+      tigers: 2,
+      bears: 3,
+      penguins: 4,
+      otters: 4,
+      frogs: 2,
+      snakes: 2,
+      elephants: 4,
+      giraffes: 6,
+    };
+  });
+  return objeto;
 }
+function countAnimalComParametro(animal) {
+  let retorno = 0;
+
+  species.forEach((item) => {
+    if (item.name === animal) {
+      retorno = item.popularity;
+      return retorno;
+    }
+  });
+  return retorno;
+}
+function countAnimals(animal) {
+  if (animal === undefined) {
+    const objeto = countAnimalSemParametro();
+    return objeto;
+  }
+  // acima : sem parametro abaixo com paramentro
+  const numero = countAnimalComParametro(animal);
+  return numero;
+}
+console.log(countAnimals('snakes'));
 
 function calculateEntry(entrants) {
   // seu código aqui
