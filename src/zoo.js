@@ -12,9 +12,9 @@ function getSpeciesByIds(...ids) {
 }
 
 function getAnimalsOlderThan(animal, age) {
-  const currentSpecie = species.find((specie) => specie.name === animal);
+  const currentSpecies = species.find((specie) => specie.name === animal);
 
-  const result = currentSpecie.residents.every((resident) => resident.age >= age);
+  const result = currentSpecies.residents.every((resident) => resident.age >= age);
 
   return result;
 }
@@ -53,12 +53,17 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
     managers,
     responsibleFor,
   };
-  
+
   employees.push(newEmployee);
 }
 
-function countAnimals(speciess) {
-  // seu código aqui
+function countAnimals(specie) {
+  const currentSpecies = species.find((spc) => spc.name === specie);
+  const allAnimals = {};
+  
+  species.forEach((spc) => allAnimals[spc.name] = spc.residents.length);
+
+  return specie !== undefined ? currentSpecies.residents.length : allAnimals;
 }
 
 function calculateEntry(entrants) {
