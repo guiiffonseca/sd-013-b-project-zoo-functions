@@ -1,9 +1,7 @@
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
-  if (ids.length === 0) {
-    return [];
-  }
+  if (ids.length === 0) { return []; }
   if (ids.length >= 1) {
     return ids.map((id) => data.species.find((animal) => animal.id === id));
   }
@@ -78,7 +76,13 @@ function getOldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  const price = data.prices;
+  const key = Object.keys(price);
+  key.forEach((keys) => {
+    const newPrice = price[keys] + (price[keys] * (percentage / 100));
+    price[keys] = Math.round(newPrice * 100) / 100;
+    return price[keys];
+  });
 }
 
 function getEmployeeCoverage(idOrName) {
