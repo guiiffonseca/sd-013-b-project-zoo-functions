@@ -2,9 +2,7 @@ const { species, employees } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
-  return species.filter((specie) => {
-    return ids.find((id) => id === specie.id);
-  });
+  return species.filter((specie) => ids.find((id) => id === specie.id));
 }
 
 function getAnimalsOlderThan(animal, age) {
@@ -52,7 +50,7 @@ function countAnimals(...args) {
 }
 
 function calculateEntry({ Adult = 0, Child = 0, Senior = 0 } = 0) {
-  
+  // começar essa
 }
 
 function getAnimalMap(options) {
