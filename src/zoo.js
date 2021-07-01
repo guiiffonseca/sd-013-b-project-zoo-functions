@@ -47,7 +47,9 @@ function calculateEntry(entrants) {
 }
 
 function getAnimalMap(options) {
-  // seu código aqui
+  // const local = {};
+  // species.forEach((specie) => { local[specie.location] = specie.name; });
+  // return local;
 }
 
 function getSchedule(dayName) {
@@ -55,8 +57,11 @@ function getSchedule(dayName) {
 }
 
 function getOldestFromFirstSpecies(id) {
-  // seu código aqui
-  // return employees.filter((employee) => employee.responsibleFor === id);
+  const info = employees.find((employee) => employee.id === id).responsibleFor[0];
+  const animais = species.find((specie) => specie.id === info).residents;
+  const animalVelho = animais.sort((age1, age2) => age2.age - age1.age)[0];
+
+  return [`${animalVelho.name}`, `${animalVelho.sex}`, animalVelho.age];
 }
 
 function increasePrices(percentage) {
@@ -64,8 +69,10 @@ function increasePrices(percentage) {
 }
 
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+  // return employees.find((employee) => `${employee.firstName} ${employee.lastName}`);
 }
+
+getEmployeeCoverage();
 
 module.exports = {
   calculateEntry,
