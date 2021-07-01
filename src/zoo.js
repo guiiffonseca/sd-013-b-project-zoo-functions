@@ -252,8 +252,30 @@ Com o id de um funcionário, retorna os animais pelos quais o funcionário é re
 Com o primeiro nome de um funcionário, retorna os animais pelos quais o funcionário é responsável
 Com o último nome de um funcionário, retorna os animais pelos quais o funcionário é responsável */
 
+const standard = {
+  'Nigel Nelson': ['lions', 'tigers'],
+  'Burl Bethea': ['lions', 'tigers', 'bears', 'penguins'],
+  'Ola Orloff': ['otters', 'frogs', 'snakes', 'elephants'],
+  'Wilburn Wishart': ['snakes', 'elephants'],
+  'Stephanie Strauss': ['giraffes', 'otters'],
+  'Sharonda Spry': ['otters', 'frogs'],
+  'Ardith Azevado': ['tigers', 'bears'],
+  'Emery Elser': ['elephants', 'bears', 'lions'],
+};
+
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+  if (!idOrName) {
+    return standard;
+  }
+  const empregados = (empregado) =>
+    empregado.firstName === idOrName
+    || empregado.lastName === idOrName
+    || empregado.id === idOrName;
+  const person = employees.find(empregados);
+  console.table(person);
+  const { firstName, lastName } = person;
+  const fullName = `${firstName} ${lastName}`;
+  return { [fullName]: standard[fullName] };
 }
 
 module.exports = {
