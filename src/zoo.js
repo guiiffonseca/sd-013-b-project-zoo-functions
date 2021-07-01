@@ -48,7 +48,10 @@ function countAnimals(species) {
 }
 
 function calculateEntry(entrants) {
-  // seu código aqui
+  // como verificar objetos vazios https://programandosolucoes.dev.br/2021/03/02/objeto-vazio-javascript/
+  if (!entrants || Object.keys(entrants).length === 0) return 0; // verificando se o parâmtro foi passado ou o objeto está vazio;
+  const { Adult = 0, Senior = 0, Child = 0 } = entrants; // desestruturando o objeto passado.
+  return (Adult * data.prices.Adult) + (Senior * data.prices.Senior) + (Child * data.prices.Child); // multiplicando as entradas dadas no parâmetro pelo preço correpsondente a entrada e somando todos.
 }
 
 function getAnimalMap(options) {
