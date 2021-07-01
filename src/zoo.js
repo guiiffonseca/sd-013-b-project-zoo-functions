@@ -22,7 +22,7 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  // seu código aqui
+  if (employees.find((employee) => employee.managers !== undefined)) return true;
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
