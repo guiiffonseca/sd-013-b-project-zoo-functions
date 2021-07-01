@@ -62,7 +62,12 @@ function calculateEntry({ Adult = 0, Child = 0, Senior = 0 } = {}) {
 }
 
 function getAnimalMap(options) {
-  // seu código aqui
+  // const mapa = {};
+  // if (!options) {
+  //   species.find(() => {
+
+  //   })
+  // }
 }
 
 // const turn12Hour = (valor) => valor % 12;
@@ -74,9 +79,25 @@ function getSchedule(dayName) {
   // });
 }
 
-function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+function getOldestFromFirstSpecies(workId) {
+  const work = employees.find((worker) => worker.id === workId);
+  // console.log(work);
+  const { responsibleFor } = work;
+  const animal = species.find(({ id }) => responsibleFor[0] === id);
+  // console.log(animal);
+  const { residents } = animal;
+  let bixoVelho;
+  let maior = 0;
+  residents.forEach((bixo) => {
+    if (bixo.age > maior) {
+      maior = bixo.age;
+      bixoVelho = Object.values(bixo);
+    }
+  });
+  return bixoVelho;
 }
+
+// console.log(getOldestFromFirstSpecies('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
 
 function increasePrices(percentage) {
   function porcentagem(valor) {
@@ -91,16 +112,22 @@ function increasePrices(percentage) {
 }
 
 function getEmployeeCoverage(...idOrName) {
-  if (idOrName) {
-    //
-  }
-  return employees.map((worker) => {
-    const nome = `${worker.firstName} ${worker.lastName}`;
-    return {
-      [nome]: [...worker.responsibleFor],
-    };
-  });
+  // const list = {};
+  // if (idOrName) {
+  //   const work = idOrName.map((id) => employees
+  //     .find((worker) => worker.id === id || worker.firstName === id || worker.lastName === id));
+  //   console.log(work);
+  //   const animais = work.map(({ responsibleFor }) => species
+  //     .find(({ id }) => responsibleFor === id));
+  //   console.log(animais);
+  //   // const { firstName, lastName } = work;
+  //   // const nomeFuncionario = `${firstName} ${lastName}`;
+  //   // list[nomeFuncionario] = [animais.name];
+  // }
+  // return list;
 }
+
+// console.log(getEmployeeCoverage('Stephanie'));
 
 module.exports = {
   calculateEntry,
