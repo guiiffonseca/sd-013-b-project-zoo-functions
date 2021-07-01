@@ -83,9 +83,19 @@ function calculateEntry(entrants) {
 }
 
 function getAnimalMap(options) {
-  // seu código aqui
+  const speciesForLocation = {};
+  if (!options) {
+    const locationsArray = ['NE', 'NW', 'SE', 'SW'];
+    locationsArray.forEach((locationCurr) => {
+      const namesSpecies = data.species
+        .filter(({ location }) => location === locationCurr)
+        .map(({ name }) => name);
+      speciesForLocation[locationCurr] = namesSpecies;
+    });
+  }
+  return speciesForLocation;
 }
-
+console.log(getAnimalMap());
 function getSchedule(dayName) {
   // seu código aqui
 }
