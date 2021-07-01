@@ -192,12 +192,26 @@ function getOldestFromFirstSpecies(id) {
 
 getOldestFromFirstSpecies('4b40a139-d4dc-4f09-822d-ec25e819a5ad');
 
+const aroundNumber = (number) => {
+  let num = `${number}`;
+  const numList = num.split('');
+  numList.pop();
+  num = numList.join('');
+  let around = num.split('.');
+  around = [around[0], parseInt(around[1], 10) + 1];
+  return around.join('.');
+};
+const porcentagemFunc = (porc, value) => parseFloat(aroundNumber(value + value * porc), 10);
+
 function increasePrices(percentage) {
-  // seu código aqui
+  const porcentagem = percentage / 100;
+  prices.Adult = porcentagemFunc(porcentagem, prices.Adult);
+  prices.Senior = porcentagemFunc(porcentagem, prices.Senior);
+  prices.Child = porcentagemFunc(porcentagem, prices.Child);
+  return prices;
 }
 
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
 }
 
 module.exports = {
