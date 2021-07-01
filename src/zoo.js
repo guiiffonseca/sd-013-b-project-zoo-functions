@@ -64,8 +64,17 @@ function calculateEntry(entrants) {
   if (!entrants || Object.entries(entrants).length === 0) {
     return 0;
   }
-  // const arrayPrices = Object.entries(data.prices);
-  // const visits = Object.entries(entrants);
+  const arrayprices = Object.entries(data.prices);
+  const arrayEntries = Object.entries(entrants);
+  let cost = 0;
+  arrayEntries.forEach((entry) => {
+    arrayprices.forEach((entrie) => {
+      if (entrie[0] === entry[0]) {
+        cost += (entrie[1] * entry[1]);
+      }
+    });
+  });
+  return cost;
 }
 
 function getAnimalMap(options) {
@@ -87,9 +96,9 @@ function getOldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  const num = (percentage / 100);
+  const num = percentage / 100;
   const costs = Object.values(data.prices);
-  const newPrices = costs.map((cost) => (cost + (cost * num)));
+  const newPrices = costs.map((cost) => cost + cost * num);
   const [x, y, z] = newPrices;
   data.prices.Adult = Math.ceil(x * 100) / 100;
   data.prices.Senior = Math.ceil(y * 100) / 100;
@@ -97,8 +106,38 @@ function increasePrices(percentage) {
   return data.prices;
 }
 
+function getAnimalsByEmployeeId(idOrName) {
+  const employe = data.employees.find(
+    (employee) =>
+      employee.firstName === idOrName
+      || employee.id === idOrName
+      || employee.lastName === idOrName,
+  );
+  const animalsArray = data.species.filter((specie) => employe.responsibleFor.includes(specie.id));
+  return animalsArray.map((animal) => animal.name);
+}
+function giveObjectOfEmployeeCoverage(curr) {
+  const array = data
+    .species.filter((specie) => curr
+    .responsibleFor.includes(specie.id)).map((element) => element.name);
+  return array;
+}
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+  if (!idOrName) {
+    return data.employees.reduce((acc, curr) => {
+      acc[`${curr.firstName} ${curr.lastName}`] = giveObjectOfEmployeeCoverage(curr);
+      return acc;
+    }, {});
+  }
+  const animalsArray = getAnimalsByEmployeeId(idOrName);
+  return data.employees.reduce(((acc, curr) => {
+    if (curr.firstName === idOrName 
+      || curr.id === idOrName 
+      || curr.lastName === idOrName) {
+        acc[`${curr.firstName} ${curr.lastName}`] = animalsArray;
+      }
+    return acc;
+  }), {});
 }
 
 module.exports = {
