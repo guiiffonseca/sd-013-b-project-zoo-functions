@@ -34,10 +34,10 @@ function getEmployeeByName(employeeName) {
   return retorno;
 }
 
-console.log(getEmployeeByName('Emery'));
-
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
+  const retorno = { ...personalInfo, ...associatedWith };
+  return retorno;
 }
 
 function isManager(id) {
