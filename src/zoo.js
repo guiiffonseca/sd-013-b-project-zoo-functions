@@ -101,7 +101,7 @@ function getAnimalMap(options = {}) {
         const checkSex = animalSexFilter(element, options.sex);
         if (checkSex !== undefined) animalNameList.push(checkSex);
       });
-      sortAnimalFilter(options.sorted);
+      sortAnimalFilter(options.sorted, animalNameList);
       obj[animalName] = animalNameList;
       map[animal.location].push(obj);
     } else {
