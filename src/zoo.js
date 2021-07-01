@@ -30,6 +30,8 @@ function getEmployeeByName(employeeName) {
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
+  const destiny = { ...personalInfo, ...associatedWith };
+  return destiny;
 }
 
 function isManager(id) {
