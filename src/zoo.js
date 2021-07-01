@@ -106,6 +106,17 @@ function increasePrices(percentage) {
   return data.prices;
 }
 
+function createAnimalsArray(colaborator) {
+  const array = [];
+  colaborator.responsibleFor.forEach((animalId) => {
+    data.species.forEach((specie) => {
+      if (animalId === specie.id) {
+        array.push(specie.name);
+      }
+    });
+  });
+  return array;
+}
 function getAnimalsByEmployeeId(idOrName) {
   const employe = data.employees.find(
     (employee) =>
@@ -113,19 +124,12 @@ function getAnimalsByEmployeeId(idOrName) {
       || employee.id === idOrName
       || employee.lastName === idOrName,
   );
-  const animalsArray = data.species.filter((specie) => employe.responsibleFor.includes(specie.id));
-  return animalsArray.map((animal) => animal.name);
-}
-function giveObjectOfEmployeeCoverage(curr) {
-  const array = data
-    .species.filter((specie) => curr
-    .responsibleFor.includes(specie.id)).map((element) => element.name);
-  return array;
+  return createAnimalsArray(employe);
 }
 function getEmployeeCoverage(idOrName) {
   if (!idOrName) {
     return data.employees.reduce((acc, curr) => {
-      acc[`${curr.firstName} ${curr.lastName}`] = giveObjectOfEmployeeCoverage(curr);
+      acc[`${curr.firstName} ${curr.lastName}`] = createAnimalsArray(curr);
       return acc;
     }, {});
   }
