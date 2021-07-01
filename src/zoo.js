@@ -21,7 +21,7 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  // seu código aqui
+  return !data.employees.some((value) => value.id === id && value.managers.length > 1);
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
