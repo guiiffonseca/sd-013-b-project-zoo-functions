@@ -1,3 +1,4 @@
+const { employees } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -6,16 +7,29 @@ function getSpeciesByIds(...ids) {
 
 // map - vai percorrer o array e retorna outro array de acordo com a função passada.
 // rest - pega strings e junta num array.
+// find - procura o id do parâmetro no id de cada espécie
 // se não passar nenhum parâmetro o map vai retornar o array vazio, visto q ele ja retorna um array, independente do parâmetro passado, por isso passa no primeiro teste.
+// retorna um array com a espécie do id do parâmetro.
 
 function getAnimalsOlderThan(animal, age) {
   return data.species.find((specie) => specie.name === animal)
     .residents.every((resident) => resident.age >= age);
 }
 
+// find - procura dentro das espécies o nome do animal passado no parâmetro (animal).
+// every - verifica se TODOS os residentes tem a idade mínima passada no parâmetro (age).
+// retorna true ou false.
+
 function getEmployeeByName(employeeName) {
-  // seu código aqui
+  if (!employeeName) return {};
+
+  return employees.find(({ firstName, lastName }) =>
+    firstName === employeeName || lastName === employeeName);
 }
+
+// no if se não passar nenhum parâmetro retorna um objeto vazio.
+// no array employees (array de objetos), procura o objeto com o firstName ou lastName passado no parâmetro.
+// retorna um objeto com as informações do employee passado no parâmetro.
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
