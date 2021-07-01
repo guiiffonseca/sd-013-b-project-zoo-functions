@@ -15,10 +15,7 @@ function getEmployeeByName(employeeName) {
     || employee.lastName === employeeName);
 }
 
-console.log(data.employees.lastName);
-
 function createEmployee(personalInfo, associatedWith) {
-  
 }
 
 function isManager(id) {
@@ -30,8 +27,10 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 }
 
 function countAnimals(species) {
-  // seu código aqui
-}
+    if(!species) return data.species.find((specie) => specie.popularity);
+  }
+
+  console.log(countAnimals());
 
 function calculateEntry(entrants) {
   // seu código aqui
