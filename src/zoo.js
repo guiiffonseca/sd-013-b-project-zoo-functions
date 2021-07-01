@@ -32,7 +32,7 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  // seu código aqui
+  return employees.some((employer) => employer.managers.includes(id));
 }
 
 function addEmployee(idN, firstNameN, lastNameN, managersN = [], responsibleForN = []) {
@@ -66,16 +66,18 @@ function getAnimalMap(options) {
 }
 
 function getSchedule(dayName) {
-  // seu código aqui
+
 }
 
 function getOldestFromFirstSpecies(id) {
-  // seu código aqui.
+  // seu código aqui
 }
 
 function increasePrices(percentage) {
-  const porcentagem = percentage / 100;
-  return prices.Adult * porcentagem && prices.Child * porcentagem && prices.Senior * porcentagem;
+  // console.log(prices);
+  // const porcentagem = 1 + percentage / 100;
+  // console.log(porcentagem);
+  // return prices.reduce((idade, atual) => atual * porcentagem, 0);
 }
 
 function getEmployeeCoverage(idOrName) {
