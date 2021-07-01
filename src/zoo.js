@@ -20,11 +20,15 @@ function getEmployeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+
 }
 
 function isManager(id) {
-  // seu código aqui
+  const manager = data.employees.find((procura) => procura.id === id);
+  const gerente = '0e7b460e-acf4-4e17-bcb3-ee472265db83';
+  if(manager.id === gerente) {
+    return true;
+  } return false;
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
