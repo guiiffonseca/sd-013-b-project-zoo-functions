@@ -1,12 +1,14 @@
-const { species, employees, hours, prices } = require('./data');
+const { species, employees, prices, hours } = require('./data');
 
 function getSpeciesByIds(...ids) {
   if (!ids.length) return [];
   if (ids.length === 1) return species.filter(({ id }) => id === ids[0]);
   const animalsFind = [];
+
   ids.forEach((animalId, index) => {
     animalsFind.push(species.find(({ id }) => id === animalId));
   });
+
   return animalsFind;
 }
 
@@ -30,10 +32,12 @@ function createEmployee(personalInfo, associatedWith) {
 function isManager(id) {
   const employeFind = employees.find(({ id: employeId }) => employeId === id);
   const employeManager = employeFind.managers[0];
+
   if (employeFind.managers.length === 1) {
     const boss = employees.find(({ id: employeId }) => employeId === employeManager);
     if (!boss.managers.length) return true;
   }
+
   return false;
 }
 
@@ -56,26 +60,61 @@ function countAnimals(countSpecies) {
     });
     return obj;
   }
+
   const { residents } = species.find(({ name }) => name === countSpecies);
   return residents.length;
 }
 
 function calculateEntry(entrants) {
   let total = 0;
+
   if (!entrants) return 0;
   if (Object.entries(entrants).length === 0) return 0;
   Object.keys(entrants).forEach((key, index) => {
     total += prices[key] * entrants[key];
   });
+
   return total;
 }
 
-function getAnimalMap(options) {
-  // seu código aqui
+function getIncludeNames() {
+  const obj = {};
+
+  species.forEach(({ location, name, residents }) => {
+    if (!obj[location]) obj[location] = [];
+    obj[location].push({
+      [name]: residents.map(({ name: animalName }) => animalName),
+    });
+  });
+
+  return obj;
 }
 
+function getAnimalMap(options) {
+  const obj = {};
+
+  species.forEach(({ name, location }) => {
+    if (!obj[location]) obj[location] = [name]; else obj[location].push(name);
+  });
+
+  if (!options) return obj;
+  if (options.includeNames) return getIncludeNames();
+}
+
+console.log(getAnimalMap({ includeNames: true }));
+
 function getSchedule(dayName) {
-  // seu código aqui
+  const obj = {};
+  const hoursKeys = Object.keys(hours);
+
+  hoursKeys.forEach((key, index) => {
+    obj[key] = `Open from ${hours[key].open}am until ${hours[key].close - 12}pm`;
+    if (index === hoursKeys.length - 1) obj[key] = 'CLOSED';
+  });
+
+  if (!dayName) return obj;
+  const dayNameFind = obj[hoursKeys.find((key) => key === dayName)];
+  return { [dayName]: dayNameFind };
 }
 
 function getOldestFromFirstSpecies(id) {
