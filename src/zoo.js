@@ -1,11 +1,11 @@
 const data = require('./data');
 
-const { species, employees } = data;
+const { species, employees, hours, prices } = data;
 
-// function getSpeciesByIds(...ids) {
-//   // seu código aqui
-//   species.filter((specie) => ids.some((id) => specie.id === id))
-// }
+function getSpeciesByIds(...ids) {
+  // seu código aqui
+  // species.filter((specie) => specie === ids.some((id) => specie.id === id))
+}
 
 // console.log(getSpeciesByIds('0938aa23-f153-4937-9f88-4858b24d6bce'));
 
@@ -58,8 +58,19 @@ function countAnimals(speciesToCount) {
   return animalCount;
 }
 
-function calculateEntry(entrants) {
+function calculateEntry(entrants = {}) {
   // seu código aqui
+  let finalPrice = 0;
+  if (entrants.Adult) {
+    finalPrice += entrants.Adult * prices.Adult;
+  }
+  if (entrants.Child) {
+    finalPrice += entrants.Child * prices.Child;
+  }
+  if (entrants.Senior) {
+    finalPrice += entrants.Senior * prices.Senior;
+  }
+  return finalPrice;
 }
 
 function getAnimalMap(options) {
@@ -68,18 +79,43 @@ function getAnimalMap(options) {
 
 function getSchedule(dayName) {
   // seu código aqui
+  // const schedule = {};
+  // hours.forEach((day) => { schedule[day] = `Open from ${day.open} until ${day.close}`});
+  // console.log(schedule);
+  // schedule.forEach((day === 0) ? 'CLOSED' : day);
+  // if (schedule[dayName]) {
+  //   return schedule[dayName];
+  // }
+  // return schedule;
 }
 
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
+  // const speciesId = employees
+  // .find((employee) => (employee.id === id))
+  // .responsibleFor[0];
+  // const specieObj = species.find((specie) => specie.id === speciesId);
+  // currentAge = 0;
+  // specieObj.residents.forEach((ind) => {
+  //   if (ind.age > currentAge) {
+  //     currentAge = ind.age;
+  //   }
+  // });
+  // Oldest = specieObj.find((animal) => animal.age === currentAge);
+  // return [...Oldest]
 }
 
 function increasePrices(percentage) {
   // seu código aqui
+  // prices.forEach((category) => prices[category] *= (1 + (percentage/100)));
 }
 
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
+  // const employee =
+  // if (idOrName) {
+  //   employees.find((employee) => (employee.id === idOrName));
+  // }
 }
 
 module.exports = {
@@ -87,7 +123,7 @@ module.exports = {
   getSchedule,
   countAnimals,
   getAnimalMap,
-  // getSpeciesByIds,
+  getSpeciesByIds,
   getEmployeeByName,
   getEmployeeCoverage,
   addEmployee,
