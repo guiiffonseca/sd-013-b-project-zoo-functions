@@ -23,11 +23,11 @@ function createEmployee(personalInfo, associatedWith) {
   const { id, firstName, lastName } = personalInfo;
   const { managers, responsibleFor } = associatedWith;
   const employee = {
-  id,
-  firstName,
-  lastName,
-  managers,
-  responsibleFor,
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
   };
   return employee;
 }
