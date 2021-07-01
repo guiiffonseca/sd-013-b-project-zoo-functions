@@ -1,16 +1,23 @@
 const data = require('./data');
 
-function getSpeciesByIds(ids) {
-  // seu código aqui
+const { species, employees } = data;
 
+function getSpeciesByIds(...params) {
+  // seu código aqui
+  return species.filter((specie) => params.includes(specie.id));
 }
 
 function getAnimalsOlderThan(animal, age) {
   // seu código aqui
+  return species.filter((specie) => specie.name === animal)[0]
+    .residents.every(({ age: ageSpecie }) => ageSpecie > age);
 }
 
 function getEmployeeByName(employeeName) {
   // seu código aqui
+  return employees
+    .find(({ firstName, lastName }) => firstName === employeeName || lastName === employeeName)
+    || {};
 }
 
 function createEmployee(personalInfo, associatedWith) {
