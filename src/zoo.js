@@ -66,8 +66,11 @@ function countAnimals(species) {
 
 // //////////////////// 8ª Função ////////////////////
 function calculateEntry(entrants) {
-  // seu código aqui
+  if (!entrants) return 0;
+  return Object.keys(entrants).reduce((pv, cv) => pv + data.prices[cv] * entrants[cv], 0);
 }
+
+calculateEntry({ Adult: 3, Senior: 3 });
 
 function getAnimalMap(options) {
   // seu código aqui
