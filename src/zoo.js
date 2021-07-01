@@ -11,6 +11,13 @@ function getSpeciesByIds(...ids) {
 }
 
 function getAnimalsOlderThan(animal, age) {
+  const animals = data.species.find((obj) => obj.name === animal).residents;
+  let allOlder = true;
+  animals.forEach((indiviual) => {
+    console.log(indiviual.age);
+    if (indiviual.age < age) allOlder = false;
+  });
+  return allOlder;
   // seu código aqui
 }
 
