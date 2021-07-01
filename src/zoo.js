@@ -36,8 +36,20 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
 }
 
-function countAnimals(specieS) {
+function countAnimals(speciesName) {
   // seu código aqui
+  if (speciesName === undefined) {
+    return species.reduce((acc, spec) => {
+      acc[spec.name] = spec.residents.length;
+      return acc;
+    }, {});
+  }
+  let number = 0;
+  species.forEach((specie) => {
+    if (specie.name === speciesName) number = specie.residents.length;
+  });
+  return number;
+  // demorei mais entendi ,não era o popularity que devia contar e sim quantidade de animais/residentes usei entao o length
 }
 
 function calculateEntry(entrants) {
