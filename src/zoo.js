@@ -38,17 +38,17 @@ function isManager(id) {
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   // seu código aqui
-
+  const addingEmploye = data.employees.push({ id, firstName, lastName, managers, responsibleFor });
+  return addingEmploye;
 }
 
 function countAnimals(especies) {
   // seu código aqui
-  const { species } = data;
-  const creatList = species.reduce((acc, curr) => {
+  const creatList = data.species.reduce((acc, curr) => {
     acc[curr.name] = curr.residents.length;
     return acc;
   }, {});
-  if (typeof especies === 'undefined') {
+  if (!especies) {
     return creatList;
   }
   return creatList[especies];
@@ -56,7 +56,7 @@ function countAnimals(especies) {
 
 function calculateEntry(entrants) {
   // seu código aqui
-  if (typeof entrants === 'undefined' || Object.keys(entrants).length === 0) {
+  if (!entrants || Object.keys(entrants).length === 0) {
     return 0;
   }
   const { Adult = 0, Senior = 0, Child = 0 } = entrants;
@@ -83,17 +83,27 @@ function getSchedule(dayName) {
 
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
-
+  const getId = data.employees.find((element) => element.id === id);
+  const getResposible = getId.responsibleFor;
+  const speciesOfId = (...responsibleFor) => data.species
+    .filter((element) => responsibleFor.includes(element.id));
+  const specie = speciesOfId(...getResposible).reduce((acc, curr) => {
+    const { residents } = curr;
+    acc.push(...residents);
+    return acc;
+  }, []);
+  specie.sort((a, b) => b.age - a.age);
+  return Object.values(specie[0]);
 }
 
 function increasePrices(percentage) {
   // seu código aqui
-  const porcentagem = 1 + (percentage / 100);
-  const valor = Object.keys(prices);
-  valor.forEach((element) => {
-    const valorInicial = prices[element] * porcentagem;
-    const redondado = Math.round(valorInicial * 100) / 100;
-    prices[element] = redondado;
+  const porcentage = 1 + (percentage / 100);
+  const value = Object.keys(prices);
+  value.forEach((element) => {
+    const valorInicial = prices[element] * porcentage;
+    const numberRounded = Math.round(valorInicial * 100) / 100;
+    prices[element] = numberRounded;
   });
 }
 
