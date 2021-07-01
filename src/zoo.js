@@ -1,7 +1,7 @@
 const { species, employees, hours, prices } = require('./data');
 
 function getSpeciesByIds(...ids) {
-  return species.filter((specie) => ids.includes(specie.id));
+  return ids.map((id) => species.find((specie) => specie.id === id));
 }
 
 function getAnimalsOlderThan(animal, age) {
@@ -164,9 +164,42 @@ function increasePrices(percentage) {
   prices.Child = calculateNewPrice(Child, percentage);
 }
 
-function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+function createListOfEmployees() {
+  const listEmployees = {};
+  employees.forEach((employee) => {
+    const { firstName, lastName, responsibleFor } = employee;
+    const name = `${firstName} ${lastName}`;
+    const animal = getSpeciesByIds(...responsibleFor).map((animals) =>
+      animals.name);
+    listEmployees[name] = animal;
+  });
+  return listEmployees;
 }
+
+function fullNameEmployee(idOrName) {
+  const objEmployee = employees.find((employee) =>
+    employee.id === idOrName
+    || employee.firstName === idOrName
+    || employee.lastName === idOrName);
+  return `${objEmployee.firstName} ${objEmployee.lastName}`;
+}
+
+function getEmployeeCoverage(idOrName) {
+  const listEmployees = createListOfEmployees();
+
+  if (!idOrName) {
+    return listEmployees;
+  }
+
+  const nameOfEmployee = fullNameEmployee(idOrName);
+  return Object.keys(listEmployees).reduce((acc, name) => {
+    if (name === nameOfEmployee) {
+      acc[name] = listEmployees[name];
+    }
+    return acc;
+  }, {});
+}
+console.log(getEmployeeCoverage('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
 
 module.exports = {
   calculateEntry,
