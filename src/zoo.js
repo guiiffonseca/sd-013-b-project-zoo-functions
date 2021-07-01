@@ -135,11 +135,11 @@ function getEmployeeCoverage(idOrName) {
   }
   const animalsArray = getAnimalsByEmployeeId(idOrName);
   return data.employees.reduce(((acc, curr) => {
-    if (curr.firstName === idOrName 
-      || curr.id === idOrName 
+    if (curr.firstName === idOrName
+      || curr.id === idOrName
       || curr.lastName === idOrName) {
-        acc[`${curr.firstName} ${curr.lastName}`] = animalsArray;
-      }
+      acc[`${curr.firstName} ${curr.lastName}`] = animalsArray;
+    }
     return acc;
   }), {});
 }
