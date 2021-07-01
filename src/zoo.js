@@ -1,5 +1,5 @@
 /* eslint-disable editorconfig/editorconfig */
-const data = require("./data");
+const data = require('./data');
 
 function getSpeciesByIds(...ids) {
   if (ids === null) {
@@ -20,7 +20,7 @@ function getEmployeeByName(employeeName) {
   }
   return data.employees.find(
     (employee) =>
-      employee.firstName === employeeName || employee.lastName === employeeName
+      employee.firstName === employeeName || employee.lastName === employeeName,
   );
 }
 
@@ -37,7 +37,7 @@ function addEmployee(
   firstName,
   lastName,
   managers = [],
-  responsibleFor = []
+  responsibleFor = [],
 ) {
   const newEmployee = {
     id,
