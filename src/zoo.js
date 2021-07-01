@@ -37,10 +37,10 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   employees.push(newEmployee);
 }
 
-function countAnimals(...args) {
-  if (args.includes(species.name)) {
-    const animalsWithArgs = args.find((arg) => arg === species.name)
-      .reduce((accumulator) => accumulator.length);
+function countAnimals(args) {
+  // if criado com ajuda de Ygor Lage e Allan Oliveira;
+  if (args) {
+    const animalsWithArgs = species.find((specie) => specie.name === args).residents.length;
     return animalsWithArgs;
   }
   const animalsWhitoudArgs = species.reduce((accumulator, currentValue) =>
