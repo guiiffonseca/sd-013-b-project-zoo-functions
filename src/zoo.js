@@ -3,6 +3,7 @@ const data = require('./data');
 const { species } = data;
 const { employees } = data;
 const { prices } = data;
+const { hours } = data;
 
 function getSpeciesByIds(...ids) {
   return species.filter((objc) =>
@@ -40,8 +41,6 @@ function isManager(id) {
   });
 }
 
-console.log(isManager('0e7b460e-acf4-4e17-bcb3-ee472265db83'));
-
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   // seu código aqui
   const newPerson = {
@@ -78,65 +77,98 @@ function calculateEntry(entrants = []) {
   return total.reduce((acc, value) => acc + value, 0);
 }
 
-const getAnimalIncludeOff = () => species.reduce((acc, objc) => {
-  if (acc[objc.location]) {
-    acc[objc.location].push(objc.name);
-  } else {
-    acc[objc.location] = [objc.name];
-  }
-  return acc;
-}, {});
+// const getAnimalIncludeOff = () => species.reduce((acc, objc) => {
+//   if (acc[objc.location]) {
+//     acc[objc.location].push(objc.name);
+//   } else {
+//     acc[objc.location] = [objc.name];
+//   }
+//   return acc;
+// }, {});
 
-const getAnimalIncludeOn = () => species.reduce((acc, objc) => {
-  if (acc[objc.location]) {
-    acc[objc.location].push({
-      [objc.name]: [...objc.residents.map((value) => value.name)]
-    });
-  } else {
-    acc[objc.location] = [{
-      [objc.name]: [...objc.residents.map((value) => value.name)]
-    }];
-  }
-  return acc;
-}, {});
+// const getAnimalIncludeOn = () => species.reduce((acc, objc) => {
+//   if (acc[objc.location]) {
+//     acc[objc.location].push({
+//       [objc.name]: [...objc.residents.map((value) => value.name)]
+//     });
+//   } else {
+//     acc[objc.location] = [{
+//       [objc.name]: [...objc.residents.map((value) => value.name)]
+//     }];
+//   }
+//   return acc;
+// }, {});
 
-const getAnimalSorted = () => species.reduce((acc, objc) => {
-  if (acc[objc.location]) {
-    acc[objc.location].push({
-      [objc.name]: [...objc.residents.map((value) => value.name)].sort()
-    });
-  } else {
-    acc[objc.location] = [{
-      [objc.name]: [...objc.residents.map((value) => value.name)].sort()
-    }];
-  }
-  return acc;
-}, {});
+// const getAnimalSorted = () => species.reduce((acc, objc) => {
+//   if (acc[objc.location]) {
+//     acc[objc.location].push({
+//       [objc.name]: [...objc.residents.map((value) => value.name)].sort()
+//     });
+//   } else {
+//     acc[objc.location] = [{
+//       [objc.name]: [...objc.residents.map((value) => value.name)].sort()
+//     }];
+//   }
+//   return acc;
+// }, {});
 
-const returnSx = (value, sex, accu) => {
-  if (value.sex === sex.sex) accu.push(value.name);
-  return accu;
-};
+// const returnSx = (value, sex, accu) => {
+//   if (value.sex === sex.sex) accu.push(value.name);
+//   return accu;
+// };
 
-const getAnimalSex = (sex) => species.reduce((acc, objc) => {
-  if (acc[objc.location]) {
-    acc[objc.location].push([{
-      [objc.name]: objc.residents.reduce((accu, value) => returnSx(value, sex, accu), [])
-    }]);
-  } else {
-    acc[objc.location] = [{
-      [objc.name]: objc.residents.reduce((accu, value) => returnSx(value, sex, accu), [])
-    }];
-  }
-  return acc;
-}, {});
+// const getAnimalSex = (sex) => species.reduce((acc, objc) => {
+//   if (acc[objc.location]) {
+//     acc[objc.location].push([{
+//       [objc.name]: objc.residents.reduce((accu, value) => returnSx(value, sex, accu), [])
+//     }]);
+//   } else {
+//     acc[objc.location] = [{
+//       [objc.name]: objc.residents.reduce((accu, value) => returnSx(value, sex, accu), [])
+//     }];
+//   }
+//   return acc;
+// }, {});
 
 function getAnimalMap(...options) {
 
 }
+
+const transformvalue = (hour) => {
+  let value = 0;
+  switch (hour) {
+  case 20:
+    value = 8;
+    break;
+  case 18:
+    value = 6;
+    break;
+  case 22:
+    value = 10;
+    break;
+  default:
+    break;
+  }
+  return value;
+};
+
 function getSchedule(dayName) {
-  // seu código aqui
+  const keys = Object.keys(hours);
+  let obj = {};
+  if (dayName === undefined) {
+    obj = keys.reduce((acc, value) => {
+      acc[value] = `Open from ${hours[value].open}am until ${transformvalue(hours[value].close)}pm`;
+      return acc;
+    }, {});
+    obj.Monday = 'CLOSED';
+  } else {
+    obj = (dayName === 'Monday') ? { [dayName]: 'CLOSED' }
+      : { [dayName]: `Open from ${hours[dayName].open}am until ${hours[dayName].close / 3}pm` };
+  }
+  return obj;
 }
+
+console.log(getSchedule());
 
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
