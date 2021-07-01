@@ -1,18 +1,18 @@
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
-  return ids.map((id) => data.species.find((specie) => specie.id === id));
+  return ids.map((idParam) => data.species.find(({ idSpecie }) => idSpecie === idParam));
 }
 
 function getAnimalsOlderThan(animal, age) {
-  return data.species.find((specie) =>
-    specie.name === animal).residents.every((resident) => resident.age >= age);
+  return data.species.find(({ name }) =>
+    name === animal).residents.every((resident) => resident.age >= age);
 }
 
 function getEmployeeByName(employeeName) {
   if (!employeeName) return {};
-  return data.employees.find((employee) =>
-    employee.firstName === employeeName || employee.lastName === employeeName);
+  return data.employees.find(({ firstName, lastName }) =>
+    firstName === employeeName || lastName === employeeName);
 }
 
 function createEmployee(personalInfo, associatedWith) {
@@ -20,8 +20,8 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  return data.employees.some((employee) =>
-    employee.managers.includes(id));
+  return data.employees.some(({ managers }) =>
+    managers.includes(id));
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
