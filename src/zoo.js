@@ -72,7 +72,6 @@ function calculateEntry(entrants) {
     return 0;
   }
   const { Adult = 0, Child = 0, Senior = 0 } = entrants;
-  console.log(Adult);
   const soma = (data.prices.Adult * Adult) + (data.prices.Senior * Senior)
   + (data.prices.Child * Child);
   return soma;
@@ -92,7 +91,7 @@ function getAnimalMap(options) {
 }
 
 function getSchedule(dayName) {
-  const daysAndLanguage = Object.entries(data.hours).reduce((acc, curr) => {
+  const daysOfWeek = Object.entries(data.hours).reduce((acc, curr) => {
     if (curr[1].open === 0 && curr[1].close === 0) {
       acc[curr[0]] = 'CLOSED';
       return acc;
@@ -101,10 +100,10 @@ function getSchedule(dayName) {
     return acc;
   }, {});
   if (!dayName) {
-    return daysAndLanguage;
+    return daysOfWeek;
   }
   const result = {};
-  const objectOfParameter = Object.entries(daysAndLanguage)
+  const objectOfParameter = Object.entries(daysOfWeek)
     .filter((elemento) => elemento[0] === dayName)[0];
   const [key2, value] = objectOfParameter;
   result[key2] = value;
@@ -112,7 +111,12 @@ function getSchedule(dayName) {
 }
 
 function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+  const person = data.employees.find((elemento) => elemento.id === id).responsibleFor[0];
+  const animal = data.species.find((elemento) => elemento.id === person).residents;
+  const oldAnimal = animal.reduce((acc, curr) => [Math.max(acc, curr.age)], 0);
+  const elementototal = animal.find((elemento) => elemento.age === oldAnimal[0]);
+  const { name, sex, age } = elementototal;
+  return [name, sex, age];
 }
 
 function increasePrices(percentage) {
