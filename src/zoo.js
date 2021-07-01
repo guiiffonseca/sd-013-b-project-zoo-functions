@@ -23,8 +23,8 @@ function getEmployeeByName(employeeName) {
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
-  const newEmployee = { personalInfo, associatedWith };
-  return newEmployee;
+  const destiny = {};
+  return Object.assign(destiny, personalInfo, associatedWith);
 }
 
 function isManager(id) {
