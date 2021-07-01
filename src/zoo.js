@@ -45,9 +45,15 @@ function isManager(id) {
   return cleanedIds.includes(id);
 }
 
-// //////////////////// 5ª Função ////////////////////
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+// //////////////////// 6ª Função ////////////////////
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  data.employees.push({
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  });
 }
 
 function countAnimals(species) {
