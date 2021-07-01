@@ -214,7 +214,11 @@ Passado o id de um funcionário, encontra a primeira espécie de animal gerencia
  */
 
 function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+  const animal = employees.find((employee) => employee.id === id).responsibleFor[0];
+  const animalObj = species.find((specie) => specie.id === animal).residents;
+  animalObj.sort((anim1, anim2) => anim2.age - anim1.age);
+  const { name, sex, age } = animalObj[0];
+  return [name, sex, age];
 }
 
 /* 12. IMPLEMENTE A FUNÇÃO increasePrices
