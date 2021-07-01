@@ -18,11 +18,11 @@ function getEmployeeByName(employeeName) {
 console.log(data.employees.lastName);
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  
 }
 
 function isManager(id) {
-  // seu código aqui
+  return data.employees.some((employee) => employee.managers.includes(id));
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
