@@ -35,13 +35,18 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
     responsibleFor,
   });
 }
-
+// Resolvido com a ajuda do Cajueiro
 function countAnimals(speciess) {
-  // seu código aqui
+  const animalsCount = {};
+  species.forEach((specie) => { animalsCount[specie.name] = specie.residents.length; });
+  if (animalsCount[speciess]) {
+    return animalsCount[speciess];
+  }
+  return animalsCount;
 }
 
 function calculateEntry(entrants) {
-  // seu código aqui
+
 }
 
 function getAnimalMap(options) {
