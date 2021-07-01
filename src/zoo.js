@@ -12,7 +12,6 @@ const getAnimalsOlderThan = (animal, age) => species
   .every((resident) => resident.age > age);
 
 const employeesFunction = (empName) => employees
-  .map((employee) => employee)
   .find((eName) => eName.firstName === empName || eName.lastName === empName);
 
 function getEmployeeByName(employeeName) {
@@ -39,7 +38,13 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 function countAnimals(speciespar) {
-  // seu código aqui
+  if (!speciespar) {
+    return species.reduce((accumulator, { name, residents }) => {
+      accumulator[name] = residents.length;
+      return accumulator;
+    }, {});
+  }
+  return species.find((specie) => specie.name === speciespar).residents.length;
 }
 
 function calculateEntry(entrants) {
