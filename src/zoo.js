@@ -82,6 +82,13 @@ function calculateEntry(entrants) {
   0);
 }
 
+// PRIMEIRO REQUISITO:
+// Se não tiver parâmetros, então vai filtrar pela localização.
+// Criei ujm objeto vazio para o retorno da função.
+// Criei um array com as localizações.
+// Fiz um forEach nas localizações pra usar elas para o filter.
+// Fiz um filter pra achar a localização atual, através do objeto do filter fiz um map pra pegar o name.
+// Atribui os nomes à chave do objeto vazio, correspondente à localização atual.
 function getAnimalMap(options) {
   const speciesForLocation = {};
   if (!options) {
@@ -96,6 +103,7 @@ function getAnimalMap(options) {
   return speciesForLocation;
 }
 console.log(getAnimalMap());
+
 function getSchedule(dayName) {
   // seu código aqui
 }
