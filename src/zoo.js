@@ -110,16 +110,15 @@ function getOldestFromFirstSpecies(id) {
   const speciesId = employees
     .find((employee) => (employee.id === id))
     .responsibleFor[0];
-  const residents = species
-    .find((specie) => specie.id === speciesId)
-    .residents;
+  const animalObj = species
+    .find((specie) => specie.id === speciesId);
   let oldestAge = 0;
-  residents.forEach((ind) => {
+  animalObj.residents.forEach((ind) => {
     if (ind.age > oldestAge) {
       oldestAge = ind.age;
     }
   });
-  const Oldest = residents.find((ind) => ind.age === oldestAge);
+  const Oldest = animalObj.residents.find((ind) => ind.age === oldestAge);
   const final = [Oldest.name, Oldest.sex, Oldest.age];
   return final;
 }
@@ -127,7 +126,9 @@ function getOldestFromFirstSpecies(id) {
 // 12
 function increasePrices(percentage) {
   // seu código aqui
-  // prices.forEach((category) => prices[category] *= (1 + (percentage/100)));
+  prices.Adult = (Math.round((prices.Adult * (1 + (percentage / 100))) * 100)) / 100;
+  prices.Child = (Math.round((prices.Child * (1 + (percentage / 100))) * 100)) / 100;
+  prices.Senior = (Math.round((prices.Senior * (1 + (percentage / 100))) * 100)) / 100;
 }
 
 // 13
