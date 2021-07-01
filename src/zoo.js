@@ -5,11 +5,10 @@ const data = require('./data');
 function getSpeciesByIds(...ids) {
   const idSpecies = ids;
   const returnSpecies = [];
-  species.reduce((_, currentValue, index) => {
+  species.forEach((currentValue, index) => {
     const verificaId = idSpecies.filter((animalId) => currentValue.id === animalId);
     if (verificaId[0] === species[index].id) returnSpecies.push(species[index]);
-    return undefined;
-  }, []);
+  });
   return returnSpecies;
 }
 
@@ -35,9 +34,7 @@ function getEmployeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
-  const retorno = { ...personalInfo, ...associatedWith };
-  return retorno;
+  return { ...personalInfo, ...associatedWith };
 }
 
 function isManager(id) {
