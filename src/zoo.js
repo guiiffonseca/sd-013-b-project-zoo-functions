@@ -27,8 +27,7 @@ function getEmployeeByName(employeeName) {
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
-  const newEmployee = {};
-  Object.assign(newEmployee, personalInfo, associatedWith);
+  const newEmployee = { ...personalInfo, ...associatedWith };
   data.employees.push(newEmployee);
   return newEmployee;
 }
