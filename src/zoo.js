@@ -1,7 +1,7 @@
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
-  return ids.map((idParam) => data.species.find(({ idSpecie }) => idSpecie === idParam));
+  return ids.map((idParam) => data.species.find(({ id }) => id === idParam));
 }
 
 function getAnimalsOlderThan(animal, age) {
