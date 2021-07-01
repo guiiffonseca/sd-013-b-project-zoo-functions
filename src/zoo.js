@@ -78,6 +78,13 @@ function getOldestFromFirstSpecies(id) {
 
 function increasePrices(percentage) {
   // seu código aqui
+  const arrayOfPrices = [];
+  const arrayPrices = Object.values(data.prices);
+  arrayPrices.forEach((element) => arrayOfPrices.push(element + element * (percentage / 100)));
+  const [adult, senior, child] = arrayOfPrices;
+  data.prices.Adult = Math.round(adult * 100) / 100;
+  data.prices.Senior = Math.round(senior * 100) / 100;
+  data.prices.Child = Math.round(child * 100) / 100;
 }
 
 function getEmployeeCoverage(idOrName) {
