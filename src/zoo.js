@@ -32,8 +32,11 @@ function isManager(id) {
   // verifiquei os codigos do manager da pessoa e o id dela, ver quais batiam e quais não com o que o assert pedia.
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   // seu código aqui
+  const newObject = { id, firstName, lastName, managers, responsibleFor };
+  return employees.push(newObject);
+  // demorei entender que não estava mechendo só com objeto mas foi (employes é um array)
 }
 
 function countAnimals(speciesName) {
