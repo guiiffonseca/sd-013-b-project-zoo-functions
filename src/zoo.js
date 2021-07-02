@@ -12,15 +12,26 @@ const getSpeciesByIds = (...idSpecies) =>
 // some, every -> boolean
 // find -> object
 
-const getAnimalsOlderThan = (animal, age) => species
-  .find((specie) => specie.name === animal).residents.every((resident) => resident.age >= age);
+const getAnimalsOlderThan = (animal, age) =>
+  species
+    .find((specie) => specie.name === animal)
+    .residents.every((resident) => resident.age >= age);
 
 const getEmployeeByName = (...employeeName) => (employeeName.length !== 0 ? employees
   .find((employee) => `${employee.firstName} ${employee.lastName}`
     .includes(employeeName.join())) : {});
 
+/* O parâmetro personalInfo recebe um objeto que contém o id, o firstName e o lastName
+O parâmetro associatedWith recebe um objeto que contém dois array: managers e responsibleFor
+
+O que será avaliado:
+Cria um novo colaborador a partir de objetos contendo informações pessoais e gerentes e animais gerenciados. */
+
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  const { id, firstName, lastName } = personalInfo;
+  const { managers, responsibleFor } = associatedWith;
+  const employee = { id, firstName, lastName, managers, responsibleFor };
+  return employee;
 }
 
 function isManager(id) {
