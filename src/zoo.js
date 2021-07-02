@@ -1,5 +1,5 @@
 const data = require('./data');
-const { species, employees } = require('./data');
+const { species, employees, prices } = require('./data');
 
 function getSpeciesByIds(...ids) {
   // seu código aqui
@@ -18,8 +18,9 @@ function getAnimalsOlderThan(animal, idade) {
 function getEmployeeByName(employeeName) {
   if (employeeName) {
     // eslint-disable-next-line max-len
-    return employees.find((employee) => employee.firstName === employeeName 
-    || employee.lastName === employeeName);
+    return employees.find(
+      (employee) => employee.firstName === employeeName || employee.lastName === employeeName,
+    );
   }
   return {};
 }
@@ -34,6 +35,7 @@ function createEmployee(personalInfo, associatedWith) {
 
 function isManager(id) {
   // seu código aqui
+  return employees.some((employee) => employee.managers.includes(id));
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
@@ -60,20 +62,61 @@ function countAnimals(animals) {
   return anCoun;
 }
 
-function calculateEntry(entrants) {
+function calculateEntry(entrants = {}) {
   // seu código aqui
+  if (entrants === {}) return 0;
+  return Object.entries(entrants).reduce((accumulator, [key, value]) => accumulator + prices[key] * value, 0);
 }
 
-function getAnimalMap(options) {
-  // seu código aqui
-}
+// const animals = {
+//   NE: [],
+//   NW: [],
+//   SE: [],
+//   SW: [],
+// };
+// const locations = Object.keys(animals);
+
+// const searchIncludeName = () => {
+
+// };
+
+// const option1 = { includeNames: true };
+
+// function getAnimalMap(options) {
+//   // seu código aqui
+//   const map = locations
+//     .reduce((acc, currVal) => {
+//       acc[currVal] = species
+//         .filter((specie) => specie.location === currVal)
+//         .map((animal) => animal.name);
+//       return acc;
+//     }, {});
+//   if (options === option1) {
+//     return searchIncludeName();
+//   }
+//   return map;
+// }
 
 function getSchedule(dayName) {
   // seu código aqui
 }
 
+function findOlder (animals) {
+  let oldest = { name: '', sex: '', age: 0 };
+
+  animals.forEach((animal) => {
+    if (animal.age > oldest.age) {
+      oldest = animal;
+    }
+  });
+  return oldest;
+}
+
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
+  const emp = employees.find((employee) => employee.id === id);
+  const firstAnimal = species.find((specie) => specie.id === emp.responsibleFor[0]).residents;
+  return Object.values(findOlder(firstAnimal));
 }
 
 function increasePrices(percentage) {
@@ -88,7 +131,7 @@ module.exports = {
   calculateEntry,
   getSchedule,
   countAnimals,
-  getAnimalMap,
+  // getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
   getEmployeeCoverage,
