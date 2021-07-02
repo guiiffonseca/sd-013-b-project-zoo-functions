@@ -1,4 +1,4 @@
-const { species, employees, prices, hours } = require('./data');
+const { species, employees, prices } = require('./data');
 
 function getSpeciesByIds(...ids) {
   const result = [];
@@ -33,10 +33,17 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  return employees.some(({ managers }) => managers.some((manager) => manager === id));
+  return employees.some(({ managers }) =>
+    managers.some((manager) => manager === id));
 }
 
-function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+function addEmployee(
+  id,
+  firstName,
+  lastName,
+  managers = [],
+  responsibleFor = [],
+) {
   employees.push({
     id,
     firstName,
@@ -50,65 +57,54 @@ function countAnimals(speciess) {
   return speciess
     ? species.find(({ name }) => name === speciess).residents.length
     : species.reduce((totalBySpecie, { name, residents }) =>
-      ({ ...totalBySpecie, [name]: residents.length }),
-    {});
+      ({ ...totalBySpecie, [name]: residents.length }), {});
 }
 
 function calculateEntry({ Adult = 0, Child = 0, Senior = 0 } = {}) {
-  return (Adult * prices.Adult) + (Child * prices.Child) + (Senior * prices.Senior);
+  return Adult * prices.Adult + Child * prices.Child + Senior * prices.Senior;
 }
 
 function filterBySex(aux, sexForFilter) {
-  return aux.filter(({sex}) => sex === sexForFilter);
+  return aux.filter(({ sex }) => sex === sexForFilter);
 }
 
 function animalMap(animals, sex) {
   species.forEach(({ name, location, residents }) => {
     let aux = [...residents];
     if (sex) {
-      aux = filterBySex(aux, sex)
+      aux = filterBySex(aux, sex);
     }
-    animals[location].push({ [name]: aux.map((animal) => animal.name)});
+    animals[location].push({ [name]: aux.map((animal) => animal.name) });
   });
 }
 
 function sortAnimals(animals) {
   return Object.values(animals).forEach((animal) => {
     animal.forEach((element) => {
-      Object.values(element).map((animalForSort) => {
-        animalForSort.sort();
-      });
-    }) 
+      Object.values(element).map((animalForSort) => animalForSort.sort());
+    });
   });
 }
 
-function getAnimalMap({includeNames, sorted, sex} = {}) {
-   const map = {
+function getAnimalMap({ includeNames, sorted, sex } = {}) {
+  const map = {
     NE: [],
     NW: [],
     SE: [],
     SW: [],
-  }
-
-  if(!includeNames) {
+  };
+  if (!includeNames) {
     species.forEach(({ name, location }) => map[location].push(name));
     return map;
-  };
-
+  }
   animalMap(map, sex);
-
   if (sorted) {
     sortAnimals(map);
-  };
-
+  }
   return map;
 }
-// const options = { includeNames: true, sorted: true };
-// console.log(getAnimalMap(options));
 
-function getSchedule(dayName) {
-  
-}
+function getSchedule(dayName) {}
 
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
