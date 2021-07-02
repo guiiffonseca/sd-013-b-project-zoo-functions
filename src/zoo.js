@@ -65,9 +65,46 @@ function calculateEntry(entrants) {
   // retornei com um calcuro simples e direto dos valores do object e os do prices.
 }
 
+function animalMap() {
+  // Funçao usada em Funcao getAnimalMap
+  const geografico = { NE: [], NW: [], SE: [], SW: [] };
+  Object.keys(geografico).forEach((geo) => {
+    species.forEach((specie) => {
+      if (specie.location === geo) geografico[geo].push(specie.name);
+    });
+  });
+  return geografico;
+}
+
+/* function animalMapResidents(param) {
+  // Função usada no getAnimalMap
+  const geografico = { NE: [], NW: [], SE: [], SW: [] };
+  Object.keys(geografico).forEach((geo) => {
+    species.forEach((specie) => {
+      if (specie.location === geo) {
+        const specName = specie.name;
+        let specResiNames = [];
+        speciesName.push(specie.residents.name);
+        geografico[geo].push({ specName: specResiNames });
+      }
+    });
+  });
+} */
+
 function getAnimalMap(options) {
   // seu código aqui
-  // tentei nao consegui
+  if (options === undefined) return animalMap();
+  /* const { includeNames, sex, sorted } = options;
+  if (options[includeNames] === true) {
+    return animalMapResidents('Name');
+  } else if (options[includeNames] === true && options[sorted] === true) {
+    return animalMapResidents('sorted');
+  }else if (options[includeNames] === true && options[sex] === 'female') {
+    return animalMapResidents('NameSex')
+  } else {
+    return 'ERROR';
+  }
+  */
 }
 
 function getSchedule(dayName) {
