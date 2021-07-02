@@ -53,7 +53,17 @@ function getAnimalMap(options) {
 }
 
 function getSchedule(dayName) {
-  // seu código aqui
+  const daysAndTime = {
+    Tuesday: 'Open from 8am until 6pm',
+    Wednesday: 'Open from 8am until 6pm',
+    Thursday: 'Open from 10am until 8pm',
+    Friday: 'Open from 10am until 8pm',
+    Saturday: 'Open from 8am until 10pm',
+    Sunday: 'Open from 8am until 8pm',
+    Monday: 'CLOSED',
+  };
+  if (!dayName) return daysAndTime;
+  return { [dayName]: daysAndTime[dayName] };
 }
 
 function getOldestFromFirstSpecies(id) {
@@ -69,7 +79,11 @@ function increasePrices(percentage) {
 }
 
 function getEmployeeCoverage(idOrName) {
-  // return employees.find((employee) => `${employee.firstName} ${employee.lastName}`);
+//   const list = {};
+//   employees.forEach((employee) => {
+//     list[employee.name] = employee.responsibleFor;
+//   });
+//   console.log(list);
 }
 
 getEmployeeCoverage();
