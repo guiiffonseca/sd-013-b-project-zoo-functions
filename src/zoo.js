@@ -1,4 +1,4 @@
-const { employees, prices } = require('./data');
+const { employees, prices, species } = require('./data');
 const data = require('./data');
 
 /* 1. Esta função é responsável pela busca das espécies de animais por id.
@@ -110,7 +110,11 @@ function getSchedule(dayName) {
  gerenciada pela pessoa colaboradora do parâmetro */
 
 function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+  const firstId = employees.find((careTaker) => careTaker.id === id).responsibleFor[0]; // Pela Id do funcionário retorna primeira Id da espécie que ele cuida
+  const searchSpecies = data.species.find((speciesId) => firstId === speciesId.id).residents; // Guarda os animais da espécie retornada
+  const firstSpecies = searchSpecies.sort((a, b) => b.age - a.age); // Ordena pela idade maior
+  const { name, sex, age } = firstSpecies[0]; // Desustruturador para retornar os valores pedidos no return
+  return [name, sex, age];
 }
 
 /* 12. A função é responsável por aumentar o preço das visitas, com base no
