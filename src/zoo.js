@@ -61,6 +61,7 @@ function isManager(id) {
   // const managers = data.employees.map((person) => person.managers);
   // return flatten(managers).some((manager) => manager === id);
   // Usei como referência o projeto do Rafael Nery Machado na modificação da função para uma versão mais compacta
+  // Outra referencia - https://brianflove.com/2014-09-02/whats-the-double-exclamation-mark-for-in-javascript/#:~:text=If%20you%20have%20ever%20noticed,(true%20or%20false)%20value.
   return !!employees.find(({ managers }) => managers.includes(id));
 }
 
@@ -81,6 +82,9 @@ function countAnimals(Specie) {
 
 function calculateEntry(entrants) {
   // seu código aqui
+  if (entrants === undefined || entrants === {}) return 0;
+  const { Adult = 0, Senior = 0, Child = 0 } = entrants;
+  return (Adult * prices.Adult + Senior * prices.Senior + Child * prices.Child);
 }
 
 function getAnimalMap(options) {
