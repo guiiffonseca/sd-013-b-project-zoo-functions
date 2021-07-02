@@ -224,8 +224,39 @@ function increasePrices(percentage) {
   return data.prices;
 }
 
-function getEmployeeCoverage(idOrName) {
-  // ! seu código aqui
+const qwe = {};
+employees.sort((a, b) => a.firstName.localeCompare(b.firstName));
+
+function nbv(a) {
+  const asd = [];
+  const sdf = Object.values(employees)[a].id;
+  const gfd = employees.find((e) => e.id === sdf).responsibleFor;
+  Object.keys(gfd).forEach((p) => {
+    asd.push(species.filter((e) => e.id === gfd[p])[0].name);
+  });
+  return asd;
+}
+
+employees.reduce((e, a, i) => {
+  qwe[`${a.firstName} ${a.lastName}`] = nbv(i);
+  return 0;
+}, 0);
+
+function getEmployeeCoverage(idOrName = 0) {
+  if (idOrName === 0) {
+    return qwe;
+  }
+  let jhg;
+  Object.entries(qwe).forEach((e, i) => {
+    if (e[0].includes(idOrName) || employees[i].id === idOrName) {
+      jhg = e;
+      return jhg;
+    }
+  });
+  const tre = {};
+  const [a, b] = jhg;
+  tre[a] = b;
+  return tre;
 }
 
 module.exports = {
