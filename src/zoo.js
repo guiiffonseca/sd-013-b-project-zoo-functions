@@ -65,7 +65,8 @@ function countAnimals(animals) {
 function calculateEntry(entrants = {}) {
   // seu código aqui
   if (entrants === {}) return 0;
-  return Object.entries(entrants).reduce((accumulator, [key, value]) => accumulator + prices[key] * value, 0);
+  return Object.entries(entrants)
+    .reduce((accumulator, [key, value]) => accumulator + prices[key] * value, 0);
 }
 
 // const animals = {
@@ -101,7 +102,7 @@ function getSchedule(dayName) {
   // seu código aqui
 }
 
-function findOlder (animals) {
+function findOlder(animals) {
   let oldest = { name: '', sex: '', age: 0 };
 
   animals.forEach((animal) => {
