@@ -71,8 +71,11 @@ function countAnimals(species) {
     ? Object.entries(saida).find((specie) => specie[0] === species)[1] : saida;
 }
 
-function calculateEntry(entrants) {
+function calculateEntry(entrants = {}) {
   // seu código aqui
+  const { Adult: adult = 0, Child: child = 0, Senior: senior = 0 } = entrants;
+  const { Adult: priceAdult, Child: priceChild, Senior: priceSenior} = data.prices;
+  return (adult * priceAdult) + (child * priceChild) + (senior * priceSenior);
 }
 
 function getAnimalMap(options) {
