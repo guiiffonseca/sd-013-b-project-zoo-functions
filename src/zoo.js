@@ -158,14 +158,22 @@ function getOldestFromFirstSpecies(id) {
   return olderAnimal;
 }
 
+// //////////////////// 12ª Função ////////////////////
 
-
-getOldestFromFirstSpecies('4b40a139-d4dc-4f09-822d-ec25e819a5ad');
-
-function increasePrices(percentage) {
-  // seu código aqui
+function newPrice(value, percentage) {
+  const priceIncreased = value * (1 + percentage / 100);
+  return Math.round(priceIncreased * 100) / 100;
 }
 
+function increasePrices(percentage) {
+  Object.keys(data.prices).forEach((key) => {
+    data.prices[key] = newPrice(data.prices[key], percentage);
+  });
+  console.log(data.prices);
+}
+
+// increasePrices();
+// //////////////////// 13ª Função ////////////////////
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
 }

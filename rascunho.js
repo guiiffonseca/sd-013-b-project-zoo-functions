@@ -1,6 +1,3 @@
-let obj = {
-  nome: 'Guilherme',
-  sobrenome: 'Costa',
-};
+let n = 100;
 
-console.log(Object.entries(obj))
+console.log(n * (1 + 0.5))
