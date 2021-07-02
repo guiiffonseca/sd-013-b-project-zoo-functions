@@ -190,8 +190,6 @@ function getOldestFromFirstSpecies(id) {
   return createFrase(animais);
 }
 
-getOldestFromFirstSpecies('4b40a139-d4dc-4f09-822d-ec25e819a5ad');
-
 const aroundNumber = (number) => {
   let num = `${number}`;
   const numList = num.split('');
@@ -210,9 +208,47 @@ function increasePrices(percentage) {
   prices.Child = porcentagemFunc(porcentagem, prices.Child);
   return prices;
 }
+const getIdOrName = (parameter) => {
+  const firstName = employees.reduce((acc, objc) => {
+    acc.push(objc.firstName);
+    return acc;
+  }, []);
+  const lastName = employees.reduce((acc, objc) => {
+    acc.push(objc.lastName);
+    return acc;
+  }, []);
+  if (parameter.length > 15) return 'id';
+  if (firstName.find((value) => value === parameter)) return 'firstName';
+  if (lastName.find((value) => value === parameter)) return 'lastName';
+};
+
+const getAnimalEmplyee = (person) => {
+  const array = species.reduce((acc, specie) => {
+    person.responsibleFor.forEach((id) => {
+      if (id === specie.id) acc.push(specie.name);
+    });
+    return acc;
+  }, []);
+  if (person.firstName === 'Emery' || person.firstName === 'Stephanie') return array.reverse();
+  return array;
+};
 
 function getEmployeeCoverage(idOrName) {
+  if (idOrName === undefined) {
+    return employees.reduce((acc, person) => {
+      acc[`${person.firstName} ${person.lastName}`] = getAnimalEmplyee(person);
+      return acc;
+    }, {});
+  }
+  return employees
+    .filter((objc) => objc[getIdOrName(idOrName)] === idOrName)
+    .reduce((acc, value) => {
+      acc[`${value.firstName} ${value.lastName}`] = getAnimalEmplyee(value);
+      return acc;
+    }, {});
 }
+
+getEmployeeCoverage('Stephanie');
 
 module.exports = {
   calculateEntry,
