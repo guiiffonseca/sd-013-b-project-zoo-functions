@@ -1,9 +1,9 @@
 const { species, employees, hours, prices } = require('./data');
+
 const data = require('./data');
 
 const all = [...species, ...employees];
-const isTrue = hours + prices + data === true;
-console.log(isTrue);
+
 let { Adult, Senior, Child } = prices;
 
 function getSpeciesByIds(ids = [], ids2 = []) {
@@ -78,6 +78,8 @@ function calculateEntry(entrants = {}) {
   const { Adult: guestOne = 0, Senior: guestTwo = 0, Child: guestThree = 0 } = entrants;
   return guestOne * Adult + guestTwo * Senior + guestThree * Child;
 }
+
+// !     \/    ------Inicio do requerimento 9------      \/
 
 const NE = species.filter((e) => e.location === 'NE').map((e) => e.name);
 const NW = species.filter((e) => e.location === 'NW').map((e) => e.name);
@@ -188,6 +190,8 @@ function getAnimalMap(options) {
   return possibilityTwo;
 }
 
+// !       /\      ------Fim do requerimento 9------       /\
+
 function getSchedule(dayName) {
   const schedule = Object.getOwnPropertyDescriptors(hours);
   Object.keys(schedule).forEach((prop) => {
@@ -224,40 +228,44 @@ function increasePrices(percentage) {
   return data.prices;
 }
 
-const qwe = {};
+// !     \/    ------Inicio do requerimento 13------      \/
+
+const employeesAndAnimals = {};
+
 employees.sort((a, b) => a.firstName.localeCompare(b.firstName));
 
 function nbv(a) {
-  const asd = [];
-  const sdf = Object.values(employees)[a].id;
-  const gfd = employees.find((e) => e.id === sdf).responsibleFor;
-  Object.keys(gfd).forEach((p) => {
-    asd.push(species.filter((e) => e.id === gfd[p])[0].name);
+  const animalsFromEmployee = [];
+  const employee = Object.values(employees)[a].id;
+  const groupOfAnimals = employees.find((e) => e.id === employee).responsibleFor;
+  Object.keys(groupOfAnimals).forEach((p) => {
+    animalsFromEmployee.push(species.filter((e) => e.id === groupOfAnimals[p])[0].name);
   });
-  return asd;
+  return animalsFromEmployee;
 }
 
 employees.reduce((e, a, i) => {
-  qwe[`${a.firstName} ${a.lastName}`] = nbv(i);
+  employeesAndAnimals[`${a.firstName} ${a.lastName}`] = nbv(i);
   return 0;
 }, 0);
 
 function getEmployeeCoverage(idOrName = 0) {
   if (idOrName === 0) {
-    return qwe;
+    return employeesAndAnimals;
   }
-  let jhg;
-  Object.entries(qwe).forEach((e, i) => {
+  let arrayReceiver;
+  Object.entries(employeesAndAnimals).forEach((e, i) => {
     if (e[0].includes(idOrName) || employees[i].id === idOrName) {
-      jhg = e;
-      return jhg;
+      arrayReceiver = e;
     }
   });
-  const tre = {};
-  const [a, b] = jhg;
-  tre[a] = b;
-  return tre;
+  const finalObject = {};
+  const [a, b] = arrayReceiver;
+  finalObject[a] = b;
+  return finalObject;
 }
+
+// !       /\      ------Fim do requerimento 13------       /\
 
 module.exports = {
   calculateEntry,
