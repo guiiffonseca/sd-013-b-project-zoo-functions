@@ -12,8 +12,19 @@ const getSpeciesByIds = (...ids) => {
 
 function getAnimalsOlderThan(animal, age) {
   // seu código aqui
-
+  let ehVelho = false;
+  especies.forEach((especie) => {
+    if (especie.name === animal) {
+      ehVelho = especie.residents.every((residente) => {
+        return residente.age > age;
+      });
+    }
+  });
+  return ehVelho;
 }
+// Para testar a função com o debug
+getAnimalsOlderThan('otters', 7);
+getAnimalsOlderThan('penguins', 10);
 
 function getEmployeeByName(employeeName) {
   // seu código aqui
