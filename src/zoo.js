@@ -1,3 +1,5 @@
+/* eslint-disable max-lines-per-function */
+/* eslint-disable no-unused-vars */
 const { species, employees, prices, hours } = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -137,9 +139,36 @@ function increasePrices(percentage) {
   return prices;
 }
 
-function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+function findAnimal({ firstName, lastName, responsibleFor }) {
+  const animalsResponsible = [];
+
+  responsibleFor.forEach((animal) => {
+    animalsResponsible.push(species.find(({ id }) => animal === id).name);
+  });
+
+  return { [`${firstName} ${lastName}`]: animalsResponsible };
 }
+
+function getEmployeeCoverage(idOrName) {
+  if (!idOrName) {
+    const employeesResponsibleFor = {};
+    employees.forEach(({ firstName, lastName, responsibleFor }) => {
+      const animalsResponsible = [];
+      responsibleFor.forEach((animal) => animalsResponsible
+        .push(species.find(({ id }) => id === animal).name));
+      employeesResponsibleFor[`${firstName} ${lastName}`] = animalsResponsible;
+    });
+    return employeesResponsibleFor;
+  }
+  const withId = employees.find(({ id }) => id === idOrName);
+  const withFirstName = employees.find(({ firstName }) => firstName === idOrName);
+  const withLastName = employees.find(({ lastName }) => lastName === idOrName);
+  if (withId) return findAnimal(withId);
+  if (withFirstName) return findAnimal(withFirstName);
+  if (withLastName) return findAnimal(withLastName);
+}
+
+console.log(getEmployeeCoverage());
 
 module.exports = {
   calculateEntry,
