@@ -32,8 +32,10 @@ function getEmployeeByName(employeeName) {
 // retorna um objeto com as informações do employee passado no parâmetro.
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  return { ...personalInfo, ...associatedWith };
 }
+
+// o spread junta os 2 objetos do parâmetro e retorna um objeto.
 
 function isManager(id) {
   // seu código aqui
