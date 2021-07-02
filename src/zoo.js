@@ -129,7 +129,15 @@ function getOldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  const save = Object.entries(prices).reduce((acc, price) => {
+    const newPrice = price[1] + (price[1] * percentage) / 100;
+    const round = Math.round(newPrice * 100) / 100;
+    // Chequei como arrendondar em duas casas decimais com o round, neste link:
+    // https://stackoverflow.com/questions/11832914/how-to-round-to-at-most-2-decimal-places-if-necessary
+    acc[price[0]] = round;
+    return acc;
+  }, {});
+  return Object.assign(prices, save);
 }
 
 function getEmployeeCoverage(idOrName) {
