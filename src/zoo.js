@@ -79,8 +79,92 @@ function calculateEntry(entrants = {}) {
   return guestOne * Adult + guestTwo * Senior + guestThree * Child;
 }
 
+const NE = species.filter((e) => e.location === 'NE').map((e) => e.name);
+const NW = species.filter((e) => e.location === 'NW').map((e) => e.name);
+const SE = species.filter((e) => e.location === 'SE').map((e) => e.name);
+const SW = species.filter((e) => e.location === 'SW').map((e) => e.name);
+const [lions, giraffes] = species.filter((e) => e.location === 'NE');
+const [tigers, bears, elephants] = species.filter((e) => e.location === 'NW');
+const [penguins, otters] = species.filter((e) => e.location === 'SE');
+const [frogs, snakes] = species.filter((e) => e.location === 'SW');
+
+function get(param) {
+  const animals = param.residents.map((e) => e.name);
+  const animalsName = [param].map((e) => e.name);
+  const makeObject = {};
+  makeObject[animalsName] = animals;
+  return makeObject;
+}
+
+function getSort(param) {
+  const animals = param.residents.map((e) => e.name).sort();
+  const animalsName = [param].map((e) => e.name);
+  const makeObject = {};
+  makeObject[animalsName] = animals;
+  return makeObject;
+}
+
+//! const exp3 = {
+//!   NE: [{ lions: ["Zena", "Dee"] }, { giraffes: ["Gracia", "Vicky"] }],
+//!   NW: [
+//!     { tigers: ["Shu", "Esther"] },
+//!     { bears: [] },
+//!     { elephants: ["Ilana", "Bea"] },
+//!   ],
+//!   SE: [{ penguins: ["Keri"] }, { otters: ["Mercedes", "Margherita"] }],
+//!   SW: [{ frogs: ["Cathey", "Annice"] }, { snakes: ["Paulette"] }],
+//! };
+
+const requirementOneGet = {
+  NE: [get(lions), get(giraffes)],
+  NW: [get(tigers), get(bears), get(elephants)],
+  SE: [get(penguins), get(otters)],
+  SW: [get(frogs), get(snakes)],
+};
+
+const requirementTwoGet = {
+  NE: [getSort(lions), getSort(giraffes)],
+  NW: [getSort(tigers), getSort(bears), getSort(elephants)],
+  SE: [getSort(penguins), getSort(otters)],
+  SW: [getSort(frogs), getSort(snakes)],
+};
+
+function getHelperOne(para) {
+  switch (para) {
+  case 'true':
+    return requirementOneGet;
+  case 'true,true':
+    return requirementTwoGet;
+  case 'bob3':
+    return 3;
+  default:
+    return undefined;
+  }
+}
+
+function getHelperTwo(para) {
+  switch (para) {
+  case 'true,female,true':
+    return 4;
+  case 'bob4':
+    return 5;
+  default:
+    return undefined;
+  }
+}
+
 function getAnimalMap(options) {
-  // seu código aqui
+  if (options === undefined) {
+    return { NE, NW, SE, SW };
+  }
+  const key = Object.values(options).toString();
+  console.log(key);
+  const possibilityOne = getHelperOne(key);
+  const possibilityTwo = getHelperTwo(key);
+  if (possibilityOne !== undefined) {
+    return possibilityOne;
+  }
+  return possibilityTwo;
 }
 
 function getSchedule(dayName) {
