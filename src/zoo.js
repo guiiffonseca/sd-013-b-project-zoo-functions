@@ -1,8 +1,8 @@
 const { species, employees, hours, prices } = require('./data');
-// const data = require('./data');
+const data = require('./data');
 
 const all = [...species, ...employees];
-const isTrue = hours + prices === true;
+const isTrue = hours + prices + data === true;
 console.log(isTrue);
 const { Adult, Senior, Child } = prices;
 
@@ -104,16 +104,21 @@ function getSort(param) {
   return makeObject;
 }
 
-//! const exp3 = {
-//!   NE: [{ lions: ["Zena", "Dee"] }, { giraffes: ["Gracia", "Vicky"] }],
-//!   NW: [
-//!     { tigers: ["Shu", "Esther"] },
-//!     { bears: [] },
-//!     { elephants: ["Ilana", "Bea"] },
-//!   ],
-//!   SE: [{ penguins: ["Keri"] }, { otters: ["Mercedes", "Margherita"] }],
-//!   SW: [{ frogs: ["Cathey", "Annice"] }, { snakes: ["Paulette"] }],
-//! };
+function getFem(param) {
+  const animals = param.residents.filter((e) => e.sex === 'female').map((e) => e.name);
+  const animalsName = [param].map((e) => e.name);
+  const makeObject = {};
+  makeObject[animalsName] = animals;
+  return makeObject;
+}
+
+function getFemSort(param) {
+  const animals = param.residents.filter((e) => e.sex === 'female').map((e) => e.name).sort();
+  const animalsName = [param].map((e) => e.name);
+  const makeObject = {};
+  makeObject[animalsName] = animals;
+  return makeObject;
+}
 
 const requirementOneGet = {
   NE: [get(lions), get(giraffes)],
@@ -129,14 +134,28 @@ const requirementTwoGet = {
   SW: [getSort(frogs), getSort(snakes)],
 };
 
+const requirementThreeGet = {
+  NE: [getFem(lions), getFem(giraffes)],
+  NW: [getFem(tigers), getFem(bears), getFem(elephants)],
+  SE: [getFem(penguins), getFem(otters)],
+  SW: [getFem(frogs), getFem(snakes)],
+};
+
+const requirementFourGet = {
+  NE: [getFemSort(lions), getFemSort(giraffes)],
+  NW: [getFemSort(tigers), getFemSort(bears), getFemSort(elephants)],
+  SE: [getFemSort(penguins), getFemSort(otters)],
+  SW: [getFemSort(frogs), getFemSort(snakes)],
+};
+
 function getHelperOne(para) {
   switch (para) {
   case 'true':
     return requirementOneGet;
   case 'true,true':
     return requirementTwoGet;
-  case 'bob3':
-    return 3;
+  case 'true,female':
+    return requirementThreeGet;
   default:
     return undefined;
   }
@@ -145,9 +164,11 @@ function getHelperOne(para) {
 function getHelperTwo(para) {
   switch (para) {
   case 'true,female,true':
-    return 4;
-  case 'bob4':
-    return 5;
+    return requirementFourGet;
+  case 'female':
+    return { NE, NW, SE, SW };
+  case 'female,true':
+    return { NE, NW, SE, SW };
   default:
     return undefined;
   }
