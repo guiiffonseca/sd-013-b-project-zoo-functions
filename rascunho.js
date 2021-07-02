@@ -1,8 +1,9 @@
-// let array = [1, 2, 3, 4];
+let residents = [
+  { name: 'Zena', sex: 'female', age: 12 },
+  { name: 'Maxwell', sex: 'male', age: 15 },
+  { name: 'Faustino', sex: 'male', age: 7 },
+  { name: 'Dee', sex: 'female', age: 14 },
+];
 
 
-// let obj = {a: 2};
-
-// let { a, b } = obj;
-
-// obj.forEach
+console.log([...residents])
