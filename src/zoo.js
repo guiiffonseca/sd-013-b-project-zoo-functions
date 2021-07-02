@@ -1,7 +1,15 @@
+const { species, employees, hours, prices } = require('./data');
 const data = require('./data');
 
-function getSpeciesByIds(ids) {
-  // seu código aqui
+function getSpeciesByIds(...ids) {
+  if (ids.length <= 0) return [];
+  const animalsArray = [];
+
+  ids.find((uniqueId) => {
+    const foundSpecies = species.find(({ id }) => id === uniqueId);
+    animalsArray.push(foundSpecies);
+  });
+  return animalsArray;
 }
 
 function getAnimalsOlderThan(animal, age) {
