@@ -88,6 +88,10 @@ function getOldestFromFirstSpecies(id) {
 
 function increasePrices(percentage) {
   // seu código aqui
+  Object.assign(prices, Object.entries(prices).reduce((acc, [key, value]) => {
+    acc[key] = parseFloat((value * (percentage / 100 + 1) + 0.001).toFixed(2));
+    return acc;
+  }, {}));
 }
 
 function getEmployeeCoverage(idOrName) {
