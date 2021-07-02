@@ -40,11 +40,21 @@ function isManager(id) {
   return data.employees.some(({ managers }) => managers.includes(id));
 }
 
-// o some vai percorrer o array employees e o includes verifica se na chave managers está o parâmetro (id) passado, retornando true ou false.
+// o includes verifica se na chave managers está o parâmetro (id) passado, o some vai percorrer o array employees para verificar se ao menos um dos elementos passa no teste, retornando true ou false.
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  data.employees.push({
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  });
 }
+
+// push no array employees para incluir o parâmetro passado na última posição
+// object property shorthand para incluir chaves e valores do objeto, sem precisar repetir os nomes das chaves.
+// default parameters nas chaves managers e responsibleFor caso não seja passado o parâmetro retorna um array vazio.
 
 function countAnimals(species) {
   // seu código aqui
