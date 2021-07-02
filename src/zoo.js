@@ -62,6 +62,13 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 
 function countAnimals(species) {
   // seu código aqui
+  // A única forma que encontrei de dar saída em um objeto com as species sendo propriedades dele, foi dessa forma...
+  const saida = {};
+  data.species.forEach((specie) => {
+    saida[specie.name] = specie.residents.length;
+  });
+  return (species !== undefined)
+    ? Object.entries(saida).find((specie) => specie[0] === species)[1] : saida;
 }
 
 function calculateEntry(entrants) {
