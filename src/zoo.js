@@ -90,18 +90,28 @@ function increasePrices(percentage) {
   prices.Senior = Math.ceil(prices.Senior * (100 + percentage)) / 100;
 }
 
-function getEmployeeCoverage(idOrName) {
-  // const personResp = employees
-  //   .reduce((acc, { firstName, lastName, responsibleFor }) => {
-  //     acc[`${firstName} ${lastName}`] = responsibleFor;
-  //     return acc;
-  // }, {});
-  // if (!idOrName) return personResp;
-  // return employees.find(({ firstName, lastName, id }) => {
-  //   firstName === idOrName || lastName === idOrName || id === idOrName;
-  // });
+const getName = (...idAnimal) => {
+  return idAnimal.map((id) => species
+  .find((specie) => specie.id === id).name);
 }
-// console.log(getEmployeeCoverage('Stephanie'));
+
+function getEmployeeCoverage(idOrName) {
+  if (!idOrName) { 
+    return employees.reduce((acc, { firstName, lastName, responsibleFor }) => {
+      acc[`${firstName} ${lastName}`] = getName(...responsibleFor);
+      return acc;
+    }, {});
+  }
+  {
+    const found = employees.find(({ firstName, lastName, id }) => {
+      return firstName === idOrName || lastName === idOrName || id === idOrName
+    });
+    return { 
+      [`${found.firstName} ${found.lastName}`]: getName(...found.responsibleFor), 
+    };
+  }
+}
+console.log(getEmployeeCoverage('Nelson'));
 module.exports = {
   calculateEntry,
   getSchedule,
