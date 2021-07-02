@@ -95,7 +95,16 @@ function getAnimalMap(options) {
  apenas o cronograma de um dia específico */
 
 function getSchedule(dayName) {
-  // seu código aqui
+  const getKeys = Object.keys(data.hours);
+  const days = getKeys.reduce((accumulator, current) => ({
+    ...accumulator,
+    [current]: `Open from ${data.hours[current].open}am until ${data.hours[current].close - 12}pm`,
+  }), {});
+  days.Monday = 'CLOSED';
+  if (!dayName) return days;
+  return {
+    [dayName]: days[dayName],
+  };
 }
 /* 11. A função busca por informações do animal mais velho da primeira espécie
  gerenciada pela pessoa colaboradora do parâmetro */
