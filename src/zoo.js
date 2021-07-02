@@ -62,7 +62,7 @@ function calculateEntry(entrants) {
 }
 
 function getAnimalMap(options) {
- 
+
 }
 
 function getSchedule(dayName) {
@@ -77,16 +77,15 @@ function getOldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
+  function calculo(valor) {
+    return (Math.ceil((valor * 100) * (((percentage / 100) + 1))) / 100).toFixed(2);
+  }
   const novoAdult = calculo(data.prices.Adult);
   const novoChild = calculo(data.prices.Child);
   const novoSenior = calculo(data.prices.Senior);
   data.prices.Adult = parseFloat(novoAdult, 10);
   data.prices.Child = parseFloat(novoChild, 10);
   data.prices.Senior = parseFloat(novoSenior, 10);
-
-  function calculo(valor) {
-    return (Math.ceil((valor * 100) * (((percentage / 100) + 1))) / 100).toFixed(2);
-  }
 }
 
 function getEmployeeCoverage(idOrName) {
