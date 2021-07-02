@@ -83,7 +83,7 @@ function calculateEntry(entrants = {}) {
 
 // const option1 = { includeNames: true };
 
-// function getAnimalMap(options) {
+function getAnimalMap(options) {
 //   // seu código aqui
 //   const map = locations
 //     .reduce((acc, currVal) => {
@@ -96,13 +96,13 @@ function calculateEntry(entrants = {}) {
 //     return searchIncludeName();
 //   }
 //   return map;
-// }
+}
 
 function getSchedule(dayName) {
   // seu código aqui
 }
 
-function findOlder(animals) {
+function getOlder(animals) {
   let oldest = { name: '', sex: '', age: 0 };
 
   animals.forEach((animal) => {
@@ -117,22 +117,40 @@ function getOldestFromFirstSpecies(id) {
   // seu código aqui
   const emp = employees.find((employee) => employee.id === id);
   const firstAnimal = species.find((specie) => specie.id === emp.responsibleFor[0]).residents;
-  return Object.values(findOlder(firstAnimal));
+  return Object.values(getOlder(firstAnimal));
 }
 
 function increasePrices(percentage) {
   // seu código aqui
+  prices.Adult = Math.ceil((prices.Adult * (1 + percentage / 100)) * 100) / 100;
+  prices.Senior = Math.ceil((prices.Senior * (1 + percentage / 100)) * 100) / 100;
+  prices.Child = Math.ceil((prices.Child * (1 + percentage / 100)) * 100) / 100;
 }
 
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
+  if (idOrName) {
+    const colaborator = employees.find((employee) =>
+      employee.id === idOrName
+      || employee.firstName === idOrName || employee.lastName === idOrName);
+    return {
+      [`${colaborator.firstName} ${colaborator.lastName}`]: colaborator.responsibleFor
+        .map((animal) => species.find((specie) => specie.id === animal).name),
+    };
+  }
+  const employee = employees.reduce((acc, curVal) => {
+    acc[`${curVal.firstName} ${curVal.lastName}`] = curVal.responsibleFor
+      .map((animal) => species.find((specie) => specie.id === animal).name);
+    return acc;
+  }, {});
+  return employee;
 }
 
 module.exports = {
   calculateEntry,
   getSchedule,
   countAnimals,
-  // getAnimalMap,
+  getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
   getEmployeeCoverage,
