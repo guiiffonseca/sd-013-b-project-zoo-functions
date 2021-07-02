@@ -1,4 +1,3 @@
-const { employees } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -23,7 +22,7 @@ function getAnimalsOlderThan(animal, age) {
 function getEmployeeByName(employeeName) {
   if (!employeeName) return {};
 
-  return employees.find(({ firstName, lastName }) =>
+  return data.employees.find(({ firstName, lastName }) =>
     firstName === employeeName || lastName === employeeName);
 }
 
@@ -38,8 +37,10 @@ function createEmployee(personalInfo, associatedWith) {
 // o spread junta os 2 objetos do parâmetro e retorna um objeto.
 
 function isManager(id) {
-  // seu código aqui
+  return data.employees.some(({ managers }) => managers.includes(id));
 }
+
+// o some vai percorrer o array employees e o includes verifica se na chave managers está o parâmetro (id) passado, retornando true ou false.
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
