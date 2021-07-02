@@ -43,7 +43,18 @@ function countAnimals(species) {
 }
 
 function calculateEntry(entrants) {
-  // seu código aqui
+  if (!entrants || Object.keys(entrants).length === 0) return 0;
+  const arrayOfEntrants = Object.entries(entrants);
+  const arrayOfPrice = Object.entries(data.prices);
+  let total = 0;
+  arrayOfEntrants.forEach((entrant) => { // percorre e compara o primeiro índice dos arrays, caso iguais total é incrementado com a multiplicação do 2º índice dos arrays.
+    arrayOfPrice.forEach((tableOfPrices) => {
+      if (entrant[0] === tableOfPrices[0]) {
+        total += entrant[1] * tableOfPrices[1];
+      }
+    });
+  });
+  return total;
 }
 
 function getAnimalMap(options) {
