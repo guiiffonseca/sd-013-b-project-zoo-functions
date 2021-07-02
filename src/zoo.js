@@ -15,9 +15,7 @@ function getAnimalsOlderThan(animal, age) {
   let ehVelho = false;
   especies.forEach((especie) => {
     if (especie.name === animal) {
-      ehVelho = especie.residents.every((residente) => {
-        return residente.age > age;
-      });
+      ehVelho = especie.residents.every((residente) => { residente.age > age; });
     }
   });
   return ehVelho;
