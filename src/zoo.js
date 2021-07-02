@@ -47,7 +47,6 @@ function isManager(id) {
     .map((employee) => employee.managers) // Cria um array com os arrays dos gerentes
     .reduce((acc, currentValue) => acc.concat(currentValue), []) // reduz o array de array para um array sumples
     .some((manager) => manager === id); // Retorna True/False se encontar o gerente
-
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
