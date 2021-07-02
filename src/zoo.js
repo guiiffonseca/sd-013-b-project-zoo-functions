@@ -28,8 +28,14 @@ function isManager(id) {
   return Boolean(employees.find((employee) => employee.managers.find((manager) => manager === id)));
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  employees.push({
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  });
 }
 
 function countAnimals(specie) {
