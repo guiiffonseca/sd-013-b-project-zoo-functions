@@ -94,17 +94,17 @@ const getName = (...idAnimal) => idAnimal.map((id) => species
   .find((specie) => specie.id === id).name);
 
 function getEmployeeCoverage(idOrName) {
-  if (!idOrName) { 
+  if (!idOrName) {
     return employees.reduce((acc, { firstName, lastName, responsibleFor }) => {
       acc[`${firstName} ${lastName}`] = getName(...responsibleFor);
       return acc;
     }, {});
   }
   {
-    const found = employees.find(({ firstName, lastName, id }) => 
-    firstName === idOrName || lastName === idOrName || id === idOrName);
-    return { 
-      [`${found.firstName} ${found.lastName}`]: getName(...found.responsibleFor), 
+    const found = employees.find(({ firstName, lastName, id }) =>
+      firstName === idOrName || lastName === idOrName || id === idOrName);
+    return {
+      [`${found.firstName} ${found.lastName}`]: getName(...found.responsibleFor),
     };
   }
 }
