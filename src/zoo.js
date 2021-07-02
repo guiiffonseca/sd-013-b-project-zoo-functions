@@ -62,11 +62,11 @@ function calculateEntry(entrants) {
 }
 
 function getAnimalMap(options) {
-  // seu código aqui
+ 
 }
 
 function getSchedule(dayName) {
-  // seu código aqui
+
 }
 
 function getOldestFromFirstSpecies(id) {
@@ -77,11 +77,20 @@ function getOldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  const novoAdult = calculo(data.prices.Adult);
+  const novoChild = calculo(data.prices.Child);
+  const novoSenior = calculo(data.prices.Senior);
+  data.prices.Adult = parseFloat(novoAdult, 10);
+  data.prices.Child = parseFloat(novoChild, 10);
+  data.prices.Senior = parseFloat(novoSenior, 10);
+
+  function calculo(valor) {
+    return (Math.ceil((valor * 100) * (((percentage / 100) + 1))) / 100).toFixed(2);
+  }
 }
 
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+
 }
 
 module.exports = {
