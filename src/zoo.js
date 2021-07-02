@@ -90,12 +90,48 @@ function increasePrices(percentage) {
   // seu código aqui
   Object.assign(prices, Object.entries(prices).reduce((acc, [key, value]) => {
     acc[key] = parseFloat((value * (percentage / 100 + 1) + 0.001).toFixed(2));
+    console.log(percentage);
     return acc;
   }, {}));
 }
+/* 13. IMPLEMENTE A FUNÇÃO getEmployeeCoverage */
+const firstSelectCoverage = () => employees.reduce((acc, curr) => {
+  acc[`${curr.firstName} ${curr.lastName}`] = curr.responsibleFor
+    .map((resp) => species.find((spec) => spec.id === resp).name);
+  return acc;
+}, {});
+
+const secondSelectCoverage = (idEmploy) => employees.reduce((acc, curr) => {
+  if (curr.id === idEmploy) {
+    acc[`${curr.firstName} ${curr.lastName}`] = curr.responsibleFor
+      .map((resp) => species.find((spec) => spec.id === resp).name);
+  }
+  return acc;
+}, {});
+
+const thirdSelectCoverage = (idEmploy) => employees.reduce((acc, curr) => {
+  if (curr.firstName === idEmploy) {
+    acc[`${curr.firstName} ${curr.lastName}`] = curr.responsibleFor
+      .map((resp) => species.find((spec) => spec.id === resp).name);
+  }
+  return acc;
+}, {});
+
+const fourthSelectCoverage = (idEmploy) => employees.reduce((acc, curr) => {
+  if (curr.lastName === idEmploy) {
+    acc[`${curr.firstName} ${curr.lastName}`] = curr.responsibleFor
+      .map((resp) => species.find((spec) => spec.id === resp).name);
+  }
+  return acc;
+}, {});
 
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+  if (!idOrName) return firstSelectCoverage();
+  const { id, firstName, lastName } = employees.find((employe) =>
+    employe.id === idOrName || employe.firstName === idOrName || employe.lastName === idOrName);
+  if (idOrName === id) return secondSelectCoverage(idOrName);
+  if (idOrName === firstName) return thirdSelectCoverage(idOrName);
+  if (idOrName === lastName) return fourthSelectCoverage(idOrName);
 }
 
 module.exports = {
