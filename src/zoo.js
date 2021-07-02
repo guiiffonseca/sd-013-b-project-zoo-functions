@@ -79,13 +79,31 @@ function calculateEntry(entrants) {
   return total;
 }
 
-function getIncludeNames() {
+function getSexNames(residents, sex) {
+  const animalNameList = [];
+
+  residents.forEach(({ name: animalName, sex: animalSex }) => {
+    if (animalSex === sex) animalNameList.push(animalName);
+  });
+
+  return animalNameList;
+}
+
+function getIncludeNames({ sorted, sex }) {
   const obj = {};
 
   species.forEach(({ location, name, residents }) => {
     if (!obj[location]) obj[location] = [];
+
+    let animalNameList = [];
+
+    if (sex) animalNameList = getSexNames(residents, sex);
+    else animalNameList = residents.map(({ name: animalName }) => animalName);
+
+    if (sorted) animalNameList.sort();
+
     obj[location].push({
-      [name]: residents.map(({ name: animalName }) => animalName),
+      [name]: animalNameList,
     });
   });
 
@@ -100,10 +118,11 @@ function getAnimalMap(options) {
   });
 
   if (!options) return obj;
-  if (options.includeNames) return getIncludeNames();
+  if (options.includeNames) return getIncludeNames(options);
+  return obj;
 }
 
-console.log(getAnimalMap({ includeNames: true }));
+console.log(getAnimalMap({ sex: 'female', sorted: true }));
 
 function getSchedule(dayName) {
   const obj = {};
@@ -167,8 +186,6 @@ function getEmployeeCoverage(idOrName) {
   if (withFirstName) return findAnimal(withFirstName);
   if (withLastName) return findAnimal(withLastName);
 }
-
-console.log(getEmployeeCoverage());
 
 module.exports = {
   calculateEntry,
