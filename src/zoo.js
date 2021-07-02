@@ -32,9 +32,17 @@ function addEmployee(id, firstName, lastName, man = [], res = []) {
 }
 
 function countAnimals(species) {
-  // seu código aqui
+  if (!species) {
+    return data.species.reduce((accumulator, specie) => {
+      const { name } = specie;
+      accumulator[name] = specie.residents.length;
+      return accumulator;
+    }, {});
+  }
+  return data.species.find((specie) => specie.name === species).residents.length;
 }
 
+console.log(countAnimals());
 function calculateEntry(entrants) {
   // seu código aqui
 }
