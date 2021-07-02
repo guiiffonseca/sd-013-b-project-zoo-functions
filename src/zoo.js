@@ -31,7 +31,7 @@ function addEmployee(id, firstName, lastName, man = [], res = []) {
   data.employees.push(employee);
 }
 
-function countAnimals(species) { 
+function countAnimals(species) {
   if (!species) {
     return data.species.reduce((accumulator, specie) => {
       const { name } = specie;
