@@ -129,7 +129,7 @@ function getOldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  const save = Object.entries(prices).reduce((acc, price) => {
+  const result = Object.entries(prices).reduce((acc, price) => {
     const newPrice = price[1] + (price[1] * percentage) / 100;
     const round = Math.round(newPrice * 100) / 100;
     // Chequei como arrendondar em duas casas decimais com o round, neste link:
@@ -137,11 +137,33 @@ function increasePrices(percentage) {
     acc[price[0]] = round;
     return acc;
   }, {});
-  return Object.assign(prices, save);
+  return Object.assign(prices, result);
+}
+
+// function auxiliar do requisito 13:
+function getAllCoverage() {
+  return employees.reduce((acc, employee) => {
+    const getFullName = `${employee.firstName} ${employee.lastName}`;
+    const animalsSpecie = employee.responsibleFor.map((animalId) => species
+      .find((specie) => specie.id === animalId).name);
+    acc[getFullName] = animalsSpecie;
+    return acc;
+  }, {});
 }
 
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+  if (idOrName === undefined) return getAllCoverage();
+
+  const findEmployee = employees.find((employee) => employee.id === idOrName
+    || employee.firstName === idOrName || employee.lastName === idOrName);
+  const animalName = findEmployee.responsibleFor.map((id) => species
+    .find((specie) => specie.id === id).name);
+
+  return animalName.reduce((acc) => {
+    const getFullName = `${findEmployee.firstName} ${findEmployee.lastName}`;
+    acc[getFullName] = animalName;
+    return acc;
+  }, {});
 }
 
 module.exports = {
