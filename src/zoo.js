@@ -73,6 +73,8 @@ function countAnimals(especie) {
 
 function calculateEntry(entrants) {
   // seu código aqui
+  if (entrants === undefined || Object.keys(entrants).length === 0) return 0;
+  console.log(entrants);
 }
 
 function getAnimalMap(options) {
@@ -89,6 +91,11 @@ function getOldestFromFirstSpecies(id) {
 
 function increasePrices(percentage) {
   // seu código aqui
+  const { prices } = data;
+  prices.Adult = Math.round(100 * (prices.Adult * (1 + (percentage / 100)))) / 100;
+  prices.Child = Math.round(100 * (prices.Child * (1 + (percentage / 100)))) / 100;
+  prices.Senior = Math.round(100 * (prices.Senior * (1 + (percentage / 100)))) / 100;
+  console.log(prices);
 }
 
 function getEmployeeCoverage(idOrName) {
