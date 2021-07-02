@@ -105,13 +105,15 @@ function getAnimalMap(options) {
 
 function getSchedule(dayName) {
   const schedule = {};
-  const getSchedule = (day) => schedule[day] = day === 'Monday' ? 'CLOSED'
-  : `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`;
+  const getFromHours = (day) => {
+    schedule[day] = day === 'Monday' ? 'CLOSED'
+      : `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`;
+  };
 
   if (dayName !== undefined) {
-    getSchedule(dayName);
+    getFromHours(dayName);
   } else {
-    Object.keys(hours).forEach((day) => getSchedule(day));
+    Object.keys(hours).forEach((day) => getFromHours(day));
   }
 
   return schedule;
@@ -119,21 +121,23 @@ function getSchedule(dayName) {
 
 function getOldestFromFirstSpecies(id) {
   const speciesId = employees.find((employee) => employee.id === id)
-  .responsibleFor[0];
+    .responsibleFor[0];
 
   const speciesResidents = species.find((spc) => spc.id === speciesId).residents;
 
-  const oldest = speciesResidents.reduce((older, resident) => resident.age > older.age ? resident : older);
+  const oldest = speciesResidents.reduce((older, resident) =>
+    (resident.age > older.age ? resident : older));
 
   return Object.values(oldest);
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  Object.keys(prices).forEach((key) => {
+    prices[key] = Math.round((prices[key] + ((prices[key] * percentage) / 100)) * 100) / 100;
+  });
 }
 
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
 }
 
 module.exports = {
