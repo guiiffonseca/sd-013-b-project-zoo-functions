@@ -83,10 +83,32 @@ function getAnimalMap(options) {
 
 function getSchedule(dayName) {
   // seu código aqui
+  // const schedule = {};
+  // const { hours } = data;
+  // console.log(Object.keys(hours));
+  // console.log(Object.values(hours));
+  // if (!dayName) {
+  //   return hours;
+  // }
+  // const openHours;
 }
 
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
+  const { employees } = data;
+  const { species } = data;
+  const funcionario = employees.find((employee) => employee.id === id);
+  const animal = funcionario.responsibleFor[0];
+  const caredAnimals = species.find((specie) => specie.id === animal);
+  let oldestAge = -Infinity;
+  let oldestObj = {};
+  caredAnimals.residents.forEach((caredAnimal) => {
+    if (caredAnimal.age > oldestAge) {
+      oldestAge = caredAnimal.age;
+      oldestObj = caredAnimal;
+    }
+  });
+  return Object.values(oldestObj);
 }
 
 function increasePrices(percentage) {
