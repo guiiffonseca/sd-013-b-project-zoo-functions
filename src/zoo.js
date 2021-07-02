@@ -4,8 +4,8 @@ function getSpeciesByIds(id1, id2) {
   return species.filter((especie) => especie.id === id1 || especie.id === id2);
 }
 
-function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
+function getAnimalsOlderThan(animal, minimumAge) {
+  return species.some((especie, index) => especie.name === animal && especie.residents[index -1].age >= minimumAge);
 }
 
 function getEmployeeByName(employeeName) {
