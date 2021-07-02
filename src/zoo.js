@@ -1,4 +1,4 @@
-const { species, employees, prices } = require('./data');
+const { species, employees, prices, hours } = require('./data');
 
 function getSpeciesByIds(...ids) {
   const result = [];
@@ -58,12 +58,56 @@ function calculateEntry({ Adult = 0, Child = 0, Senior = 0 } = {}) {
   return (Adult * prices.Adult) + (Child * prices.Child) + (Senior * prices.Senior);
 }
 
-function getAnimalMap(options) {
-  // seu código aqui
+function filterBySex(aux, sexForFilter) {
+  return aux.filter(({sex}) => sex === sexForFilter);
 }
 
+function animalMap(animals, sex) {
+  species.forEach(({ name, location, residents }) => {
+    let aux = [...residents];
+    if (sex) {
+      aux = filterBySex(aux, sex)
+    }
+    animals[location].push({ [name]: aux.map((animal) => animal.name)});
+  });
+}
+
+function sortAnimals(animals) {
+  return Object.values(animals).forEach((animal) => {
+    animal.forEach((element) => {
+      Object.values(element).map((animalForSort) => {
+        animalForSort.sort();
+      });
+    }) 
+  });
+}
+
+function getAnimalMap({includeNames, sorted, sex} = {}) {
+   const map = {
+    NE: [],
+    NW: [],
+    SE: [],
+    SW: [],
+  }
+
+  if(!includeNames) {
+    species.forEach(({ name, location }) => map[location].push(name));
+    return map;
+  };
+
+  animalMap(map, sex);
+
+  if (sorted) {
+    sortAnimals(map);
+  };
+
+  return map;
+}
+// const options = { includeNames: true, sorted: true };
+// console.log(getAnimalMap(options));
+
 function getSchedule(dayName) {
-  // seu código aqui
+  
 }
 
 function getOldestFromFirstSpecies(id) {
