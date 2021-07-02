@@ -1,4 +1,5 @@
 // Imports
+const { employees } = require('./data');
 const data = require('./data');
 
 // //////////////////// 1ª Função ////////////////////
@@ -129,14 +130,37 @@ function getSchedule(dayName) {
   return hoursTable;
 }
 
-
-
-
-console.log(getSchedule('Monday'));
+// //////////////////// 11ª Função ////////////////////
+function getAnimalId(id) {
+  let animalId;
+  employees.forEach((employee) => {
+    if (id === employee.id) [animalId] = employee.responsibleFor;
+  });
+  return animalId;
+}
 
 function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+  const animalId = getAnimalId(id);
+  let residentsArray;
+  let age = 0;
+  let olderAnimal;
+
+  data.species.forEach((specie) => {
+    if (animalId === specie.id) residentsArray = specie.residents;
+  });
+
+  residentsArray.forEach((v, i) => {
+    if (v.age > age) {
+      age = v.age;
+      olderAnimal = [v.name, v.sex, v.age];
+    }
+  });
+  return olderAnimal;
 }
+
+
+
+getOldestFromFirstSpecies('4b40a139-d4dc-4f09-822d-ec25e819a5ad');
 
 function increasePrices(percentage) {
   // seu código aqui
