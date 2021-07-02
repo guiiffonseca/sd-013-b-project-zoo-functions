@@ -1,4 +1,4 @@
-const { employees } = require('./data');
+const { employees, prices } = require('./data');
 const data = require('./data');
 
 /* 1. Esta função é responsável pela busca das espécies de animais por id.
@@ -78,7 +78,9 @@ function countAnimals(species) {
  função é responsável por retornar o preço total a ser cobrado */
 
 function calculateEntry(entrants) {
-  // seu código aqui
+  if (entrants === undefined || entrants === 0) return 0;
+  const { Adult: adult = 0, Child: child = 0, Senior: senior = 0 } = entrants;
+  return (adult * prices.Adult) + (child * prices.Child) + (senior * prices.Senior);
 }
 
 /* 9. A função é responsável pelo mapeamento geográfico das espécies e seus
