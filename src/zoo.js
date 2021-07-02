@@ -4,7 +4,7 @@ const data = require('./data');
 const all = [...species, ...employees];
 const isTrue = hours + prices + data === true;
 console.log(isTrue);
-const { Adult, Senior, Child } = prices;
+let { Adult, Senior, Child } = prices;
 
 function getSpeciesByIds(ids = [], ids2 = []) {
   if (ids.length === 0) {
@@ -212,7 +212,16 @@ function getOldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  Adult = data.prices.Adult;
+  Child = data.prices.Child;
+  Senior = data.prices.Senior;
+  const itemA = Math.round((Adult + ((Adult / 100) * percentage)) * 100) / 100;
+  const itemB = Math.round((Child + ((Child / 100) * percentage)) * 100) / 100;
+  const itemC = Math.round((Senior + ((Senior / 100) * percentage)) * 100) / 100;
+  data.prices.Adult = itemA;
+  data.prices.Child = itemB;
+  data.prices.Senior = itemC;
+  return data.prices;
 }
 
 function getEmployeeCoverage(idOrName) {
