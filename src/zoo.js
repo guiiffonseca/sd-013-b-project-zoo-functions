@@ -77,61 +77,95 @@ function calculateEntry(entrants = []) {
   return total.reduce((acc, value) => acc + value, 0);
 }
 
-// const getAnimalIncludeOff = () => species.reduce((acc, objc) => {
-//   if (acc[objc.location]) {
-//     acc[objc.location].push(objc.name);
-//   } else {
-//     acc[objc.location] = [objc.name];
-//   }
-//   return acc;
-// }, {});
+const getAnimalIncludeOff = () => species.reduce((acc, objc) => {
+  if (acc[objc.location]) {
+    acc[objc.location].push(objc.name);
+  } else {
+    acc[objc.location] = [objc.name];
+  }
+  return acc;
+}, {});
 
-// const getAnimalIncludeOn = () => species.reduce((acc, objc) => {
-//   if (acc[objc.location]) {
-//     acc[objc.location].push({
-//       [objc.name]: [...objc.residents.map((value) => value.name)]
-//     });
-//   } else {
-//     acc[objc.location] = [{
-//       [objc.name]: [...objc.residents.map((value) => value.name)]
-//     }];
-//   }
-//   return acc;
-// }, {});
+const getAnimalIncludeOn = () => species.reduce((acc, objc) => {
+  if (acc[objc.location]) {
+    acc[objc.location].push({
+      [objc.name]: [...objc.residents.map((value) => value.name)] });
+  } else {
+    acc[objc.location] = [{
+      [objc.name]: [...objc.residents.map((value) => value.name)] }];
+  }
+  return acc;
+}, {});
 
-// const getAnimalSorted = () => species.reduce((acc, objc) => {
-//   if (acc[objc.location]) {
-//     acc[objc.location].push({
-//       [objc.name]: [...objc.residents.map((value) => value.name)].sort()
-//     });
-//   } else {
-//     acc[objc.location] = [{
-//       [objc.name]: [...objc.residents.map((value) => value.name)].sort()
-//     }];
-//   }
-//   return acc;
-// }, {});
+const getAnimalSorted = () => species.reduce((acc, objc) => {
+  if (acc[objc.location]) {
+    acc[objc.location].push({
+      [objc.name]: [...objc.residents.map((value) => value.name)].sort() });
+  } else {
+    acc[objc.location] = [{
+      [objc.name]: [...objc.residents.map((value) => value.name)].sort() }];
+  }
+  return acc;
+}, {});
 
-// const returnSx = (value, sex, accu) => {
-//   if (value.sex === sex.sex) accu.push(value.name);
-//   return accu;
-// };
+const returnSx = (value, sex, accu) => {
+  if (value.sex === sex) accu.push(value.name);
+  return accu;
+};
 
-// const getAnimalSex = (sex) => species.reduce((acc, objc) => {
-//   if (acc[objc.location]) {
-//     acc[objc.location].push([{
-//       [objc.name]: objc.residents.reduce((accu, value) => returnSx(value, sex, accu), [])
-//     }]);
-//   } else {
-//     acc[objc.location] = [{
-//       [objc.name]: objc.residents.reduce((accu, value) => returnSx(value, sex, accu), [])
-//     }];
-//   }
-//   return acc;
-// }, {});
+const returnSxSorted = (value, sex, accu) => {
+  if (value.sex === sex) accu.push(value.name);
+  return accu.sort();
+};
 
-function getAnimalMap(...options) {
+const getAnimalSex = (sex) => species.reduce((acc, objc) => {
+  if (acc[objc.location]) {
+    acc[objc.location].push({
+      [objc.name]: objc.residents.reduce((accu, value) => returnSx(value, sex, accu), []) });
+  } else {
+    acc[objc.location] = [{
+      [objc.name]: objc.residents.reduce((accu, value) => returnSx(value, sex, accu), []) }];
+  }
+  return acc;
+}, {});
 
+const getAnimalSexSorted = (sex) => species.reduce((acc, objc) => {
+  if (acc[objc.location]) {
+    acc[objc.location].push({
+      [objc.name]: objc.residents.reduce((accu, value) => returnSxSorted(value, sex, accu), []) });
+  } else {
+    acc[objc.location] = [{
+      [objc.name]: objc.residents.reduce((accu, value) => returnSxSorted(value, sex, accu), []) }];
+  }
+  return acc;
+}, {});
+
+console.log(getAnimalSexSorted('female').NE);
+
+const validationAnimalSexSorted = (objc) => {
+  const { includeNames = false, sex = false, sorted = false } = objc;
+  if (includeNames === true && sex !== false && sorted === true) return getAnimalSexSorted(sex);
+  return getAnimalIncludeOff();
+};
+
+const validationAnimalSex = (objc) => {
+  const { includeNames = false, sex = false, sorted = false } = objc;
+  if (includeNames === true && sex !== false && sorted === false) return getAnimalSex(sex);
+  return validationAnimalSexSorted(objc);
+};
+
+const validationAnimalSorted = (objc) => {
+  const { includeNames, sex = false, sorted } = objc;
+  if (includeNames === true && sorted === true && sex === false) return getAnimalSorted();
+  return false;
+};
+
+function getAnimalMap(options = {}) {
+  const { includeNames = false, sorted = false, sex = false } = options;
+  const sortedSex = sorted === sex;
+  if (includeNames === true && sortedSex !== false) return getAnimalIncludeOn();
+  if (validationAnimalSorted(options) !== false) return validationAnimalSorted(options);
+  return validationAnimalSex(options);
 }
 
 const transformvalue = (hour) => {
@@ -247,8 +281,6 @@ function getEmployeeCoverage(idOrName) {
       return acc;
     }, {});
 }
-
-getEmployeeCoverage('Stephanie');
 
 module.exports = {
   calculateEntry,
