@@ -20,16 +20,7 @@ function getEmployeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  const { id, firstName, lastName } = personalInfo;
-  const { managers, responsibleFor } = associatedWith;
-  const employee = {
-    id,
-    firstName,
-    lastName,
-    managers,
-    responsibleFor,
-  };
-  return employee;
+  return { ...personalInfo, ...associatedWith };
 }
 
 function isManager(id) {
@@ -42,7 +33,15 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 function countAnimals(countSpecies) {
-  // seu código aqui
+  let allAnimals = { };
+  if(!countSpecies) {
+    species.forEach((specie) => {
+      allAnimals[specie.name] = specie.residents.length;
+    });
+     return allAnimals;
+  }
+  let animals = species.find((specie) => specie.name === countSpecies);
+  return animals.residents.length;
 }
 
 function calculateEntry(entrants) {
