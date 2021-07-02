@@ -90,10 +90,8 @@ function increasePrices(percentage) {
   prices.Senior = Math.ceil(prices.Senior * (100 + percentage)) / 100;
 }
 
-const getName = (...idAnimal) => {
-  return idAnimal.map((id) => species
+const getName = (...idAnimal) => idAnimal.map((id) => species
   .find((specie) => specie.id === id).name);
-}
 
 function getEmployeeCoverage(idOrName) {
   if (!idOrName) { 
@@ -103,15 +101,14 @@ function getEmployeeCoverage(idOrName) {
     }, {});
   }
   {
-    const found = employees.find(({ firstName, lastName, id }) => {
-      return firstName === idOrName || lastName === idOrName || id === idOrName
-    });
+    const found = employees.find(({ firstName, lastName, id }) => 
+    firstName === idOrName || lastName === idOrName || id === idOrName);
     return { 
       [`${found.firstName} ${found.lastName}`]: getName(...found.responsibleFor), 
     };
   }
 }
-console.log(getEmployeeCoverage('Nelson'));
+
 module.exports = {
   calculateEntry,
   getSchedule,
