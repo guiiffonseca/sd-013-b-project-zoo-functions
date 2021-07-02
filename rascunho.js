@@ -1,9 +1,6 @@
-let residents = [
-  { name: 'Zena', sex: 'female', age: 12 },
-  { name: 'Maxwell', sex: 'male', age: 15 },
-  { name: 'Faustino', sex: 'male', age: 7 },
-  { name: 'Dee', sex: 'female', age: 14 },
-];
+let obj = {
+  nome: 'Guilherme',
+  sobrenome: 'Costa',
+};
 
-
-console.log([...residents])
+console.log(Object.entries(obj))

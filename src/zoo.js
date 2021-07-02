@@ -108,11 +108,31 @@ function getAnimalMap(options) {
   return locationObj;
 }
 
-console.log(getAnimalMap({ includeNames: true, sorted: true, sex: 'female' }));
+// //////////////////// 10ª Função ////////////////////
+
+function formatHours(hour) {
+  if (hour === 0) return 0;
+  if (hour > 12) return `${hour % 12}pm`;
+  return `${hour}am`;
+}
 
 function getSchedule(dayName) {
-  // seu código aqui
+  const hoursTable = {};
+  Object.keys(data.hours).forEach((key) => {
+    const openHour = formatHours(data.hours[key].open);
+    const closeHour = formatHours(data.hours[key].close);
+
+    hoursTable[key] = `Open from ${openHour} until ${closeHour}`;
+    if (key === 'Monday') hoursTable[key] = 'CLOSED';
+  });
+  if (dayName) return { [dayName]: hoursTable[dayName] };
+  return hoursTable;
 }
+
+
+
+
+console.log(getSchedule('Monday'));
 
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
