@@ -90,44 +90,41 @@ function countAnimals(animal) {
   const numero = countAnimalComParametro(animal);
   return numero;
 }
-//Adult: 49.99,
-//Senior: 24.99,
-//Child: 20.99,
+// Adult: 49.99,
+// Senior: 24.99,
+// Child: 20.99,
 
-function calculaValor(adult = 0 , senior = 0 , child = 0){
- let soma = (adult * 49.99) + (senior * 24.99)+ (child * 20.99)
- return soma;
+function calculaValor(adult = 0, senior = 0, child = 0) {
+  const soma = (adult * 49.99) + (senior * 24.99) + (child * 20.99);
+  return soma;
 }
 
-function quantidadePessoa(chaves, valores, obj){
+function quantidadePessoa(chaves, valores, obj) {
   let adult = 0;
   let senior = 0;
   let child = 0;
-   adult = obj.Adult;
-   senior = obj.Senior;
-   child = obj.Child;
-  
-   let soma = calculaValor(adult,senior,child);
-   return soma;
+  adult = obj.Adult;
+  senior = obj.Senior;
+  child = obj.Child;
+
+  const soma = calculaValor(adult, senior, child);
+  return soma;
 }
 
 function calculateEntry(entrants) {
-  if(entrants === undefined){
+  if (entrants === undefined) {
     return 0;
   }
   const chaves = Object.keys(entrants);
   const valores = Object.values(entrants);
-  if(chaves[0] === undefined || valores[0] === undefined){
+  if (chaves[0] === undefined || valores[0] === undefined) {
     return 0;
   }
 
-  let Valor = quantidadePessoa(chaves, valores, entrants);
+  const Valor = quantidadePessoa(chaves, valores, entrants);
   return Valor;
-  
 }
 
-let a =calculateEntry({});
-console.log(a);
 function getAnimalMap(options) {
   // seu código aqui
 }
