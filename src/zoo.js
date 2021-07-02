@@ -159,11 +159,9 @@ function getEmployeeCoverage(idOrName) {
   const animalName = findEmployee.responsibleFor.map((id) => species
     .find((specie) => specie.id === id).name);
 
-  return animalName.reduce((acc) => {
-    const getFullName = `${findEmployee.firstName} ${findEmployee.lastName}`;
-    acc[getFullName] = animalName;
-    return acc;
-  }, {});
+  const getFullName = `${findEmployee.firstName} ${findEmployee.lastName}`;
+
+  return { [getFullName]: animalName };
 }
 
 module.exports = {
