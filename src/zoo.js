@@ -51,25 +51,63 @@ function calculateEntry(entrants = 0) {
   }, 0);
 }
 
+// functions auxiliares do requisito 9:
+function getAnimalNameByMap(map) {
+  return species.filter((specie) => specie.location === map)
+    .map((animal) => animal.name);
+}
+
 function getAllAnimalsMap(maps) {
   return maps.reduce((acc, map) => {
-    const animals = species.filter((specie) => specie.location === map)
-      .map((animal) => animal.name);
-    acc[map] = animals;
+    acc[map] = getAnimalNameByMap(map);
     return acc;
   }, {});
 }
 
-function getAnimalMap(options) {
-  const maps = ['NE', 'NW', 'SE', 'SW'];
-  if (options === undefined) return getAllAnimalsMap(maps);
+function getResidentsNameByMap(map) {
+  return species.filter((specie) => specie.location === map)
+    .map((animals) => animals.residents)
+    .map((animal) => animal.map((animalName) => animalName.name));
 }
 
+function getResidentsNameBySex(map, sex) {
+  return species.filter((specie) => specie.location === map)
+    .map((animals) => animals.residents)
+    .map((resident) => resident.filter((animalSex) => animalSex.sex === sex))
+    .map((animal) => animal.map((animalName) => animalName.name));
+}
+
+function createResidentsObject(maps, sorted, sex) {
+  return maps.reduce((acc, map) => {
+    const specieName = getAnimalNameByMap(map);
+    const check = sex !== undefined ? getResidentsNameBySex(map, sex) : getResidentsNameByMap(map);
+    acc[map] = check.reduce((accumulator, name, index) => {
+      if (sorted === true) name.sort();
+      accumulator.push({ [specieName[index]]: name });
+      return accumulator;
+    }, []);
+    return acc;
+  }, {});
+}
+// Fim das functions auxiliares.
+
+function getAnimalMap(options) {
+  const maps = ['NE', 'NW', 'SE', 'SW'];
+  if (options !== undefined) {
+    const { includeNames = false, sex = undefined, sorted } = options;
+    if (includeNames === true) {
+      return createResidentsObject(maps, sorted, sex);
+    }
+  }
+  return getAllAnimalsMap(maps);
+}
+
+// function auxiliar do requisito 10:
 function getAllDaysSchedule() {
   const days = ['Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Monday'];
   return Object.values(hours).reduce((acc, hour, index) => {
-    const timeConvert = Object.values(hour).map((time) => Math.abs(time));
-    acc[days[index]] = `Open from ${timeConvert[0]}am until ${timeConvert[1] - 12}pm`;
+    const getTime = Object.values(hour).map((time) => (time));
+    acc[days[index]] = `Open from ${getTime[0]}am until ${getTime[1] - 12}pm`;
     acc.Monday = 'CLOSED';
     return acc;
   }, {});
