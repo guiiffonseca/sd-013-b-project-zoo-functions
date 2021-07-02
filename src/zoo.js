@@ -94,12 +94,15 @@ function getOldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  const newPrices = Object.entries(data.prices).reduce((accumulator, currentValue, index) =>
+    Object.assign(accumulator,
+      { [currentValue[0]]: Math.round((currentValue[1] + currentValue[1] * (percentage / 100))
+        * 100) / 100 }), {});
+  return Object.assign(data.prices, newPrices);
 }
 
 const getAnimalIdWithResponsibleFor = () => {
-  const responsable = employees.map((employee) => employee.responsibleFor);
-  console.log(responsable);
+  // const responsable = employees.map((employee) => employee.responsibleFor);
   // const hadouken = species.filter((specie, index) => specie.id[index] === responsable);
   // console.log(hadouken);
 };
