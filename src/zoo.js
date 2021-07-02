@@ -38,9 +38,22 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   });
 }
 
-function countAnimals(specie) {
-  // seu código aqui
+function countAll() {
+  const object = {};
+  species.forEach((specie) => {
+    Object.assign(object, {
+      [specie.name]: specie.residents.length,
+    });
+  });
+  return object;
 }
+
+function countAnimals(specieName) {
+  return (!specieName) ? countAll()
+    : species.find((specie) => specie.name === specieName).residents.length;
+}
+
+console.log(countAnimals());
 
 function calculateEntry(entrants) {
   // seu código aqui
