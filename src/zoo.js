@@ -169,14 +169,34 @@ function increasePrices(percentage) {
   Object.keys(data.prices).forEach((key) => {
     data.prices[key] = newPrice(data.prices[key], percentage);
   });
-  console.log(data.prices);
 }
 
-// increasePrices();
 // //////////////////// 13ª Função ////////////////////
-function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+function getSearchTarget(idOrName) {
+  let target;
+  data.employees.forEach(({ id, firstName, lastName }) => {
+    if (idOrName === id) target = `${firstName} ${lastName}`;
+    if (idOrName === firstName) target = `${firstName} ${lastName}`;
+    if (idOrName === lastName) target = `${firstName} ${lastName}`;
+  });
+  return target;
 }
+
+function getEmployeeCoverage(idOrName) {
+  const employeesList = {};
+  const animalsIds = {};
+  const target = getSearchTarget(idOrName);
+
+  data.species.forEach(({ name, id }) => { animalsIds[id] = name; });
+
+  data.employees.forEach(({ firstName, lastName, responsibleFor }) => {
+    employeesList[`${firstName} ${lastName}`] = responsibleFor.map((v) => animalsIds[v]);
+  });
+
+  if (target) return { [target]: employeesList[target] };
+  return employeesList;
+}
+console.log(getEmployeeCoverage('Nigel'));
 
 module.exports = {
   calculateEntry,
