@@ -1,5 +1,10 @@
 const { species } = require('./data');
-const data = require('./data');
+const { prices } = require('./data');
+const { employees } = require('./data');
+const { hours } = require('./data');
+
+// const data = require('./data');
+// Isso é algo que eu coloquei aqui??
 
 function getSpeciesByIds(...ids) {
   if (ids === undefined) {
@@ -14,8 +19,6 @@ function getAnimalsOlderThan(animal, age) {
   const nameAnimal = specieChosen.residents;
   return nameAnimal.every((nameA) => nameA.age > age);
 }
-
-const { employees } = require('./data');
 
 function getEmployeeByName(employeeName) {
   if (employeeName === undefined) {
@@ -61,8 +64,6 @@ function countAnimals(speciees) {
   }, {});
 }
 
-const { prices } = require('./data');
-
 // função para verificar se o obj está vazio.
 // Link - https://www.horadecodar.com.br/2020/10/06/como-verificar-se-objeto-esta-vazio-em-javascript/
 function isEmpty(obj) {
@@ -97,7 +98,22 @@ function getAnimalMap(options) {
 }
 
 function getSchedule(dayName) {
-  // seu código aqui
+  if (dayName === undefined) {
+    const schedules = {};
+    Object.keys(hours).forEach((hour, index) => {
+      if (hours[hour].open === 0) {
+        schedules[hour] = 'CLOSED';
+        return schedules;
+      }
+      schedules[hour] = `Open from ${hours[hour].open}am until ${hours[hour].close - 12}pm`;
+      return schedules;
+    });
+    return schedules;
+  }
+  if (hours[dayName].close === hours[dayName].open) {
+    return { Monday: 'CLOSED' };
+  }
+  return { [dayName]: `Open from ${hours[dayName].open}am until ${hours[dayName].close - 12}pm` };
 }
 
 function getOldestFromFirstSpecies(id) {
