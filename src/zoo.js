@@ -30,7 +30,7 @@ function getEmployeeByName(employeeName) {
   let empregadoEncontrado = {};
   if (employeeName) {
     empregadoEncontrado = empregados.find((empregado) =>
-      empregado.firstName === employeeName || empregado.lastName === employeeName)
+      empregado.firstName === employeeName || empregado.lastName === employeeName);
     return empregadoEncontrado;
   }
   return empregadoEncontrado;
