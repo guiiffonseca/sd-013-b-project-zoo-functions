@@ -1,4 +1,5 @@
-const { species, employees } = require('./data');
+const data = require('./data');
+const { species, employees, prices } = require('./data');
 
 function getSpeciesByIds(...ids) {
   return species.filter((specie) => {
@@ -12,10 +13,10 @@ function getSpeciesByIds(...ids) {
 }
 
 function getAnimalsOlderThan(animal, age) {
-  //So conseguir fazer graças a o code review do amigo Rafael Ne da Turma 13-B
+  // So conseguir fazer graças a o code review do amigo Rafael Ne da Turma 13-B
   // com isso aprendi a a juntar duas HOF para ter um resultado mais direto. Perdi 4hs sem sair do lugar antes de lembrar do code review.
   return species.find((specie) => specie.name === animal).residents.every((res) =>
-  res.age >= age);
+    res.age >= age);
 }
 
 function getEmployeeByName(employeeName) {
@@ -37,11 +38,15 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 function countAnimals(specie) {
-  
+
 }
 
-function calculateEntry(entrants) {
-
+function calculateEntry({ Adult = 0, Child = 0, Senior = 0 } = 0) {
+  // fiz com o codigo code review do Rafael Ne.
+  // fiz mas ainda não entendi direito o porque de colocar valores padrões em cara parametro recebido 
+  // if (!entrants) return {};
+  // const { Adult, Child, Senior } = entrants;
+  return (Adult * prices.Adult) + (Child * prices.Child) + (Senior * prices.Senior);
 }
 
 function getAnimalMap(options) {
