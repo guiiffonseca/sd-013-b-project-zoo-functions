@@ -55,17 +55,14 @@ function isManager(id) {
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
-  if (managers === undefined) {
-    gerentes = [];
-  } else {
-    gerentes = managers;
+  let gerentes;
+  let responsavelPor;
+  if (managers === undefined) { gerentes = [];
+  } else { gerentes = managers;
   }
 
-  if (responsibleFor === undefined) {
-    responsavelPor = [];
-  } else {
-    responsavelPor = responsibleFor;
+  if (responsibleFor === undefined) { responsavelPor = [];
+  } else { responsavelPor = responsibleFor;
   }
 
   const novoEmpregado = {
@@ -75,7 +72,6 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
     managers: gerentes,
     responsibleFor: responsavelPor,
   };
-
   empregados.push(novoEmpregado);
 }
 
