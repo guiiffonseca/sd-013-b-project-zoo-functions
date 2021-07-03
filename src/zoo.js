@@ -1,7 +1,7 @@
-const { species, employees, prices } = require('./data');
+const { species, employees, prices, hours } = require('./data');
 
 const data = require('./data');
-//  Rest the parameter if there is more than one, using a map and find the same id as the 'idd' of map. 
+//  Rest the parameter if there is more than one, using a map and find the same id as the 'idd' of map.
 function getSpeciesByIds(...ids) {
   return ids.map((idd) => species.find((specie) => (specie.id === idd)));
 }
@@ -60,8 +60,29 @@ function getAnimalMap(options) {
   // seu código aqui
 }
 
+const entArray = Object.entries(hours);
+
+const entriesAll = () => entArray.reduce((accumulator, cValue, index) => {
+  if (cValue[0] === 'Monday') {
+    accumulator[entArray[index][0]] = 'CLOSED';
+    return accumulator;
+  }
+  accumulator[entArray[index][0]] = `Open from ${cValue[1].open}am until ${cValue[1].close - 12}pm`;
+  return accumulator;
+}, {});
+
 function getSchedule(dayName) {
-  // seu código aqui
+  if (!dayName) {
+    return entriesAll();
+  }
+  return entArray.find(((day) => day[0] === dayName)).reduce((accumulator, { open, close }) => {
+    if (dayName === 'Monday') {
+      accumulator[dayName] = 'CLOSED';
+      return accumulator;
+    }
+    accumulator[dayName] = `Open from ${open}am until ${close - 12}pm`;
+    return accumulator;
+  }, {});
 }
 
 function getOldestFromFirstSpecies(id) {
