@@ -12,7 +12,10 @@ function getSpeciesByIds(...ids) {
 }
 
 function getAnimalsOlderThan(animal, age) {
-  // species.find((specie) => { return specie.name === animal})
+  //So conseguir fazer graças a o code review do amigo Rafael Ne da Turma 13-B
+  // com isso aprendi a a juntar duas HOF para ter um resultado mais direto. Perdi 4hs sem sair do lugar antes de lembrar do code review.
+  return species.find((specie) => specie.name === animal).residents.every((res) =>
+  res.age >= age);
 }
 
 function getEmployeeByName(employeeName) {
@@ -34,15 +37,15 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 function countAnimals(specie) {
-  // seu código aqui
+  
 }
 
 function calculateEntry(entrants) {
-  // seu código aqui
+
 }
 
 function getAnimalMap(options) {
-  // seu código aqui
+
 }
 
 function getSchedule(dayName) {
