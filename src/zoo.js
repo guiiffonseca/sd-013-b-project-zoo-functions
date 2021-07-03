@@ -69,7 +69,7 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
     firstName: firstName,
     lastName: lastName,
     managers: managers,
-    responsibleFor: responsibleFor, 
+    responsibleFor: responsibleFor,
   };
 
   empregados.push(novoEmpregado);
