@@ -101,8 +101,28 @@ function increasePrices(percentage) {
   // seu código aqui
 }
 
+const findAnimal = (responsibleFor) => responsibleFor.map(
+  (animal) => species.find((anima) => anima.id === animal).name,
+);
+
+const allEmployees = () => employees.reduce(
+  (accumulator, { firstName, lastName, responsibleFor }) => {
+    accumulator[`${firstName} ${lastName}`] = findAnimal(responsibleFor);
+    return accumulator;
+  }, {},
+);
+
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+  if (!idOrName) return allEmployees();
+  const empShow = employees.find(
+    (idEmp) => idEmp.id === idOrName
+    || idEmp.firstName === idOrName
+    || idEmp.lastName === idOrName,
+  );
+  const nameSingle = {
+    [`${empShow.firstName} ${empShow.lastName}`]: findAnimal(empShow.responsibleFor),
+  };
+  return nameSingle;
 }
 
 module.exports = {
