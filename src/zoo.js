@@ -46,16 +46,16 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 
 function countAnimals(animal) {
   // seu código aqui
-  let obj = {};
+  let obj1 = {};
   if (!animal) {
     species.forEach((element7) => {
-      obj[element7.name] = element7.residents.length;
+      obj1[element7.name] = element7.residents.length;
     });
   }
   if (animal) {
-    obj = species.find((element8) => element8.name === animal).residents.length;
+    obj1 = species.find((element8) => element8.name === animal).residents.length;
   }
-  return obj;
+  return obj1;
 }
 
 function calculateEntry(entrants) {
@@ -67,9 +67,59 @@ function calculateEntry(entrants) {
   return price;
 }
 
+function getAnimalRegion() {
+  const obj2 = {};
+  species.forEach((element9) => {
+    if (!obj2[element9.location]) {
+      obj2[element9.location] = [element9.name];
+    } else {
+      obj2[element9.location].push(element9.name);
+    }
+  });
+  return obj2;
+}
+
+const sortAndSex = (aNamesArray, objOptions, unknownParameter) => {
+  if (objOptions.sex) {
+    unknownParameter.residents.filter((animals) => animals.sex === objOptions.sex).forEach(
+      (element) => aNamesArray.push(element.name),
+    );
+  }
+  if (!objOptions.sex) {
+    unknownParameter.residents.forEach((animals1) => aNamesArray.push(animals1.name));
+  }
+  if (objOptions.sorted === true) return aNamesArray.sort();
+  return aNamesArray;
+};
+
+const unamedFunction = (unknownParameter, unamedObj, optionsObj) => {
+  let animalNamesArray = [];
+  const unamedObj2 = unamedObj;
+  animalNamesArray = sortAndSex(animalNamesArray, optionsObj, unknownParameter);
+  if (!unamedObj[unknownParameter.location]) {
+    unamedObj2[unknownParameter.location] = [{ [unknownParameter.name]: animalNamesArray }];
+  } else {
+    unamedObj2[unknownParameter.location].push({ [unknownParameter.name]: animalNamesArray });
+  }
+  return unamedObj2;
+};
+
+function getZooResidents(optionsObj) {
+  let obj3 = {};
+  species.forEach((animalsObject) => {
+    obj3 = unamedFunction(animalsObject, obj3, optionsObj);
+  });
+  return obj3;
+}
+
 function getAnimalMap(options) {
   // seu código aqui
-
+  let obj4;
+  if (options === undefined || !options.includeNames) return getAnimalRegion();
+  if (options.includeNames === true) {
+    obj4 = getZooResidents(options);
+  }
+  return obj4;
 }
 
 function getSchedule(dayName) {
