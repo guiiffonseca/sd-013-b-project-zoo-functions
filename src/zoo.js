@@ -94,10 +94,10 @@ function getSchedule(dayName) {
 
 function getOldestFromFirstSpecies(id) {
   // species.find((specie) => specie.id === employees.find((employee) => employee.id === id ).responsibleFor[0])
-  // employees.find((employee) => employee.id === id ).responsibleFor[0] -> Esta linha de código retorna exatamente o id do animal mais velho sob cuidados do funcionário cujo id foi passado por parâmetro
-  const oldestAnimalId = employees.find((employee) => employee.id === id).responsibleFor[0];
+  // employees.find((employee) => employee.id === id ).responsibleFor[0] -> Esta linha de código retorna exatamente o id da espécie do primeiro animal sob cuidados do funcionário cujo id foi passado por parâmetro
+  const firstAnimalId = employees.find((employee) => employee.id === id).responsibleFor[0];
   let result = {};
-  species.find((specie) => specie.id === oldestAnimalId).residents.reduce((acc, animals) => {
+  species.find((specie) => specie.id === firstAnimalId).residents.reduce((acc, animals) => {
     if (animals.age > acc.age) {
       result = animals;
     }
