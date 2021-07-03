@@ -1,4 +1,4 @@
-const { species, employees, prices } = require('./data');
+const { species, employees, prices, hours } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -122,17 +122,19 @@ function getAnimalMap(options) {
   return obj4;
 }
 
+const getFormatedString = (opening, closing) => `Open from ${opening}am until ${closing - 12}pm`;
+
 function getSchedule(dayName) {
   // seu código aqui
-  const schedule = {
-    Tuesday: 'Open from 8am until 6pm',
-    Wednesday: 'Open from 8am until 6pm',
-    Thursday: 'Open from 10am until 8pm',
-    Friday: 'Open from 10am until 8pm',
-    Saturday: 'Open from 8am until 10pm',
-    Sunday: 'Open from 8am until 8pm',
-    Monday: 'CLOSED',
-  };
+  const schedule = {};
+  const days = Object.keys(hours);
+  for (let index = 0; index < days.length; index += 1) {
+    if (hours[days[index]].open + hours[days[index]].close > 0) {
+      schedule[days[index]] = getFormatedString(hours[days[index]].open, hours[days[index]].close);
+    } else {
+      schedule[days[index]] = 'CLOSED';
+    }
+  }
   if (!dayName) return schedule;
   return { [dayName]: schedule[dayName] };
 }
@@ -161,10 +163,39 @@ function increasePrices(percentage) {
   return pricesChanged;
 }
 
-function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+const getAnimalNameId = (animalIds) => {
+  const animalNamesARR = [];
+  animalIds.forEach((animalID) => {
+    animalNamesARR.push(species.find((animalID2) => animalID2.id === animalID).name);
+  });
+  return animalNamesARR;
+};
+
+const employeesResponsibleFor = () => {
+  const employeesAndAnimalsObj = {};
+  employees.forEach((employeesObj) => {
+    const employeeFullName = `${employeesObj.firstName} ${employeesObj.lastName}`;
+    employeesAndAnimalsObj[employeeFullName] = getAnimalNameId(employeesObj.responsibleFor);
+  });
+  return employeesAndAnimalsObj;
+};
+
+function employeesResponsibleForOBJ(idOrName) {
+  const obj5 = employeesResponsibleFor();
+  const { firstName, lastName } = employees.find((employeesObj) => employeesObj.id === idOrName
+  || employeesObj.lastName === idOrName || employeesObj.firstName === idOrName);
+  const employeeFullName = `${firstName} ${lastName}`;
+  return { [employeeFullName]: obj5[employeeFullName] };
 }
 
+function getEmployeeCoverage(idOrName) {
+  // seu código aqui
+  if (!idOrName) {
+    return employeesResponsibleFor();
+  }
+  return employeesResponsibleForOBJ(idOrName);
+}
+console.log(getEmployeeCoverage());
 module.exports = {
   calculateEntry,
   getSchedule,
