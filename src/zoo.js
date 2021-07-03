@@ -80,8 +80,15 @@ function countAnimals(species) {
 // o forEach vai executar a função em cada elemento name e residents e para cada espécie eu pego o nome e o número de reidentes.
 
 function calculateEntry(entrants) {
-  // seu código aqui
+  if (!entrants || Object.entries(entrants).length === 0) return 0;
+
+  const entries = Object.entries(entrants);
+  return entries.reduce((acc, personType) =>
+    acc + personType[1] * data.prices[personType[0]], 0);
 }
+
+// se não tiver parâmetro ou o objeto for vazio retorna 0.
+// criei uma constante que pega todas as entradas do obejto num array, por exemplo ['adult', '2'], depois faço um reduce pegando esse array. o acumulador soma (com o index[1] desse array que é o numero de pessoas multiplicado pelo preço de cada pessoa no index[0]). o último 0 faz parte da sintaxe do reduce, onde a soma começa com 0.
 
 function getAnimalMap(options) {
   // seu código aqui
