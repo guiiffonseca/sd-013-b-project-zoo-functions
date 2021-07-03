@@ -1,9 +1,11 @@
 const data = require('./data');
 
-function getSpeciesByIds(ids) {
-  // seu código aqui
-  // #VQV!
+const { species } = data;
+
+function getSpeciesByIds(ids = []) {
+  return species.filter((specie) => specie.id === ids);
 }
+console.log(getSpeciesByIds('533bebf3-6bbe-41d8-9cdf-46f7d13b62ae'));
 
 function getAnimalsOlderThan(animal, age) {
   // seu código aqui
@@ -25,7 +27,7 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
 }
 
-function countAnimals(species) {
+function countAnimals(speciesParam) {
   // seu código aqui
 }
 
