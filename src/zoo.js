@@ -7,11 +7,16 @@ function getSpeciesByIds(...ids) {
 }
 
 function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
+  const animalsSearch = species.find(({ name }) => animal.includes(name));
+  const ageSearch = animalsSearch.residents.every((element) => element.age >= age);
+  return ageSearch;
 }
 
+const { employees } = data;
 function getEmployeeByName(employeeName) {
-  // seu código aqui
+  const test = ['lastName', 'firstName'];
+  const seletor = employees.filter((test) => employeeName.includes(test));
+  return seletor;
 }
 
 function createEmployee(personalInfo, associatedWith) {
@@ -19,7 +24,8 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  // seu código aqui
+  const seletor = employees.find((ids) => id.includes(ids));
+  console.log(seletor);
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
