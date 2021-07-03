@@ -1,6 +1,7 @@
 const data = require('./data');
 
 const especies = data.species;
+const empregados = data.employees;
 
 const getSpeciesByIds = (...ids) => {
   // seu código aqui
@@ -21,11 +22,19 @@ function getAnimalsOlderThan(animal, age) {
   return ehVelho;
 }
 // Para testar a função com o debug
-getAnimalsOlderThan('otters', 7);
-getAnimalsOlderThan('penguins', 10);
+// getAnimalsOlderThan('otters', 7);
+// getAnimalsOlderThan('penguins', 10);
 
 function getEmployeeByName(employeeName) {
   // seu código aqui
+  let empregadoEncontrado = {};
+  if (employeeName) {
+    empregadoEncontrado = empregados.find((empregado) => {
+      return empregado.firstName === employeeName || empregado.lastName === employeeName
+    });
+    return empregadoEncontrado;
+  }
+  return empregadoEncontrado;
 }
 
 function createEmployee(personalInfo, associatedWith) {
