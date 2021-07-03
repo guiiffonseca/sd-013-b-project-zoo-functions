@@ -93,7 +93,17 @@ function getSchedule(dayName) {
 }
 
 function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+  // species.find((specie) => specie.id === employees.find((employee) => employee.id === id ).responsibleFor[0])
+  // employees.find((employee) => employee.id === id ).responsibleFor[0] -> Esta linha de código retorna exatamente o id do animal mais velho sob cuidados do funcionário cujo id foi passado por parâmetro
+  const oldestAnimalId = employees.find((employee) => employee.id === id).responsibleFor[0];
+  let result = {};
+  species.find((specie) => specie.id === oldestAnimalId).residents.reduce((acc, animals) => {
+    if (animals.age > acc.age) {
+      result = animals;
+    }
+    return result;
+  }, { age: 0 });
+  return Object.values(result);
 }
 
 function increasePrices(percentage) {
