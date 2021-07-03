@@ -29,6 +29,7 @@ function getEmployeeByName(employeeName) {
 // no if se não passar nenhum parâmetro retorna um objeto vazio.
 // no array employees (array de objetos), procura o objeto com o firstName ou lastName passado no parâmetro.
 // retorna um objeto com as informações do employee passado no parâmetro.
+// { firstName, lastName } -> object destructuring para acessar as propriedades do objeto.
 
 function createEmployee(personalInfo, associatedWith) {
   return { ...personalInfo, ...associatedWith };
@@ -57,8 +58,26 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 // default parameters nas chaves managers e responsibleFor caso não seja passado o parâmetro retorna um array vazio.
 
 function countAnimals(species) {
-  // seu código aqui
+  if (!species === 0) return {};
+
+  if (species) {
+    const findName = data.species.find(({ name }) => name === species);
+    return findName.residents.length;
+  }
+
+  const findAnimal = {};
+
+  data.species.forEach(({ name, residents }) => {
+    findAnimal[name] = residents.length;
+  });
+
+  return findAnimal;
 }
+
+// se não recebe parâmetro retorna um objeto vazio.
+// dado um parâmetro (nome do animal) ele vai procurar através do find se o nome do animal é igual ao passado no parâmetro e retornar o tamanho da chave, que é o número de animais.
+// passo uma constante com um objeto vazio para retornar o resultado do que é pedido depois da função (um objeto com o nome e numero de residentes).
+// o forEach vai executar a função em cada elemento name e residents e para cada espécie eu pego o nome e o número de reidentes.
 
 function calculateEntry(entrants) {
   // seu código aqui
