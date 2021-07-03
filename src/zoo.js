@@ -138,9 +138,9 @@ function getOldestFromFirstSpecies(id) {
   specieFind.residents.forEach((animal) => {
     if (animal.age > oldAnimal.age) oldAnimal = animal;
   });
+  // retorna apenas os valores do objeto Animal:
   return Object.values(oldAnimal);
 }
-console.log(getOldestFromFirstSpecies('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
 
 function increasePrices(percentage) {
   // seu código aqui
