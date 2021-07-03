@@ -37,8 +37,24 @@ function isManager(id) {
   return false;
 }
 
+function emptyArrayTest(arr) {
+  if (arr === undefined) {
+    return [];
+  }
+  return arr;
+}
+
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+  const identificador = id;
+  const primeiroNome = firstName;
+  const ultimoNome = lastName;
+  employees.push({
+    id: identificador,
+    firstName: primeiroNome,
+    lastName: ultimoNome,
+    managers: emptyArrayTest(managers),
+    responsibleFor: emptyArrayTest(responsibleFor),
+  });
 }
 
 function countAnimals(speciess) {
