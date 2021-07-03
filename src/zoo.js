@@ -125,9 +125,170 @@ function calculateEntry(entrants) {
   return Valor;
 }
 
-function getAnimalMap(options) {
-  // seu código aqui
+// 4 arrays  NE NW SE SW
+
+function AdcionaEspecies(obj) {
+  species.forEach((value) => {
+    if (value.location === 'NE') {
+      obj.NE.push(value.name);
+    }
+    if (value.location === 'NW') {
+      obj.NW.push(value.name);
+    }
+    if (value.location === 'SE') {
+      obj.SE.push(value.name);
+    }
+    if (value.location === 'SW') {
+      obj.SW.push(value.name);
+    }
+  });
+  return obj;
 }
+
+function optionSemParametro() {
+  const obj = {
+    NE: [],
+    NW: [],
+    SE: [],
+    SW: [],
+  };
+  const RetornaOBJ = AdcionaEspecies(obj);
+  return RetornaOBJ;
+}
+function animaisNE(obj) {
+  species.forEach((value) => {
+    if (value.location === 'NE') {
+      const objetoAnimais = {};
+      objetoAnimais[value.name] = [];
+      const arrayLion = [];
+      const arrayGiraffes = []; if (value.name === 'lions') {
+        value.residents.forEach((item) => {
+          arrayLion.push(item.name);
+          objetoAnimais.lions = arrayLion;
+        });
+      } if (value.name === 'giraffes') {
+        value.residents.forEach((item) => {
+          arrayGiraffes.push(item.name);
+          objetoAnimais.giraffes = arrayGiraffes;
+        });
+      } obj.NE.push(objetoAnimais);
+    }
+  });
+}
+function montaArrayNW(value, objetoAnimaisNW, arrayTigers, arrayBears, arrayElephants) {
+  const objetoAnimais = objetoAnimaisNW;
+  if (value.name === 'tigers') {
+    value.residents.forEach((item) => {
+      arrayTigers.push(item.name);
+      objetoAnimais.tigers = arrayTigers;
+    });
+  } if (value.name === 'bears') {
+    value.residents.forEach((item) => {
+      arrayBears.push(item.name);
+      objetoAnimais.bears = arrayBears;
+    });
+  } if (value.name === 'elephants') {
+    value.residents.forEach((item) => {
+      arrayElephants.push(item.name);
+      objetoAnimais.elephants = arrayElephants;
+    });
+  }
+}
+
+function animaisNW(obj) {
+  species.forEach((value) => {
+    if (value.location === 'NW') {
+      const objetoAnimais = {};
+      objetoAnimais[value.name] = [];
+      const arrayTigers = [];
+      const arrayBears = [];
+      const arrayElephants = [];
+      montaArrayNW(value, objetoAnimais, arrayTigers, arrayBears, arrayElephants);
+      obj.NW.push(objetoAnimais);
+    }
+  });
+}
+
+function montaArraySE(value, objetoAnimaisSE, arrayPenguins, arrayOtters) {
+  const objetoAnimais = objetoAnimaisSE;
+  if (value.name === 'penguins') {
+    value.residents.forEach((item) => {
+      arrayPenguins.push(item.name);
+      objetoAnimais.penguins = arrayPenguins;
+    });
+  } if (value.name === 'otters') {
+    value.residents.forEach((item) => {
+      arrayOtters.push(item.name);
+      objetoAnimais.otters = arrayOtters;
+    });
+  }
+}
+
+function animaisSE(obj) {
+  species.forEach((value) => {
+    if (value.location === 'SE') {
+      const objetoAnimais = {};
+      objetoAnimais[value.name] = [];
+      const arrayPenguins = [];
+      const arrayOtters = [];
+      montaArraySE(value, objetoAnimais, arrayPenguins, arrayOtters);
+      obj.SE.push(objetoAnimais);
+    }
+  });
+}
+function montaArraySW(value, objetoAnimaisSW, arrayFrogs, arraySnakes) {
+  const objetoAnimais = objetoAnimaisSW;
+  if (value.name === 'frogs') {
+    value.residents.forEach((item) => {
+      arrayFrogs.push(item.name);
+      objetoAnimais.frogs = arrayFrogs;
+    });
+  } if (value.name === 'snakes') {
+    value.residents.forEach((item) => {
+      arraySnakes.push(item.name);
+      objetoAnimais.snakes = arraySnakes;
+    });
+  }
+}
+
+function animaisSW(obj) {
+  species.forEach((value) => {
+    if (value.location === 'SW') {
+      const objetoAnimais = {};
+      objetoAnimais[value.name] = [];
+      const arrayFrogs = [];
+      const arraySnakes = [];
+      montaArraySW(value, objetoAnimais, arrayFrogs, arraySnakes);
+      obj.SW.push(objetoAnimais);
+    }
+  });
+}
+
+function includeNames() {
+  const obj = {
+    NE: [],
+    NW: [],
+    SE: [],
+    SW: [],
+  };
+  animaisNE(obj);
+  animaisNW(obj);
+  animaisSE(obj);
+  animaisSW(obj);
+  console.log(obj);
+}
+
+function getAnimalMap(options) {
+  if (options === undefined) {
+    const obj = optionSemParametro();
+    return obj;
+  }
+
+  if (options.includeNames === true) {
+    return includeNames();
+  }
+}
+getAnimalMap({ includeNames: true });
 
 function getSchedule(dayName) {
   // seu código aqui
