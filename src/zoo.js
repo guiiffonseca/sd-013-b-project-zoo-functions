@@ -145,9 +145,20 @@ function getOldestFromFirstSpecies(id) {
   );
   return [oldestFF[0].name, oldestFF[0].sex, oldestFF[0].age];
 }
-console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
+
 function increasePrices(percentage) {
   // seu código aqui
+  const pricesChanged = prices;
+  const pricesChangedKeys = Object.keys(pricesChanged);
+  for (let index = 0; index < pricesChangedKeys.length; index += 1) {
+    pricesChanged[pricesChangedKeys[index]] += (Math.ceil(
+      pricesChanged[pricesChangedKeys[index]] * percentage,
+    ) / 100);
+    pricesChanged[pricesChangedKeys[index]] = Number(
+      pricesChanged[pricesChangedKeys[index]].toPrecision(4),
+    );
+  }
+  return pricesChanged;
 }
 
 function getEmployeeCoverage(idOrName) {
