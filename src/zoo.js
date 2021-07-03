@@ -25,11 +25,12 @@ function getEmployeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  const person = {};
+  return Object.assign(person, personalInfo, associatedWith);
 }
 
-function isManager(id) {
-  // seu código aqui
+function isManager(idGiven) {
+
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
