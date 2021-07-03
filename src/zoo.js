@@ -5,10 +5,7 @@ function getSpeciesByIds(...ids) {
 }
 
 function getAnimalsOlderThan(animal, age) {
-  const especieAnimal = data.species
-    .filter((especie) => especie.name === animal)
-    .shift();
-
+  const especieAnimal = data.species.find((especie) => especie.name === animal);
   if (!especieAnimal) {
     return false;
   }
@@ -17,9 +14,13 @@ function getAnimalsOlderThan(animal, age) {
 }
 
 function getEmployeeByName(employeeName) {
-  // seu código aqui
+  if (!employeeName) {
+    return {};
+  }
+  return data.employees.find((employee) => employee.firstName === employeeName
+    || employee.lastName === employeeName);
 }
-
+console.log(getEmployeeByName('Emery'));
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
 }
