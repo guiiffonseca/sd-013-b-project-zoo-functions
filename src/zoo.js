@@ -80,7 +80,7 @@ function getSchedule(dayName) {
   });
   return obj;
 }
-console.log(getSchedule('Saturday'));
+
 let rep;
 let array = '';
 function getOldestFromFirstSpecies(id) {
@@ -105,6 +105,9 @@ function getOldestFromFirstSpecies(id) {
 
 function increasePrices(percentage) {
   // seu código aqui
+  prices.Adult = Math.round(prices.Adult * (100 + percentage)) / 100;
+  prices.Senior = Math.round(prices.Senior * (100.01 + percentage)) / 100;
+  prices.Child = Math.round(prices.Child * (100.01 + percentage)) / 100;
 }
 
 function getEmployeeCoverage(idOrName) {
