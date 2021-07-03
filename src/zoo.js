@@ -96,28 +96,42 @@ function getOldestFromFirstSpecies(id) {
 function increasePrices(percentage) {
   const newPrices = Object.entries(data.prices).reduce((accumulator, currentValue, index) =>
     Object.assign(accumulator,
+      // conta para arredondamento do valor com ajuda de Lucas Caribé;
       { [currentValue[0]]: Math.round((currentValue[1] + currentValue[1] * (percentage / 100))
         * 100) / 100 }), {});
   return Object.assign(data.prices, newPrices);
 }
 
-const getAnimalIdWithResponsibleFor = () => {
-  // const responsable = employees.map((employee) => employee.responsibleFor);
-  // const hadouken = species.filter((specie, index) => specie.id[index] === responsable);
-  // console.log(hadouken);
+const responsable = employees.map((employee) => {
+  const idAnimals = employee.responsibleFor.map((resp) => {
+    const animals = species.find((specie) => specie.id === resp);
+    return animals.name;
+  });
+  return idAnimals;
+});
+
+const getEmployeeWithDatas = (idOrName) => {
+  const getEmployee = employees.find((employee) =>
+    employee.id === idOrName || employee.firstName === idOrName
+    || employee.lastName === idOrName);
+  const getAnimalsName = getEmployee.responsibleFor.map((resp) => {
+    const animals = species.find((specie) => specie.id === resp);
+    return animals.name;
+  });
+  return getAnimalsName;
 };
-getAnimalIdWithResponsibleFor();
+
 function getEmployeeCoverage(idOrName) {
   if (idOrName) {
     const getEmployee = employees.find((employee) =>
       employee.id === idOrName || employee.firstName === idOrName
       || employee.lastName === idOrName);
-    return { [`${getEmployee.firstName} ${getEmployee.lastName}`]: getEmployee.responsibleFor };
+    return { [`${getEmployee.firstName} ${getEmployee.lastName}`]: getEmployeeWithDatas(idOrName) };
   }
-  return employees.reduce((acc, value) =>
-    Object.assign(acc, { [`${value.firstName} ${value.lastName}`]: value.responsibleFor }), {});
+  return employees.reduce((acc, value, index) =>
+    Object.assign(acc, { [`${value.firstName} ${value.lastName}`]: responsable[index] }), {});
 }
-// console.log(getEmployeeCoverage());
+
 module.exports = {
   calculateEntry,
   getSchedule,
