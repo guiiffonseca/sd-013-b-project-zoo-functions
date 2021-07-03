@@ -1,4 +1,4 @@
-const { species, employees } = require('./data');
+const { species, employees, prices } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -74,8 +74,15 @@ function countAnimals(animals) {
 }
 
 function calculateEntry(entrants) {
-  // seu código aqui
+  if (!entrants || Object.keys(entrants).length === 0) return 0;
+
+  // Se fizer o console.log(curr), vai ver que a saída é: [ 'Adult', 2 ],[ 'Child', 3 ],[ 'Senior', 1 ]. Logo :
+  return Object.entries(entrants).reduce((acc, [ageGroup, value]) =>
+    acc + prices[ageGroup] * value, 0);
+  // OBS: Se não inicializar com zero, coisas bizarras acontecem.
 }
+// const teste = { 'Adult': 2, 'Child': 3, 'Senior': 1 };
+// console.log(calculateEntry(teste));
 
 function getAnimalMap(options) {
   // seu código aqui
