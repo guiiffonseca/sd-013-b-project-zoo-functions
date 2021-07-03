@@ -58,18 +58,18 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
   if (managers === undefined) {
     managers = [];
-  };
+  }
 
   if (responsibleFor === undefined) {
     responsibleFor = [];
-  };
+  }
 
   const novoEmpregado = {
     id: id,
     firstName: firstName,
     lastName: lastName,
     managers: managers,
-    responsibleFor: responsibleFor
+    responsibleFor: responsibleFor, 
   };
 
   empregados.push(novoEmpregado);
