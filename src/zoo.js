@@ -22,15 +22,21 @@ function createEmployee(personalInfo, associatedWith) {
 
 function isManager(id) {
   return employees.some((employee) => employee.managers.includes(id));
-  // https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/includes//
+  // https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/includes
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   return employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
 
-function countAnimals(speciess) {
-  // seu código aqui
+function countAnimals(animals) {
+  if (!animals) {
+    return species.reduce((accumulator, currentValue) => {
+      accumulator[currentValue.name] = currentValue.residents.length;
+      return accumulator;
+    }, {});
+  }
+  return species.find((specie) => specie.name === animals).residents.length;
 }
 
 function calculateEntry(entrants) {
