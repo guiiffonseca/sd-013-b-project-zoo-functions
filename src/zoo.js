@@ -37,14 +37,14 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   });
 }
 
-function countAnimals(speciespar) {
-  if (!speciespar) {
+function countAnimals(speciesPar) {
+  if (!speciesPar) {
     return species.reduce((accumulator, { name, residents }) => {
       accumulator[name] = residents.length;
       return accumulator;
     }, {});
   }
-  return species.find((specie) => specie.name === speciespar).residents.length;
+  return species.find((specie) => specie.name === speciesPar).residents.length;
 }
 
 const calculateAllPeople = (entrants) => (prices.Adult * entrants.Adult || 0)
@@ -52,7 +52,7 @@ const calculateAllPeople = (entrants) => (prices.Adult * entrants.Adult || 0)
 + (prices.Senior * entrants.Senior || 0);
 
 function calculateEntry(entrants) {
-  if (!entrants || entrants === {}) return 0;
+  if (!entrants) return 0;
   return calculateAllPeople(entrants);
 }
 
@@ -86,7 +86,15 @@ function getSchedule(dayName) {
 }
 
 function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+  const animal = employees.find((idEmp) => idEmp.id === id).responsibleFor[0];
+  return Object.values(species.find(
+    (specie) => specie.id === animal,
+  ).residents.reduce(
+    (accumulator, currentNumber) => {
+      if ((accumulator.age) > currentNumber.age) return accumulator;
+      return currentNumber;
+    },
+  ));
 }
 
 function increasePrices(percentage) {
