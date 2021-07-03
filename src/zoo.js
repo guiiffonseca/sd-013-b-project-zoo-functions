@@ -63,9 +63,46 @@ function calculateEntry(entrants) {
   const filtro = array.filter((atual) => Number.isNaN(atual) !== true);
   return filtro.reduce((acumulator, atual) => acumulator + atual);
 }
+// funçoes pra 9
 
+const neAnimals = species.filter((atual) => atual.location === 'NE');
+const nwAnimals = species.filter((atual) => atual.location === 'NW');
+const seAnimals = species.filter((atual) => atual.location === 'SE');
+const swAnimals = species.filter((atual) => atual.location === 'SW');
+
+function getNames(array) {
+  const arrayNomes = [];
+  array.forEach((atual) => arrayNomes.push(atual.name));
+  return arrayNomes;
+}
+
+const noParameters = () => {
+  const returnObject = {
+    NE: getNames(neAnimals),
+    NW: getNames(nwAnimals),
+    SE: getNames(seAnimals),
+    SW: getNames(swAnimals),
+  };
+  return returnObject;
+};
+
+const includeNames = () => {
+  const resposta = {
+    NE: neAnimals.forEach((crr) => { (getNames(crr.residents)); }),
+    NW: [],
+    SE: [],
+    SW: [],
+  };
+  return resposta;
+};
 function getAnimalMap(options) {
-  // seu código aqui
+  if (options === undefined) {
+    return noParameters();
+  }
+
+  if (options === 'includeNames: true') {
+    includeNames();
+  }
 }
 
 function getSchedule(dayName) {
