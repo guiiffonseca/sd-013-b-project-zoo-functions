@@ -29,9 +29,9 @@ function getEmployeeByName(employeeName) {
   // seu código aqui
   let empregadoEncontrado = {};
   if (employeeName) {
-    empregadoEncontrado = empregados.find((empregado) => {
-      return empregado.firstName === employeeName || empregado.lastName === employeeName
-    });
+    empregadoEncontrado = empregados.find((empregado) => 
+      empregado.firstName === employeeName || empregado.lastName === employeeName
+    );
     return empregadoEncontrado;
   }
   return empregadoEncontrado;
