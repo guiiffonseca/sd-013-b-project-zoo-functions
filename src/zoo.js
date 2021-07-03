@@ -47,19 +47,12 @@ function createEmployee(personalInfo, associatedWith) {
 function isManager(id) {
   // seu código aqui
   const stephanieId = '9e7d4524-363c-416a-8759-8aa7e50c0992'; // presidente
-  
+
   const gerente = empregados
     .some((empregado) => empregado.id === id && empregado.managers
       .some((manager) => manager === stephanieId));
   return gerente;
 }
-
-isManager('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'); // false
-isManager('0e7b460e-acf4-4e17-bcb3-ee472265db83'); // true
-
-
-
-
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
