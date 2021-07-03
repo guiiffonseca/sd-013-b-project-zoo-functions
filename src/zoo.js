@@ -1,24 +1,59 @@
 const data = require('./data');
 
-function getSpeciesByIds(ids) {
-  // seu código aqui
+function getSpeciesByIds(...ids) {
+  if (ids === undefined) {
+    return [];
+  }
+  const arraySepecie = data.species.filter((specie) => ids === specie.id);
+
+  return arraySepecie;
 }
+//console.log(getSpeciesByIds());
+/*function getSpeciesByIds(...ids) {
+  if ( ids === 'undefined' || ids === '') {
+    return [];
+  }
+  return data.species.filter((specie) => ids = specie.id);
+}
+
+
+console.log(getSpeciesByIds());*/
 
 function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
+  const nomes = data.species.find((speci) => {
+    return speci.name === animal;
+  });
+  return nomes.residents.every((nome) => nome.age >= age);
 }
+//console.log(getAnimalsOlderThan('penguins', 10))
 
 function getEmployeeByName(employeeName) {
-  // seu código aqui
+  nameEmploy = {};
+  if (employeeName === undefined) {
+    return {};
+  }
+  const empregados = data.employees.find((employ) => {
+    if (employeeName === employ.firstName) {
+      return (nameEmploy = employ.id);
+    } else if (employeeName === employ.lastName) {
+      return (nameEmploy = employ.id);
+    }
+  });
+  return empregados;
 }
+//console.log(getEmployeeByName('Emery'))
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  return { ...personalInfo, ...associatedWith };
 }
 
+//referencia para resolver o exercicio em https://www.w3schools.com/jsref/jsref_includes_array.asp
 function isManager(id) {
-  // seu código aqui
+  return data.employees.some((emplo) => {
+    return emplo.managers.includes(id);
+  });
 }
+console.log(isManager('0e7b460e-acf4-4e17-bcb3-ee472265db83'));
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
