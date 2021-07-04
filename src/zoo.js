@@ -4,7 +4,7 @@ function getSpeciesByIds(...ids) {
   // seu código aqui
   const search = especies
     .filter((especie) => especie.id === ids
-    .find((value) => especie.id === value));
+      .find((value) => especie.id === value));
   return search;
 }
 
