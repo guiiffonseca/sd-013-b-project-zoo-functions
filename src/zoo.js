@@ -65,6 +65,12 @@ function addEmployee(
 
 function countAnimals(species) {
   // seu código aqui
+  const obj = {};
+  for (let i = 0; i < data.species.length; i += 1) {
+    const anim = data.species[i].name;
+    obj[anim] = data.species[i].residents.length;
+  }
+  return !species ? obj : obj[species];
 }
 
 function calculateEntry(entrants) {
