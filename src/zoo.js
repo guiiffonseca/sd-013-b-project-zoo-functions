@@ -77,8 +77,8 @@ function addEmployeeResponsibleFor(responsibleFor) {
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  let gerentes = addEmployeeManagers(managers);
-  let responsavelPor = addEmployeeResponsibleFor(responsibleFor);  
+  const gerentes = addEmployeeManagers(managers);
+  const responsavelPor = addEmployeeResponsibleFor(responsibleFor);
 
   const novoEmpregado = {
     id: `${id}`,
