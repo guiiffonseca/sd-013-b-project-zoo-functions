@@ -12,10 +12,14 @@ function getAnimalsOlderThan(animal, age) {
   return ageSearch;
 }
 
-const { employees } = data;
 function getEmployeeByName(employeeName) {
-  const test = ['lastName', 'firstName'];
-  const seletor = employees.filter((test) => employeeName.includes(test));
+  if (!employeeName) {
+    return {};
+  }
+  const seletor = data.employees.find(
+    (element) => element.firstName === employeeName || element.lastName === employeeName);
+  // .filter(() => data.employees.incluasdasddes(employeeName));
+  console.log(seletor);
   return seletor;
 }
 
@@ -24,8 +28,10 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  const seletor = employees.find((ids) => id.includes(ids));
-  console.log(seletor);
+  const seletor = employees.find((element) => element.id.includes(id));
+  const tester = seletor.managers.some((element) => element.value === '');
+  console.log(tester);
+  return tester;
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
