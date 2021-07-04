@@ -27,9 +27,13 @@ function isManager(id) {
   // seu código aqui
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
-}
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor =[]) {
+  return data.employees.push({id, firstName, lastName, managers, responsibleFor});
+  /*data.employees.firstName.push(firstName);
+  data.employees.lastName.push(lastName);
+  data.employees.managers.push(managers);
+  data.employees.responsibleFor.push(responsibleFor);*/
+  }
 
 function countAnimals(species) {
   // seu código aqui
