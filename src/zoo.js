@@ -75,6 +75,20 @@ function countAnimals(species) {
 
 function calculateEntry(entrants) {
   // seu código aqui
+  const obj = {
+    Adult: 0,
+    Child: 0,
+    Senior: 0,
+    prices: data.prices,
+  };
+  if (entrants) Object.assign(obj, entrants);
+
+  // prettier-ignore
+  return (
+    obj.prices.Adult * obj.Adult
+    + obj.prices.Child * obj.Child
+    + obj.prices.Senior * obj.Senior
+  );
 }
 
 function getAnimalMap(options) {
