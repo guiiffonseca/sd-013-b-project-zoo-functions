@@ -84,11 +84,11 @@ function getOldestFromFirstSpecies(Id) {
 
 // https://stackoverflow.com/questions/6134039/format-number-to-always-show-2-decimal-places
 function increasePrices(percentage) {
-//   prices.Adult = parseFloat((Math.ceil(prices.Adult * (100 + percentage)) / 100).toFixed(2));
-//   prices.Senior = parseFloat((Math.ceil(prices.Senior * (100 + percentage)) / 100).toFixed(2));
-//   prices.Child = parseFloat((Math.ceil(prices.Child * (100 + percentage)) / 100).toFixed(2));
-//   return prices;
-// }
+  prices.Adult = parseFloat((Math.ceil(prices.Adult * (100 + percentage)) / 100).toFixed(2));
+  prices.Senior = parseFloat((Math.ceil(prices.Senior * (100 + percentage)) / 100).toFixed(2));
+  prices.Child = parseFloat((Math.ceil(prices.Child * (100 + percentage)) / 100).toFixed(2));
+  return prices;
+}
 
 function getEmployeeCoverage(idOrName) {
   // const getEmployee = getEmployeeByName(idOrName) === {} ?   
