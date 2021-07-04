@@ -12,7 +12,7 @@ function getAnimalsOlderThan(animal, age) {
 }
 
 function getEmployeeByName(employeeName) {
-  if (employeeName !== '') {
+  if (employeeName !== undefined) {
     return data.employees.find((element) =>
       element.firstName === employeeName || element.lastName === employeeName);
   }
@@ -28,7 +28,8 @@ function isManager(id) {
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+  
+  
 }
 
 function countAnimals(species) {
