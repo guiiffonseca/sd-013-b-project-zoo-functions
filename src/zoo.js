@@ -58,14 +58,15 @@ function isManager(id) {
 
 /** FUNÇÃO AUXILIAR */
 function addEmployeeAux(managers, responsibleFor) {
-  if (managers === undefined) { 
+  if (managers === undefined) {
     gerentes = [];
-  } else { gerentes = managers;
+  } else {
+    gerentes = managers;
   }
-  
-  if (responsibleFor === undefined) { 
+
+  if (responsibleFor === undefined) {
     responsavelPor = [];
-  } else { 
+  } else {
     responsavelPor = responsibleFor;
   }
   return gerentes, responsavelPor;
@@ -73,11 +74,14 @@ function addEmployeeAux(managers, responsibleFor) {
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   addEmployeeAux(managers, responsibleFor);
+  let identificacao = id;
+  let nome = firstName;
+  let sobrenome = lastName;
 
   const novoEmpregado = {
-    id: id,
-    firstName: firstName,
-    lastName: lastName,
+    id: identificacao,
+    firstName: nome,
+    lastName: sobrenome,
     managers: gerentes,
     responsibleFor: responsavelPor,
   };
