@@ -57,10 +57,28 @@ function calculateEntry(entrants) {
   return total;
 }
 
-function getAnimalMap(options) {
-  // seu código aqui
-}
 
+
+function getAnimalMap(options) {
+  const newObject = {
+    NE: [],
+    NW: [],
+    SE: [],
+    SW: [],
+  };
+  if (!options) {
+    data.species.forEach((specie) => {
+      newObject[specie.location].push(specie.name);
+    });
+    return newObject;
+  }
+  data.species.forEach((specie) => {
+    const object = {};
+    object[specie.name] = specie.residents.map((value) => value.name);
+    newObject[specie.location].push(object);
+  });
+  return newObject;
+}
 function getSchedule(dayName) {
   // seu código aqui
 }
