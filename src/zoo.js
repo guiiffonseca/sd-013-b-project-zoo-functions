@@ -2,8 +2,6 @@ const data = require('./data');
 
 const especies = data.species;
 const empregados = data.employees;
-let gerentes;
-let responsavelPor;
 
 const getSpeciesByIds = (...ids) => {
   // seu código aqui
@@ -56,32 +54,36 @@ function isManager(id) {
   return gerente;
 }
 
-/** FUNÇÃO AUXILIAR */
-function addEmployeeAux(managers, responsibleFor) {
+/** Função auxiliar para adicionar o(s) gerente(s) */
+function addEmployeeManagers(managers) {
+  let gerentes;
   if (managers === undefined) {
     gerentes = [];
   } else {
     gerentes = managers;
   }
+  return gerentes;
+}
 
+/** Função auxiliar para adicionar por quem o empregado é responsável */
+function addEmployeeResponsibleFor(responsibleFor) {
+  let responsavelPor;
   if (responsibleFor === undefined) {
     responsavelPor = [];
   } else {
     responsavelPor = responsibleFor;
   }
-  return gerentes, responsavelPor;
+  return responsavelPor;
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  addEmployeeAux(managers, responsibleFor);
-  let identificacao = id;
-  let nome = firstName;
-  let sobrenome = lastName;
+  let gerentes = addEmployeeManagers(managers);
+  let responsavelPor = addEmployeeResponsibleFor(responsibleFor);  
 
   const novoEmpregado = {
-    id: identificacao,
-    firstName: nome,
-    lastName: sobrenome,
+    id: `${id}`,
+    firstName: `${firstName}`,
+    lastName: `${lastName}`,
     managers: gerentes,
     responsibleFor: responsavelPor,
   };
