@@ -1,12 +1,12 @@
-const { data, species, employees, prices } = require('./data');
+const { data, especies } = require('./data');
 
 function getSpeciesByIds(...ids) {
   // seu código aqui
-  const search = species
-  .filter((specie) => specie.id === ids
-  .find((value) => specie.id === value));
+  const search = especies
+    .filter((especie) => especie.id === ids
+    .find((value) => especie.id === value));
   return search;
-};
+}
 
 function getAnimalsOlderThan(animal, age) {
   // seu código aqui
