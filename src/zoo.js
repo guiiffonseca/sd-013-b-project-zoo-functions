@@ -15,7 +15,9 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  // seu código aqui
+  const personel = data.employees;
+  return personel.some((value, index, set) => value.managers
+    .find((managerId) => managerId === id));
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
