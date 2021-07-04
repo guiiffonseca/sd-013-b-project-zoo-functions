@@ -22,6 +22,11 @@ function getAnimalsOlderThan(animal, age) {
 
 function getEmployeeByName(employeeName) {
   // seu código aqui
+  // prettier-ignore
+  const index = data.employees.findIndex(
+    (x) => x.firstName === employeeName || x.lastName === employeeName,
+  );
+  return index === -1 ? {} : data.employees[index];
 }
 
 function createEmployee(personalInfo, associatedWith) {
