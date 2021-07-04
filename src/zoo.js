@@ -49,8 +49,18 @@ function isManager(id) {
   return index !== -1;
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+// prettier-ignore
+function addEmployee(
+  id,
+  firstName,
+  lastName,
+  managers = [],
+  responsibleFor = [],
+) {
   // seu código aqui
+  const newEmp = { id, firstName, lastName, managers, responsibleFor };
+  console.log(newEmp);
+  data.employees.push(newEmp);
 }
 
 function countAnimals(species) {
