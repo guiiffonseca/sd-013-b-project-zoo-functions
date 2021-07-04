@@ -5,10 +5,10 @@ const { species, employees, hours, prices } = data;
 // 1
 function getSpeciesByIds(...ids) {
   // seu código aqui
-  // species.filter((specie) => specie === ids.some((id) => specie.id === id))
+  const searchResult = [];
+  ids.forEach((id) => searchResult.push(species.find((specie) => specie.id === id)));
+  return searchResult;
 }
-
-// console.log(getSpeciesByIds('0938aa23-f153-4937-9f88-4858b24d6bce'));
 
 // 2
 function getAnimalsOlderThan(animal, age) {
@@ -132,13 +132,21 @@ function increasePrices(percentage) {
 }
 
 // 13
-function getEmployeeCoverage(idOrName) {
+function getEmployeeCoverage(idOrName = '') {
   // seu código aqui
-  // const employee =
-  // if (idOrName) {
-  //   employees.find((employee) => (employee.id === idOrName));
+  // if (idOrName === '') {
+  //   const fin = employees
+  //   .reduce((acc, emp) => acc[`${emp.firstName} ${emp.lastName}`] = emp.responsibleFor, {});
+  //   return fin;
   // }
+  // const employee = employees
+  //   .find((p) => (p.firstName === idOrName || p.lastName === idOrName || p.id === idOrName));
+  // const finalArray = {};
+  // finalArray[`${employee.firstName} ${employee.lastName}`] = employee.responsibleFor;
+  // return finalArray;
 }
+
+console.log(getEmployeeCoverage());
 
 module.exports = {
   calculateEntry,
