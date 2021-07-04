@@ -1,5 +1,85 @@
 const data = require('./data');
 
+// ====================
+// = HELPER FUNCTIONS
+// ====================
+function getMapBySpecies() {
+  const neSpecies = data.species
+    .filter((x) => x.location === 'NE')
+    .map((x) => x.name);
+
+  const nwSpecies = data.species
+    .filter((x) => x.location === 'NW')
+    .map((x) => x.name);
+
+  const seSpecies = data.species
+    .filter((x) => x.location === 'SE')
+    .map((x) => x.name);
+
+  const swSpecies = data.species
+    .filter((x) => x.location === 'SW')
+    .map((x) => x.name);
+
+  return { NE: neSpecies, NW: nwSpecies, SE: seSpecies, SW: swSpecies };
+}
+
+function getLocationsArrays(location, ...sex) {
+  const speciesObj = getMapBySpecies();
+  const result = speciesObj[location].map((x) => {
+    const index = data.species.findIndex((y) => y.name === x);
+    let resArr = data.species[index].residents;
+    resArr = sex.length > 0 ? resArr.filter((w) => w.sex === sex[0]) : resArr;
+    const named = resArr.map((z) => z.name);
+    return {
+      [x]: named,
+    };
+  });
+  return result;
+}
+
+function getMapIncludeNames(...sex) {
+  let obj = {};
+  if (sex.length > 0) {
+    obj = {
+      NE: getLocationsArrays('NE', sex[0]),
+      NW: getLocationsArrays('NW', sex[0]),
+      SE: getLocationsArrays('SE', sex[0]),
+      SW: getLocationsArrays('SW', sex[0]),
+    };
+  } else {
+    obj = {
+      NE: getLocationsArrays('NE'),
+      NW: getLocationsArrays('NW'),
+      SE: getLocationsArrays('SE'),
+      SW: getLocationsArrays('SW'),
+    };
+  }
+
+  return obj;
+}
+
+function sortAnimalNames(obj) {
+  const loc = Object.keys(obj);
+  for (let i = 0; i < loc.length; i += 1) {
+    for (let j = 0; j < obj[loc[i]].length; j += 1) {
+      const [animal] = Object.keys(obj[loc[i]][j]);
+      obj[loc[i]][j][animal].sort();
+    }
+  }
+}
+
+function getAnimalMapAtom(options) {
+  const object = !options.sex
+    ? getMapIncludeNames()
+    : getMapIncludeNames(options.sex);
+
+  return object;
+}
+
+// ====================
+// ====================
+// ====================
+
 function getSpeciesByIds(...ids) {
   // seu código aqui
   const arr = [];
@@ -93,6 +173,15 @@ function calculateEntry(entrants) {
 
 function getAnimalMap(options) {
   // seu código aqui
+  let obj;
+
+  if (!options || !options.includeNames) obj = getMapBySpecies();
+  else if (options.includeNames === true) {
+    obj = getAnimalMapAtom(options);
+    if (options.sorted === true) sortAnimalNames(obj);
+  }
+
+  return obj;
 }
 
 function getSchedule(dayName) {
