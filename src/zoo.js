@@ -10,10 +10,13 @@ function getAnimalsOlderThan(animal, age) {
   const relAnimal = data.species.find((animalName) => animalName.name === animal);
   return relAnimal.residents.every((element) => element.age > age);
 }
-getAnimalsOlderThan('otters', 7);
+
 
 function getEmployeeByName(employeeName) {
-  // seu código aqui
+  if (employeeName != ""){
+    return data.employees.find((element) => (element.firstName === employeeName) || element.lastName === employeeName);
+  }
+  return {}; 
 }
 
 function createEmployee(personalInfo, associatedWith) {
