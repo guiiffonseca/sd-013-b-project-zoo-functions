@@ -91,7 +91,7 @@ function increasePrices(percentage) {
 }
 
 function getEmployeeCoverage(idOrName) {
-  // const getEmployee = getEmployeeByName(idOrName) === {} ?   
+//
 }
 
 module.exports = {
