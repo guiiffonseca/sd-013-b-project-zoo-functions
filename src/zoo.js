@@ -16,7 +16,7 @@ function createEmployee(personalInfo, associatedWith) {
 
 function isManager(id) {
   const personel = data.employees;
-  return personel.some((value, index, set) => value.managers
+  return personel.some((value) => value.managers
     .find((managerId) => managerId === id));
 }
 
@@ -53,7 +53,14 @@ function getOldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  let { Adult, Senior, Child } = data.prices;
+  Adult = Math.ceil(Adult * (100 + percentage)) / 100;
+  Senior = Math.ceil(Senior * (100 + percentage)) / 100;
+  Child = Math.ceil(Child * (100 + percentage)) / 100;
+  data.prices.Adult = Adult;
+  data.prices.Senior = Senior;
+  data.prices.Child = Child;
+  return data.prices;
 }
 
 function getEmployeeCoverage(idOrName) {
