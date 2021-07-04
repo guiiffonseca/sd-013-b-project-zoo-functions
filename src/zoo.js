@@ -38,6 +38,15 @@ function createEmployee(personalInfo, associatedWith) {
 
 function isManager(id) {
   // seu código aqui
+  const arr = [];
+  for (let i = 0; i < data.employees.length; i += 1) {
+    for (let j = 0; j < data.employees[i].managers.length; j += 1) {
+      arr.push(data.employees[i].managers[j]);
+    }
+  }
+  const set = new Set(arr);
+  const index = [...set].findIndex((x) => x === id);
+  return index !== -1;
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
