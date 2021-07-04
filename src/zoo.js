@@ -29,16 +29,34 @@ function createEmployee(personalInfo, associatedWith) {
   return Object.assign(person, personalInfo, associatedWith);
 }
 
+// Checa se o manager que foi chamado tem o id que foi passado
+function checkIfManager(managersId, id) {
+  return managersId.some((managerId) => managerId === id);
+}
+
 function isManager(idGiven) {
-
+  return employees.some(({ managers }) => checkIfManager(managers, idGiven));
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  return employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
+
+// function chackAnimal(animalsName, name) {
+//   return animalsName.some((animalName) => animalName === name);
+// }
 
 function countAnimals(speciesGiven) {
-  // seu código aqui
+  if (speciesGiven) {
+    const animalNumbers = species.find((specie) => specie.name === speciesGiven).residents.length;
+    return animalNumbers;
+  }
+
+  const animalsObject = {};
+  species.forEach(({ name, residents }) => {
+    animalsObject[name] = residents.length;
+  });
+  return animalsObject;
 }
 
 function calculateEntry(entrants) {
