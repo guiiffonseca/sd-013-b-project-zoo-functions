@@ -17,16 +17,17 @@ function getEmployeeByName(employeeName) {
     return {};
   }
   const seletor = data.employees.find(
-    (element) => element.firstName === employeeName || element.lastName === employeeName);
-  // .filter(() => data.employees.incluasdasddes(employeeName));
-  console.log(seletor);
+    (element) => element.firstName === employeeName || element.lastName === employeeName,
+  );
   return seletor;
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  const newObj = { ...personalInfo, ...associatedWith };
+  return newObj;
 }
 
+const { employees } = data;
 function isManager(id) {
   const seletor = employees.find((element) => element.id.includes(id));
   const tester = seletor.managers.some((element) => element.value === '');
