@@ -2,10 +2,8 @@ const data = require('./data');
 
 function getSpeciesByIds(...ids) {
   const arrayOfSpecies = [];
-  ids.forEach((element) => {
-    arrayOfSpecies.push(data.species.find((specie)=>specie.id === element));
+  ids.forEach((element) => arrayOfSpecies.push(data.species.find((specie)=>specie.id === element)))
       return arrayOfSpecies;
-  });
   console.log(arrayOfSpecies);
 } ;
 
