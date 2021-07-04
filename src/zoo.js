@@ -1,11 +1,8 @@
 const data = require('./data');
 
-function getSpeciesByIds(ids) {
-  // seu código aqui
-}
-
 function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
+  const species = data.species.find((critter) => critter.name === animal);
+  return !species.residents.find((resident) => resident.age < age);
 }
 
 function getEmployeeByName(employeeName) {
@@ -29,7 +26,9 @@ function countAnimals(species) {
 }
 
 function calculateEntry(entrants) {
-  if (!entrants) { return 0; }
+  if (!entrants) {
+    return 0;
+  }
   const { Adult = 0, Senior = 0, Child = 0 } = entrants;
   let totalEntry = 0;
   totalEntry += Adult * data.prices.Adult;
@@ -63,7 +62,7 @@ module.exports = {
   getSchedule,
   countAnimals,
   getAnimalMap,
-  getSpeciesByIds,
+  // getSpeciesByIds,
   getEmployeeByName,
   getEmployeeCoverage,
   addEmployee,
