@@ -1,4 +1,4 @@
-const { employees } = require('./data');
+const { employees, hours } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -58,11 +58,31 @@ function calculateEntry({ Adult = 0, Child = 0, Senior = 0 } = {}) {
 }
 
 function getAnimalMap(options) {
-  // seu código aqui
+  // const animalLocations = { NE: [], NW: [], SE: [], SW: [] };
+  // if (!options) {
+  //   for (let [key, value] of Object.entries(animalLocations)) {
+  //     data.species.forEach((specimen) => {
+  //       if (specimen.location === key) {
+  //         value.push(specimen);
+  //       };
+  //     });
+  //   }
+  // }
+
 }
 
-function getSchedule(dayName) {
-  // seu código aqui
+function getSchedule(dayName = '') {
+  const formatHour = (hr) => (hr % 12) || 12;
+  const ans = {};
+  Object.keys(hours).forEach((day) => {
+    ans[day] = `Open from ${formatHour(hours[day].open)}am until ${formatHour(hours[day].close)}pm`;
+    if (day === 'Monday') ans[day] = 'CLOSED';
+  });
+
+  if (dayName) {
+    return { [dayName]: ans[dayName] };
+  }
+  return ans;
 }
 
 function getOldestFromFirstSpecies(id) {
