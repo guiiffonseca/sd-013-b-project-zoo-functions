@@ -98,7 +98,15 @@ function getOldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  prices.Adult = Math.ceil(
+    ((prices.Adult * (percentage / 100)) + prices.Adult) * 100,
+  ) / 100;
+  prices.Child = Math.ceil(
+    ((prices.Child * (percentage / 100)) + prices.Child) * 100,
+  ) / 100;
+  prices.Senior = Math.ceil(
+    ((prices.Senior * (percentage / 100)) + prices.Senior) * 100,
+  ) / 100;
 }
 
 const findAnimal = (responsibleFor) => responsibleFor.map(
