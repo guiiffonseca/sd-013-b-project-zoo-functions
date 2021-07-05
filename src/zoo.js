@@ -15,6 +15,14 @@ function getAnimal(idNumber) {
   return data.species[index];
 }
 
+function openTime(open) {
+  return open < 12 ? `${open}am` : `${open - 12}pm`;
+}
+
+function closeTime(close) {
+  return close < 12 ? `${close}am` : `${close - 12}pm`;
+}
+
 function getSpeciesByIds(...ids) {
   return ids.map(getAnimal);
 }
@@ -84,7 +92,23 @@ function getAnimalMap(options) {
 }
 
 function getSchedule(dayName) {
-  // seu código aqui
+  const { Tuesday, Wednesday, Thursday,
+    Friday, Saturday, Sunday } = data.hours;
+  const completeSchedule = {
+    Tuesday: `Open from ${openTime(Tuesday.open)} until ${closeTime(Tuesday.close)}`,
+    Wednesday: `Open from ${openTime(Wednesday.open)} until ${closeTime(Wednesday.close)}`,
+    Thursday: `Open from ${openTime(Thursday.open)} until ${closeTime(Thursday.close)}`,
+    Friday: `Open from ${openTime(Friday.open)} until ${closeTime(Friday.close)}`,
+    Saturday: `Open from ${openTime(Saturday.open)} until ${closeTime(Saturday.close)}`,
+    Sunday: `Open from ${openTime(Sunday.open)} until ${closeTime(Sunday.close)}`,
+    Monday: 'CLOSED',
+  };
+  if (!dayName) {
+    return completeSchedule;
+  }
+  const schedule = {};
+  schedule[dayName] = completeSchedule[dayName];
+  return schedule;
 }
 
 function getOldestFromFirstSpecies(id) {
