@@ -60,12 +60,12 @@ function countAnimals(speciesPar) {
   // seu código aqui
   // species.forEach((specie) => { animals[specie.name] = specie.residents.// length; });
   // if (!speciesPar)
-  if (!speciesPar) {
+  /*if (!speciesPar) {
     return species.reduce((acc, { name, residents }) => {
       acc[name] = residents.length
 
     }, {})
-  }
+  }*/
 }
 
 function calculateEntry(entrants) {
@@ -86,10 +86,8 @@ function getOldestFromFirstSpecies(id) {
 
 function increasePrices(percentage) {
   // seu código aqui
-  const { Adult, Senior, Child } = prices;
-  console.log(Adult);
-
-
+  // const { Adult, Senior, Child } = prices;
+  // console.log(Adult);
 }
 
 function getEmployeeCoverage(idOrName) {
