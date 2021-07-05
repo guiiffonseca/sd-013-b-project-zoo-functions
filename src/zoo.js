@@ -46,10 +46,21 @@ function countAnimals(species) {
 
   return countedSpecies;
 }
-console.log(countAnimals('lions'));
 
 function calculateEntry(entrants) {
-  // seu código aqui
+  if (!entrants) return 0;
+  if (Object.keys(entrants).length === 0) return 0;
+
+  const persons = Object.entries(entrants);
+  const prices = Object.entries(data.prices);
+  let count = 0;
+
+  persons.forEach((person) => {
+    prices.forEach((price) => {
+      if (price[0] === person[0]) count += person[1] * price[1];
+    });
+  });
+  return count;
 }
 
 function getAnimalMap(options) {
