@@ -10,6 +10,15 @@ data.employees.forEach((staff, i) => {
     .responsibleFor.map(getSpeciesName);
 });
 
+function getAnimal(idNumber) {
+  const index = data.species.findIndex((species) => idNumber === species.id);
+  return data.species[index];
+}
+
+function getSpeciesByIds(...ids) {
+  return ids.map(getAnimal);
+}
+
 function getAnimalsOlderThan(animal, age) {
   const species = data.species.find((critter) => critter.name === animal);
   return !species.residents.find((resident) => resident.age < age);
@@ -111,15 +120,12 @@ function getEmployeeCoverage(idOrName) {
   return coverage;
 }
 
-console.table(getEmployeeCoverage('Emery'));
-// console.table(data.employees);
-
 module.exports = {
   calculateEntry,
   getSchedule,
   countAnimals,
   getAnimalMap,
-  // getSpeciesByIds,
+  getSpeciesByIds,
   getEmployeeByName,
   getEmployeeCoverage,
   addEmployee,
