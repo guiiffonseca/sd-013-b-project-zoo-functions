@@ -1,3 +1,4 @@
+const { prices, hours, employees, species } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...getId) {
@@ -34,17 +35,21 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   data.employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
 
-function countAnimals(species) {
+function countAnimals(specie) {
   const totalOfAnimals = {};
-  if (typeof species === 'undefined') {
-    data.species.forEach((specie) => {
-      totalOfAnimals[specie.name] = specie.residents.length;
-    });
-    return totalOfAnimals;
+  if (typeof specie === 'undefined') {
+    const animals = {};
+    data.species.forEach((animal) => {
+      const count = animal.residents.reduce((previous, current) => previous +1, 0);
+      animals[animal.name] = count;
+  });
+    return animals;
   }
-  return data.species.find((specie) => specie.name === species)
-    .residents.length;
+  const animalObject = data.species.find((each) => each.name === specie);
+  return animalObject.residents.reduce((previous, current) => previous +1, 0);
 }
+
+
 
 function calculateEntry({ Adult = 0, Child = 0, Senior = 0 } = {}) {
   return (Adult * prices.Adult) + (Senior * prices.Senior) + (Child * prices.Child);
