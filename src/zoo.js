@@ -1,4 +1,4 @@
-const { species, prices } = require('./data');
+// const { species, prices } = require('./data');
 const data = require('./data');
 
 const { employees } = data;
@@ -60,12 +60,12 @@ function countAnimals(speciesPar) {
   // seu código aqui
   // species.forEach((specie) => { animals[specie.name] = specie.residents.// length; });
   // if (!speciesPar)
-  /*if (!speciesPar) {
+  /*  if (!speciesPar) {
     return species.reduce((acc, { name, residents }) => {
       acc[name] = residents.length
 
     }, {})
-  }*/
+  }  */
 }
 
 function calculateEntry(entrants) {
