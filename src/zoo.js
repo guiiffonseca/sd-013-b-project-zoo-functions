@@ -71,8 +71,9 @@ function getOldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
-}
+  prices.Adult = Math.ceil(prices.Adult * 0.`${percentage}`);
+  prices.Child = Math.ceil(prices.Child * 0.`${percentage}`);
+  prices.Senior = Math.ceil(prices.Senior * 0.`${percentage}`);
 
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
