@@ -1,6 +1,6 @@
 const data = require('./data');
 
-const { species, employees, prices } = data;
+const { species, employees, prices, hours } = data;
 const byLocation = {};
 
 function getSpeciesByIds(...params) {
@@ -88,6 +88,7 @@ const animalBayName = (animalLocation, sorted) => {
   return byLocation;
 };
 
+// Com a opção `sex: \'female\'` ou `sex: \'male\'` especificada e a opção `sort: true`(opcional) especificada, retorna somente nomes de animais macho/fêmea com os nomes dos animais ordenados
 const animalBaysex = (animalLocation, sorted, animalSex) => {
   const arrayBySex = [];
   species.map(({ name, location, residents }) => {
@@ -128,6 +129,7 @@ const sortedOff = (options) => {
   }
   return newCatalog(animalBayName, false);
 };
+//---------------------------------------------------------------------------
 
 function getAnimalMap(options) {
   // seu código aqui
@@ -140,6 +142,19 @@ function getAnimalMap(options) {
 
 function getSchedule(dayName) {
   // seu código aqui
+  const schedule = {};
+  Object.entries(hours)
+    .forEach((element) => {
+      if (element[1].close !== 0) {
+        schedule[element[0]] = (`Open from ${element[1].open}am until ${element[1].close-12}pm`)
+      } else schedule[element[0]] = 'CLOSED';
+    });
+  if (Object.keys(hours).includes(dayName)) {
+    const SelectSchedule = {};
+    SelectSchedule[dayName] = schedule[dayName];
+    return SelectSchedule;
+  }
+  return schedule;
 }
 
 function getOldestFromFirstSpecies(id) {
