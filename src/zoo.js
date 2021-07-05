@@ -56,9 +56,9 @@ function countAnimals(speciesPar) {
 }
 
 function calculateEntry({ Adult = 0, Child = 0, Senior = 0 } = {}) {
-  const outroArray = [Adult, Senior, Child];
-  const pricesCopia = Object.values(prices);
-  const priceTotal = pricesCopia.reduce((total, price, index) => total + outroArray[index] * price, 0);
+  const array = [Adult, Senior, Child];
+  const pricesCop = Object.values(prices);
+  const priceTotal = pricesCop.reduce((total, price, index) => total + array[index] * price, 0);
   return priceTotal;
 }
 
