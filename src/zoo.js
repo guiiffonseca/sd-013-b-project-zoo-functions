@@ -66,7 +66,7 @@ function getAnimalMap(options) {
 }
 
 function getSchedule(dayName) {
-  const {hours} = data;
+  const { hours } = data;
   const crono = Object.keys(hours).reduce((acc, act) => {
     const check = (typeof (dayName) === 'undefined') ? act : dayName;
     const mensagem = `Open from ${hours[check].open}am until ${hours[check].close - 12}pm`;
@@ -76,12 +76,11 @@ function getSchedule(dayName) {
 
   function comp() {
     if (Object.keys(crono).includes('Monday')) {
-    crono.Monday = 'CLOSED';
-     }
-     return crono;
-}
+      crono.Monday = 'CLOSED';
+    }
+    return crono;
+  }
   return comp();
-
 }
 
 function getOldestFromFirstSpecies(id) {
