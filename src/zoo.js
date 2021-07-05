@@ -1,4 +1,4 @@
-const { species, employees, prices } = require('./data');
+const { species, employees, prices, hours } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -65,19 +65,51 @@ function getAnimalMap(options) {
   // const mapa = {};
   // if (!options) {
   //   species.find(() => {
-
   //   })
   // }
 }
 
-// const turn12Hour = (valor) => valor % 12;
+// get Schedule //
 
-function getSchedule(dayName) {
-  // const { } = hours;
-  // return array.find((dia) => {
-  //   dia === dayName
-  // });
+const convertTo12hr = (hora) => {
+  if (hora === 0) {
+    return 'CLOSED';
+  } if (hora > 12) {
+    return `${hora % 12}pm`;
+  }
+  return `${hora}am`;
+};
+
+const noParam = () => {
+  const { Tuesday: tue, Wednesday: wed, Thursday: thu,
+    Friday: fri, Saturday: sat, Sunday: sun, Monday: mon } = hours;
+  return {
+    Tuesday: `Open from ${convertTo12hr(tue.open)} until ${convertTo12hr(tue.close)}`,
+    Wednesday: `Open from ${convertTo12hr(wed.open)} until ${convertTo12hr(wed.close)}`,
+    Thursday: `Open from ${convertTo12hr(thu.open)} until ${convertTo12hr(thu.close)}`,
+    Friday: `Open from ${convertTo12hr(fri.open)} until ${convertTo12hr(fri.close)}`,
+    Saturday: `Open from ${convertTo12hr(sat.open)} until ${convertTo12hr(sat.close)}`,
+    Sunday: `Open from ${convertTo12hr(sun.open)} until ${convertTo12hr(sun.close)}`,
+    Monday: `${convertTo12hr(mon.open)}`,
+  };
+};
+
+function getSchedule(dayName = 0) {
+  if (dayName === 0) {
+    return noParam();
+  } if (dayName === 'Monday') {
+    return {
+      Monday: `${convertTo12hr(hours.Monday.open)}`,
+    };
+  }
+  const open = convertTo12hr(hours[dayName].open);
+  const close = convertTo12hr(hours[dayName].close);
+  return {
+    [`${dayName}`]: `Open from ${open} until ${close}`,
+  };
 }
+
+console.log(getSchedule('Tuesday'));
 
 function getOldestFromFirstSpecies(workId) {
   const work = employees.find((worker) => worker.id === workId);
@@ -97,8 +129,6 @@ function getOldestFromFirstSpecies(workId) {
   return bixoVelho;
 }
 
-// console.log(getOldestFromFirstSpecies('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
-
 function increasePrices(percentage) {
   function porcentagem(valor) {
     return (Math.ceil((valor * 100) * (((percentage / 100) + 1))) / 100).toFixed(2);
@@ -110,6 +140,8 @@ function increasePrices(percentage) {
   prices.Child = parseFloat(novoChild, 10);
   prices.Senior = parseFloat(novoSenior, 10);
 }
+
+// Get Employee Coverage //
 
 function seSim(idOrName) {
   const list = {};
@@ -148,8 +180,6 @@ function getEmployeeCoverage(idOrName) {
   }
   return seNao();
 }
-
-console.log(getEmployeeCoverage('Stephanie'));
 
 module.exports = {
   calculateEntry,
