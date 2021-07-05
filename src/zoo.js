@@ -47,7 +47,23 @@ function countAnimals(species) {
 }
 
 function calculateEntry(entrants) {
-  // seu código aqui
+  if ((entrants === undefined) || (Object.keys(entrants).length === 0)) {
+    return 0;
+  } 
+  let adult = 0;
+  let child = 0;
+  let senior = 0;
+  if (entrants.Adult > 0) {
+     adult = data.prices.Adult * entrants.Adult;
+  }
+  if (entrants.Child > 0) {
+    child = data.prices.Child * entrants.Child;
+  }
+  if (entrants.Senior > 0) {
+    senior = data.prices.Senior * entrants.Senior;
+  }
+  let resultado = adult+senior+child
+  return resultado;
 }
 
 function getAnimalMap(options) {
@@ -59,7 +75,7 @@ function getSchedule(dayName) {
 }
 
 function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+  
 }
 
 function increasePrices(percentage) {
