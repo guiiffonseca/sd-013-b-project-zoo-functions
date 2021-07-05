@@ -1,3 +1,4 @@
+const { prices } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -56,11 +57,20 @@ function countAnimals(species) {
 
   return countSpecies;
 }
-console.log(countAnimals());
-function calculateEntry(entrants) {
-  // seu código aqui
+
+function calculateEntry(entrants = {}) {
+  let valorAcumulado = 0;
+  // eu tenho que pegar o valor da entrada;
+  // multiplicar o valor da entrado pela quantidade de entradas;
+  // somar o total de entradas;
+  Object.entries(entrants).forEach((valor) => {
+    valorAcumulado += data.prices[valor[0]] * valor[1];
+  });
+  // retornar o valor somado;
+  return valorAcumulado;
 }
 
+calculateEntry({ 'Adult': 2 }) 
 function getAnimalMap(options) {
   // seu código aqui
 }
