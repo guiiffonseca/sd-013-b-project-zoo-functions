@@ -61,7 +61,7 @@ function getAnimalMap(options) {
 function getSchedule(dayName) {
   if (!dayName) {
     return {
-      Tuesday: `Open from ${hours.Tuesday.open} am until ${hours.Tuesday.close - 12} pm`,
+      Tuesday: `Open from ${ hours.Tuesday.open } am until ${ hours.Tuesday.close - 12 } pm`,
       Wednesday:`Open from ${hours.Wednesday.open} am until ${hours.Wednesday.close - 12} pm`,
       Thursday:`Open from ${hours.Thursday.open} am until ${hours.Thursday.close - 12} pm`,
       Friday:`Open from ${hours.Friday.open} am until ${hours.Friday.close - 12} pm`,
