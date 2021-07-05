@@ -1,3 +1,4 @@
+const { hours } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -53,7 +54,19 @@ function getAnimalMap(options) {
 }
 
 function getSchedule(dayName) {
-  // seu código aqui
+  const daysOfTheWeek = Object.keys(hours);
+  const emptyDays = {};
+
+  daysOfTheWeek.forEach((day, index) => {
+    emptyDays[day] = `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`;
+    if (index === daysOfTheWeek.length - 1) emptyDays[day] = 'CLOSED';
+  });
+
+  if (typeof dayName === 'undefined') return emptyDays;
+
+  if (dayName === 'Monday') return { Monday: 'CLOSED' };
+  const dayFinder = emptyDays[daysOfTheWeek.find((nam) => nam === dayName)];
+  return { [dayName]: dayFinder };
 }
 
 function getOldestFromFirstSpecies(id) {
