@@ -1,35 +1,98 @@
+const { species, employees, prices } = require('./data');
 const data = require('./data');
 
-function getSpeciesByIds(ids) {
-  // seu código aqu
+function getSpeciesByIds(...ids) {
+  if (ids.length === 0) {
+    return [];
+  }
+  let answer = []
+  ids.forEach((element) => answer.push(species.find((element2) => element2.id === element)));
+  return answer;
 }
 
 function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
+  let animalObject = species.find((element) => element.name === animal);
+  let verifyList = animalObject.residents.filter((element) => element.age >= age);
+  if (verifyList.length === animalObject.residents.length) {
+    return true;
+  }
+  return false;
 }
 
 function getEmployeeByName(employeeName) {
-  // seu código aqui
+  if (employeeName === undefined)  {
+    return {}
+  }
+  let try1 = employees.find((element) => element.firstName === employeeName)
+  let try2 = employees.find((element) => element.lastName === employeeName)
+  if (try1 === undefined) {
+    return try2
+  }
+  return try1
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  return {
+    ...personalInfo,
+    ...associatedWith
+  };
+}
+
+const createManagerList = () => {
+  let managerList = []
+  employees.forEach((element) => {
+    for (let i = 0; i <= element.managers.length; i += 1) {
+      if (managerList.includes(element.managers[i]) === false) {
+        managerList.push(element.managers[i])
+      }
+    }
+  })
+  return managerList
 }
 
 function isManager(id) {
-  // seu código aqui
+  let verify = 0
+  createManagerList().forEach((element) => id === element? verify += 1 : undefined)
+  if (verify > 0) {
+    return true
+  }
+  return false
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  let newEmployee = {
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor
+  };
+  data.employees.push(newEmployee)
 }
 
-function countAnimals(species) {
-  // seu código aqui
+function countAnimals(animalName) {
+  if (animalName === undefined) {
+    let answer = {}
+    species.forEach((element) => {
+      answer[`${element.name}`] = element.residents.length
+    })
+    return answer
+  }
+  return species.find((element) => element.name === animalName).residents.length
 }
 
-function calculateEntry(entrants) {
-  // seu código aqui
+const normalizeAdult = (entrants) => entrants.Adult === undefined? entrants.Adult = 0 : 0;
+const normalizeChild = (entrants) => entrants.Child === undefined? entrants.Child = 0 : 0;
+const normalizeSenior = (entrants) => entrants.Senior === undefined? entrants.Senior = 0 : 0;
+
+function calculateEntry(entrants = { 'Adult': 0, 'Child': 0, 'Senior': 0}) {
+  normalizeAdult(entrants);
+  normalizeChild(entrants);
+  normalizeSenior(entrants);
+  let adultTotal = entrants.Adult * prices.Adult;
+  let childTotal = entrants.Child * prices.Child;
+  let seniorTotal = entrants.Senior * prices.Senior;
+  return adultTotal + childTotal + seniorTotal;
 }
 
 function getAnimalMap(options) {
