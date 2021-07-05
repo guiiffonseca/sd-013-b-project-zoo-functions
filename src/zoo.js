@@ -91,6 +91,18 @@ function getCompleteSchedule() {
   return schedule;
 }
 
+function getEmployeesList() {
+  const obj = {};
+  data.employees.forEach((x) => {
+    const arr = [];
+    for (let i = 0; i < x.responsibleFor.length; i += 1) {
+      const index = data.species.findIndex((y) => y.id === x.responsibleFor[i]);
+      arr.push(data.species[index].name);
+    }
+    obj[`${x.firstName} ${x.lastName}`] = arr;
+  });
+  return obj;
+}
 // ====================
 // ====================
 // ====================
@@ -234,6 +246,15 @@ function increasePrices(percentage) {
 
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
+  const list = getEmployeesList();
+  if (!idOrName) return list;
+  // prettier-ignore
+  const index = data.employees.findIndex(
+    (x) =>
+      x.firstName === idOrName || x.lastName === idOrName || x.id === idOrName,
+  );
+  const name = `${data.employees[index].firstName} ${data.employees[index].lastName}`;
+  return { [name]: list[name] };
 }
 
 module.exports = {
@@ -251,3 +272,5 @@ module.exports = {
   increasePrices,
   createEmployee,
 };
+
+console.log(getEmployeeCoverage());
