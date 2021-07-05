@@ -1,4 +1,4 @@
-const { species } = require('./data');
+const { species, employees } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -11,8 +11,10 @@ function getAnimalsOlderThan(animal, age) {
 }
 
 function getEmployeeByName(employeeName) {
-  // seu código aqui
+  return employees.find(({ firstName, lastName }) =>
+    (firstName === employeeName || lastName === employeeName)) || {};
 }
+// nesta função caso o return não satisfaça a condição passada pelo find retorna automagicamente  o array vazio.
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
