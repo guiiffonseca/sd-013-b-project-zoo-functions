@@ -1,6 +1,6 @@
 const data = require('./data');
 
-const { species, employees } = data;
+const { species, employees, prices, hours} = data;
 
 // species[0].residents[0].age;
 // Array.isArray(species.find((specie) => specie.name === animal));
@@ -12,14 +12,32 @@ const { species, employees } = data;
 // Função que ordena objetos
 // fonte: https://stackoverflow.com/questions/1069666/sorting-object-property-by-values
 
-const sortObject = (object) => Object.fromEntries(
-  Object.entries(object).sort((a, b) => (a > b ? 1 : -1)),
-);
+// const sortObject = (object) => Object.fromEntries(
+//   Object.entries(object).sort((a, b) => (a > b ? 1 : -1)),
+// );
 
-const limitDecimals = (expresssion, amountDecimals) =>
-  Number(parseFloat(expresssion).toFixed(amountDecimals));
+// const limitDecimals = (expresssion, amountDecimals) =>
+//   Number(parseFloat(expresssion).toFixed(amountDecimals));
 
 const alreadyExistsInDataBase = (employeeId) => employees.some(({ id }) => id === employeeId);
+
+const calcValues = (amount, type) => {
+  let multiplier;
+  switch (type) {
+  case 'Adult':
+    multiplier = prices.Adult;
+    break;
+  case 'Senior':
+    multiplier = prices.Senior;
+    break;
+  case 'Child':
+    multiplier = prices.Child;
+    break;
+  default: multiplier = 1;
+    break;
+  }
+  return amount * multiplier;
+};
 
 // ------------------------------------------------------------------------------------ //
 
@@ -56,32 +74,14 @@ const countAnimals = (spcName) => {
   if (spcName) {
     return getAnimalsAmountByName(spcName);
   }
-  const resp = {};
+  const animalsListAmount = {};
   const names = species
     .sort((a, b) => (a.name > b.name ? 1 : -1))
     .map(({ name }) => name);
   names.forEach((element) => {
-    resp[`${element}`] = getAnimalsAmountByName(element);
+    animalsListAmount[element] = getAnimalsAmountByName(element);
   });
-  return resp;
-};
-
-const calcValues = (amount, type) => {
-  let multiplier;
-  switch (type) {
-  case 'Adult':
-    multiplier = 49.99;
-    break;
-  case 'Senior':
-    multiplier = 24.99;
-    break;
-  case 'Child':
-    multiplier = 20.99;
-    break;
-  default: multiplier = 1;
-    break;
-  }
-  return amount * multiplier;
+  return animalsListAmount;
 };
 
 const calculateEntry = (entrants) => {
@@ -91,7 +91,7 @@ const calculateEntry = (entrants) => {
   return Object.entries(entrants).reduce((acc, item) => acc + calcValues(item[1], item[0]), 0);
 };
 
-const getAnimalsResidentsByName = () => {
+/* const getAnimalsResidentsByName = () => {
   const animalsResidentsByName = {};
   species.forEach((item) => {
     const animals = species.find(({ name }) => name === item.name)
@@ -101,34 +101,57 @@ const getAnimalsResidentsByName = () => {
   return sortObject(animalsResidentsByName);
 };
 
+const locationFilter = (item) => species.filter(({ location }) => location === item.location);
+
 const getAnimalsByLocation = () => {
   const animalsByLocation = {};
   species.forEach((item) => {
-    const animals = species.filter(({ location }) => location === item.location)
-      .map(({ name }) => name);
-    animalsByLocation[item.location] = animals;
+    const animals = locationFilter(item).map(({ name }) => name);
+    const names = locationFilter(item).map(({ residents }) => residents.length);
+    animalsByLocation[item.location] = names;
   });
   return sortObject(animalsByLocation);
-};
+}; */
 
 // console.log(getAnimalsResidentsByName());
 // console.log(getAnimalsByLocation());
 
-function getAnimalMap(...params) {
-  const { includeNames = false, sorted = false, sex } = params;
-  if (!includeNames) {
-    return getAnimalsByLocation();
+/* function getAnimalMap(...params) {
+  if (params.length !== 0) {
+      return getAnimalsByLocation();
+    }
+  //   console.log(params.length);
+  //   console.log(params);
+  // console.log(Object.entries(params[0]));
+} */
+
+// console.log(getAnimalMap({ includeNames: true, sex: 'male', sorted: true }));
+// console.log(getAnimalMap());
+
+function getSchedule(dayName) {
+  if (!dayName) {
+    const schedule = {};
+    Object.entries(hours).forEach((element) => {
+      let msg = `Open from ${element[1].open}am until ${element[1].close - 12}pm`;
+      msg = element[0] === 'Monday' ? 'CLOSED' : msg;
+      schedule[element[0]] = msg;
+    });
+    return schedule;
   }
 }
 
-getAnimalMap({ includeNames: true, sorted: true });
-
-function getSchedule(dayName) {
-  // seu código aqui
-}
+// console.log(getSchedule());
+// console.log(getSchedule('Monday'));
 
 function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+  const idFisrtSpecie = employees.find((employee) => employee.id === id).responsibleFor[0];
+  const animalsList = species.filter((specie) => specie.id === idFisrtSpecie)
+    .map((item) => item.residents)
+    .reduce((acc, item) => acc + item);
+  return Object.values(animalsList
+    .sort((a, b) => b.age - a.age)
+    .filter((_item, index) => index === 0)
+    .reduce((acc, item) => acc + item));
 }
 
 function increasePrices(percentage) {
@@ -142,7 +165,7 @@ function getEmployeeCoverage(idOrName) {
 module.exports = {
   calculateEntry,
   getSchedule,
-  // countAnimals,
+  countAnimals,
   // getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
