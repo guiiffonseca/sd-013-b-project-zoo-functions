@@ -6,7 +6,7 @@ function getSpeciesByIds(...ids) {
 }
 
 function getAnimalsOlderThan(animal, age) {
-  return data.species.find((spec) => spec.name === animal)
+  return species.find((spec) => spec.name === animal)
     .residents.every((resident) => resident.age >= age);
 }
 
@@ -23,13 +23,13 @@ function createEmployee(personalInfo, associatedWith) {
 function isManager(id) {
   return !!employees.find(({ managers }) => managers.includes(id));
 }
-//  a função is manager vai utilizar o find para encontrar algum valor referente 
+//  o find nesta função busca e retorna o elemento ou undefined, logo em seguida o includes vai verificar e retornar true ou false.
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
 }
 
-function countAnimals(species) {
+function countAnimals(speciesAgain) {
   // seu código aqui
 }
 
