@@ -96,7 +96,7 @@ function getSchedule(dayName) {
       Monday: 'CLOSED',
     };
   }
-  if (dayName === 'Monday') return { 'Monday' : 'CLOSED' };
+  if (dayName === 'Monday') return { Monday: 'CLOSED' };
   return { [dayName]: `Open from ${hours[dayName].open}am until ${hours[dayName].close - 12}pm` };
 }
 
