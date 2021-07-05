@@ -82,7 +82,7 @@ function calculateEntry(entrants = {}) {
 }
 
 // 9
-function getAnimalMap(options) {
+function getAnimalMap(options = {}) {
   // seu código aqui
 }
 
@@ -93,7 +93,7 @@ function getSchedule(dayName = '') {
   const weekday = Object.keys(hours);
   const time = Object.values(hours);
   for (let index = 0; index < time.length; index += 1) {
-    schedule[weekday[index]] = `Opens at ${time[index].open}am until ${time[index].open}pm`;
+    schedule[weekday[index]] = `Open from ${time[index].open}am until ${time[index].close - 12}pm`;
     if (time[index].open === 0 && time[index].close === 0) {
       schedule[weekday[index]] = 'CLOSED';
     }
@@ -101,7 +101,7 @@ function getSchedule(dayName = '') {
   if (dayName === '') {
     return schedule;
   }
-  return { dayName: schedule[dayName] };
+  return { [dayName]: schedule[dayName] };
 }
 
 // 11
@@ -132,21 +132,28 @@ function increasePrices(percentage) {
 }
 
 // 13
+const getSpecieName = (id) => getSpeciesByIds(id)[0].name;
+
 function getEmployeeCoverage(idOrName = '') {
   // seu código aqui
-  // if (idOrName === '') {
-  //   const fin = employees
-  //   .reduce((acc, emp) => acc[`${emp.firstName} ${emp.lastName}`] = emp.responsibleFor, {});
-  //   return fin;
-  // }
-  // const employee = employees
-  //   .find((p) => (p.firstName === idOrName || p.lastName === idOrName || p.id === idOrName));
-  // const finalArray = {};
-  // finalArray[`${employee.firstName} ${employee.lastName}`] = employee.responsibleFor;
-  // return finalArray;
+  if (idOrName === '') {
+    const fin = employees
+      .reduce((acc, emp) => {
+        const auxArray = [];
+        emp.responsibleFor.forEach((id) => auxArray.push(getSpecieName(id)));
+        acc[`${emp.firstName} ${emp.lastName}`] = auxArray;
+        return acc;
+      }, {});
+    return fin;
+  }
+  const employee = employees
+    .find((p) => (p.firstName === idOrName || p.lastName === idOrName || p.id === idOrName));
+  const finalObj = {};
+  const nameArray = [];
+  employee.responsibleFor.forEach((id) => nameArray.push(getSpecieName(id)));
+  finalObj[`${employee.firstName} ${employee.lastName}`] = nameArray;
+  return finalObj;
 }
-
-console.log(getEmployeeCoverage());
 
 module.exports = {
   calculateEntry,
