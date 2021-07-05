@@ -146,7 +146,7 @@ function getSchedule(dayName) {
   Object.entries(hours)
     .forEach((element) => {
       if (element[1].close !== 0) {
-        schedule[element[0]] = (`Open from ${element[1].open}am until ${element[1].close-12}pm`)
+        schedule[element[0]] = (`Open from ${element[1].open}am until ${element[1].close - 12}pm`);
       } else schedule[element[0]] = 'CLOSED';
     });
   if (Object.keys(hours).includes(dayName)) {
@@ -159,6 +159,10 @@ function getSchedule(dayName) {
 
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
+  const getIdAnimal = employees.find((element) => element.id === id).responsibleFor[0];
+  const getResidents = species.find((element) => element.id === getIdAnimal).residents;
+  const maxAge = getResidents.map(({ age }) => age).reduce((a, b) => Math.max(a, b));
+  return Object.values(getResidents.find(({ age }) => age === maxAge));
 }
 
 function increasePrices(percentage) {
