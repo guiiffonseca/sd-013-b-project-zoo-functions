@@ -1,4 +1,5 @@
 /* eslint-disable editorconfig/editorconfig */
+const { hours } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -81,8 +82,20 @@ function getAnimalMap(options) {
   // seu código aqui
 }
 
+function getAllSchedules() {
+  const days = Object.entries(data.hours);
+  return days.reduce(((acc, curr) => {
+    acc[curr[0]] = `Open from ${curr[1].open}am until ${curr[1].close - 12}pm`;
+    if (curr[0] === 'Monday') { acc[curr[0]] = 'CLOSED'; }
+    return acc;
+  }), {});
+}
 function getSchedule(dayName) {
-  // seu código aqui
+  if (!dayName) { return getAllSchedules(); }
+  if (dayName === 'Monday') { return { [dayName]: 'CLOSED' }; }
+  const hors = Object.values(data.hours[dayName]);
+  const [a, b] = hors;
+  return { [dayName]: `Open from ${a}am until ${b - 12}pm` };
 }
 
 function getOldestFromFirstSpecies(id) {
