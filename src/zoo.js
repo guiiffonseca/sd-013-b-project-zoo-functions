@@ -124,3 +124,11 @@ module.exports = {
   increasePrices,
   createEmployee,
 };
+
+/* Links que deram suporte no desenvolvimento:
+https://www.guj.com.br/t/math-ceil/30259 
+https://www.geeksforgeeks.org/java-math-max-method-examples/
+https://www.w3schools.com/js/tryit.asp?filename=tryjs_object_es5_4
+https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce
+https://translate.google.com.br/?hl=pt&sl=en&tl=pt&text=Linha%2076%3A%20%27workerId%27%20is%20already%20declared%20in%20the%20upper%20scope.%0ALinha%20102%3A%20EditorConfig%3A%20Trailing%20spaces%20not%20allowed.%0ALinha%20105%3A%20Unexpected%20space%20between%20function%20name%20and%20paren.%0ALinha%20105%3A%20Unexpected%20newline%20between%20function%20name%20and%20paren.&op=translate
+*/
