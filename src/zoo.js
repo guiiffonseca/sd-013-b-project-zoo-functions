@@ -50,7 +50,7 @@ function calculateEntry({ Adult = 0, Child = 0, Senior = 0 } = {}) {
 }
 
 function getAnimalMap(options) {
-  // seu código aqui
+  return hours.find((option) => option === options);
 }
 
 function getSchedule(dayName) {
