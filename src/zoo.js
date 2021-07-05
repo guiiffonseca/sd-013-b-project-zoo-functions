@@ -121,6 +121,8 @@ function getEmployeeCoverage(idOrName) {
   if (!idOrName) return completeList();
   const employeeCoverage = {};
   const { id, firstName, lastName } = data.employees;
+  console.log(employeeCoverage);
+  console.log(id, firstName, lastName);
 }
 
 module.exports = {
