@@ -49,19 +49,66 @@ function calculateEntry(entrants) {
   }
 }
 
+const getNamesLoc = (info) => {
+  return species.filter((animal) => animal.location === info)
+  .map((obj) => obj.name);
+}
+
+const getAnimalName = (info) => {
+  return species.reduce((acc, { name, location, residents }) => {
+    if (location === info) acc.push({ [name]: residents
+    .map(({ name }) => name) });
+    return acc;
+  }, []);
+}
+
+const sortedNames = (info) => {
+  return species.reduce((acc, { name, location, residents }) => {
+    if (location === info) acc.push({ [name]: residents
+    .map(({ name }) => name).sort() });
+    return acc;
+  }, []);
+}
+
+const femaleNames = (info) => {
+  return species.reduce((acc, { name, location, residents }) => {
+    if (location === info) acc.push({ [name]: residents
+      .filter(({ sex}) => sex === 'female')
+      .map(({name}) => name) });
+    return acc;
+  }, []);
+}
+
+const femaleSort = (info) => {
+  return species.reduce((acc, { name, location, residents }) => {
+    if (location === info) acc.push({ [name]: residents
+      .filter(({ sex}) => sex === 'female')
+      .map(({name}) => name).sort() });
+    return acc;
+  }, []);
+}
+
 function getAnimalMap(options) {
-  // const animalLocation = {};
-  // if (!options) {
-  //   animalLocation.NE = species.filter(({ location, name })  => {
-  //     if (location === 'NE') return name;
-  //   });
-  //   animalLocation.NW = species.filter(({ location }) => location === 'NW')
-  //     .map((animal) => animal.name);
-  //   animalLocation.SW = species.filter(({ location }) => location === 'SW')
-  //     .map((animal) => animal.name);
-  //   animalLocation.SE = species.filter(({ location }) => location === 'SW')
-  //     .map((animal) => animal.name);
-  // };
+  const location = ['NE', 'NW', 'SW', 'SE'];
+  return location.reduce((acc, curr) => {
+    if (!options) { acc[curr] = getNamesLoc(curr);
+      return acc };
+    {
+      const { includeNames, sorted, sex } = options;
+      if (includeNames === true && !sorted && !sex) { acc[curr] = getAnimalName(curr);
+        return acc };
+      if (includeNames === true && sorted === true && !sex) { acc[curr] = sortedNames(curr);
+        return acc };
+      if (includeNames === true && sex === 'female' && !sorted) { acc[curr] = femaleNames(curr);
+        return acc };
+      if (includeNames === true && sorted === true && sex === 'female') {
+        acc[curr] = femaleSort(curr);
+        return acc;
+      }
+      acc[curr] = getNamesLoc(curr);
+      return acc;
+    }
+  }, {});
 }
 
 function getSchedule(dayName) {
