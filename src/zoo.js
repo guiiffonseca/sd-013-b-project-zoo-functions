@@ -69,7 +69,7 @@ function getAnimalMap(options) {
   // }
 }
 
-// get Schedule //
+// Função get Schedule //
 
 const convertTo12hr = (hora) => {
   if (hora === 0) {
@@ -109,8 +109,6 @@ function getSchedule(dayName = 0) {
   };
 }
 
-console.log(getSchedule('Tuesday'));
-
 function getOldestFromFirstSpecies(workId) {
   const work = employees.find((worker) => worker.id === workId);
   // console.log(work);
@@ -141,7 +139,7 @@ function increasePrices(percentage) {
   prices.Senior = parseFloat(novoSenior, 10);
 }
 
-// Get Employee Coverage //
+// Função Get Employee Coverage //
 
 function seSim(idOrName) {
   const list = {};
