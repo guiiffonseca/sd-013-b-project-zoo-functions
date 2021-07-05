@@ -1,6 +1,6 @@
 const data = require('./data');
 
-const { species, employees } = data;
+const { species, employees, prices } = data;
 
 function getSpeciesByIds(...ids) {
   // seu código aqui
@@ -42,7 +42,6 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 
 function countAnimals(speciesParam) {
   // seu código aqui
-
   if (!speciesParam) {
     return species.reduce((accumulator, { name, residents }) => {
       accumulator[name] = residents.length;
@@ -52,10 +51,19 @@ function countAnimals(speciesParam) {
   return species.find((specie) => specie.name === speciesParam).residents.length;
 }
 
-function calculateEntry(entrants) {
-  // seu código aqui
-}
+const multiplyPrices = (price, entrants) => {
+ let newPrice = price * entrants;
+};
 
+function calculateEntry(entrants = 0) {
+  // seu código aqui
+  const { Adult = 0, Child = 0, Senior = 0} = entrants;
+  if (Object.keys(entrants).length === 0) return 0;
+
+  return ((Adult * prices.Adult) + (Child * prices.Child) + (Senior * prices.Senior));
+
+}
+// console.log();
 function getAnimalMap(options) {
   // seu código aqui
 }
@@ -68,8 +76,12 @@ function getOldestFromFirstSpecies(id) {
   // seu código aqui
 }
 
+const doPercentage = (price, percentage) => {
+  return price + (price * percentage / 100)
+}
 function increasePrices(percentage) {
   // seu código aqui
+  data.prices =  Object.values(data.prices).forEach(doPercentage);
 }
 
 function getEmployeeCoverage(idOrName) {
