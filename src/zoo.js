@@ -194,7 +194,7 @@ function allEmployeesAndResponsibles() {
 
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
-  //const idOrNameString = idOrName;
+  // const idOrNameString = idOrName;
   // se vier undefined :
   if (idOrName === undefined) return allEmployeesAndResponsibles();
   // se vier algum id ,firstName, ou lastName :
