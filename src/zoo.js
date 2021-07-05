@@ -1,4 +1,4 @@
-const { species } = require('./data');
+const { species, prices } = require('./data');
 const data = require('./data');
 
 const { employees } = data;
@@ -57,7 +57,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 function countAnimals(speciesPar) {
-  // Me inspirei na primeira metade do código no código de Rafael Nery Machado, no Github.
+  // Me inspirei na primeira metade do meu código com o código de Rafael Nery Machado, no Github.
   if (!speciesPar) {
     return species.reduce((acc, { name, residents }) =>
       ({ ...acc, [name]: residents.length }),
@@ -66,8 +66,9 @@ function countAnimals(speciesPar) {
   return species.find(({ name }) => name === speciesPar).residents.length;
 }
 
-function calculateEntry(entrants) {
-  // seu código aqui
+function calculateEntry({ Adult = 0, Child = 0, Senior = 0 } = 0) {
+  // mind blowing na sala do Panta para usar default values
+  return (Adult * prices.Adult) + (Child * prices.Child) + (Senior * prices.Senior);
 }
 
 function getAnimalMap(options) {
