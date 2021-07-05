@@ -1,3 +1,4 @@
+const { prices } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...getId) {
@@ -46,13 +47,41 @@ function countAnimals(species) {
     .residents.length;
 }
 
-function calculateEntry(entrants) {
-  // seu código aqui
+function calculateEntry( { Adult = 0, Child = 0, Senior = 0 } = {} ) {
+  return (Adult * prices.Adult) + (Senior * prices.Senior) + (Child * prices.Child);
+}
+  
+function getAnimalMap(options = {} ) {
+  const animalSex = (animal, sex) => {
+    if (animal.sex === sex || sex === undefined) {
+      return animal.name;
+    }
+  }
+  const animalSort = (sort, animalsList) => {
+    if (sort) animalsList.sort();
+  }
+  const location = { NE: [], NW: [], SE: [], SW: [] };
+  data.species.forEach((animal) => {
+    if (options.includeNames) {
+      const animalName = animal.name;
+      const animalObject = {};
+      const animalListedNames = [];
+      animal.residents.forEach((element) => {
+        const checkAnimalSex = animalSex(element, options.sex);
+        if (checkAnimalSex !== undefined) {
+          animalListedNames.push(checkAnimalSex);
+        }
+      });
+      animalSort(options.sorted, animalListedNames);
+      animalObject[animalName] = animalListedNames;
+      location[animal.location].push(animalObject);
+    } else {
+      location[animal.location].push(animal.name);
+    }
+  });
+  return location;
 }
 
-function getAnimalMap(options) {
-  // seu código aqui
-}
 
 function getSchedule(dayName) {
   // seu código aqui
