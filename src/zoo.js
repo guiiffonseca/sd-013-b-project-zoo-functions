@@ -345,32 +345,28 @@ function pegaPrimeiraSpecie(ParamentroID) {
 }
 
 function pegaMaisVelho(colaborador) {
-  let pessoa = colaborador;
-  let retorno = species.find((value)=>{
-  return value.id === pessoa.responsibleFor[0];
-  })
+  const pessoa = colaborador;
+  const retorno = species.find((value) => value.id === pessoa.responsibleFor[0]);
   return retorno;
 }
 
-function comparaIdade(velho){
-  let residentes = velho.residents;
-  
-  let idades = [];
+function comparaIdade(velho) {
+  const residentes = velho.residents;
+
+  const idades = [];
   let retorno = [];
-  residentes.forEach((value)=>{
+  residentes.forEach((value) => {
     idades.push(value.age);
-  })
-  idades.sort((a,b)=> b - a);
-  residentes.forEach((value)=>{
-    if(value.age === idades[0]){
-      retorno = [value.name , value.sex , value.age];
+  });
+  idades.sort((a, b) => b - a);
+  residentes.forEach((value) => {
+    if (value.age === idades[0]) {
+      retorno = [value.name, value.sex, value.age];
     }
-  })
-  
-  return retorno
+  });
 
+  return retorno;
 }
-
 
 function getOldestFromFirstSpecies(id) {
   const idFuncionario = id;
@@ -378,8 +374,6 @@ function getOldestFromFirstSpecies(id) {
   const OmaisVelho = pegaMaisVelho(primeiraEspecie);
   const DefineMaisVelho = comparaIdade(OmaisVelho);
   return DefineMaisVelho;
-
-  
 }
 getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992');
 
