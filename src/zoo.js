@@ -334,10 +334,54 @@ function getAnimalMap(options) {
 }
 
 // const a = getAnimalMap({ includeNames: false, sorted: true});
+function SemParamentroDia(){
+  let retorno = {
+    'Tuesday': 'Open from 8am until 6pm',
+    'Wednesday': 'Open from 8am until 6pm',
+    'Thursday': 'Open from 10am until 8pm',
+    'Friday': 'Open from 10am until 8pm',
+    'Saturday': 'Open from 8am until 10pm',
+    'Sunday': 'Open from 8am until 8pm',
+    'Monday': 'CLOSED'
+  }
+return retorno;
+}
+function montaFrase(dia,hora){
+let diaInformado = dia;
+let frase = {};  
+let keys = Object.keys(hora);
+keys.forEach((value)=>{
+  
+  if(value === diaInformado){
+    frase[diaInformado] = 'Open from 8am until 6pm';
+  }
+})
+return frase;
+}
+
+function ComParamentro(dia){
+let hora = data.hours;
+  if (dia !== 'Monday'){
+    let frase = montaFrase(dia,hora);
+    return frase;
+  }
+  return {"Monday":"CLOSED"};
+
+}
 
 function getSchedule(dayName) {
-  // seu código aqui
+ let Dia = dayName;
+ let retorno;
+if(Dia === undefined){
+  retorno = SemParamentroDia();
 }
+else{
+  retorno = ComParamentro(Dia);
+}
+return retorno;
+
+}
+console.log(getSchedule('Sunday'));
 function pegaPrimeiraSpecie(ParamentroID) {
   const id = ParamentroID;
   const retorno = employees.find((value) => id === value.id);
