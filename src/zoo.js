@@ -35,9 +35,9 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   data.employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
 
-function countAnimals(species) {
+function countAnimals(allSpecies) {
   const totalOfAnimals = {};
-  if (typeof species === 'undefined') {
+  if (typeof allSpecies === 'undefined') {
     data.species.forEach((specie) => {
       totalOfAnimals[specie.name] = specie.residents.length;
     });
@@ -98,15 +98,15 @@ function getSchedule(dayName) {
 
 function getOldestFromFirstSpecies(id) {
   const firstRegister = employees
-  .find(({id: employeeID}) => employeeID === id).responsibleFor[0];
+    .find(( {id: employeeID} ) => employeeID === id).responsibleFor[0];
   const oldest = species
-  .find(({ id: specieId}) => specieId === firstRegister)
-  .residents.reduce((older, resident) => {
-    if (resident.age > older.age) {
+    .find(( { id: specieId} ) => specieId === firstRegister)
+      .residents.reduce((older, resident) => {
+      if (resident.age > older.age) {
       return resident;
     }
-    return older
-  });
+    return older;
+    });
   return Object.values(oldest);
 }
 
