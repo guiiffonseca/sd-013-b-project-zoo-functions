@@ -2,14 +2,8 @@ const data = require('./data');
 const { species, employees, prices } = require('./data');
 
 function getSpeciesByIds(...ids) {
-  return species.filter((specie) => {
-    if (!ids) {
-      return [];
-    }
-    if (specie.id === ids[0] || specie.id === ids[1]) {
-      return specie;
-    }
-  });
+  // Pedir oras para entender como funciona o includes(). Complicado.
+  return species.filter((animal) => ids.includes(animal.id));
 }
 
 function getAnimalsOlderThan(animal, age) {
@@ -43,7 +37,7 @@ function countAnimals(specie) {
 
 function calculateEntry({ Adult = 0, Child = 0, Senior = 0 } = 0) {
   // fiz com o codigo code review do Rafael Ne.
-  // fiz mas ainda não entendi direito o porque de colocar valores padrões em cara parametro recebido 
+  // fiz mas ainda não entendi direito o porque de colocar valores padrões em cara parametro recebido
   // if (!entrants) return {};
   // const { Adult, Child, Senior } = entrants;
   return (Adult * prices.Adult) + (Child * prices.Child) + (Senior * prices.Senior);
