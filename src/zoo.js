@@ -63,11 +63,15 @@ function countAnimals(speciesName) {
   }
   return allAnimalsObject[speciesName];
 }
-
+// O parâmetro entrants recebe um objeto que contém as chaves Adult, Child e Senior, com suas respectivas quantidades de pessoas
 function calculateEntry(entrants) {
-  // seu código aqui
+  if (entrants === undefined) {
+    return 0;
+  }
+  const entrantsArray = Object.entries(entrants);
+  return entrantsArray
+    .reduce((acc, [typeEntrant, amount]) => acc + data.prices[typeEntrant] * amount, 0);
 }
-
 function getAnimalMap(options) {
   // seu código aqui
 }
