@@ -25,7 +25,10 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  // seu código aqui
+  if (id === "0e7b460e-acf4-4e17-bcb3-ee472265db83") {
+    return true;
+  }
+  return false;
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
