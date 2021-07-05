@@ -1,16 +1,16 @@
-const data = require('./data');
+const { species, employees, hours, prices } = require('./data');
 
 function getSpeciesByIds(...ids) {
-  return data.species.filter(({ id }) => ids.find((wantedId) => wantedId === id));
+  return species.filter(({ id }) => ids.find((wantedId) => wantedId === id));
 }
 
 function getAnimalsOlderThan(animal, minimumAge) {
-  return data.species.find(({ name }) => name === animal).residents
+  return species.find(({ name }) => name === animal).residents
     .every(({ age }) => age >= minimumAge);
 }
 
 function getEmployeeByName(employeeName) {
-  return employeeName ? data.employees.find(({ firstName, lastName }) => (firstName === employeeName
+  return employeeName ? employees.find(({ firstName, lastName }) => (firstName === employeeName
     || lastName === employeeName)) : {};
 }
 
@@ -19,19 +19,19 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  return data.employees.some(({ managers }) => managers.includes(id));
+  return employees.some(({ managers }) => managers.includes(id));
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-  data.employees.push({ id, firstName, lastName, managers, responsibleFor });
+  employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
 
-function countAnimals(species) {
-  if (species) {
-    return data.species.find(({ name }) => name === species).residents.length;
+function countAnimals(wantedSpecies) {
+  if (wantedSpecies) {
+    return species.find(({ name }) => name === wantedSpecies).residents.length;
   }
   const numberOfAnimals = {};
-  data.species.forEach(({ name, residents }) => {
+  species.forEach(({ name, residents }) => {
     (numberOfAnimals[name] = residents.length);
   });
   return numberOfAnimals;
@@ -42,7 +42,6 @@ function calculateEntry(entrants) {
     return 0;
   }
   const keys = Object.keys(entrants);
-  const { prices } = data;
   let total = 0;
   keys.forEach((key) => {
     total += (entrants[key] * prices[key]);
@@ -59,7 +58,6 @@ function createPhrase({ open, close }) {
 }
 
 function getSchedule(dayName) {
-  const { hours } = data;
   const schedule = {};
   if (dayName) {
     schedule[dayName] = createPhrase(hours[dayName]);
@@ -73,8 +71,8 @@ function getSchedule(dayName) {
 }
 
 function getOldestFromFirstSpecies(wantedId) {
-  const { responsibleFor } = data.employees.find(({ id }) => id === wantedId);
-  const { residents } = data.species.find(({ id }) => id === responsibleFor[0]);
+  const { responsibleFor } = employees.find(({ id }) => id === wantedId);
+  const { residents } = species.find(({ id }) => id === responsibleFor[0]);
   return Object.values(residents.reduce((olderAnimal, currentAnimal) => {
     if (olderAnimal.age < currentAnimal.age) {
       return currentAnimal;
@@ -84,7 +82,6 @@ function getOldestFromFirstSpecies(wantedId) {
 }
 
 function increasePrices(percentage) {
-  const { prices } = data;
   const keys = Object.keys(prices);
   let newPrice;
   keys.forEach((key) => {
