@@ -61,16 +61,16 @@ function getAnimalMap(options) {
 function getSchedule(dayName) {
   if (!dayName) {
     return {
-      Tuesday: `Open from ${hours.Tuesday.open}am until ${hours.Tuesday.close - 12}pm`,
-      Wednesday:`Open from ${hours.Wednesday.open}am until ${hours.Wednesday.close - 12}pm`,
-      Thursday:`Open from ${hours.Thursday.open}am until ${hours.Thursday.close - 12}pm`,
-      Friday:`Open from ${hours.Friday.open}am until ${hours.Friday.close - 12 }pm`,
-      Saturday:`Open from ${hours.Saturday.open}am until ${hours.Saturday.close - 12}pm`,
-      Sunday:`Open from ${hours.Sunday.open}am until ${hours.Sunday.close - 12}pm`,
-      Monday:`CLOSED`,
-    }
+      Tuesday: `Open from ${hours.Tuesday.open} am until ${hours.Tuesday.close - 12} pm`,
+      Wednesday:`Open from ${hours.Wednesday.open} am until ${hours.Wednesday.close - 12} pm`,
+      Thursday:`Open from ${hours.Thursday.open} am until ${hours.Thursday.close - 12} pm`,
+      Friday:`Open from ${hours.Friday.open} am until ${hours.Friday.close - 12} pm`,
+      Saturday:`Open from ${hours.Saturday.open} am until ${hours.Saturday.close - 12} pm`,
+      Sunday:`Open from ${hours.Sunday.open} am until ${hours.Sunday.close - 12} pm`,
+      Monday:'CLOSED',
+    };
   }
-  if (dayName === 'Monday') return { 'Monday': 'CLOSED' }
+  if (dayName === 'Monday') return { Monday: 'CLOSED' };
   return { [dayName]: `Open from ${hours[dayName].open}am until ${hours[dayName].close - 12}pm` };
 }
 
