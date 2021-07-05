@@ -113,8 +113,29 @@ function increasePrices(percentage) {
   prices.Senior = Math.ceil(prices.Senior * (increase)) / 100;
 }
 
+const searchEmployee = (idOrName) => {
+  let employeeNameOrId = '';
+  data.employees.forEach(({ id, firstName, lastName }) => {
+    if (idOrName === id) employeeNameOrId = `${firstName} ${lastName}`;
+    if (idOrName === firstName) employeeNameOrId = `${firstName} ${lastName}`;
+    if (idOrName === lastName) employeeNameOrId = `${firstName} ${lastName}`;
+  });
+  return employeeNameOrId;
+};
+
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+  const specieId = {};
+  const allEmployees = {};
+  const search = searchEmployee(idOrName);
+
+  data.species.forEach(({ name, id }) => { specieId[id] = name; });
+
+  data.employees.forEach(({ firstName, lastName, responsibleFor }) => {
+    allEmployees[`${firstName} ${lastName}`] = responsibleFor.map((animal) => specieId[animal]);
+  });
+
+  if (search) return { [search]: allEmployees[search] };
+  if (!idOrName) return allEmployees;
 }
 
 module.exports = {
