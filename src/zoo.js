@@ -26,12 +26,9 @@ function createEmployee(personalInfo, associatedWith) {
   };
 }
 
-function isManager(id) {
-  return employees.some((emp, index) => Object.values(emp.managers)[index] === id);
-}
+const isManager = (id) => employees.some((emp, index) => Object.values(emp.managers)[index] === id);
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-  // seu código aqui
   const newEmployee = {
     id,
     firstName,
@@ -44,7 +41,23 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 function countAnimals(speciesParam) {
-  // seu código aqui
+  if (speciesParam !== undefined) {
+    return species.find((specie) => specie.name === speciesParam).residents.length;
+  }
+  // const allAnimals = species.forEach((specie) => ({ [specie.name]: specie.residents.length }));
+  // return allAnimals;
+  const allAnimals = {
+    lions: species.find((specie) => specie.name === 'lions').residents.length,
+    tigers: species.find((specie) => specie.name === 'tigers').residents.length,
+    bears: species.find((specie) => specie.name === 'bears').residents.length,
+    penguins: species.find((specie) => specie.name === 'penguins').residents.length,
+    otters: species.find((specie) => specie.name === 'otters').residents.length,
+    frogs: species.find((specie) => specie.name === 'frogs').residents.length,
+    snakes: species.find((specie) => specie.name === 'snakes').residents.length,
+    elephants: species.find((specie) => specie.name === 'elephants').residents.length,
+    giraffes: species.find((specie) => specie.name === 'giraffes').residents.length,
+  };
+  return allAnimals;
 }
 
 function calculateEntry(entrants) {
