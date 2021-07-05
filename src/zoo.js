@@ -1,13 +1,13 @@
-// const { employees } = require('./data');
+const { employees } = require('./data');
+const { species } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
-  const animalsList = data.species;
-  return animalsList.filter((specie) => ids.includes(specie.id));
+  return species.filter((specie) => ids.includes(specie.id));
 }
 
 function getAnimalsOlderThan(animal, age) {
-  const animals = data.species.find((specie) => specie.name === animal);
+  const animals = species.find((specie) => specie.name === animal);
   return animals.residents.every((resident) => resident.age > age);
 }
 
@@ -15,7 +15,7 @@ function getEmployeeByName(employeeName) {
   if (employeeName === undefined) {
     return {};
   }
-  return data.employees.find((employee) =>
+  return employees.find((employee) =>
     employee.firstName === employeeName || employee.lastName === employeeName);
 }
 
@@ -24,12 +24,11 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  const employeeList = data.employees;
-  return employeeList.some((employee) => employee.managers.includes(id));
+  return employees.some((employee) => employee.managers.includes(id));
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-  data.employees.push({
+  employees.push({
     id,
     firstName,
     lastName,
@@ -38,12 +37,28 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   });
 }
 
-function countAnimals(species) {
-  // seu código aqui
+function countAnimals(specie) {
+  // // deixar um default parameter
+  const allAnimals = {};
+  if (specie === undefined) {
+    species.forEach((animalSpecie) => {
+      allAnimals[animalSpecie.name] = animalSpecie.residents.length;
+    });
+    return allAnimals;
+  }
+  const animals = species.find((animalSpecie) => animalSpecie.name === specie);
+  // dar um jeito de acessar residents.length
+  return animals.residents.length;
 }
 
 function calculateEntry(entrants) {
-  // seu código aqui
+  if (entrants === undefined || {}) {
+    return 0;
+  }
+  // dar um jeito de acessar as chaves de entrants (talvez object.keys)
+  // recuperar as 3 chaves de prices
+  // somar cada uma delas
+  // retornar a soma de todos eles
 }
 
 function getAnimalMap(options) {
@@ -55,7 +70,10 @@ function getSchedule(dayName) {
 }
 
 function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+  // recuperar o funcionario pelo id
+  // pegar a primeira especie com o find em responsibleFor
+  // ordenar a lista de animais pela idade com o sort
+  // retorna o ultimo da lista
 }
 
 function increasePrices(percentage) {
@@ -63,7 +81,9 @@ function increasePrices(percentage) {
 }
 
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+  // deixar um default parameter com todos os funcionarios e seus responsible for
+  // recuperar funcionario por id ou nome
+  // retornar a chave responsible for
 }
 
 module.exports = {
