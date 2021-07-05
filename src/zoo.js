@@ -1,5 +1,6 @@
 const data = require('./data');
-const { species, employees, hours, prices } = data;
+
+const { species, employees } = data;
 
 function getSpeciesByIds(...ids) {
   return species.filter((specie) => ids.includes(specie.id));
@@ -45,7 +46,7 @@ function countAnimals(countSpecies) {
 
 function calculateEntry(entrants) {
   if (!entrants || entrants === {}) return 0;
-  const { Adult = 0, Child = 0 , Senior = 0 } = entrants;
+  const { Adult = 0, Child = 0, Senior = 0 } = entrants;
 
   const total = Adult * 49.99 + Senior * 24.99 + Child * 20.99;
   return total;
