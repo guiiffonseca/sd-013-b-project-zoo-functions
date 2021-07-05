@@ -100,7 +100,16 @@ function getSchedule(nomeDia) {
 }
 
 function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+  const primeiraEspecies = employees.find(({ id: empId }) => empId === id).responsibleFor[0];
+  const primeiroMaisVelho = species
+    .find(({ id: spectId }) => spectId === primeiraEspecies).residents
+    .reduce((maisVelho, morador) => {
+      if (morador.age > maisVelho.age) {
+        return morador;
+      }
+      return maisVelho;
+    });
+  return Object.values(primeiroMaisVelho);
 }
 
 function increasePrices(percentage) {
