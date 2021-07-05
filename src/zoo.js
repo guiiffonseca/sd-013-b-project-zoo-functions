@@ -335,7 +335,7 @@ function getAnimalMap(options) {
 
 // const a = getAnimalMap({ includeNames: false, sorted: true});
 function SemParamentroDia() {
-  const fraseRepitidaLint ='Open from 8am until 6pm'; 
+  const fraseRepitidaLint = 'Open from 8am until 6pm';
   const retorno = {
     Tuesday: fraseRepitidaLint,
     Wednesday: fraseRepitidaLint,
