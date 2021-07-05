@@ -1,4 +1,4 @@
-// Usei como referência o projeto do Rafael Nery Machado para compactar funcoes feitas.
+// Usei como referência o projeto do Rafael Nery Machado para compactar algumas funcoes.
 
 const { species, employees, hours, prices } = require('./data');
 
@@ -90,8 +90,28 @@ function increasePrices(percentage) {
   return prices;
 }
 
+function getEmployee(idOrName) {
+  return employees.find(({ firstName, lastName, id }) =>
+    firstName === idOrName || lastName === idOrName || id === idOrName);
+}
+
+function getAnimalsOfInterest(animalsOfAEmployee) {
+  return animalsOfAEmployee.map((animalId) => species.find(({ id }) => animalId === id).name);
+}
+// Referencia: Projeto do colega Lucas Caribe
 function getEmployeeCoverage(idOrName) {
-  //
+  const coverage = {};
+  if (!idOrName) {
+    employees.forEach(({ firstName, lastName, responsibleFor }) => {
+      const employeeFullName = `${firstName} ${lastName}`;
+      coverage[employeeFullName] = getAnimalsOfInterest(responsibleFor);
+    }); return coverage;
+  }
+  const employee = getEmployee(idOrName);
+  const { firstName, lastName, responsibleFor } = employee;
+  const employeeFullName = `${firstName} ${lastName}`;
+  coverage[employeeFullName] = getAnimalsOfInterest(responsibleFor);
+  return coverage;
 }
 
 module.exports = {
