@@ -75,9 +75,9 @@ function getSchedule(dayName) {
   if (dayName === undefined) {
     return schedule;
   }
-  const oneDayOnASchedule = {};
-  oneDayOnASchedule[dayName] = schedule[dayName];
-  return oneDayOnASchedule;
+  const oneDay = {};
+  oneDay[dayName] = schedule[dayName];
+  return oneDay;
 }
 
 function getOldestFromFirstSpecies(id) {
