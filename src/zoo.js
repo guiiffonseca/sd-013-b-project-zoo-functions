@@ -2,6 +2,7 @@ const data = require('./data');
 
 function getSpeciesByIds(ids) {
   // seu código aqui
+  ids.some((id) => id.species.name);
 }
 
 function getAnimalsOlderThan(animal, age) {
