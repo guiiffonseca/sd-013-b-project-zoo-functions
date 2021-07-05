@@ -117,9 +117,19 @@ function increasePrices(percentage) {
   prices.Child = Math.ceil(prices.Child * (100 + percentage)) / 100;
   prices.Senior = Math.ceil(prices.Senior * (100 + percentage)) / 100;
 }
+const pegEspecNomesEmOrdem = (...ids) => ids
+  .map((id) => species
+    .find((specie) => specie.id === id).name);
 
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+  return employees.filter(({ id, firstName, lastName }) =>
+    !idOrName
+  || idOrName === id
+  || idOrName === firstName
+  || idOrName === lastName)
+    .reduce((cobertura, { firstName, lastName, responsibleFor }) => ({ ...cobertura,
+      [`${firstName} ${lastName}`]: pegEspecNomesEmOrdem(...responsibleFor),
+    }), {});
 }
 
 module.exports = {
