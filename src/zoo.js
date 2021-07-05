@@ -43,11 +43,11 @@ function isManager(id) {
   console.log(burlId);
   return test();
 }
-// refazer
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  const newEmployee = [{ ...id, ...firstName, ...lastName, ...managers, ...responsibleFor }];
+
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  const newEmployee = { id, firstName, lastName, managers, responsibleFor };
   console.log(newEmployee);
-  return { ...employees, ...newEmployee };
+  return data.employees.push(newEmployee);
 }
 
 function countAnimals(species) {
