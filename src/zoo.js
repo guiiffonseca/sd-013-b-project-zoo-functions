@@ -62,10 +62,26 @@ function calculateEntry(entrants) {
 }
 
 function getAnimalMap(options) {
+  
 
 }
 
 function getSchedule(dayName) {
+    const hours = data.hours;
+  const crono = Object.keys(hours).reduce((acc, act) => {
+    const check = (typeof (dayName) === 'undefined') ? act : dayName;
+    const mensagem = `Open from ${hours[check].open}am until ${hours[check].close - 12}pm`;
+    acc[check] = mensagem;
+    return acc;
+  }, {});
+
+  function comp () {
+    if (Object.keys(crono).includes('Monday')) {
+    crono.Monday = 'CLOSED';
+  }
+  return crono
+}
+return comp();
 
 }
 
@@ -77,15 +93,9 @@ function getOldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  function calculo(valor) {
-    return (Math.ceil((valor * 100) * (((percentage / 100) + 1))) / 100).toFixed(2);
-  }
-  const novoAdult = calculo(data.prices.Adult);
-  const novoChild = calculo(data.prices.Child);
-  const novoSenior = calculo(data.prices.Senior);
-  data.prices.Adult = parseFloat(novoAdult, 10);
-  data.prices.Child = parseFloat(novoChild, 10);
-  data.prices.Senior = parseFloat(novoSenior, 10);
+  data.prices.Adult = Math.ceil(data.prices.Adult * (100 + percentage)) / 100;
+  data.prices.Child = Math.ceil(data.prices.Child * (100 + percentage)) / 100;
+  data.prices.Senior = Math.ceil(data.prices.Senior * (100 + percentage)) / 100;
 }
 
 function getEmployeeCoverage(idOrName) {
