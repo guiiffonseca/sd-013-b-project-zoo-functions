@@ -338,10 +338,50 @@ function getAnimalMap(options) {
 function getSchedule(dayName) {
   // seu código aqui
 }
+function pegaPrimeiraSpecie(ParamentroID) {
+  const id = ParamentroID;
+  const retorno = employees.find((value) => id === value.id);
+  return retorno;
+}
 
-function getOldestFromFirstSpecies(id) {
+function pegaMaisVelho(colaborador) {
+  let pessoa = colaborador;
+  let retorno = species.find((value)=>{
+  return value.id === pessoa.responsibleFor[0];
+  })
+  return retorno;
+}
+
+function comparaIdade(velho){
+  let residentes = velho.residents;
+  
+  let idades = [];
+  let retorno = [];
+  residentes.forEach((value)=>{
+    idades.push(value.age);
+  })
+  idades.sort((a,b)=> b - a);
+  residentes.forEach((value)=>{
+    if(value.age === idades[0]){
+      retorno = [value.name , value.sex , value.age];
+    }
+  })
+  
+  return retorno
 
 }
+
+
+function getOldestFromFirstSpecies(id) {
+  const idFuncionario = id;
+  const primeiraEspecie = pegaPrimeiraSpecie(idFuncionario);
+  const OmaisVelho = pegaMaisVelho(primeiraEspecie);
+  const DefineMaisVelho = comparaIdade(OmaisVelho);
+  return DefineMaisVelho;
+
+  
+}
+getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992');
 
 function increasePrices(percentage) { // Math.X(prices.X * (100 + percentage)) / 100;
   data.prices.Adult = Math.ceil(prices.Adult * (100 + percentage)) / 100;
@@ -351,7 +391,7 @@ function increasePrices(percentage) { // Math.X(prices.X * (100 + percentage)) /
 }
 
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+
 }
 
 module.exports = {
