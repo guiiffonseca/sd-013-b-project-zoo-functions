@@ -1,7 +1,7 @@
 const data = require('./data');
 
 const especies = data.species;
-const { employees } = require('./data');
+const { employees, prices } = require('./data');
 const { hours } = require('./data');
 /* const { prices } = require('./data'); */
 
@@ -73,14 +73,17 @@ function getSchedule(dayName) {
 }
 
 function getOldestFromFirstSpecies(id) {
-  const workerId = data.employees.find(employee => employee.id === id). responsibleFor[0];
-  const especie = data.species.find(specie => specie.id === workerId);
+  const workerId = data.employees.find((employee) => employee.id === id).responsibleFor[0];
+  const especie = data.species.find((specie) => specie.id === workerId);
   const olderAnimal = Math.max(...especie.residents.map((resident) => resident.age));
   return Object.values(especie.residents.find((resident) => resident.age === olderAnimal));
 }
 
 function increasePrices(percentage) {
-  
+  prices.Adult = Number(((prices.Adult + (Math.ceil(prices.Adult) * (percentage / 100)))).toFixed(2));
+  prices.Child = Number(Math.round(prices.Child * (1 + (percentage / 100)) * 100) / 100);
+  prices.Senior = Number(Math.round(prices.Senior * (1 + (percentage / 100)) * (99 + 1)) / 100);
+  return prices;
 }
 
 function getEmployeeCoverage(idOrName) {
