@@ -63,6 +63,7 @@ function getSchedule(dayName) {
   return schedule;
 }
 
+// https://github.com/tryber/sd-013-b-project-zoo-functions/blob/arthur-palomo-zoo-functions-project/src/zoo.js / segui a logica de colocar cada passo da função em uma const.
 function getOldestFromFirstSpecies(id) {
   const employeeById = employees.find((employee) => employee.id === id);
   const firtSpecie = species.find((animal) => animal.id === employeeById.responsibleFor[0]);
