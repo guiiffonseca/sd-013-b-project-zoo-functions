@@ -17,11 +17,10 @@ function getEmployeeByName(employeeName) {
 // nesta função caso o return não satisfaça a condição passada pelo find retorna automagicamente  o array vazio.
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  return { ...personalInfo, ...associatedWith };
 }
 
 function isManager(id) {
-  // seu código aqui
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
