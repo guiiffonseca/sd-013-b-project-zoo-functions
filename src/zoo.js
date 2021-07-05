@@ -1,6 +1,6 @@
 const data = require('./data');
 
-const { species, employees, prices, hours} = data;
+const { species, employees, prices, hours } = data;
 
 // species[0].residents[0].age;
 // Array.isArray(species.find((specie) => specie.name === animal));
