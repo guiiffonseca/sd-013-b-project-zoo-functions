@@ -37,8 +37,17 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
 }
 
+// 1- Encontrar todos os animais e suas quantidades;
+// 2- Encontrar o animal e ver o comprimento de residents;
 function countAnimals(species1) {
-  // seu código aqui
+  const animals = {};
+  if (species1 === undefined) {
+    species.forEach((animal) => {
+      animals[animal.name] = animal.residents.length;
+    });
+    return animals;
+  }
+  return species.find(({ name }) => name === species1).residents.length;
 }
 
 function calculateEntry(entrants) {
