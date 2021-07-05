@@ -109,6 +109,11 @@ function getOldestFromFirstSpecies(idFornecido) {
 
 function increasePrices(percentage) {
   // seu código aqui
+  Object.entries(prices).forEach((elemento) => {
+    const chave = elemento[0];
+    const incremento = (elemento[1] + (percentage / 100) * elemento[1]);
+    prices[chave] = Math.ceil(incremento * 100) / 100;
+  });
 }
 
 function getEmployeeCoverage(idOrName) {
