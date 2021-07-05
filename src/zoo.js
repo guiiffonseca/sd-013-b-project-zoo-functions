@@ -1,8 +1,14 @@
+const { species } = require('./data');
 const data = require('./data');
 
-function getSpeciesByIds(ids) {
+function getSpeciesByIds(...ids) {
   // seu código aqui
+  const identidade = (ids);
+  const bichos = identidade.map((value) => species.find((value2) => value2.id === value));
+  return bichos;
 }
+console.log(getSpeciesByIds('0938aa23-f153-4937-9f88-4858b24d6bce',
+  'e8481c1d-42ea-4610-8e11-1752cfc05a46'));
 
 function getAnimalsOlderThan(animal, age) {
   // seu código aqui
