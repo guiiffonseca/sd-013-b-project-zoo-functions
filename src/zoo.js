@@ -89,23 +89,66 @@ function calculateEntry(entrants) {
 // Fiz um forEach nas localizações pra usar elas para o filter.
 // Fiz um filter pra achar a localização atual, através do objeto do filter fiz um map pra pegar o name.
 // Atribui os nomes à chave do objeto vazio, correspondente à localização atual.
-function getAnimalMap(options) {
+const getAnimalMapWithoutParameter = (options) => {
   const speciesForLocation = {};
-  if (!options) {
+  const locationsArray = ['NE', 'NW', 'SE', 'SW'];
+  locationsArray.forEach((locationCurr) => {
+    const namesSpecies = data.species
+      .filter(({ location }) => location === locationCurr)
+      .map(({ name }) => name);
+    speciesForLocation[locationCurr] = namesSpecies;
+  });
+  return speciesForLocation;
+};
+
+const getAnimalMapIncludeNames = (options) => {
+  const speciesForLocation = {};
+  const speciesIncludeNames = {};
+  if (options.includeNames === true) {
     const locationsArray = ['NE', 'NW', 'SE', 'SW'];
     locationsArray.forEach((locationCurr) => {
       const namesSpecies = data.species
-        .filter(({ location }) => location === locationCurr)
-        .map(({ name }) => name);
-      speciesForLocation[locationCurr] = namesSpecies;
+        .filter(({ location }) => location === locationCurr);
+      namesSpecies.forEach((animal) => {
+        speciesIncludeNames[animal.name] = animal.residents.map((resident) => resident.name);
+        speciesForLocation[locationCurr] = speciesIncludeNames;
+      });
     });
   }
   return speciesForLocation;
+};
+console.log(getAnimalMapIncludeNames({ includeNames: true }));
+function getAnimalMap(options) {
+  if (!options) return getAnimalMapWithoutParameter();
 }
-console.log(getAnimalMap());
+// console.log(getAnimalMap());
+
+const getScheduleGeneral = (dayName) => {
+  const schedule = {};
+  const scheduleEntrants = Object.entries(data.hours);
+  if (!dayName) {
+    scheduleEntrants.forEach((day) => {
+      if (day[0] === 'Monday') schedule[day[0]] = 'CLOSED';
+      else schedule[day[0]] = `Open from ${day[1].open}am until ${day[1].close - 12}pm`;
+    });
+  }
+  return schedule;
+};
+
+const getScheduleByName = (dayName) => {
+  const schedule = {};
+  const scheduleEntrants = Object.entries(data.hours);
+  const scheduleDay = scheduleEntrants.find((day) => day[0] === dayName);
+  if (dayName === 'Monday') schedule[dayName] = 'CLOSED';
+  else {
+    schedule[dayName] = `Open from ${scheduleDay[1].open}am until ${scheduleDay[1].close - 12}pm`;
+  }
+  return schedule;
+};
 
 function getSchedule(dayName) {
-  // seu código aqui
+  if (!dayName) return getScheduleGeneral(dayName);
+  return getScheduleByName(dayName);
 }
 
 function getOldestFromFirstSpecies(id) {
