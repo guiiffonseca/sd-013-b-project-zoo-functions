@@ -1,4 +1,4 @@
-// const { species, prices } = require('./data');
+const { species, prices } = require('./data');
 const data = require('./data');
 
 const { employees } = data;
@@ -57,15 +57,13 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 function countAnimals(speciesPar) {
-  // seu código aqui
-  // species.forEach((specie) => { animals[specie.name] = specie.residents.// length; });
-  // if (!speciesPar)
-  /*  if (!speciesPar) {
-    return species.reduce((acc, { name, residents }) => {
-      acc[name] = residents.length
-
-    }, {})
-  }  */
+  // Me inspirei na primeira metade do código no código de Rafael Nery Machado, no Github.
+  if (!speciesPar) {
+    return species.reduce((acc, { name, residents }) => 
+    ({ ...acc, [name]: residents.length }),
+    {});
+  }
+  return species.find(({ name }) => name === speciesPar).residents.length;
 }
 
 function calculateEntry(entrants) {
