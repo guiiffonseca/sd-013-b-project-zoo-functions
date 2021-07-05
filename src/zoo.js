@@ -334,52 +334,49 @@ function getAnimalMap(options) {
 }
 
 // const a = getAnimalMap({ includeNames: false, sorted: true});
-function SemParamentroDia(){
-  let retorno = {
-    'Tuesday': 'Open from 8am until 6pm',
-    'Wednesday': 'Open from 8am until 6pm',
-    'Thursday': 'Open from 10am until 8pm',
-    'Friday': 'Open from 10am until 8pm',
-    'Saturday': 'Open from 8am until 10pm',
-    'Sunday': 'Open from 8am until 8pm',
-    'Monday': 'CLOSED'
-  }
-return retorno;
+function SemParamentroDia() {
+  const fraseRepitidaLint ='Open from 8am until 6pm'; 
+  const retorno = {
+    Tuesday: fraseRepitidaLint,
+    Wednesday: fraseRepitidaLint,
+    Thursday: fraseRepitidaLint,
+    Friday: fraseRepitidaLint,
+    Saturday: fraseRepitidaLint,
+    Sunday: fraseRepitidaLint,
+    Monday: 'CLOSED',
+  };
+  return retorno;
 }
-function montaFrase(dia,hora){
-let diaInformado = dia;
-let frase = {};  
-let keys = Object.keys(hora);
-keys.forEach((value)=>{
-  
-  if(value === diaInformado){
-    frase[diaInformado] = 'Open from 8am until 6pm';
-  }
-})
-return frase;
+function montaFrase(dia, hora) {
+  const diaInformado = dia;
+  const frase = {};
+  const keys = Object.keys(hora);
+  keys.forEach((value) => {
+    if (value === diaInformado) {
+      frase[diaInformado] = 'Open from 8am until 6pm';
+    }
+  });
+  return frase;
 }
 
-function ComParamentro(dia){
-let hora = data.hours;
-  if (dia !== 'Monday'){
-    let frase = montaFrase(dia,hora);
+function ComParamentro(dia) {
+  const hora = data.hours;
+  if (dia !== 'Monday') {
+    const frase = montaFrase(dia, hora);
     return frase;
   }
-  return {"Monday":"CLOSED"};
-
+  return { Monday: 'CLOSED' };
 }
 
 function getSchedule(dayName) {
- let Dia = dayName;
- let retorno;
-if(Dia === undefined){
-  retorno = SemParamentroDia();
-}
-else{
-  retorno = ComParamentro(Dia);
-}
-return retorno;
-
+  const Dia = dayName;
+  let retorno;
+  if (Dia === undefined) {
+    retorno = SemParamentroDia();
+  } else {
+    retorno = ComParamentro(Dia);
+  }
+  return retorno;
 }
 console.log(getSchedule('Sunday'));
 function pegaPrimeiraSpecie(ParamentroID) {
