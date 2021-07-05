@@ -54,9 +54,9 @@ function calculateEntry(entrants) {
   let child = 0;
   let senior = 0;
   if (entrants.Adult > 0) {
-     adult = data.prices.Adult * entrants.Adult;
+    adult = data.prices.Adult * entrants.Adult;
   }
-  if (entrants.Child > 0) {
+  if (entrants.Child > 0) { 
     child = data.prices.Child * entrants.Child;
   }
   if (entrants.Senior > 0) {
@@ -74,7 +74,7 @@ function getSchedule(dayName) {
 }
 
 function getOldestFromFirstSpecies(id) {
-  
+ // 
 }
 
 function increasePrices(percentage) {
