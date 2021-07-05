@@ -21,7 +21,9 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
+  return !!employees.find(({ managers }) => managers.includes(id));
 }
+//  a função is manager vai utilizar o find para encontrar algum valor referente 
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
