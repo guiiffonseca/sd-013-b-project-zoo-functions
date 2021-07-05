@@ -77,17 +77,34 @@ function calculateEntry(entrants) {
   return soma;
 }
 
+function getAnimalLocations() {
+  const getAnimalLocation = data.species.reduce((acc, curr) => {
+    if (!acc[curr.location]) {
+      acc[curr.location] = [curr.name];
+      return acc;
+    }
+    acc[curr.location].push(curr.name);
+    return acc;
+  }, {});
+  return getAnimalLocation;
+}
+
+// function getAnimalNames() {
+//   const getNameAnimals = data.species.reduce((acc, curr) => {
+//     if (!acc[curr.location]) {
+//       acc[curr.location] = [{curr}];
+//       return acc;
+//     }
+//     acc[curr.location].push(curr.name);
+//     return acc;
+//   }, {});
+//   return getNameAnimals;
+// }
+
 function getAnimalMap(options) {
-  // if (!options) {
-  //   const locationAndName = data.species.reduce((acc, curr, index) => {
-  //     acc[curr.location] = [curr.name];
-  //     if (curr.name.length >= 1) {
-  //       acc[curr.location].push(curr.name);
-  //     }
-  //     return acc;
-  //   }, {});
-  //   return locationAndName;
-  // }
+  if (!options) {
+    return getAnimalLocations();
+  }
 }
 
 function getSchedule(dayName) {
@@ -129,8 +146,25 @@ function increasePrices(percentage) {
 }
 
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+  const getFullList = data.employees.reduce((acc, curr) => {
+    acc[`${curr.firstName} ${curr.lastName}`] = curr.responsibleFor
+      .map((elemento) => data.species.find((elemento2) => elemento2.id === elemento).name);
+    return acc;
+  }, {});
+  if (!idOrName) {
+    return getFullList;
+  }
+  const teste = {};
+  data.employees.map((teste2) => {
+    if (teste2.id === idOrName || teste2.firstName === idOrName || teste2.lastName === idOrName) {
+      teste[`${teste2.firstName} ${teste2.lastName}`] = teste2.responsibleFor
+        .map((elemento) => data.species.find((elemento2) => elemento2.id === elemento).name);
+    }
+    return teste;
+  });
+  return teste;
 }
+console.log(getEmployeeCoverage('Azevado'));
 
 module.exports = {
   calculateEntry,
