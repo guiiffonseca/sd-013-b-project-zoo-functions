@@ -336,13 +336,14 @@ function getAnimalMap(options) {
 // const a = getAnimalMap({ includeNames: false, sorted: true});
 function SemParamentroDia() {
   const fraseRepitidaLint = 'Open from 8am until 6pm';
+  const fraseReptidaLint10= 'Open from 10am until 8pm';
   const retorno = {
     Tuesday: fraseRepitidaLint,
     Wednesday: fraseRepitidaLint,
-    Thursday: fraseRepitidaLint,
-    Friday: fraseRepitidaLint,
-    Saturday: fraseRepitidaLint,
-    Sunday: fraseRepitidaLint,
+    Thursday: fraseReptidaLint10,
+    Friday: fraseReptidaLint10,
+    Saturday: 'Open from 8am until 10pm',
+    Sunday: 'Open from 8am until 8pm',
     Monday: 'CLOSED',
   };
   return retorno;
