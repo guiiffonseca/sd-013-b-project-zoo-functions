@@ -73,14 +73,14 @@ function getSchedule(dayName) {
 }
 
 function getOldestFromFirstSpecies(id) {
-  const workerId = data.employees.find(employee => employee.id === id). responsibleFor[0],
-  especie = data.species.find(specie => specie.id === workerId),
-  olderAnimal = Math.max(...especie.residents.map(resident => resident.age));
-  return Object.values(especie.residents.find(resident => resident.age === olderAnimal));
+  const workerId = data.employees.find(employee => employee.id === id). responsibleFor[0];
+  const especie = data.species.find(specie => specie.id === workerId);
+  const olderAnimal = Math.max(...especie.residents.map((resident) => resident.age));
+  return Object.values(especie.residents.find((resident) => resident.age === olderAnimal));
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  
 }
 
 function getEmployeeCoverage(idOrName) {
