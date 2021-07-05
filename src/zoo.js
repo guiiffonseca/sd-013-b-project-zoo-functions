@@ -222,6 +222,14 @@ function getOldestFromFirstSpecies(id) {
 
 function increasePrices(percentage) {
   // seu código aqui
+  const person = Object.keys(data.prices);
+  person.forEach((x) => {
+    const newPrice = data.prices[x] * (1 + percentage / 100);
+    // prettier-ignore
+    data.prices[x] = newPrice.toFixed(2) >= newPrice
+      ? parseFloat(newPrice.toFixed(2))
+      : parseFloat((parseFloat(newPrice.toFixed(2)) + 0.01).toFixed(2));
+  });
 }
 
 function getEmployeeCoverage(idOrName) {
