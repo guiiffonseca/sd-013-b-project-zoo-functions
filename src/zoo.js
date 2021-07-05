@@ -171,33 +171,34 @@ function allEmployeesAndResponsibles() {
   return employeesAndSpecies;
 }
 
-function employeeAndSpecieResp(idOrName) {
+/* function employeeAndSpecieResp(idOrName) {
   // FUNCAO USADA NO getEmployeeCoverage()
   const employeeAndSpcie = {};
+  const namesSpecies = [];
+  let employeeName = '';
+  // juntando nome e sobreNome do funcionario
   employees.forEach((emp) => {
     if (emp.id === idOrName || emp.firstName === idOrName || emp.lastName === idOrName) {
-      // juntando nome e sobreNome do funcionario
-      const employeeName = `${emp.firstName} ${emp.lastName}`;
+      employeeName = `${emp.firstName} ${emp.lastName}`;
       // pegando nome das especies
-      const namesSpecies = [];
       emp.responsibleFor.forEach((idSpecie) => {
         species.forEach((specie) => {
           if (idSpecie === specie.id) namesSpecies.push(specie.name);
         });
       });
-      employeeAndSpcie[employeeName] = namesSpecies;
     }
   });
+  employeeAndSpcie[employeeName] = namesSpecies;
   return employeeAndSpcie;
-}
+} */
 
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
-  const idOrNameString = idOrName;
+  //const idOrNameString = idOrName;
   // se vier undefined :
   if (idOrName === undefined) return allEmployeesAndResponsibles();
   // se vier algum id ,firstName, ou lastName :
-  return employeeAndSpecieResp(idOrNameString);
+  // return employeeAndSpecieResp(idOrNameString);
 }
 console.log(getEmployeeCoverage('Azevado'));
 
