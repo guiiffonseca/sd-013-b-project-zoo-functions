@@ -1,4 +1,7 @@
+const { species } = require('./data');
 const data = require('./data');
+
+const { employees } = data;
 
 function getSpeciesByIds(...ids) {
   // seu código aqui
@@ -21,7 +24,6 @@ function getAnimalsOlderThan(animal, age) {
 function getEmployeeByName(employeeName) {
   // seu código aqui
   if (!employeeName) return {};
-  const { employees } = data;
   const employeeObj = employees.find(
     (employee) => employee.firstName === employeeName || employee.lastName === employeeName,
   );
@@ -36,7 +38,6 @@ function createEmployee(personalInfo, associatedWith) {
 
 function isManager(id) {
   // seu código aqui
-  const { employees } = data;
   const manager = employees.some((employee, index) => employee.managers[index] === id);
   console.log(id);
   return manager;
@@ -44,7 +45,6 @@ function isManager(id) {
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   // seu código aqui
-  const { employees } = data;
   employees.push({
     id,
     firstName,
@@ -57,7 +57,6 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 function countAnimals(especie) {
   // seu código aqui
   const speciesObj = {};
-  const { species } = data;
   if (!especie) {
     species.forEach((specie) => {
       speciesObj[`${specie.name}`] = specie.residents.length;
@@ -110,8 +109,6 @@ function getSchedule(dayName) {
 
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
-  const { employees } = data;
-  const { species } = data;
   const funcionario = employees.find((employee) => employee.id === id);
   const animal = funcionario.responsibleFor[0];
   const caredAnimals = species.find((specie) => specie.id === animal);
@@ -135,9 +132,7 @@ function increasePrices(percentage) {
   console.log(prices);
 }
 
-function getEmployeeCoverage(idOrName) {
-  // seu código aqui
-  const { employees } = data;
+function findEmployee(idOrName) {
   // console.log(employees);
   const foundEmployees = employees.find(
     (employee) => employee.firstName === idOrName
@@ -147,12 +142,30 @@ function getEmployeeCoverage(idOrName) {
   const arrayOfSpecies = [];
   foundEmployees.responsibleFor.forEach((id) => {
     const specie = data.species.find((tipo) => tipo.id === id);
-    console.log(specie);
     arrayOfSpecies.push(specie.name);
   });
-  console.log(arrayOfSpecies);
+  const fullName = `${foundEmployees.firstName} ${foundEmployees.lastName}`;
+  return { fullName, arrayOfSpecies };
+}
+
+function getEmployeeCoverage(idOrName) {
+  // seu código aqui
+  if (!idOrName) {
+    const allEmployees = {};
+    employees.forEach((employee) => {
+      const fullName = `${employee.firstName} ${employee.lastName}`;
+      const arrayOfSpecies = [];
+      employee.responsibleFor.forEach((id) => {
+        const foundSpecie = species.find((specie) => specie.id === id);
+        arrayOfSpecies.push(foundSpecie.name);
+      });
+      allEmployees[fullName] = arrayOfSpecies;
+    });
+    return allEmployees;
+  }
+  const { fullName, arrayOfSpecies } = findEmployee(idOrName);
   return (
-    `{${foundEmployees.firstName} ${foundEmployees.lastName}: [${arrayOfSpecies}]}`);
+    { [fullName]: arrayOfSpecies });
 }
 
 module.exports = {
