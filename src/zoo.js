@@ -34,7 +34,7 @@ function getEmployeeByName(employeeName) {
 
 function createEmployee(personalInfo, associatedWith) {
   // executado acompanhando mentoria do Cajueiro dia 1.
-  return (...personalInfo, ...associatedWith);
+  return { ...personalInfo, ...associatedWith };
 }
 
 function isManager(id) {
