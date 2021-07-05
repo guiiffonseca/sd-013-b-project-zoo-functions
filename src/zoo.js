@@ -118,11 +118,15 @@ const getAnimalMapIncludeNames = (options) => {
   return speciesForLocation;
 };
 console.log(getAnimalMapIncludeNames({ includeNames: true }));
+
 function getAnimalMap(options) {
   if (!options) return getAnimalMapWithoutParameter();
 }
-// console.log(getAnimalMap());
 
+// Se não colocar o dia, manda a escala de todos os dias.
+// Peguei o par de entradas do objeto data.schedule pra conseguir percorrer com o forEach.
+// Se o dia for Monday, então tá fechado o dia todo.
+// Nos outros dias eu criei uma chave no objeto vazio com o nome da chave do data.schedule e o valor com a frase pegando os horários.
 const getScheduleGeneral = (dayName) => {
   const schedule = {};
   const scheduleEntrants = Object.entries(data.hours);
@@ -135,6 +139,7 @@ const getScheduleGeneral = (dayName) => {
   return schedule;
 };
 
+// Fiz a mesma coisa no anterior, mas busquei o dia, passado como parãmetro, nas entradas.
 const getScheduleByName = (dayName) => {
   const schedule = {};
   const scheduleEntrants = Object.entries(data.hours);
@@ -151,6 +156,11 @@ function getSchedule(dayName) {
   return getScheduleByName(dayName);
 }
 
+// Na primeira constante eu busquei o id no objeto data.employees, acessei a chave responsibleFor e peguei o primeiro valor.
+// Na segunda constante eu busquei o id do animal e acessei a chave residents, pegando um objeto com todos os animais.
+// Na terceira constante eu fiz um map pra pegar todas as idades.
+// Fiz um Math.max pra pegar o maior valor.
+// Por fim, busquei o animal que tinha a idade igual à máxima e retornei seus valores.
 function getOldestFromFirstSpecies(idEmployee) {
   const firstAnimalResponsableFor = data.employees.find(({ id }) =>
     id === idEmployee).responsibleFor[0];
@@ -160,6 +170,9 @@ function getOldestFromFirstSpecies(idEmployee) {
   return Object.values(animals.find(({ age }) => age === oldestAge));
 }
 
+// Peguei as chaves do objeto data.prices pra fazer um forEach.
+// No forEach eu alterei a chave do objeto data.prices que era igual à atual do array percorrido.
+// Multiplicar por 100, arredondar e dividir por 100 foi pra dar as casas decimais certas.
 function increasePrices(percentage) {
   const pricesEntries = Object.keys(data.prices);
   pricesEntries.forEach((type) => {
@@ -169,6 +182,9 @@ function increasePrices(percentage) {
   });
 }
 
+// Sem o id ou nome, vou devolver um objeto com os nomes dos empregadose od ids dos animais que eles são responsáveis.
+// O objeto ids, foi pra ter uma tradução, porque tava devolvendo o id cheio de letras e números, e não é o que ele quer.
+// Peguei o array data.employees e fiz um forEach, que pra cada employee cria uma chave (com nome e sobre nome) no objeto vazio, com um valor que é um array com os ids já traduzidos.
 const getEmployeeWithoutidOrName = (idOrName) => {
   const result = {};
   const ids = {
@@ -190,6 +206,7 @@ const getEmployeeWithoutidOrName = (idOrName) => {
   return result;
 };
 
+// O que muda da anterior é que eu tenho o id, o nome ou o sobre nome do empregado, então vou procurar por eles e pegar o objeto do empregado.
 function getEmployeeCoverage(idOrName) {
   const result = {};
   const ids = {
