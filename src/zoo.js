@@ -25,8 +25,15 @@ function isManager(id) {
 }
 //  o find nesta função busca e retorna o elemento ou undefined, logo em seguida o includes vai verificar e retornar true ou false.
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  const newObj = {
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  };
+  employees.push(newObj);
 }
 
 function countAnimals(speciesAgain) {
