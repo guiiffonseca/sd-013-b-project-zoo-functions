@@ -151,30 +151,55 @@ function increasePrices(percentage) {
   });
 }
 
-function getNameAnimal(...idAnimals) {
-  const namesAnimal = [];
-  species.forEach((specie) => {
-    idAnimals.forEach((animal) => {
-      if (animal === specie.id) namesAnimal.push(specie.name);
+function allEmployeesAndResponsibles() {
+  // FUNCAO USADA NA FUNCAO getEmployeeCoverage
+  const employeesAndSpecies = {};
+  employees.forEach((employe) => {
+    // resgatando nome e sobrenome de funcionarios
+    const employeName = `${employe.firstName} ${employe.lastName}`;
+    // juntar nome dos funcionarios e os animais que ele cuida
+    // acessando os animais que employe atual é responsavel
+    const namesAnimal = [];
+    employe.responsibleFor.forEach((idSpecie) => {
+      species.forEach((specie) => {
+        if (idSpecie === specie.id) namesAnimal.push(specie.name);
+      });
     });
+    // a cada loop vai salvar o nome do employee atual e dos animais
+    employeesAndSpecies[employeName] = namesAnimal;
   });
-  return namesAnimal;
+  return employeesAndSpecies;
+}
+
+function employeeAndSpecieResp(idOrName) {
+  // FUNCAO USADA NO getEmployeeCoverage()
+  const employeeAndSpcie = {};
+  employees.forEach((emp) => {
+    if (emp.id === idOrName || emp.firstName === idOrName || emp.lastName === idOrName) {
+      // juntando nome e sobreNome do funcionario
+      const employeeName = `${emp.firstName} ${emp.lastName}`;
+      // pegando nome das especies
+      const namesSpecies = [];
+      emp.responsibleFor.forEach((idSpecie) => {
+        species.forEach((specie) => {
+          if (idSpecie === specie.id) namesSpecies.push(specie.name);
+        });
+      });
+      employeeAndSpcie[employeeName] = namesSpecies;
+    }
+  });
+  return employeeAndSpcie;
 }
 
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
-  const listFuncAndAnimals = {};
-  employees.forEach((employe) => {
-    const employeName = `${employe.firstName} ${employe.lastName}`;
-    if (idOrName === undefined) {
-      const nameAnimals = getNameAnimal(employe.responsibleFor);
-
-      listFuncAndAnimals[employeName] = nameAnimals;
-    }
-  });
-  return listFuncAndAnimals;
+  const idOrNameString = idOrName;
+  // se vier undefined :
+  if (idOrName === undefined) return allEmployeesAndResponsibles();
+  // se vier algum id ,firstName, ou lastName :
+  return employeeAndSpecieResp(idOrNameString);
 }
-console.log(getEmployeeCoverage());
+console.log(getEmployeeCoverage('Azevado'));
 
 module.exports = {
   calculateEntry,
