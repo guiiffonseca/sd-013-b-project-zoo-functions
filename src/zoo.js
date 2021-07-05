@@ -58,12 +58,12 @@ function getAnimalMap(options) {
 }
 
 function getSchedule(dayName) {
-  const result = Object.entries(hours).reduce((acumulator, [key,value]) => {
+  const result = Object.entries(hours).reduce((accumulator, [key, value]) => {
     const [am, pm] = Object.values(value);
-    acumulator[key] = key === 'Monday' ? 'CLOSED' : `Open from ${am}am until ${pm % 12}pm`;
-    return acumulator;
+    accumulator[key] = key === 'Monday' ? 'CLOSED' : `Open from ${am}am until ${pm % 12}pm`;
+    return accumulator;
   }, {});
-  if(dayName) {
+  if (dayName) {
     const day = result[dayName];
     return {
       [dayName]: day,
@@ -73,7 +73,7 @@ function getSchedule(dayName) {
 }
 
 function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+  
 }
 
 function increasePrices(percentage) {
