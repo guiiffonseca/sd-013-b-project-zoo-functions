@@ -52,13 +52,28 @@ function calculateEntry(entrants) {
   if (!entrants || !Object.keys(entrants).length) {
     return 0;
   }
-  let { Adult = 0, Child = 0, Senior = 0 } = entrants;
-  Adult *= prices.Adult;
-  Child *= prices.Child;
-  Senior *= prices.Senior;
 
-  return Adult + Child + Senior;
+  return Object.entries(prices).reduce((acc, priceType) => {
+    const entryType = priceType[0];
+    const price = priceType[1];
+    if (entrants[entryType]) {
+      return acc + (price * entrants[entryType]);
+    }
+    return acc;
+  }, 0);
 }
+/* Forma reduzida:
+return Object.entries(prices).reduce((acc, priceType) =>
+    ((entrants[priceType[0]]) ? acc + (priceType[1] * entrants[priceType[0]]) : acc), 0);
+*/
+/* Tipos de entrada fixos:
+let { Adult = 0, Child = 0, Senior = 0 } = entrants;
+Adult *= prices.Adult;
+Child *= prices.Child;
+Senior *= prices.Senior;
+
+return Adult + Child + Senior;
+*/
 
 // getAnimalMap
 function byLocation(name) {
@@ -164,10 +179,9 @@ function calculateNewPrice(price, percentage) {
 }
 
 function increasePrices(percentage) {
-  const { Adult, Senior, Child } = prices;
-  prices.Adult = calculateNewPrice(Adult, percentage);
-  prices.Senior = calculateNewPrice(Senior, percentage);
-  prices.Child = calculateNewPrice(Child, percentage);
+  Object.keys(prices).forEach((price) => {
+    prices[price] = calculateNewPrice(prices[price], percentage);
+  });
 }
 
 // getEmployeeCoverage
