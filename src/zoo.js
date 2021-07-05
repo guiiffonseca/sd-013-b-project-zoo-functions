@@ -53,16 +53,20 @@ function calculateEntry(entrants) {
   let adult = 0;
   let child = 0;
   let senior = 0;
-  if (entrants.Adult > 0) {
-    adult = data.prices.Adult * entrants.Adult;
+  return CalcEntry(entrants, adult, child, senior);
+}
+
+function CalcEntry(e,a,c,s) {
+  if (e.Adult > 0) {
+    a = data.prices.Adult * e.Adult;
   }
-  if (entrants.Child > 0) {
-    child = data.prices.Child * entrants.Child;
+  if (e.Child > 0) {
+    c = data.prices.Child * e.Child;
   }
-  if (entrants.Senior > 0) {
-    senior = data.prices.Senior * entrants.Senior;
+  if (e.Senior > 0) {
+    s = data.prices.Senior * e.Senior;
   }
-  return adult + senior + child;
+  return (a+c+s);
 }
 
 function getAnimalMap(options) {
