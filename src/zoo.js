@@ -144,8 +144,21 @@ function getOldestFromFirstSpecies(employeId) {
   return Object.values(oldestAnimal(animals));
 }
 
+function incresePricePercentage(value) {
+  const increase = (value / 100) + 1;
+  const newPrices = {
+    newAdult: Math.ceil((prices.Adult * increase) * 100) / 100,
+    newSenior: Math.ceil((prices.Senior * increase) * 100) / 100,
+    newChild: Math.ceil((prices.Child * increase) * 100) / 100,
+  };
+  return newPrices;
+}
+
 function increasePrices(percentage) {
-  // seu código aqui
+  const [firstValue, secondValue, thirdValue] = Object.values(incresePricePercentage(percentage));
+  prices.Adult = firstValue;
+  prices.Senior = secondValue;
+  prices.Child = thirdValue;
 }
 
 function getEmployeeCoverage(idOrName) {
