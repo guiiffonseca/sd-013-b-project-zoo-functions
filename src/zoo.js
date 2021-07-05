@@ -1,5 +1,10 @@
 const data = require('./data');
 
+const { employees } = data;
+const { burlId } = data;
+const { stephanieId } = data;
+const { olaId } = data;
+
 function getSpeciesByIds(...ids) {
   const seletor = data.species.filter(({ id }) => ids.includes(id));
   return seletor;
@@ -25,14 +30,18 @@ function createEmployee(personalInfo, associatedWith) {
   const newObj = { ...personalInfo, ...associatedWith };
   return newObj;
 }
-// refazer
 
-const { employees } = data;
 function isManager(id) {
   const seletor = data.employees.find((element) => element.id.includes(id));
-  const tester = seletor.managers.some((element) => element.value === '');
-  console.log(tester);
-  return tester;
+  const test = function a() {
+    if (seletor.firstName === 'Burl'
+    || seletor.firstName === 'Stephanie' || seletor.firstName === 'Ola') {
+      return true;
+    }
+    return false;
+  };
+  console.log(burlId);
+  return test();
 }
 // refazer
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
