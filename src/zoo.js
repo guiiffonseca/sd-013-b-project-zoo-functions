@@ -89,8 +89,43 @@ function calculateEntry(entrants = 0) {
   return totalToPay;
 }
 
-function getAnimalMap(options) {
-  // seu código aqui
+function getAnimalsByLocation() {
+  const retorno = {
+    NE: [],
+    NW: [],
+    SE: [],
+    SW: [],
+  };
+  species.forEach((currentValue) => {
+    retorno[`${currentValue.location}`].push(currentValue.name);
+  });
+  return retorno;
+}
+
+function getAnimalsNames(sorted = false, sex = '') {
+  const retorno = {
+    NE: [],
+    NW: [],
+    SE: [],
+    SW: [],
+  };
+  species.forEach((currentValue) => {
+    const { name, location, residents } = currentValue;
+    const nameAnimal = {}; nameAnimal[name] = [];
+    retorno[`${location}`].push(nameAnimal);
+    residents.forEach((Resident) => {
+      if (sex === '') { nameAnimal[name].push(Resident.name); }
+      if (sex === Resident.sex) { nameAnimal[name].push(Resident.name); }
+    });
+    if (sorted === true) { nameAnimal[currentValue.name].sort(); }
+  });
+  return retorno;
+}
+
+function getAnimalMap(options = '') {
+  const { sorted = false, sex = '', includeNames = false } = options;
+  if (includeNames === true) { return getAnimalsNames(sorted, sex); }
+  return getAnimalsByLocation();
 }
 
 function getSchedule(dayName) {
