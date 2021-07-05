@@ -31,6 +31,9 @@ function createEmployee(personalInfo, associatedWith) {
 
 function isManager(id) {
   // seu código aqui
+  const managers = data.employees.map((element) =>
+    element.managers).reduce((array, element) => array.concat(element), []);
+  return managers.includes(id);
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
@@ -127,14 +130,13 @@ function increasePrices(percentage) {
   // seu código aqui
   const increase = percentage / 100;
   const { prices } = data;
-  prices.Adult += Math.round(prices.Adult * increase);
+  prices.Adult += (prices.Adult * increase);
   prices.Child += (prices.Child * increase);
   prices.Senior += (prices.Senior * increase);
   return prices;
 }
 
-function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+function getCoverageById(idOrName) {
   const speciesNames = [];
   const employee = data.employees.find((element) => idOrName === element.id
   || idOrName === element.firstName || idOrName === element.lastName);
@@ -143,6 +145,23 @@ function getEmployeeCoverage(idOrName) {
   const result = {};
   result[`${employee.firstName} ${employee.lastName}`] = speciesNames;
   return result;
+}
+
+function getEmployeeCoverage(idOrName) {
+  // seu código aqui
+  if (!idOrName) {
+    const coverage = {};
+    data.employees.forEach((element) => {
+      const name = `${element.firstName} ${element.lastName}`;
+      const animalsIds = element.responsibleFor;
+      const animalsNames = [];
+      animalsIds.forEach((id) =>
+        animalsNames.push(data.species.find((animal) => animal.id === id).name));
+      coverage[name] = animalsNames;
+    });
+    return coverage;
+  }
+  return getCoverageById(idOrName);
 }
 
 module.exports = {
