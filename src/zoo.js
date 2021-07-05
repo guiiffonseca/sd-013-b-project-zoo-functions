@@ -70,8 +70,21 @@ function countAnimals(species = {}) {
   return animals;
 }
 
-function calculateEntry(entrants = 0) {
+function calculateEntry(entrants = {}) {
+  // Retorna 0 se nenhum argumento for passado
+  // Retorna 0 se um objeto vazio for passado
   // seu código aqui
+  let entry;
+  if (Object.keys(entrants).length === 0) {
+    entry = 0;
+  } else {
+    const entryFunc = ({ Adult = 0, Child = 0, Senior = 0 }) => {
+      const { prices } = data;
+      return prices.Adult * Adult + prices.Child * Child + prices.Senior * Senior;
+    };
+    entry = entryFunc(entrants);
+  }
+  return entry;
 }
 
 function getAnimalMap(options) {
