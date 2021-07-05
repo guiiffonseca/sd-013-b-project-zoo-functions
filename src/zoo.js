@@ -1,4 +1,4 @@
-const { hours } = require('./data');
+const { hours, prices } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -73,11 +73,16 @@ function getOldestFromFirstSpecies(id) {
   const getIds = data.employees.find((employee) => employee.id === id).responsibleFor;
   const getOlderOne = data.species.find((specie) => specie.id === getIds[0])
     .residents.sort((residentAgeA, residentAgeB) => residentAgeB.age - residentAgeA.age);
-  return [getOlderOne[0].name, getOlderOne[0].sex, getOlderOne[0].age];
+  return Object.values(getOlderOne[0]);
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  const pricesValues = Object.keys(prices);
+  pricesValues.forEach((value) => {
+    const roundedNumber = Math.round((prices[value] * (1 + (percentage / 100))) * 100) / 100;
+    prices[value] = roundedNumber;
+  });
+  return pricesValues;
 }
 
 function getEmployeeCoverage(idOrName) {
