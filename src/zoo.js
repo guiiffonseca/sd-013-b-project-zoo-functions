@@ -134,7 +134,13 @@ function getOldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  prices.Adult = Number((prices.Adult + ((prices.Adult / 100) * percentage) + 0.005).toFixed(2));
+  prices.Senior = Number((prices.Senior + ((prices.Senior / 100) * percentage) + 0.005).toFixed(2));
+  prices.Child = Number((prices.Child + ((prices.Child / 100) * percentage) + 0.005).toFixed(2));
+
+  // prices.Adult = prices.Adult + (prices.Adult / 100 * percentage) + 0.005;
+  // prices.Senior = prices.Senior + (prices.Senior / 100 * percentage) + 0.005;
+  // prices.Child = prices.Child + (prices.Child / 100 * percentage) + 0.005;
 }
 
 function getEmployeeCoverage(idOrName) {
