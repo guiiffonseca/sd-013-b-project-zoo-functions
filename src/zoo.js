@@ -1,3 +1,4 @@
+const { employees } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -25,11 +26,10 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  if (id === '0e7b460e-acf4-4e17-bcb3-ee472265db83') {
-    return true;
-  }
-  return false;
+  const resultado = employees.some((element) => element.managers.find((element1)=>element1===id));
+  return resultado;
 }
+
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   return data.employees.push({ id, firstName, lastName, managers, responsibleFor });
