@@ -85,21 +85,21 @@ function countAnimals(animalName) {
   return species.find((element) => element.name === animalName).residents.length;
 }
 
-const normalizeAdult = (object) => {
-  if (object.Adult === undefined) {
-    object.Adult = 0;
+const normalizeAdult = () => {
+  if (entrants.Adult === undefined) {
+    entrants.Adult = 0;
   }
 };
 
-const normalizeChild = (object) => {
-  if (object.Child === undefined) {
-    object.Child = 0;
+const normalizeChild = () => {
+  if (entrants.Child === undefined) {
+    entrants.Child = 0;
   }
 };
 
-const normalizeSenior = (object) => {
-  if (object.Senior === undefined) {
-    object.Senior = 0;
+const normalizeSenior = () => {
+  if (entrants.Senior === undefined) {
+    entrants.Senior = 0;
   }
 };
 
