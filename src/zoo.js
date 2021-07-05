@@ -1,5 +1,15 @@
 const data = require('./data');
 
+function getSpeciesName(animalId) {
+  return data.species.find((species) => species.id === animalId).name;
+}
+
+const staffList = {};
+data.employees.forEach((staff, i) => {
+  staffList[`${staff.firstName} ${staff.lastName}`] = staff
+    .responsibleFor.map(getSpeciesName);
+});
+
 function getAnimalsOlderThan(animal, age) {
   const species = data.species.find((critter) => critter.name === animal);
   return !species.residents.find((resident) => resident.age < age);
@@ -84,8 +94,25 @@ function increasePrices(percentage) {
 }
 
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+  if (!idOrName) {
+    return staffList;
+  }
+  let infoType = data.employees.some((employee) => employee.id === idOrName) ? 'id' : false;
+  infoType = data.employees.some((employee) => employee.firstName === idOrName)
+    ? 'firstName' : infoType;
+  infoType = data.employees.some((employee) => employee.lastName === idOrName)
+    ? 'lastName' : infoType;
+  const staff = data.employees.findIndex((employee) => employee[infoType] === idOrName);
+  const staffAnimals = data.employees[staff]
+    .responsibleFor.map(getSpeciesName);
+  const staffName = `${data.employees[staff].firstName} ${data.employees[staff].lastName}`;
+  const coverage = {};
+  coverage[staffName] = staffAnimals;
+  return coverage;
 }
+
+console.table(getEmployeeCoverage('Emery'));
+// console.table(data.employees);
 
 module.exports = {
   calculateEntry,
