@@ -86,15 +86,11 @@ const getResidents = (specie, sex) => ((sex !== undefined)
   : specie
     .reduce((acc, currentValue) => acc.concat(currentValue.name), []));
 
-const getAnimalForAnimalMap = (sex) => {
-  return data.species.map((specie) => {
-    return {
-      name: specie.name,
-      location: specie.location,
-      residents: getResidents(specie.residents, sex),
-    };
-  });
-};
+const getAnimalForAnimalMap = (sex) => data.species.map((specie) => ({
+  name: specie.name,
+  location: specie.location,
+  residents: getResidents(specie.residents, sex),
+}));
 
 const getNamesAnimal = (animals) => animals // Retorna um array com o nome dos animais
   .reduce((acc, currentValue) => acc.concat(currentValue), []);
