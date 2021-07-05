@@ -76,6 +76,21 @@ function getAnimalMapAtom(options) {
   return object;
 }
 
+function getCompleteSchedule() {
+  const schedule = {};
+  const days = Object.keys(data.hours);
+  days.forEach((x) => {
+    if (x === 'Monday') schedule[x] = 'CLOSED';
+    else {
+      schedule[x] = `Open from ${data.hours[x].open}am until ${
+        data.hours[x].close - 12
+      }pm`;
+    }
+  });
+
+  return schedule;
+}
+
 // ====================
 // ====================
 // ====================
@@ -186,6 +201,9 @@ function getAnimalMap(options) {
 
 function getSchedule(dayName) {
   // seu código aqui
+  const complete = getCompleteSchedule();
+  if (!dayName) return complete;
+  return { [dayName]: complete[dayName] };
 }
 
 function getOldestFromFirstSpecies(id) {
@@ -215,3 +233,5 @@ module.exports = {
   increasePrices,
   createEmployee,
 };
+
+console.log(getSchedule());
