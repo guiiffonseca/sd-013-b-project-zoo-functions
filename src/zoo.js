@@ -87,7 +87,7 @@ function getAnimalMap(options) {
     return data.species.reduce(((acc, curr) => {
       acc[curr.location] = createAnimalsList(curr.location);
       return acc;
-  }), {});
+    }), {});
   }
   // const { includeNames: a, sex: b, sorted: c } = options;
 }
