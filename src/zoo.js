@@ -61,7 +61,7 @@ function animalSort(sort, animalsList) {
   if (sort) animalsList.sort();
 }
 
-function getAnimalMap(options = {} ) {
+function getAnimalMap(options = {}) {
   const location = { NE: [], NW: [], SE: [], SW: [] };
   data.species.forEach((animal) => {
     if (options.includeNames) {
@@ -70,9 +70,7 @@ function getAnimalMap(options = {} ) {
       const animalListedNames = [];
       animal.residents.forEach((element) => {
         const checkAnimalSex = animalSex(element, options.sex);
-        if (checkAnimalSex !== undefined) {
-          animalListedNames.push(checkAnimalSex);
-        }
+        if (checkAnimalSex !== undefined) animalListedNames.push(checkAnimalSex);
       });
       animalSort(options.sorted, animalListedNames);
       animalObject[animalName] = animalListedNames;
