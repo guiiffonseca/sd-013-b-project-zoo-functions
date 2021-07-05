@@ -46,17 +46,7 @@ function countAnimals(species) {
   return (data.species.find((element) => element.name === species).residents.length);
 }
 
-function calculateEntry(entrants) {
-  if ((entrants === undefined) || (Object.keys(entrants).length === 0)) {
-    return 0;
-  }
-  let adult = 0;
-  let child = 0;
-  let senior = 0;
-  return CalcEntry(entrants, adult, child, senior);
-}
-
-function CalcEntry(e,a,c,s) {
+function CalcEntry(e, a, c, s) {
   if (e.Adult > 0) {
     a = data.prices.Adult * e.Adult;
   }
@@ -66,7 +56,17 @@ function CalcEntry(e,a,c,s) {
   if (e.Senior > 0) {
     s = data.prices.Senior * e.Senior;
   }
-  return (a+c+s);
+  return (a + c + s);
+}
+
+function calculateEntry(entrants) {
+  if ((entrants === undefined) || (Object.keys(entrants).length === 0)) {
+    return 0;
+  }
+  const adult = 0;
+  const child = 0;
+  const senior = 0;
+  return CalcEntry(entrants, adult, child, senior);
 }
 
 function getAnimalMap(options) {
