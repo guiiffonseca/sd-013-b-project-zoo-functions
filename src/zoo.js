@@ -64,10 +64,10 @@ function getSchedule(dayName) {
 }
 
 function getOldestFromFirstSpecies(id) {
-  const employee = employees.find((emp) => emp.id === id);
-  const animals = data.species.find((anm) => anm.id === employee.responsibleFor[0]);
-  const oldest = animals.residents.sort((anm1, anm2) => anm1.age - anm2.age).reverse()[0];
-  return Object.values(oldest);
+  const employeeById = employees.find((employee) => employee.id === id);
+  const firtSpecie = species.find((animal) => animal.id === employeeById.responsibleFor[0]);
+  const oldestAnimal = firtSpecie.residents.sort((animal1, animal2) => animal2.age - animal1.age);
+  return Object.values(oldestAnimal[0]);
 }
 
 function increasePrices(percentage) {
