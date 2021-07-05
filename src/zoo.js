@@ -1,23 +1,28 @@
-const data = require('./data');
+const { species, employees } = require('./data');
+
 // Com a ajuda da Mariana Nogueira, consegui fazer o primeiro requisito:
 // Usei o rest para que independente de quantos parâmetros a função funcione;
 // Coloquei a função para retornar o parâmetro com map;
 // O map percorre o parametro e retorna ele como um array;
 // Dentro do map coloquei um find para encontrar dentro de species o id que é igual a ao parametro;
 function getSpeciesByIds(...ids) {
-  return ids.map((id) => data.species.find((specie) => specie.id === id));
+  return ids.map((id) => species.find((specie) => specie.id === id));
 }
 
 // 1- Encontrar o animal(animal);
 // 2- Encontrar as idades;
 // 3- Ver se as idades são maiores que a idade minima(age);
-function getAnimalsOlderThan(animal, age) {
-  return (data.species.find((specie) => specie.name === animal))
-    .residents.every((minAge) => minAge.age >= age);
+function getAnimalsOlderThan(animal, minAge) {
+  return (species.find(({ name }) => name === animal))
+    .residents.every(({ age }) => age >= minAge);
 }
 
+// 1- Encontrar o nome e o sobrenome;
+// 2- Comparar com o parametro(employeeName);
 function getEmployeeByName(employeeName) {
-  // seu código aqui
+  if (employeeName === undefined) return {};
+  return employees.find(({ firstName, lastName }) =>
+    (firstName === employeeName || lastName === employeeName));
 }
 
 function createEmployee(personalInfo, associatedWith) {
@@ -25,14 +30,14 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  // seu código aqui
+  return employees.some(({ managers }) => managers === id);
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
 }
 
-function countAnimals(species) {
+function countAnimals(species1) {
   // seu código aqui
 }
 
