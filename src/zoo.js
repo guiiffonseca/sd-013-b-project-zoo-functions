@@ -50,12 +50,56 @@ function calculateEntry(entrants = {}) {
   return Object.entries(entrants).reduce((acc, [key, value]) => acc + prices[key] * value, 0);
 }
 
+const findSpec = () => species.reduce((acc, curr) => {
+  acc[curr.location] = species.filter((value) => value.location === curr.location)
+    .map((spec) => spec.name);
+  return acc;
+}, {});
+
+const includeNames = () => species.reduce((acc, curr) => {
+  acc[curr.location] = species.filter((value) => value.location === curr.location)
+    .map((spec) => ({ [spec.name]: spec.residents.map(({ name }) => name) }));
+  return acc;
+}, {});
+
+const includeNamesSorted = () => species.reduce((acc, curr) => {
+  acc[curr.location] = species.filter((value) => value.location === curr.location)
+    .map((spec) => ({ [spec.name]: spec.residents.map(({ name }) => name).sort() }));
+  return acc;
+}, {});
+
+const includeNamesSex = () => species.reduce((acc, curr) => {
+  acc[curr.location] = species.filter((value) => value.location === curr.location)
+    .map((spec) => ({ [spec.name]: spec.residents.filter(({ sex }) => sex === 'female')
+      .map(({ name }) => name) }));
+  return acc;
+}, {});
+
+const includeNamesSexSorted = () => species.reduce((acc, curr) => {
+  acc[curr.location] = species.filter((value) => value.location === curr.location)
+    .map((spec) => ({ [spec.name]: spec.residents.filter(({ sex }) => sex === 'female')
+      .map(({ name }) => name).sort() }));
+  return acc;
+}, {});
+
+function eslint2(options) {
+  if (options.sex === 'female') return findSpec();
+  if (options.includeNames) return includeNames();
+}
+
+function eslint1(options) {
+  if (options.includeNames && options.sex === 'female') return includeNamesSex();
+  if (options.includeNames && options.sorted) return includeNamesSorted();
+  return eslint2(options);
+}
+
 function getAnimalMap(options) {
   // seu código aqui
-  // return species.reduce((acc, curr) => {
-  //  acc = { [curr.location]: [curr.name] }
-  //  return acc;
-  // }, {});
+  if (!options) return findSpec();
+  if (options.includeNames && options.sex === 'female' && options.sorted) {
+    return includeNamesSexSorted();
+  }
+  return eslint1(options);
 }
 
 const auxShedule = () => Object.entries(hours).reduce((acc, [key, { open, close }]) => {
