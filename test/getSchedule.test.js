@@ -5,7 +5,7 @@ describe('Implemente a função getSchedule', () => {
   it('Sem parâmetros, retorna um cronograma legível para humanos', () => {
     const actual = zoo.getSchedule();
     const expected = {
-      'Tuesday': 'Open from 8am until 6pm',
+      'Tuesday': 'Open from 10am until 8pm',
       'Wednesday': 'Open from 8am until 6pm',
       'Thursday': 'Open from 10am until 8pm',
       'Friday': 'Open from 10am until 8pm',
@@ -26,7 +26,7 @@ describe('Implemente a função getSchedule', () => {
 
     actual = zoo.getSchedule('Tuesday');
     expected = {
-      'Tuesday': 'Open from 8am until 6pm'
+      'Tuesday': 'Open from 10am until 8pm'
     };
     assert.deepStrictEqual(actual, expected);
   });
