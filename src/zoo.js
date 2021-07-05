@@ -49,7 +49,7 @@ function countAnimals(species) {
 function CalcEntry(entrada) {
   let nnAdult = 0;
   let nnChild = 0;
-  let nnSenior= 0;
+  let nnSenior = 0;
   if (entrada.Adult > 0) {
     nnAdult = data.prices.Adult * entrada.Adult;
   }
