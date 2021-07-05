@@ -91,8 +91,9 @@ function consultDay({ open, close }) {
 
 function getSchedule(dayName) {
   return dayName ? { [dayName]: consultDay(hours[dayName]) }
-  : Object.keys(hours).reduce((schedule, day) => ({...schedule,
-  [day]: consultDay(hours[day]), }), {});
+    : Object.keys(hours).reduce((schedule, day) => ({ ...schedule,
+      [day]: consultDay(hours[day]),
+    }), {});
 }
 
 function getOldestFromFirstSpecies(id) {
