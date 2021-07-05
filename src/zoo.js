@@ -1,4 +1,4 @@
-const { prices, hours } = require('./data');
+const { prices, hours, employees, species } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...getId) {
@@ -97,7 +97,17 @@ function getSchedule(dayName) {
 }
 
 function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+  const firstRegister = employees
+  .find(({id: employeeID}) => employeeID === id).responsibleFor[0];
+  const oldest = species
+  .find(({ id: specieId}) => specieId === firstRegister)
+  .residents.reduce((older, resident) => {
+    if (resident.age > older.age) {
+      return resident;
+    }
+    return older
+  });
+  return Object.values(oldest);
 }
 
 function increasePrices(percentage) {
