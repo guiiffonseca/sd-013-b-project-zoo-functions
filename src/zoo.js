@@ -42,7 +42,7 @@ function countAnimals(species) {
       animais[name] = residents.length;
     });
     return (animais);
-  } 
+  }
   return (data.species.find((element) => element.name === species).residents.length);
 }
 

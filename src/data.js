@@ -51,7 +51,6 @@ module.exports = {
           sex: 'female',
           age: 19,
         },
-        
         {
           name: 'Esther',
           sex: 'female',
