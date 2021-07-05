@@ -51,10 +51,6 @@ function countAnimals(speciesParam) {
   return species.find((specie) => specie.name === speciesParam).residents.length;
 }
 
-const multiplyPrices = (price, entrants) => {
- let newPrice = price * entrants;
-};
-
 function calculateEntry(entrants = 0) {
   // seu código aqui
   const { Adult = 0, Child = 0, Senior = 0} = entrants;
@@ -74,13 +70,13 @@ function getOldestFromFirstSpecies(id) {
   // seu código aqui
 }
 
-const doPercentage = (price, percentage) => {
-  return price + (price * percentage / 100)
-}
+// const doPercentage = (price, percentage) => {
+//   return price + (price * percentage / 100)
+// }
 
 function increasePrices(percentage) {
   // seu código aqui
-  data.prices =  Object.values(data.prices).forEach(doPercentage);
+  // data.prices =  Object.values(data.prices).forEach(doPercentage);
 }
 
 function getEmployeeCoverage(idOrName) {
