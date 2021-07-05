@@ -109,7 +109,18 @@ function increasePrices(percentage) {
 
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
+  if (!idOrName) {
+    const findName = data.employees.reduce((acc, curr) => {
+      const animalId = (id) => data.species.find((element) => element.id === id).name;
+      const animal = curr.responsibleFor.map(animalId);
+      acc[`${curr.firstName} ${curr.lastName}`] = animal;
+      return acc;
+    }, {})
+    return findName;
+  }
+  
 }
+console.log(getEmployeeCoverage())
 
 module.exports = {
   calculateEntry,
