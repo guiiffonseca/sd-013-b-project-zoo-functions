@@ -19,7 +19,7 @@ function getEmployeeByName(employeeName) {
   return employeesNames;
 }
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  return { ...personalInfo, ...associatedWith };
 }
 
 function isManager(id) {
@@ -31,7 +31,7 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 }
 
 function countAnimals(species) {
-  // seu código aqui
+
 }
 
 function calculateEntry(entrants) {
