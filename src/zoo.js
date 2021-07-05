@@ -130,8 +130,29 @@ function increasePrices(percentage) {
   prices.Senior = Math.ceil((prices.Senior * mult) * 100) / 100;
 }
 
-function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+const all = {};
+employees.forEach((val) => {
+  const name = `${val.firstName} ${val.lastName}`;
+  const animais = [];
+  val.responsibleFor.forEach((arg) => animais.push(species.find((spe) => spe.id === arg).name));
+  all[name] = animais;
+});
+
+function getEmployeeCoverage(idOrName = '') {
+  function check(arg) {
+    return arg.firstName === idOrName || arg.lastName === idOrName || arg.id === idOrName;
+  }
+
+  if (idOrName) {
+    const person = employees.find(check);
+    const animals = [];
+    person.responsibleFor.forEach((arg) => animals.push(species.find((sp) => sp.id === arg).name));
+    const result = {
+      [`${person.firstName} ${person.lastName}`]: animals,
+    };
+    return result;
+  }
+  return all;
 }
 
 module.exports = {
