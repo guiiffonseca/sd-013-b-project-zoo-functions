@@ -1,4 +1,4 @@
-const { species, employees } = require('./data');
+const { species, employees, prices } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -275,31 +275,79 @@ function includeNames() {
   animaisNW(obj);
   animaisSE(obj);
   animaisSW(obj);
-  console.log(obj);
+  return obj;
 }
+// function ordernarArray(NEanimais) {
+//   let key = '';
+//   const AnimaisNE = NEanimais;
+//   AnimaisNE.forEach((value) => {
+//     key = Object.keys(value);
+//     let nomeKey;
+//     [nomeKey] = key;
+//     value[nomeKey].sort();
+//     nomeKey = '';
+//   });
+//   return AnimaisNE;
+// }
+
+// function ordenar(obj) {
+//   const objeto = obj;
+//   objeto.NE = ordernarArray(objeto.NE);
+//   objeto.NW = ordernarArray(objeto.NW);
+//   objeto.SW = ordernarArray(objeto.SW);
+//   objeto.SE = ordernarArray(objeto.SE);
+//   return objeto;
+//   // let objetoNW = obj.NW;
+//   // let objetoSE = obj.SE;
+//   // let objetoSW = obj.SW;
+// }
+
+// function escolheSex(obj, sex) {
+//   let objeto = obj;
+//   if (sex === 'female') {
+//     objeto = sexFilterF(objeto);
+//   }
+//   // if(sex === 'male'){
+//   //  objeto = sexFilterM(objeto)
+//   // }
+//   return objeto;
+// }
 
 function getAnimalMap(options) {
-  if (options === undefined) {
-    const obj = optionSemParametro();
-    return obj;
+  let obj = {};
+
+  if (options.includeNames === false) {
+    obj = optionSemParametro();
   }
 
   if (options.includeNames === true) {
-    return includeNames();
+    obj = includeNames();
   }
+  // if (options.sex !== '') {
+
+  // }
+
+  // if (options.sorted === true) {
+  //   obj = ordenar(obj, options);
+  // }
+  return obj;
 }
-getAnimalMap({ includeNames: true });
+
+// const a = getAnimalMap({ includeNames: false, sorted: true});
 
 function getSchedule(dayName) {
   // seu código aqui
 }
 
 function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+
 }
 
-function increasePrices(percentage) {
-  // seu código aqui
+function increasePrices(percentage) { // Math.X(prices.X * (100 + percentage)) / 100;
+  data.prices.Adult = Math.ceil(prices.Adult * (100 + percentage)) / 100;
+  data.prices.Child = Math.ceil(prices.Child * (100 + percentage)) / 100;
+  data.prices.Senior = Math.ceil(prices.Senior * (100 + percentage)) / 100;
+  return data.prices;
 }
 
 function getEmployeeCoverage(idOrName) {
