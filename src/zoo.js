@@ -67,6 +67,17 @@ function getAnimalMap(options) {
 
 function getSchedule(dayName) {
   // seu código aqui
+  const schedule = Object.getOwnPropertyDescriptors(data.hours);
+  Object.keys(schedule).forEach((prop) => {
+    schedule[prop] = `Open from ${data.hours[prop].open}am until ${data.hours[prop].close % 12}pm`;
+    schedule.Monday = 'CLOSED';
+  });
+  if (dayName === undefined) {
+    return schedule;
+  }
+  const oneDayOnASchedule = {};
+  oneDayOnASchedule[dayName] = schedule[dayName];
+  return oneDayOnASchedule;
 }
 
 function getOldestFromFirstSpecies(id) {
@@ -79,9 +90,9 @@ function getOldestFromFirstSpecies(id) {
 
 function increasePrices(percentage) {
   // seu código aqui
-  prices.Adult = Math.ceil(prices.Adult * (100 + percentage)) / 100;
-  prices.Child = Math.ceil(prices.Child * (100 + percentage)) / 100;
-  prices.Senior = Math.ceil(prices.Senior * (100 + percentage)) / 100;
+  data.prices.Adult = Math.ceil(prices.Adult * (100 + percentage)) / 100;
+  data.prices.Child = Math.ceil(prices.Child * (100 + percentage)) / 100;
+  data.prices.Senior = Math.ceil(prices.Senior * (100 + percentage)) / 100;
 }
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
