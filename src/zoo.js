@@ -1,5 +1,4 @@
 /* eslint-disable editorconfig/editorconfig */
-const { hours } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -78,8 +77,19 @@ function calculateEntry(entrants) {
   return cost;
 }
 
+function createAnimalsList(direction) {
+  return data.species
+    .filter((specie) => specie.location === direction)
+    .map((animal) => animal.name);
+}
 function getAnimalMap(options) {
-  // seu código aqui
+  if (!options) {
+    return data.species.reduce(((acc, curr) => {
+      acc[curr.location] = createAnimalsList(curr.location);
+      return acc;
+  }), {});
+  }
+  // const { includeNames: a, sex: b, sorted: c } = options;
 }
 
 function getAllSchedules() {
