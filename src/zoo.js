@@ -45,8 +45,8 @@ function countAnimals(specieName) {
   return species.find((specie) => specie.name === specieName).residents.length;
 }
 
-function calculateEntry(adult, child, senior) {
-  return adult;
+function calculateEntry({ Adult = 0, Child = 0, Senior = 0 } = {}) {
+  return (Adult * prices.Adult) + (Child * prices.Child) + (Senior * prices.Senior);
 }
 
 function getAnimalMap(options) {
