@@ -128,11 +128,25 @@ function getSchedule(dayName) {
 // a função getSchedule retorna: a função scheduleAllDays se não tiver parâmetro ou a função scheduleOneDay passando o parâmetro.
 
 function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+  const employeeId = data.employees.find((employee) => employee.id === id).responsibleFor[0];
+  const animalsId = data.species.find((specie) => specie.id === employeeId).residents;
+  const ages = animalsId.map(({ age }) => age);
+  const oldestAnimal = Math.max(...ages);
+  return Object.values(animalsId.find(({ age }) => age === oldestAnimal));
 }
+
+// const residentAnimals = animalsId.residents;
+// const responsible = employeeId.responsibleFor[0];
+
+// primeiro eu criei uma constante para acessar procurar o id do employee. em vez de criar outra constante para acessar a chave responsibleFor eu ja fiz isso com o .responsibleFor[0] para acessar o primeiro valor da mesma.
+// depois criei outra constante para encontrar o id da especie que seja igual ao id do responsibleFor do employee. e da mesma maneira em vez de criar outra constante oara acessar a chave residents eu fiz isso com o .residents.
+// depois criei outra constante e fiz um map que vai me retornar um array com todas as idades.
+// depois criei outra constante para pegar a maior idade (math.max) dentro do array ages, usei spread operator.
+// para o retorno acessei os valores do objeto da chave residents e busquei o animal com a idade igual a idade maxima.
 
 function increasePrices(percentage) {
   // seu código aqui
+  // price * ( 100 + percentual ) / 100
 }
 
 function getEmployeeCoverage(idOrName) {
