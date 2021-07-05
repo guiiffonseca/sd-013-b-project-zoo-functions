@@ -1,7 +1,6 @@
 const data = require('./data');
 
 const { species } = data;
-const { employees } = data;
 
 const getSpeciesByIds = (...ids) => species.filter((specie, index) => specie.id === ids[index]);
 
@@ -12,6 +11,7 @@ function getAnimalsOlderThan(animal, age) {
   return animals.residents.every((resident) => resident.age >= age);
 }
 
+const { employees } = data;
 function getEmployeeByName(employeeName) {
   return employees.find((e) => e.firstName === employeeName || e.lastName === employeeName) || {};
 }
@@ -57,11 +57,22 @@ function countAnimals(speciesParam) {
     elephants: species.find((specie) => specie.name === 'elephants').residents.length,
     giraffes: species.find((specie) => specie.name === 'giraffes').residents.length,
   };
+
   return allAnimals;
 }
-
+const { prices } = data;
+// prices: { Adult: 49.99, Senior: 24.99, Child: 20.99 }
 function calculateEntry(entrants) {
   // seu código aqui
+  if (entrants === undefined) return 0;
+  const { Adult, Senior, Child } = entrants;
+  const quantiesOfEnt = [Adult, Senior, Child];
+  const valuesPrices = Object.values(prices);
+
+  const eachPrice = quantiesOfEnt.map((quanty, i) => ((quanty > 0 ? quanty * valuesPrices[i] : 0)));
+  const totalPrice = eachPrice.reduce(((acc, curr) => acc + curr));
+
+  return totalPrice || 0;
 }
 
 function getAnimalMap(options) {
