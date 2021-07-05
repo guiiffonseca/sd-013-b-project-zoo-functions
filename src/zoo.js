@@ -1,6 +1,7 @@
 const { species } = require('./data');
 const data = require('./data');
 const { employees } = require('./data');
+const { prices } = require('./data');
 
 function getSpeciesByIds(...ids) {
   const arr = [];
@@ -70,8 +71,19 @@ function countAnimals(especie) {
   return newObj.residents.length;
 }
 
+const sum = (obj) => {
+  const adulto = Number.isNaN(Number(obj.Adult)) ? 0 : obj.Adult * prices.Adult;
+  const crianca = Number.isNaN(Number(obj.Child)) ? 0 : obj.Child * prices.Child;
+  const idoso = Number.isNaN(Number(obj.Senior)) ? 0 : obj.Senior * prices.Senior;
+  return adulto + crianca + idoso;
+};
+
 function calculateEntry(entrants) {
-  // seu código aqui
+  if (entrants === undefined || Object.keys(entrants).length === 0) {
+    return 0;
+  }
+  const valor = sum(entrants);
+  return valor;
 }
 
 function getAnimalMap(options) {
