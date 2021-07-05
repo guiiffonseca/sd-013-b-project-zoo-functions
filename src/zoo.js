@@ -46,17 +46,17 @@ function countAnimals(species) {
   return (data.species.find((element) => element.name === species).residents.length);
 }
 
-function CalcEntry(e, a, c, s) {
-  if (e.Adult > 0) {
-    a = data.prices.Adult * e.Adult;
+function CalcEntry(entrada, nAdult, nChild, nSenior) {
+  if (entrada.Adult > 0) {
+    nAdult = data.prices.Adult * entrada.Adult;
   }
-  if (e.Child > 0) {
-    c = data.prices.Child * e.Child;
+  if (entrada.Child > 0) {
+    nChild = data.prices.Child * entrada.Child;
   }
-  if (e.Senior > 0) {
-    s = data.prices.Senior * e.Senior;
+  if (entrada.Senior > 0) {
+    nSenior = data.prices.Senior * entrada.Senior;
   }
-  return (a + c + s);
+  return (nAdult + nChild + nSenior);
 }
 
 function calculateEntry(entrants) {
