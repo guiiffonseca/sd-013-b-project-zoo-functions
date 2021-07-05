@@ -167,7 +167,15 @@ Só retorna informações ordenadas e com sexo se a opção includeNames: true f
  */
 
 function getAnimalMap(options) {
-  // seu código aqui
+  if (!options) {
+    const location = {
+      NE: ['lions', 'giraffes'],
+      NW: ['tigers', 'bears', 'elephants'],
+      SE: ['penguins', 'otters'],
+      SW: ['frogs', 'snakes'],
+    };
+    return location;
+  }
 }
 
 /* 10. IMPLEMENTE A FUNÇÃO getSchedule
