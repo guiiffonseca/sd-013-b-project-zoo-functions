@@ -69,11 +69,7 @@ function getAnimalMap(options) {
   if (!options) {
     return animalsByRegions();
   }
-  const { includeNames = false, sorted = false, sex = 'female' } = options;
-
 }
-
-console.log(species.find(({ name }) => name === 'lions'));
 
 function getSchedule(dayName) {
   // seu código aqui
@@ -121,26 +117,26 @@ function increasePrices(percentage) {
   data.prices.Child = Math.round(child * 100) / 100;
 }
 
+function getAnimals(employee) {
+  const idsAnimals = employee.responsibleFor;
+  const animals = idsAnimals.map((id) => species.find((specie) => specie.id === id).name);
+  return animals;
+}
+
 function getEmployeeCoverage(idOrName) {
-  const employeesAndFunctions = {};
   if (!idOrName) {
-    employees.forEach((employee) => {
-      // employeesAndFunctions[`${employee.firstName} ${employee.lastName}`] = employee.responsibleFor.map((id) => )
-      const idsAnimals = employee.responsibleFor;
-      const animals = species
-        .filter(({ id }) => idsAnimals.includes(id))
-        .map(({ name }) => name);
-      employeesAndFunctions[`${employee.firstName} ${employee.lastName}`] = animals;
-    });
-    return employeesAndFunctions;
+    return employees.reduce((acc, currentValue) => {
+      acc[`${currentValue.firstName} ${currentValue.lastName}`] = getAnimals(currentValue);
+      return acc;
+    }, {});
   }
-  const employeeSelected = employees.find(({ id, firstName, lastName }) => idOrName === id || idOrName === firstName || idOrName === lastName);
-  const idsAnimals = employeeSelected.responsibleFor;
-  const animals = species
-    .filter(({ id }) => idsAnimals.includes(id))
-    .map(({ name }) => name);
-  employeesAndFunctions[`${employeeSelected.firstName} ${employeeSelected.lastName}`] = animals;
-  return employeesAndFunctions;
+  const employeeSelected = employees
+    .find(({ id, firstName, lastName }) => idOrName === id
+    || idOrName === firstName
+    || idOrName === lastName);
+  return {
+    [`${employeeSelected.firstName} ${employeeSelected.lastName}`]: getAnimals(employeeSelected),
+  };
 }
 
 module.exports = {
