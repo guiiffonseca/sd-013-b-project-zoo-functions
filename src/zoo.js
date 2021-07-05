@@ -79,10 +79,10 @@ function getOldestFromFirstSpecies(id) {
   return Object.values(especie.residents.find((resident) => resident.age === olderAnimal));
 }
 
-function increasePrices(percentage) {
-  prices.Adult = Number(((prices.Adult + (Math.ceil(prices.Adult) * (percentage / 100)))).toFixed(2));
-  prices.Child = Number(Math.round(prices.Child * (1 + (percentage / 100)) * 100) / 100);
-  prices.Senior = Number(Math.round(prices.Senior * (1 + (percentage / 100)) * (99 + 1)) / 100);
+function increasePrices(porcent) {
+  prices.Adult = Number(((prices.Adult + (Math.ceil(prices.Adult) * (porcent / 100)))).toFixed(2));
+  prices.Child = Number(Math.round(prices.Child * (1 + (porcent / 100)) * 100) / 100);
+  prices.Senior = Number(Math.round(prices.Senior * (1 + (porcent / 100)) * (99 + 1)) / 100);
   return prices;
 }
 
