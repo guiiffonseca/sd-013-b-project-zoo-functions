@@ -40,8 +40,8 @@ function countAnimals(specie) {
     const animals = {};
     data.species.forEach((animal) => {
       const count = animal.residents.reduce((previous, current) => previous + 1, 0);
-    animals[animal.name] = count;
-  });
+      animals[animal.name] = count;
+    });
     return animals;
   }
   const animalObject = data.species.find((each) => each.name === specie);
