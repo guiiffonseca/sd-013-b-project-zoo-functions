@@ -52,9 +52,28 @@ function calculateEntry({ Adult = 0, Child = 0, Senior = 0 } = {}) {
   return (Adult * prices.Adult) + (Child * prices.Child) + (Senior * prices.Senior);
 }
 
+const animalsByRegions = () => {
+  const speciesByRegion = {};
+  const regions = ['NE', 'NW', 'SE', 'SW'];
+  regions.forEach((region) => {
+    const nameSpecies = species
+      .filter(({ location }) => location === region)
+      .map(({ name }) => name);
+    speciesByRegion[region] = nameSpecies;
+  });
+  return speciesByRegion;
+};
+
 function getAnimalMap(options) {
   // seu código aqui
+  if (!options) {
+    return animalsByRegions();
+  }
+  const { includeNames = false, sorted = false, sex = 'female' } = options;
+
 }
+
+console.log(species.find(({ name }) => name === 'lions'));
 
 function getSchedule(dayName) {
   // seu código aqui
@@ -103,7 +122,25 @@ function increasePrices(percentage) {
 }
 
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+  const employeesAndFunctions = {};
+  if (!idOrName) {
+    employees.forEach((employee) => {
+      // employeesAndFunctions[`${employee.firstName} ${employee.lastName}`] = employee.responsibleFor.map((id) => )
+      const idsAnimals = employee.responsibleFor;
+      const animals = species
+        .filter(({ id }) => idsAnimals.includes(id))
+        .map(({ name }) => name);
+      employeesAndFunctions[`${employee.firstName} ${employee.lastName}`] = animals;
+    });
+    return employeesAndFunctions;
+  }
+  const employeeSelected = employees.find(({ id, firstName, lastName }) => idOrName === id || idOrName === firstName || idOrName === lastName);
+  const idsAnimals = employeeSelected.responsibleFor;
+  const animals = species
+    .filter(({ id }) => idsAnimals.includes(id))
+    .map(({ name }) => name);
+  employeesAndFunctions[`${employeeSelected.firstName} ${employeeSelected.lastName}`] = animals;
+  return employeesAndFunctions;
 }
 
 module.exports = {
