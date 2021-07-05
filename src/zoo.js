@@ -116,8 +116,27 @@ function increasePrices(percentage) {
   });
 }
 
+function animalArr(idArray) {
+  // função para montar um array com os nomes dos animais, recebendo como parâmetro uma array contendo apenas com os ids dos animais
+  return idArray.map((element) => species.find((elsp) => elsp.id === element).name);
+}
+
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
+  if (!idOrName) {
+    return employees.reduce((acumulador, elemento) => {
+      const nome = `${elemento.firstName} ${elemento.lastName}`;
+      const momento = acumulador;
+      const animaisArray = animalArr(elemento.responsibleFor);
+      momento[nome] = animaisArray;
+      return momento;
+    }, {});
+  }
+  const funcionario = employees.find((elemento) =>
+    elemento.id === idOrName || elemento.firstName === idOrName || elemento.lastName === idOrName);
+  const nome = `${funcionario.firstName} ${funcionario.lastName}`;
+  const animaisArray = animalArr(funcionario.responsibleFor);
+  return { [nome]: animaisArray };
 }
 
 module.exports = {
