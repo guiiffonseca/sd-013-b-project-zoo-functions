@@ -49,7 +49,7 @@ function countAnimals(species) {
 function calculateEntry(entrants) {
   if ((entrants === undefined) || (Object.keys(entrants).length === 0)) {
     return 0;
-  } 
+  }
   let adult = 0;
   let child = 0;
   let senior = 0;
@@ -62,8 +62,7 @@ function calculateEntry(entrants) {
   if (entrants.Senior > 0) {
     senior = data.prices.Senior * entrants.Senior;
   }
-  let resultado = adult+senior+child
-  return resultado;
+  return adult + senior + child;
 }
 
 function getAnimalMap(options) {
