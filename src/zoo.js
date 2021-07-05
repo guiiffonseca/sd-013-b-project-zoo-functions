@@ -71,10 +71,25 @@ function countAnimals(especie) {
   return countSpecies;
 }
 
+function price(entrants) {
+  let finalPrice = 0;
+  const entrantsArray = Object.entries(entrants);
+  entrantsArray.forEach((entrant) => {
+    if (entrant[0] === 'Adult') {
+      finalPrice += (entrant[1] * 49.99);
+    } else if (entrant[0] === 'Child') {
+      finalPrice += (entrant[1] * 20.99);
+    } else if (entrant[0] === 'Senior') {
+      finalPrice += (entrant[1] * 24.99);
+    }
+  });
+  return finalPrice;
+}
+
 function calculateEntry(entrants) {
   // seu código aqui
   if (entrants === undefined || Object.keys(entrants).length === 0) return 0;
-  console.log(entrants);
+  return price(entrants);
 }
 
 function getAnimalMap(options) {
@@ -122,6 +137,22 @@ function increasePrices(percentage) {
 
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
+  const { employees } = data;
+  // console.log(employees);
+  const foundEmployees = employees.find(
+    (employee) => employee.firstName === idOrName
+    || employee.lastName === idOrName
+    || employee.id === idOrName,
+  );
+  const arrayOfSpecies = [];
+  foundEmployees.responsibleFor.forEach((id) => {
+    const specie = data.species.find((tipo) => tipo.id === id);
+    console.log(specie);
+    arrayOfSpecies.push(specie.name);
+  });
+  console.log(arrayOfSpecies);
+  return (
+    `{${foundEmployees.firstName} ${foundEmployees.lastName}: [${arrayOfSpecies}]}`);
 }
 
 module.exports = {
