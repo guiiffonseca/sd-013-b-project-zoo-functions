@@ -37,7 +37,16 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 function countAnimals(species) {
+  const countedSpecies = data.species.reduce((acc, animal) => {
+    acc[animal.name] = animal.residents.length;
+    return acc;
+  }, {});
+
+  if (species) return countedSpecies[species];
+
+  return countedSpecies;
 }
+console.log(countAnimals('lions'));
 
 function calculateEntry(entrants) {
   // seu código aqui
