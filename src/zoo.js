@@ -95,8 +95,16 @@ function getSchedule(dayName) {
   return { [dayName]: `Open from ${arr[1].open}am until ${arr[1].close - 12}pm` };
 }
 
-function getOldestFromFirstSpecies(id) {
+function getOldestFromFirstSpecies(idFornecido) {
   // seu código aqui
+  const animalId = employees.find(({ id }) => id === idFornecido).responsibleFor[0];
+  const animal = species.find(({ id }) => id === animalId).residents
+    .reduce((acumulador, elemento) => {
+      const idadeAtual = elemento.age;
+      const idadeAcumulador = acumulador.age;
+      return (idadeAtual > idadeAcumulador) ? elemento : acumulador;
+    });
+  return Object.values(animal);
 }
 
 function increasePrices(percentage) {
