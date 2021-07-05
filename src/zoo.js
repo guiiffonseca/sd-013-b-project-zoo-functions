@@ -60,8 +60,30 @@ function calculateEntry({ Adult = 0, Senior = 0, Child = 0 } = {}) {
   return result;
 }
 
-function getAnimalMap(options) {
-  // seu código aqui
+const OrdenandoMoradores = ({ residents, sorted, sex }) => {
+  if (sorted) {
+    return residents
+      .filter(({ sex: moradoreGeneros }) => sex === '' || moradoreGeneros === sex)
+      .map(({ name }) => name).sort();
+  }
+  return residents
+    .filter(({ sex: moradoreGeneros }) => sex === '' || moradoreGeneros === sex)
+    .map(({ name }) => name);
+};
+
+function getAnimalMap({ includeNames = false, sorted = false, sex = '' } = {}) {
+  return species.reduce((mapeandoAnimais, { name, location, residents }) => {
+    const mapeandoAnimaisAux = mapeandoAnimais;
+    if (!mapeandoAnimaisAux[location]) { mapeandoAnimaisAux[location] = []; }
+    if (includeNames) {
+      mapeandoAnimaisAux[location].push({
+        [name]: OrdenandoMoradores({ residents, sorted, sex }),
+      });
+    } else {
+      mapeandoAnimaisAux[location].push(name);
+    }
+    return mapeandoAnimaisAux;
+  }, {});
 }
 
 function getSchedule(dayName) {
