@@ -78,8 +78,56 @@ function calculateEntry(entrants = {}) {
   return (adult * priceAdult) + (child * priceChild) + (senior * priceSenior);
 }
 
-function getAnimalMap(options) {
-  // seu código aqui
+// GET ANIMAL MAP
+const getResidents = (specie, sex) => ((sex !== undefined)
+  ? specie
+    .filter((animal) => animal.sex === sex)
+    .reduce((acc, currentValue) => acc.concat(currentValue.name), [])
+  : specie
+    .reduce((acc, currentValue) => acc.concat(currentValue.name), []));
+
+const getAnimalForAnimalMap = (sex) => {
+  return data.species.map((specie) => {
+    return {
+      name: specie.name,
+      location: specie.location,
+      residents: getResidents(specie.residents, sex),
+    };
+  });
+};
+
+const getNamesAnimal = (animals) => animals // Retorna um array com o nome dos animais
+  .reduce((acc, currentValue) => acc.concat(currentValue), []);
+
+const getSpeciesLocation = (animals, location, sorted) => ((sorted === true) // Retorna um array com objetos de animais com a localização passada como parâmetro
+  ? animals
+    .filter((specie) => specie.location === location)
+    .map((specieM) => ({ [specieM.name]: getNamesAnimal(specieM.residents).sort() }))
+  : animals
+    .filter((specie) => specie.location === location)
+    .map((specieM) => ({ [specieM.name]: getNamesAnimal(specieM.residents) }))
+);
+
+const makeReturn = (animals, includeNames, sorted) => ((includeNames === true)
+  ? {
+    NE: getSpeciesLocation(animals, 'NE', sorted),
+    NW: getSpeciesLocation(animals, 'NW', sorted),
+    SE: getSpeciesLocation(animals, 'SE', sorted),
+    SW: getSpeciesLocation(animals, 'SW', sorted),
+  }
+  : {
+    NE: getSpeciesLocation(animals, 'NE').map((animal) => Object.keys(animal)[0]),
+    NW: getSpeciesLocation(animals, 'NW').map((animal) => Object.keys(animal)[0]),
+    SE: getSpeciesLocation(animals, 'SE').map((animal) => Object.keys(animal)[0]),
+    SW: getSpeciesLocation(animals, 'SW').map((animal) => Object.keys(animal)[0]),
+  }
+);
+
+function getAnimalMap(options = {}) {
+  const { includeNames = false, sorted = false, sex = undefined } = options;
+  let animalMapReturn = getAnimalForAnimalMap(sex);
+  animalMapReturn = makeReturn(animalMapReturn, includeNames, sorted); // Saída no formato padrão
+  return animalMapReturn;
 }
 
 function getSchedule(dayName) {
