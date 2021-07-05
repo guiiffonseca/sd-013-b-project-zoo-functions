@@ -53,9 +53,86 @@ function calculateEntry(values) {
   return (priceAdult + priceChild + priceSenior);
 }
 
-function getAnimalMap(options) {
-  // seu código aqui
+function animalsByLocation() {
+  const result = {};
+  species.forEach(({ location, name }) => {
+    if (result[location]) {
+      result[location].push(name);
+    } else {
+      result[location] = [name];
+    }
+  });
+  return result;
 }
+
+function animalsWithNames() {
+  const animals = species.reduce((acc, current) => {
+    if (acc[current.location]) {
+      acc[current.location].push({ [current.name]:
+        current.residents.map((element) => element.name) });
+    } else {
+      acc[current.location] = [{ [current.name]:
+        current.residents.map((element) => element.name) }];
+    }
+    return acc;
+  }, {});
+
+  return animals;
+}
+
+function animalsSortedByName() {
+  const animals = species.reduce((acc, current) => {
+    if (acc[current.location]) {
+      acc[current.location].push({ [current.name]:
+        current.residents.map((element) => element.name).sort() });
+    } else {
+      acc[current.location] = [{ [current.name]:
+        current.residents.map((element) => element.name).sort() }];
+    }
+    return acc;
+  }, {});
+
+  return animals;
+}
+
+function animalsSortedBySex(currentSex) {
+  const animals = species.reduce((acc, current) => {
+    if (acc[current.location]) {
+      acc[current.location].push({ [current.name]:
+        current.residents.filter((element) =>
+          element.sex === currentSex).map((element) => element.name).sort() });
+    } else {
+      acc[current.location] = [{ [current.name]:
+        current.residents.filter((element) =>
+          element.sex === currentSex).map((element) => element.name).sort() }];
+    }
+    return acc;
+  }, {});
+
+  return animals;
+}
+
+function getAnimalMap(options) {
+  let result;
+  if (options === undefined) {
+    return animalsByLocation();
+  }
+  const { includeNames: name, sorted, sex } = options;
+  if (name) {
+    result = animalsWithNames();
+  }
+  if (sorted) {
+    result = animalsSortedByName();
+  }
+  if (sex) {
+    result = animalsSortedBySex(sex);
+  }
+
+  return result;
+}
+const options = { includeNames: true, sex: 'female', sorted: true };
+
+console.dir(getAnimalMap(options), { depth: null });
 
 function getSchedule(dayName) {
   // seu código aqui
