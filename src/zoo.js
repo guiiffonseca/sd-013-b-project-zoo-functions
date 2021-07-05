@@ -29,17 +29,18 @@ function createEmployee(personalInfo, associatedWith) {
 
 function isManager(id) {
   const arrayManagers = [stephanieId, olaId, burlId];
-  //  if (id === arrayManagers[0] || id === arrayManagers[1] || id === arrayManagers[2]) {
-  //    return true;
-  //  }
-  //  return false;
-
   return arrayManagers.filter((manage) => manage === id).some((person) => person === id);
 }
 
-function addEmployee(idValue, firstNameValue, lastNameValue, managersValue, responsibleForValue) {
-  // seu código aqui
-
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  const employee = {
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  };
+  employees.push(employee);
 }
 
 function countAnimals(speciesPar) {
