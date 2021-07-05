@@ -126,7 +126,7 @@ module.exports = {
 };
 
 /* Links que deram suporte no desenvolvimento:
-https://www.guj.com.br/t/math-ceil/30259 
+https://www.guj.com.br/t/math-ceil/30259
 https://www.geeksforgeeks.org/java-math-max-method-examples/
 https://www.w3schools.com/js/tryit.asp?filename=tryjs_object_es5_4
 https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce
