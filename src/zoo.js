@@ -5,14 +5,14 @@ function getSpeciesByIds(...ids) {
   if (ids.length === 0) {
     return [];
   }
-  let answer = []
+  const answer = [];
   ids.forEach((element) => answer.push(species.find((element2) => element2.id === element)));
   return answer;
 }
 
 function getAnimalsOlderThan(animal, age) {
-  let animalObject = species.find((element) => element.name === animal);
-  let verifyList = animalObject.residents.filter((element) => element.age >= age);
+  const animalObject = species.find((element) => element.name === animal);
+  const verifyList = animalObject.residents.filter((element) => element.age >= age);
   if (verifyList.length === animalObject.residents.length) {
     return true;
   }
@@ -20,43 +20,47 @@ function getAnimalsOlderThan(animal, age) {
 }
 
 function getEmployeeByName(employeeName) {
-  if (employeeName === undefined)  {
-    return {}
+  if (employeeName === undefined) {
+    return {};
   }
-  let try1 = employees.find((element) => element.firstName === employeeName)
-  let try2 = employees.find((element) => element.lastName === employeeName)
+  const try1 = employees.find((element) => element.firstName === employeeName);
+  const try2 = employees.find((element) => element.lastName === employeeName);
   if (try1 === undefined) {
-    return try2
+    return try2;
   }
-  return try1
+  return try1;
 }
 
 function createEmployee(personalInfo, associatedWith) {
   return {
     ...personalInfo,
-    ...associatedWith
+    ...associatedWith,
   };
 }
 
 const createManagerList = () => {
-  let managerList = []
+  let managerList = [];
   employees.forEach((element) => {
     for (let i = 0; i <= element.managers.length; i += 1) {
       if (managerList.includes(element.managers[i]) === false) {
-        managerList.push(element.managers[i])
+        managerList.push(element.managers[i]);
       }
     }
-  })
-  return managerList
+  });
+  return managerList;
 }
 
 function isManager(id) {
-  let verify = 0
-  createManagerList().forEach((element) => id === element? verify += 1 : undefined)
+  let verify = 0;
+  createManagerList().forEach((element) => {
+    if (id === element) {
+      verify += 1
+    }
+  })
   if (verify > 0) {
-    return true
+    return true;
   }
-  return false
+  return false;
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
