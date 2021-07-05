@@ -85,19 +85,22 @@ function countAnimals(animalName) {
   return species.find((element) => element.name === animalName).residents.length;
 }
 
-const normalizeAdult = () => {
+const normalizeAdult = (object) => {
+  let entrants = object;
   if (entrants.Adult === undefined) {
     entrants.Adult = 0;
   }
 };
 
-const normalizeChild = () => {
+const normalizeChild = (object) => {
+  let entrants = object;
   if (entrants.Child === undefined) {
     entrants.Child = 0;
   }
 };
 
-const normalizeSenior = () => {
+const normalizeSenior = (object) => {
+  let entrants = object;
   if (entrants.Senior === undefined) {
     entrants.Senior = 0;
   }
