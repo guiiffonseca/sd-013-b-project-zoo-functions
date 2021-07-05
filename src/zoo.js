@@ -46,10 +46,10 @@ function countAnimals(species) {
   return (data.species.find((element) => element.name === species).residents.length);
 }
 
-function CalcEntry(entrada, nAdult, nChild, nSenior) {
-  nnAdult = 0;
-  nnChild = 0;
-  nnSenior= 0;
+function CalcEntry(entrada) {
+  let nnAdult = 0;
+  let nnChild = 0;
+  let nnSenior= 0;
   if (entrada.Adult > 0) {
     nnAdult = data.prices.Adult * entrada.Adult;
   }
@@ -66,10 +66,7 @@ function calculateEntry(entrants) {
   if ((entrants === undefined) || (Object.keys(entrants).length === 0)) {
     return 0;
   }
-  const adult = 0;
-  const child = 0;
-  const senior = 0;
-  return CalcEntry(entrants, adult, child, senior);
+  return CalcEntry(entrants);
 }
 
 function getAnimalMap(options) {
