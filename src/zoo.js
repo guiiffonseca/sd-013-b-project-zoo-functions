@@ -90,7 +90,7 @@ function getWorkerFullName({ firstName, lastName }) {
   return `${firstName} ${lastName}`;
 }
 
-function workerId(id) {
+function workersId(id) {
   return employees.find((worker) => worker.id === id);
 }
 
@@ -99,10 +99,10 @@ function getEmployeeCoverage(idOrName) {
     accumulator[getWorkerFullName(worker)] = worker.responsibleFor
       .map((specieId) => getSpeciesByIds(specieId)[0])
       .map(({ name }) => name);
-    return accumulator;  
+    return accumulator;
   }, {});
   if (idOrName !== undefined) {
-    const worker = workerId(idOrName) || getEmployeeByName (idOrName);
+    const worker = workersId(idOrName) || getEmployeeByName(idOrName);
     const workerFullName = getWorkerFullName(worker);
     if (worker) return { [workerFullName]: result[workerFullName] };
   }
