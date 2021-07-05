@@ -39,7 +39,7 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 const createManagerList = () => {
-  let managerList = [];
+  const managerList = [];
   employees.forEach((element) => {
     for (let i = 0; i <= element.managers.length; i += 1) {
       if (managerList.includes(element.managers[i]) === false) {
@@ -48,15 +48,15 @@ const createManagerList = () => {
     }
   });
   return managerList;
-}
+};
 
 function isManager(id) {
   let verify = 0;
   createManagerList().forEach((element) => {
     if (id === element) {
-      verify += 1
+      verify += 1;
     }
-  })
+  });
   if (verify > 0) {
     return true;
   }
@@ -64,38 +64,50 @@ function isManager(id) {
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-  let newEmployee = {
+  const newEmployee = {
     id,
     firstName,
     lastName,
     managers,
-    responsibleFor
+    responsibleFor,
   };
-  data.employees.push(newEmployee)
+  data.employees.push(newEmployee);
 }
 
 function countAnimals(animalName) {
   if (animalName === undefined) {
-    let answer = {}
+    const answer = {};
     species.forEach((element) => {
-      answer[`${element.name}`] = element.residents.length
-    })
-    return answer
+      answer[`${element.name}`] = element.residents.length;
+    });
+    return answer;
   }
-  return species.find((element) => element.name === animalName).residents.length
+  return species.find((element) => element.name === animalName).residents.length;
 }
 
-const normalizeAdult = (entrants) => entrants.Adult === undefined? entrants.Adult = 0 : 0;
-const normalizeChild = (entrants) => entrants.Child === undefined? entrants.Child = 0 : 0;
-const normalizeSenior = (entrants) => entrants.Senior === undefined? entrants.Senior = 0 : 0;
+const normalizeAdult = (entrants) => {
+  if (entrants.Adult === undefined) {
+    entrants.Adult = 0;
+  }
+}
+const normalizeChild = (entrants) => {
+  if (entrants.Child === undefined) {
+    entrants.Child = 0;
+  }
+}
+const normalizeSenior = (entrants) => {
+  if (entrants.Senior === undefined) {
+    entrants.Senior = 0;
+  }
+}
 
-function calculateEntry(entrants = { 'Adult': 0, 'Child': 0, 'Senior': 0}) {
+function calculateEntry(entrants = { Adult: 0, Child: 0, Senior: 0 }) {
   normalizeAdult(entrants);
   normalizeChild(entrants);
   normalizeSenior(entrants);
-  let adultTotal = entrants.Adult * prices.Adult;
-  let childTotal = entrants.Child * prices.Child;
-  let seniorTotal = entrants.Senior * prices.Senior;
+  const adultTotal = entrants.Adult * prices.Adult;
+  const childTotal = entrants.Child * prices.Child;
+  const seniorTotal = entrants.Senior * prices.Senior;
   return adultTotal + childTotal + seniorTotal;
 }
 
