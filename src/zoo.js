@@ -161,13 +161,34 @@ function getOldestFromFirstSpecies(idEmployee) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  const pricesEntries = Object.keys(data.prices);
+  pricesEntries.forEach((type) => {
+    const percentageRight = (percentage + 100) / 100;
+    const newPrice = parseFloat(data.prices[type]) * percentageRight;
+    console.log(newPrice);
+    data.prices[type] = Math.round(newPrice * 100) / 100;
+  });
 }
 
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+  const result = {};
+  const ids = {
+    '0938aa23-f153-4937-9f88-4858b24d6bce': 'lionId',
+    '533bebf3-6bbe-41d8-9cdf-46f7d13b62ae': 'ottersId',
+    'bb2a76d8-5fe3-4d03-84b7-dba9cfc048b5': 'elephantsId',
+    '78460a91-f4da-4dea-a469-86fd2b8ccc84': 'snakesId',
+    '89be95b3-47e4-4c5b-b687-1fabf2afa274': 'frogsId',
+    'baa6e93a-f295-44e7-8f70-2bcdc6f6948d': 'bearsId',
+    'e8481c1d-42ea-4610-8e11-1752cfc05a46': 'tigersId',
+  };
+  if (!idOrName) {
+    data.employees.forEach(({ firstName, lastName, responsibleFor }) => {
+      result[`${firstName} ${lastName}`] = responsibleFor.map((idAnimal) => ids[idAnimal]);
+    });
+  }
+  return result;
 }
-
+console.log(getEmployeeCoverage());
 module.exports = {
   calculateEntry,
   getSchedule,
