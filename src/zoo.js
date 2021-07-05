@@ -17,9 +17,10 @@ function getEmployeeByName(employeeName) {
   return (employeeName !== undefined) ? data.employees.find((value) =>
     value.firstName === employeeName || value.lastName === employeeName) : {};
 }
-console.log(getEmployeeByName());
+
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
+  return { ...personalInfo, ...associatedWith };
 }
 
 function isManager(id) {
