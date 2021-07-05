@@ -1,4 +1,4 @@
-const { species } = require('./data');
+const { species, prices } = require('./data');
 const { employees } = require('./data');
 const data = require('./data');
 
@@ -77,8 +77,16 @@ function countAnimals(especies = '') {
   return retorno[`${especies}`];
 }
 
-function calculateEntry(entrants) {
-  // seu código aqui
+function calculateEntry(entrants = 0) {
+  if (entrants.length === 0 || entrants === 0) { return 0; }
+
+  const pricesZoo = [prices.Adult, prices.Child, prices.Senior];
+  const entrantsZoo = [entrants.Adult, entrants.Child, entrants.Senior];
+  let totalToPay = 0;
+  entrantsZoo.forEach((currentValue, index) => {
+    if (currentValue >= 0) { totalToPay += currentValue * pricesZoo[index]; }
+  });
+  return totalToPay;
 }
 
 function getAnimalMap(options) {
