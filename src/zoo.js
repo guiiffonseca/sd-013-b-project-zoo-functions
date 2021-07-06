@@ -105,10 +105,16 @@ function getOldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
-  prices.Adult = Math.ceil(prices.Adult * (100 + percentage)) / 100;
+  // Forma que o Rafael Nery Machado fez bem simples:
+  /*  prices.Adult = Math.ceil(prices.Adult * (100 + percentage)) / 100;
   prices.Senior = Math.ceil(prices.Senior * (100 + percentage)) / 100;
   prices.Child = Math.ceil(prices.Child * (100 + percentage)) / 100;
+  */
+  // Dica do Mayu ao usar Object.entries:
+  Object.entries(prices).forEach((element) => {
+    const key = element[0];
+    prices[key] = Math.ceil(element[1] * (100 + percentage)) / 100;
+  });
 }
 
 function getEmployeeCoverage(idOrName) {
