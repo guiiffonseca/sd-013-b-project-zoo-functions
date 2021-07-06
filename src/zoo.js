@@ -49,8 +49,31 @@ function calculateEntry(entrants) {
   return total;
 }
 
-function getAnimalMap(options) {
-  // seu código aqui
+function createInformation(sorted, wantedSex, residents) {
+  let information = [];
+  residents.forEach(({ name }) => {
+    information.push(name);
+  });
+  if (wantedSex) {
+    information = residents.filter(({ sex }) => sex === wantedSex).map(({ name }) => name);
+  }
+  if (sorted) {
+    information.sort();
+  }
+  return information;
+}
+
+function getAnimalMap({ includeNames = false, sorted = false, sex = '' } = {}) {
+  if (includeNames) {
+    return species.reduce((animalMap, { name, location, residents }) => {
+      animalMap[location].push({ [name]: createInformation(sorted, sex, residents) });
+      return animalMap;
+    }, { NE: [], NW: [], SE: [], SW: [] });
+  }
+  return species.reduce((animalMap, { name, location, residents }) => {
+    animalMap[location].push(name);
+    return animalMap;
+  }, { NE: [], NW: [], SE: [], SW: [] });
 }
 
 function createPhrase({ open, close }) {
