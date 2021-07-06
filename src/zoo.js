@@ -35,11 +35,7 @@ function isManager(id) {
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  const checkPerson = (element) => {
-    if (element === undefined) {
-      return [];
-    } return element;
-  };
+  const checkPerson = (element = []) => element;
   const fullInfos = {
     id,
     firstName,
@@ -64,10 +60,7 @@ function countAnimals(speciesName) {
   return allAnimalsObject[speciesName];
 }
 // O parâmetro entrants recebe um objeto que contém as chaves Adult, Child e Senior, com suas respectivas quantidades de pessoas
-function calculateEntry(entrants) {
-  if (entrants === undefined) {
-    return 0;
-  }
+function calculateEntry(entrants = 0) {
   const entrantsArray = Object.entries(entrants);
   return entrantsArray
     .reduce((acc, [typeEntrant, amount]) => acc + data.prices[typeEntrant] * amount, 0);
@@ -77,7 +70,19 @@ function getAnimalMap(options) {
 }
 
 function getSchedule(dayName) {
-  // seu código aqui
+  const object = Object.entries(data.hours);
+  const schedule = {}; // objeto para guardar cada interaçã
+  object.forEach((day) => { // usei o for each para retornar um objeto
+    const [dia, { open: openTime, close: closeTime }] = day; // destruturação do objeto para acessar cada valor
+    schedule[dia] = `Open from ${openTime}am until ${12 - (24 - closeTime)}pm`; // converte horario para pm
+    if (openTime === 0 && closeTime === 0) {
+      schedule[dia] = 'CLOSED'; // se o tempo de abrir e fechar for 0, retorna fechado
+    }
+  });
+  if (!dayName) { // se não tiver parametro retorna o objeto inteiro
+    return schedule;
+  }
+  return { [dayName]: schedule[dayName] }; // trecho retirado do codigo do caribé
 }
 
 function getOldestFromFirstSpecies(id) {
