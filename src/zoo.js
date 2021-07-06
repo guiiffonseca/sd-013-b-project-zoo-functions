@@ -71,7 +71,8 @@ function getOldestFromFirstSpecies(id) {
 }
 
 const doPercentage = (priceType, percentage) => {
-  return Math.ceil(((priceType * (percentage / 100)) + priceType) * 100,) / 100
+  didPercentage = Math.ceil(((priceType * (percentage / 100)) + priceType) * 100,) / 100;
+  return didPercentage;
 }
 
 function increasePrices(percentage) {
