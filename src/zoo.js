@@ -110,10 +110,29 @@ function increasePrices(percentage) {
   prices.Child = Math.round(prices.Child * (100.01 + percentage)) / 100;
 }
 
-function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+function getByIds(...ids) {
+  return ids.map((id, index) => species.find((specie) => id === specie.id).name);
 }
 
+function getEmployeeCoverage(idOrName) {
+  const zero = 0;
+  const um = 1;
+  const obj = {};
+  employees.forEach(({ firstName, lastName, responsibleFor }, index) => {
+    obj[`${firstName} ${lastName}`] = getByIds(...employees[index].responsibleFor);
+  });
+  if (idOrName === undefined) return obj;
+  const newObj = {};
+  Object.entries(obj).filter((name, index) => name[0].includes(idOrName) === true)
+    .forEach((acc) => { newObj[acc[zero]] = acc[um]; });
+  if (idOrName.length > 15) {
+    const findForId = employees.find((nome) => nome.id === idOrName);
+    Object.entries(obj).filter((name, index) => name[0].includes(findForId.firstName) === true)
+      .forEach((acc) => { newObj[acc[zero]] = acc[um]; });
+  }
+  return newObj;
+}
+console.log(getEmployeeCoverage('0e7b460e-acf4-4e17-bcb3-ee472265db83'));
 module.exports = {
   calculateEntry,
   getSchedule,
