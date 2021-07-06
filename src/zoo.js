@@ -85,7 +85,7 @@ function getSchedule(dayName) {
 
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
-  const animal = employees.find((idEmp) => idEmp.id === id).responsibleFor[0];
+  const animal = employees.find((employee) => employee.id === id).responsibleFor[0];
   return Object.values(species.find(
     (specie) => specie.id === animal,
   ).residents.reduce(
