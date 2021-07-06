@@ -1,3 +1,4 @@
+/* eslint-disable prefer-destructuring */
 const data = require('./data');
 
 const { species } = data;
@@ -107,8 +108,9 @@ function getOldestFromFirstSpecies(id) {
 function increasePrices(percentage) {
   const values = Object.values(prices);
   const newValues = values.map((value) => Math.round((value * (1 + percentage / 100)) * 100) / 100);
-  const { Adult, Senior, Child } = [...newValues];
-  return (Adult, Senior, Child);
+  prices.Adult = newValues[0];
+  prices.Senior = newValues[1];
+  prices.Child = newValues[2];
 }
 
 function getEmployeeCoverage(idOrName) {
