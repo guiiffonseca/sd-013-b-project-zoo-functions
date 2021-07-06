@@ -139,11 +139,21 @@ function increasePrices(percentage) {
 
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
-  if (idOrName === {}) {
-    data.employees.forEach(({ firstName, lastName }, index) => {
+  // Pesquisa funcionario por id, nome ou sobrenome ou traz todos
+  const funcionarios = data.employees.filter((employee) => !idOrName
+    || employee.id === idOrName
+    || employee.firstName === idOrName
+    || employee.lastName === idOrName);
 
-    });
-  }
+  const animais = funcionarios.map(
+    ({ firstName, lastName, responsibleFor }) => responsibleFor.reduce((acc, curr) => {
+      const fullName = `${firstName} ${lastName}`;
+      acc[fullName] = Array.isArray(acc[fullName]) ? acc[fullName].push(curr.name) : acc[fullName] = [curr.name];
+      return acc;
+    }, {}),
+  );
+
+  return animais;
 }
 
 module.exports = {
