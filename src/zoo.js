@@ -1,11 +1,15 @@
+const { species } = require('./data');
 const data = require('./data');
 
-function getSpeciesByIds(ids) {
-  // seu código aqui
+// A colega de turma Mayu fez um code review e indicou usar o Rest no 1º Desafio
+function getSpeciesByIds(...ids) { // 1º Filtrar as espécies de acordo com o ID especificado;
+  return species.filter(({ id }) => ids.includes(id)); // Verificar se o IDS está incluído no ID;
 }
 
 function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
+  // 1º Acessar o objeto do animal especificado
+  return species.find((element) => element.name === animal).residents
+    .every((penguins) => penguins.age >= age); // 2º Verificar se todos os animais possui a idade mínima específicada
 }
 
 function getEmployeeByName(employeeName) {
@@ -24,7 +28,7 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
 }
 
-function countAnimals(species) {
+function countAnimals(species1) {
   // seu código aqui
 }
 
