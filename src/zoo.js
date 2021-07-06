@@ -76,6 +76,7 @@ function addEmployeeResponsibleFor(responsibleFor) {
   return responsavelPor;
 }
 
+// Refatorar esta função, passando valor padrão diretamente nos parâmetros
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   const gerentes = addEmployeeManagers(managers);
   const responsavelPor = addEmployeeResponsibleFor(responsibleFor);
@@ -87,11 +88,21 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
     managers: gerentes,
     responsibleFor: responsavelPor,
   };
+
   empregados.push(novoEmpregado);
 }
 
 function countAnimals(species) {
-  // seu código aqui
+
+  const contagemAnimal = especies.reduce((todasEspecies, especie) => {
+    const nome = especie.name;
+    const qtd = especie.residents.length;
+    todasEspecies[nome] = qtd;
+    
+    return todasEspecies;
+  }, {});
+
+  return contagemAnimal;
 }
 
 function calculateEntry(entrants) {
