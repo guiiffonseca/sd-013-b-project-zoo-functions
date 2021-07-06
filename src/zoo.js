@@ -1,5 +1,7 @@
 const { species, employees } = require('./data');
 const data = require('./data');
+const importUtil = require('util');
+const { removeListener } = require('process');
 
 function getSpeciesByIds(...ids) {
   return species.filter((specie) => ids.find((id) => id === specie.id));
@@ -49,6 +51,8 @@ function countAnimals(args) {
 }
 
 function calculateEntry(args) {
+  // ! negação geral, impede que seja qualquer coisa que não seja um
+  // valor válido.
   if (args === undefined || args === {}) {
     return 0;
   }
@@ -56,10 +60,49 @@ function calculateEntry(args) {
     accumulator + currentValue[1] * data.prices[currentValue[0]], 0);
 }
 
-function getAnimalMap(options) {
-  // seu código aqui
-}
+const filterAnimalLocation = (arg) => species.filter((specie) =>
+  specie.location === arg).reduce((acc, value) =>
+  acc.concat(value.name), []);
 
+// const animalsName = (arg) => species.filter((specie) =>
+//   specie.location === arg).map((specie) =>
+//   specie.residents.map((resident) => resident.name));
+
+const animalsName = (arg) =>
+  species.filter((specie) =>
+    specie.location === arg).map((specie) =>
+    ({ [specie.name]: specie.residents.map((resident) => resident.name) }));
+
+const animalsSeparatedByNamesAndSex = (arg, sex) =>
+  species.filter((specie) =>
+    specie.location === arg).map((specie) => {
+    const residentNames = specie.residents.filter((resident) => resident.sex === sex);
+    return ({ [specie.name]: residentNames.map((residentName) => residentName.name) });
+  });
+
+const animalsNameSorted = (arg) => species.filter((specie) =>
+  specie.location === arg).map((specie) =>
+  ({ [specie.name]: specie.residents.map((resident) => resident.name).sort() }));
+
+function getAnimalMap({ includeNames = false, sex, sorted = false } = {}) {
+  if (sorted) {
+    return species.reduce((acc, value) =>
+      Object.assign(acc, { [value.location]: animalsNameSorted(value.location) }), {});
+  }
+  if (sex) {
+    return species.reduce((acc, value) =>
+      Object.assign(acc, { [value.location]: animalsSeparatedByNamesAndSex(value.location, sex) }),
+    {});
+  }
+  if (includeNames) {
+    return species.reduce((acc, value) =>
+      Object.assign(acc, { [value.location]: animalsName(value.location) }), {});
+  }
+  const animalsLocationWithoutArgs = species.reduce((acc, value) =>
+    Object.assign(acc, { [value.location]: filterAnimalLocation(value.location) }), {});
+  return animalsLocationWithoutArgs;
+}
+console.dir(getAnimalMap(), { depth: null });
 const { hours } = data;
 const suportGetSchedule = (dayName) =>
   Object.entries(hours).find((day, index) =>
@@ -103,11 +146,11 @@ function increasePrices(percentage) {
 }
 
 const responsable = employees.map((employee) => {
-  const idAnimals = employee.responsibleFor.map((resp) => {
+  const findNameAnimals = employee.responsibleFor.map((resp) => {
     const animals = species.find((specie) => specie.id === resp);
     return animals.name;
   });
-  return idAnimals;
+  return findNameAnimals;
 });
 
 const getEmployeeWithDatas = (idOrName) => {
