@@ -148,13 +148,13 @@ function getSchedule(dayName) {
   return answer;
 }
 
-const orderCrescent = (elementA, elementB) => elementB.age - elementA.age
+const orderCrescent = (elementA, elementB) => elementB.age - elementA.age;
 
 function getOldestFromFirstSpecies(id) {
   const employeeObject = employees.find((element) => element.id === id);
   const firstAnimal = species.find((element) => element.id === employeeObject.responsibleFor[0]);
   const sortedAnimalsByAge = firstAnimal.residents.sort(orderCrescent);
-  return Object.values(sortedAnimalsByAge[0])
+  return Object.values(sortedAnimalsByAge[0]);
 }
 
 function increasePrices(percentage) {
