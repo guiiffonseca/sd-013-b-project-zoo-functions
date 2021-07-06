@@ -93,15 +93,20 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 }
 
 function countAnimals(species) {
-
+  // Ajuda do Cajueiro | todasEspecies é o meu obj vazio {}
   const contagemAnimal = especies.reduce((todasEspecies, especie) => {
-    const nome = especie.name;
-    const qtd = especie.residents.length;
-    todasEspecies[nome] = qtd;
-    
+    if (!species) {
+      const nome = especie.name;
+      const qtd = especie.residents.length;    
+      // meu obj todasEspecies, na chave 'nome' recebe como valor a 'qtd'
+      todasEspecies[nome] = qtd;
+    } else {
+      especies.find((especie) => {
+        if (especie.name === species) todasEspecies = especie.residents.length;
+      });
+    }
     return todasEspecies;
   }, {});
-
   return contagemAnimal;
 }
 
