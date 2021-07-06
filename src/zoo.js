@@ -1,6 +1,6 @@
 const data = require('./data');
 
-const { species, employees, prices } = data;
+const { species, employees, prices, hours } = data;
 
 function getSpeciesByIds(...ids) {
   // seu código aqui
@@ -64,19 +64,28 @@ function getAnimalMap(options) {
 
 function getSchedule(dayName) {
   // seu código aqui
+  if (!dayName) {
+    return {
+      
+    }
+  }
 }
 
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
 }
 
-// const doPercentage = (price, percentage) => {
-//   return price + (price * percentage / 100)
-// }
+const doPercentage = (priceType, percentage) => {
+  return Math.ceil(
+    ((priceType * (percentage / 100)) + priceType) * 100,
+  ) / 100;
+}
 
 function increasePrices(percentage) {
   // seu código aqui
-  // data.prices =  Object.values(data.prices).forEach(doPercentage);
+  prices.Adult = doPercentage(prices.Adult, percentage);
+  prices.Child = doPercentage(prices.Child, percentage);
+  prices.Senior = doPercentage(prices.Senior, percentage);
 }
 
 function getEmployeeCoverage(idOrName) {
