@@ -1,5 +1,5 @@
 const data = require('./data');
-// const { species, employees } = data;
+const { species, employees } = data;
 
 function getSpeciesByIds(...ids) {
   if (!ids) return []; // retorna vazio se não entrar parametro
