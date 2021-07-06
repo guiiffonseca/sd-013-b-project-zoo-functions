@@ -86,8 +86,28 @@ function calculateEntry(entrants) {
 /* 9. A função é responsável pelo mapeamento geográfico das espécies e seus
 animais, podendo ainda filtrá-los por ordem alfabética e gênero, por exemplo */
 
-function getAnimalMap(options) {
-  // seu código aqui
+const spcByReg = {};
+const spcInReg = {};
+const regions = ['NE', 'SE', 'SW', 'NW'];
+
+function getAnimalMap({ includeNames = false, sorted = false, sex = '' } = {}) {
+  regions.forEach((reg) => {
+    spcByReg[reg] = data.species.filter((spc) => spc.location === reg).map((obj) => obj.name);
+  });
+  if (includeNames === true) {
+    regions.forEach((reg) => {
+      spcInReg[reg] = data.species.filter((spc) => spc.location === reg).map((obj) => {
+        let allRes = obj.residents;
+        if (sex) {
+          allRes = allRes.filter((res) => res.sex === sex);
+        }
+        if (sorted) return { [obj.name]: allRes.map((res) => res.name).sort() };
+        return { [obj.name]: allRes.map((res) => res.name) };
+      });
+    });
+    return spcInReg;
+  }
+  return spcByReg;
 }
 
 /* 10. A função é responsável por disponibilizar as informações de horário para
