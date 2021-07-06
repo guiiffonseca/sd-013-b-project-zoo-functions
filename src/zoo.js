@@ -46,14 +46,18 @@ function countAnimals(species2) {
   }
   species.forEach((value, index, array) => {
     objeto[value.name.toString()] = value.residents.length;
-    return objeto.animal;
+    return objeto;
   });
   return objeto;
 }
-console.log(countAnimals());
 
-function calculateEntry(entrants) {
+function calculateEntry(entrants = 0) {
   // seu código aqui
+  const { Adult = 0 } = entrants;
+  const { Child = 0 } = entrants;
+  const { Senior = 0 } = entrants;
+  const soma = (Adult * 49.99) + (Child * 20.99) + (Senior * 24.99);
+  return soma;
 }
 
 function getAnimalMap(options) {
