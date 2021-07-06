@@ -117,24 +117,24 @@ function calculateEntry(entrants = { Adult: 0, Child: 0, Senior: 0 }) {
 }
 
 function getAnimalMap(options) {
-  //coisa
+  // coisa
 }
 
 function returnAllSchedule() {
   return {
-    'Tuesday': `Open from ${hours.Tuesday.open}am until ${hours.Tuesday.close - 12}pm`,
-    'Wednesday': `Open from ${hours.Wednesday.open}am until ${hours.Wednesday.close - 12}pm`,
-    'Thursday': `Open from ${hours.Thursday.open}am until ${hours.Thursday.close - 12}pm`,
-    'Friday': `Open from ${hours.Friday.open}am until ${hours.Friday.close - 12}pm`,
-    'Saturday': `Open from ${hours.Saturday.open}am until ${hours.Saturday.close - 12}pm`,
-    'Sunday': `Open from ${hours.Sunday.open}am until ${hours.Sunday.close - 12}pm`,
-    'Monday': 'CLOSED'
+    Tuesday: `Open from ${hours.Tuesday.open}am until ${hours.Tuesday.close - 12}pm`,
+    Wednesday: `Open from ${hours.Wednesday.open}am until ${hours.Wednesday.close - 12}pm`,
+    Thursday: `Open from ${hours.Thursday.open}am until ${hours.Thursday.close - 12}pm`,
+    Friday: `Open from ${hours.Friday.open}am until ${hours.Friday.close - 12}pm`,
+    Saturday: `Open from ${hours.Saturday.open}am until ${hours.Saturday.close - 12}pm`,
+    Sunday: `Open from ${hours.Sunday.open}am until ${hours.Sunday.close - 12}pm`,
+    Monday: 'CLOSED',
   };
 }
 
 function getSchedule(dayName) {
   if (dayName === undefined) {
-    return returnAllSchedule()
+    return returnAllSchedule();
   }
   if (dayName === 'Monday') {
     const answer = {};
@@ -142,26 +142,28 @@ function getSchedule(dayName) {
     return answer;
   }
   const day = Object.entries(hours).find((element) => element[0] === dayName);
-  const schedule =  `Open from ${day[1].open}am until ${day[1].close - 12}pm`;
+  const schedule = `Open from ${day[1].open}am until ${day[1].close - 12}pm`;
   const answer = {};
   answer[dayName] = schedule;
   return answer;
 }
 
+const orderCrescent = (elementA, elementB) => elementB.age - elementA.age
+
 function getOldestFromFirstSpecies(id) {
-  const employeeObject =  employees.find((element) => element.id === id)
-  const firstAnimal = species.find((element) => element.id === employeeObject.responsibleFor[0])
-  const sortedAnimalsByAge = firstAnimal.residents.sort((elementA, elementB) => elementB.age - elementA.age)
+  const employeeObject = employees.find((element) => element.id === id);
+  const firstAnimal = species.find((element) => element.id === employeeObject.responsibleFor[0]);
+  const sortedAnimalsByAge = firstAnimal.residents.sort(orderCrescent);
   return Object.values(sortedAnimalsByAge[0])
 }
 
 function increasePrices(percentage) {
-  const multiplier = (100 + percentage)/100;
-  let newPrices = prices;
-  newPrices.Adult = parseFloat((Math.round(((prices.Adult * 100) * multiplier)) / 100).toFixed(2));
-  newPrices.Child = parseFloat((Math.round(((prices.Child * 100) * multiplier)) / 100).toFixed(2));
-  newPrices.Senior = parseFloat((Math.round(((prices.Senior * 100) * multiplier)) / 100).toFixed(2));
-  return newPrices;
+  const multiplier = (100 + percentage) / 100;
+  const nPrices = prices;
+  nPrices.Adult = parseFloat((Math.round(((prices.Adult * 100) * multiplier)) / 100).toFixed(2));
+  nPrices.Child = parseFloat((Math.round(((prices.Child * 100) * multiplier)) / 100).toFixed(2));
+  nPrices.Senior = parseFloat((Math.round(((prices.Senior * 100) * multiplier)) / 100).toFixed(2));
+  return nPrices;
 }
 
 function getEmployeeCoverage(idOrName) {
