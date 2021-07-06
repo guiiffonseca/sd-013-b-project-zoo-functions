@@ -1,6 +1,6 @@
 const data = require('./data');
 
-const { species, employees, hours } = data;
+const { species, employees, hours, prices } = data;
 
 function getSpeciesByIds(...ids) {
   return species.filter((specie) => ids.includes(specie.id));
@@ -56,8 +56,6 @@ function getAnimalMap(options) {
   // seu código aqui
 }
 
-// Passado o dia como parâmetro, retorna somente o dia.
-
 function getSchedule(dayName) {
   if (!dayName) {
     return {
@@ -79,8 +77,13 @@ function getOldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  return Object.entries(prices).forEach((price) => {
+    const priceKey = price[0];
+    const priceIncreased = (price[1] + (percentage / 100) * price[1]);
+    prices[priceKey] = Math.round(priceIncreased * 100) / 100;
+  });
 }
+
 
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
