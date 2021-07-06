@@ -1,4 +1,4 @@
-const { species, employees, data, prices } = require('./data');
+const { species, employees, data, prices, hours } = require('./data');
 // const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -68,9 +68,34 @@ function getAnimalMap(options) {
   // seu código aqui
 }
 
+const getScheduleNoDay = () => {
+  const newObject = {};
+  Object.entries(hours).forEach((hour) => {
+    // if (!dayName) {
+    if (hour[1].close === hour[1].open) {
+      newObject[hour[0]] = 'CLOSED';
+    } else {
+      newObject[hour[0]] = `Open from ${hour[1].open}am until ${hour[1].close - 12}pm`;
+    }
+  });
+  return newObject;
+};
+
 function getSchedule(dayName) {
-  // seu código aqui
+  const newObject = {};
+  if (!dayName) {
+    return getScheduleNoDay();
+  }
+  const day = Object.entries(hours).find((weekDay) => weekDay[0] === dayName);
+  if (day[1].close === day[1].open) {
+    newObject[day[0]] = 'CLOSED';
+  } else {
+    newObject[day[0]] = `Open from ${day[1].open}am until ${day[1].close - 12}pm`;
+  }
+  return newObject;
 }
+
+console.log(getSchedule('Friday'));
 
 function getOldestFromFirstSpecies(id) {
   const findEmployee = employees.find((employee) => employee.id === id);
@@ -90,8 +115,16 @@ function increasePrices(percentage) {
 }
 
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+  const newEmployee = {};
+  employees.forEach(({ firstName, lastName, responsibleFor }) => {
+    if (!idOrName) {
+      newEmployee[`${firstName} ${lastName}`] = responsibleFor;
+    }
+  });
+  return newEmployee;
 }
+
+// console.log(getEmployeeCoverage());
 
 module.exports = {
   calculateEntry,
