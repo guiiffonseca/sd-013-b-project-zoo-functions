@@ -1,4 +1,4 @@
-const { employees, prices, species } = require('./data');
+const { employees, prices } = require('./data');
 const data = require('./data');
 
 /* 1. Esta função é responsável pela busca das espécies de animais por id.
