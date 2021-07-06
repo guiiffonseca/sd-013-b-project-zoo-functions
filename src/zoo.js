@@ -98,9 +98,12 @@ function getOldestFromFirstSpecies(id) {
   });
   return [speciesResidents.name, speciesResidents.sex, speciesResidents.age];
 }
-
+// parseFloat(Mathround(14,)).toFixed(4)
 function increasePrices(percentage) {
-  // seu código aqu
+  const formatedPercentage = 1 + (percentage / 100);
+  data.prices.Adult = Math.round(data.prices.Adult * formatedPercentage * 100) / 100;
+  data.prices.Child = Math.round(data.prices.Child * formatedPercentage * 100) / 100;
+  data.prices.Senior = Math.round(data.prices.Senior * formatedPercentage * 100) / 100;
 }
 
 function getEmployeeCoverage(idOrName) {
