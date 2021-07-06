@@ -58,6 +58,7 @@ function calculateEntry(args) {
   return Object.entries(args).reduce((accumulator, currentValue, index) =>
     accumulator + currentValue[1] * data.prices[currentValue[0]], 0);
 }
+// funções de apoio a questão 9;
 
 const filterAnimalLocation = (arg) => species.filter((specie) =>
   specie.location === arg).reduce((acc, value) =>
@@ -75,34 +76,60 @@ const animalsSeparatedByNamesAndSex = (arg, sex) =>
     return ({ [specie.name]: residentNames.map((residentName) => residentName.name) });
   });
 
-const includeTrueMap = species.reduce((acc, value) =>
-  Object.assign(acc, { [value.location]: animalsName(value.location) }), {});
+const animalsSeparatedByNamesAndSexSorted = (arg, sex) =>
+  species.filter((specie) =>
+    specie.location === arg).map((specie) => {
+    const residentNames = specie.residents.filter((resident) => resident.sex === sex);
+    return ({ [specie.name]: residentNames.map((residentName) => residentName.name).sort() });
+  });
 
 const animalsNameSorted = (arg) => species.filter((specie) =>
   specie.location === arg).map((specie) =>
   ({ [specie.name]: specie.residents.map((resident) => resident.name).sort() }));
 
-const sortedAnimalsMap = species.reduce((acc, value) =>
-  Object.assign(acc, { [value.location]: animalsNameSorted(value.location) }), {});
-
 const animalsLocationWithoutArgs = species.reduce((acc, value) =>
   Object.assign(acc, { [value.location]: filterAnimalLocation(value.location) }), {});
 
+// const sideHelperFullMap = (includeNames, sex, sorted) => {
+//   if (!includeNames && sex && !sorted) {
+//     return species.reduce((acc, value) =>
+//       Object.assign(acc,
+//         { [value.location]: animalsSeparatedByNamesAndSexSorted(value.location, sex) }), {});
+//   }
+// };
+
+// const sideHelperSortedAndInclude = (includeNames, sex, sorted) => {
+//   if (includeNames && sorted) {
+//     return species.reduce((acc, value) =>
+//       Object.assign(acc, { [value.location]: animalsNameSorted(value.location) }), {});
+//   }
+//   if (includeNames && sex) {
+//     return species.reduce((acc, value) =>
+//       Object.assign(acc, { [value.location]: animalsSeparatedByNamesAndSex(value.location, sex) }),
+//     {});
+//   }
+// };
+
 function getAnimalMap({ includeNames = false, sex, sorted = false } = {}) {
-  if (includeNames && sorted) {
-    return sortedAnimalsMap;
-  }
-  if (sex) {
+  if (includeNames && sex && sorted) {
+    return species.reduce((acc, value) =>
+      Object.assign(acc,
+        { [value.location]: animalsSeparatedByNamesAndSexSorted(value.location, sex) }), {});
+  } if (includeNames && sorted) {
+    return species.reduce((acc, value) =>
+      Object.assign(acc, { [value.location]: animalsNameSorted(value.location) }), {});
+  } if (includeNames && sex) {
     return species.reduce((acc, value) =>
       Object.assign(acc, { [value.location]: animalsSeparatedByNamesAndSex(value.location, sex) }),
     {});
   }
   if (includeNames) {
-    return includeTrueMap;
+    return species.reduce((acc, value) =>
+      Object.assign(acc, { [value.location]: animalsName(value.location) }), {});
   }
   return animalsLocationWithoutArgs;
 }
-console.dir(getAnimalMap({ sex: 'male' }), { depth: null });
+
 const { hours } = data;
 const suportGetSchedule = (dayName) =>
   Object.entries(hours).find((day, index) =>
