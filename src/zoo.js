@@ -126,7 +126,7 @@ function getAnimalMap(options = {}) {
   return animalMapReturn;
 }
 
-const convertHour = hour => ((hour < 13) ? `${hour}am` : `${hour - 12}pm`);
+const convertHour = (hour) => ((hour < 13) ? `${hour}am` : `${hour - 12}pm`);
 
 const descriptionHour = (open, close) => ((close === open)
   ? 'CLOSED' : `Open from ${convertHour(open)} until ${convertHour(close)}`);
@@ -142,7 +142,7 @@ function getSchedule(dayName) {
     }, scheguleZoo);
   } else {
     const selectedDay = hours.find((day) => day[0] === dayName);
-    scheguleZoo[selectedDay[0]] = descriptionHour(selectedDay[1].open, selectedDay[1].close)
+    scheguleZoo[selectedDay[0]] = descriptionHour(selectedDay[1].open, selectedDay[1].close);
   }
   return scheguleZoo;
 }
