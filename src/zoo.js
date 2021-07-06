@@ -120,10 +120,16 @@ const completeList = () => {
 function getEmployeeCoverage(idOrName) {
   if (!idOrName) return completeList();
   const employeeCoverage = {};
-  const { id, firstName, lastName } = data.employees;
-  console.log(employeeCoverage);
-  console.log(id, firstName, lastName);
+  // preciso verificar se o prâmetro é igual ao id, firstName ou lastName;
+  const employeeObjt = data.employees.find((employee) => employee.id === idOrName
+  || employee.firstName === idOrName
+  || employee.lastName === idOrName);
+  const employeeFullName = `${employeeObjt.firstName} ${employeeObjt.lastName}`;
+  employeeCoverage[employeeFullName] = completeList()[employeeFullName];
+  return employeeCoverage;
 }
+
+console.log(getEmployeeCoverage('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
 
 module.exports = {
   calculateEntry,
