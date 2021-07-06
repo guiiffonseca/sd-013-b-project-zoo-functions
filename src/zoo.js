@@ -102,20 +102,13 @@ const getAnimalMapWithoutParameter = (options) => {
 };
 
 const getAnimalMapIncludeNames = (options) => {
-  const speciesForLocation = {};
-  const speciesIncludeNames = {};
-  if (options.includeNames === true) {
-    const locationsArray = ['NE', 'NW', 'SE', 'SW'];
-    locationsArray.forEach((locationCurr) => {
-      const namesSpecies = data.species
-        .filter(({ location }) => location === locationCurr);
-      namesSpecies.forEach((animal) => {
-        speciesIncludeNames[animal.name] = animal.residents.map((resident) => resident.name);
-        speciesForLocation[locationCurr] = speciesIncludeNames;
-      });
-    });
-  }
-  return speciesForLocation;
+  return data.species.reduce((objResult, specieCurrent) => {
+    const objetoAnimals = {};
+    objetoAnimals[specieCurrent.name] = specieCurrent.residents.map(({ name }) => name);
+    console.log(objetoAnimals);
+    objResult[specieCurrent.location] = objetoAnimals;
+    console.log(objResult);
+  }, {});
 };
 console.log(getAnimalMapIncludeNames({ includeNames: true }));
 
