@@ -117,22 +117,24 @@ function calculateEntry(entrants = { Adult: 0, Child: 0, Senior: 0 }) {
 }
 
 function getAnimalMap(options) {
-  if (options === undefined) {
+  //coisa
+}
 
-  }
+function returnAllSchedule() {
+  return {
+    'Tuesday': `Open from ${hours.Tuesday.open}am until ${hours.Tuesday.close - 12}pm`,
+    'Wednesday': `Open from ${hours.Wednesday.open}am until ${hours.Wednesday.close - 12}pm`,
+    'Thursday': `Open from ${hours.Thursday.open}am until ${hours.Thursday.close - 12}pm`,
+    'Friday': `Open from ${hours.Friday.open}am until ${hours.Friday.close - 12}pm`,
+    'Saturday': `Open from ${hours.Saturday.open}am until ${hours.Saturday.close - 12}pm`,
+    'Sunday': `Open from ${hours.Sunday.open}am until ${hours.Sunday.close - 12}pm`,
+    'Monday': 'CLOSED'
+  };
 }
 
 function getSchedule(dayName) {
   if (dayName === undefined) {
-    return {
-      'Tuesday': `Open from ${hours.Tuesday.open}am until ${hours.Tuesday.close - 12}pm`,
-      'Wednesday': `Open from ${hours.Wednesday.open}am until ${hours.Wednesday.close - 12}pm`,
-      'Thursday': `Open from ${hours.Thursday.open}am until ${hours.Thursday.close - 12}pm`,
-      'Friday': `Open from ${hours.Friday.open}am until ${hours.Friday.close - 12}pm`,
-      'Saturday': `Open from ${hours.Saturday.open}am until ${hours.Saturday.close - 12}pm`,
-      'Sunday': `Open from ${hours.Sunday.open}am until ${hours.Sunday.close - 12}pm`,
-      'Monday': 'CLOSED'
-    };
+    return returnAllSchedule()
   }
   if (dayName === 'Monday') {
     const answer = {};
