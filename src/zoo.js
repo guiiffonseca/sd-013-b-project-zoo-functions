@@ -61,9 +61,8 @@ function countAnimals(speciesParam) {
   return allAnimals;
 }
 const { prices } = data;
-// prices: { Adult: 49.99, Senior: 24.99, Child: 20.99 }
+
 function calculateEntry(entrants) {
-  // seu código aqui
   if (entrants === undefined) return 0;
   const { Adult, Senior, Child } = entrants;
   const quantiesOfEnt = [Adult, Senior, Child];
@@ -74,17 +73,37 @@ function calculateEntry(entrants) {
 
   return totalPrice || 0;
 }
+// const options = { includeName: true }
 
 function getAnimalMap(options) {
-  // seu código aqui
+  const nes = species.filter((specie) => (specie.location === 'NE'));
+  const nws = species.filter((specie) => (specie.location === 'NW'));
+  const ses = species.filter((specie) => (specie.location === 'SE'));
+  const sws = species.filter((specie) => (specie.location === 'SW'));
+  return { NE: nes.map((ne) => ne.name),
+    NW: nws.map((nw) => nw.name),
+    SE: ses.map((se) => se.name),
+    SW: sws.map((sw) => sw.name),
+  };
 }
-
+// Recuperar horários
+// recuperar valores de abertura e fechamento
+const { hours } = data;
 function getSchedule(dayName) {
   // seu código aqui
+  return hours;
 }
 
 function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+  const person = employees.find((employee) => employee.id === id);
+  const firstSpecieId = person.responsibleFor[0];
+  const IdAnimal = species.find((specie) => specie.id === firstSpecieId);
+  const IdResidents = IdAnimal.residents.sort((a, b) => +(a.age < b.age) || +(a.age === b.age) - 1);
+  const result = Object.values(IdResidents[0]);
+  return result;
+  // const getOldest = (oldest, age) => ((oldest > age) ? oldest : age);
+  // const residents = species.map((specie) => specie.residents);
+  // const oldest = residents.reduce(getOldest);
 }
 
 function increasePrices(percentage) {
