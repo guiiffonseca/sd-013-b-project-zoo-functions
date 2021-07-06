@@ -155,8 +155,21 @@ function getOldestFromFirstSpecies(id) {
   return [animalOldest.name, animalOldest.sex, animalOldest.age];
 }
 
+const round = (num, places) => {
+  const x = `${num}e+${places}`;
+  const y = `e-${places}`;
+  return +(Math.round(x) + y);
+};
+
 function increasePrices(percentage) {
-  // seu código aqui
+  let { Adult, Child, Senior } = prices;
+  const porcentagem = (percentage / 100);
+  Adult += porcentagem * Adult;
+  Child += porcentagem * Child;
+  Senior += porcentagem * Senior;
+  prices.Adult = round(Adult, 2);
+  prices.Child = round(Child, 2);
+  prices.Senior = round(Senior, 2);
 }
 
 function getEmployeeCoverage(idOrName) {
