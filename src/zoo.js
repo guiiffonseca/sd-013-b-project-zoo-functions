@@ -88,14 +88,44 @@ function calculateEntry(entrants) {
 
 function getAnimalMap(options) {
   // seu código aqui
+  // let animalLocalizacao = data.species.reduce((acc, curr) => {
+  //   acc[curr.location] = [];
+  //   return acc;
+  // }, {});
+  // animalLocalizacao = data.species.reduce((acc, curr) => {
+  //   acc[curr.location].push(curr.name);
+  //   return acc;
+  // }, animalLocalizacao);
+  // if (!options || Object.keys(options).length === 0) {
+  //   return animalLocalizacao;
+  // }
 }
 
 function getSchedule(dayName) {
   // seu código aqui
+  const hour24To12 = (hour) => (hour <= 12 ? `${hour}am` : `${hour - 12}pm`);
+
+  const filteredKeys = Object.keys(data.hours)
+    .filter((day) => !dayName || day === dayName);
+  const result = filteredKeys.reduce((acc, curr) => {
+    const dayWeek = data.hours[curr];
+    acc[curr] = (dayWeek.open === 0 && dayWeek.close === 0)
+      ? 'CLOSED'
+      : `Open from ${hour24To12(dayWeek.open)} until ${hour24To12(dayWeek.close)}`;
+    return acc;
+  }, {});
+  return result;
 }
 
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
+  // Busca o funcionário pelo Id
+  const funcionario = data.employees.find((employee) => employee.id === id);
+  // Pega a primeira espécie gerenciada pelo funcionário
+  const species = data.species.find((specie) => specie.id === funcionario.responsibleFor[0]);
+  // Pega o animail mais velho da espécie
+  const maisVelho = species.residents.reduce((acc, curr) => (acc.age > curr.age ? acc : curr));
+  return [maisVelho.name, maisVelho.sex, maisVelho.age];
 }
 
 function increasePrices(percentage) {
@@ -104,6 +134,11 @@ function increasePrices(percentage) {
 
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
+  if (idOrName === {}) {
+    data.employees.forEach(({ firstName, lastName }, index) => {
+
+    });
+  }
 }
 
 module.exports = {
