@@ -9,14 +9,13 @@ function getSpeciesByIds(...ids) {
 
 function getAnimalsOlderThan(animalName, age) {
   data.species.find((animal) => animal.name === animalName)
-  .residents.every((specie) => specie.age > age)
-};
+    .residents.every((specie) => specie.age > age);
+}
 
 function getEmployeeByName(employeeName) {
   if (!employeeName) return {};
-  return data.employees.find((employee) => 
-  employee.firstName === employeeName || employee.lastName === employeeName);
-};
+  data.employees.find((employee) => employee.firstName === employeeName || employee.lastName === employeeName);
+}
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
