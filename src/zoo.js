@@ -56,7 +56,10 @@ function calculateEntry(entrants = 0) {
   const { Adult = 0 } = entrants;
   const { Child = 0 } = entrants;
   const { Senior = 0 } = entrants;
-  const soma = (Adult * 49.99) + (Child * 20.99) + (Senior * 24.99);
+  const { Adult: adulto } = data.prices;
+  const { Child: crianca } = data.prices;
+  const { Senior: velhos } = data.prices;
+  const soma = (Adult * adulto) + (Child * crianca) + (Senior * velhos);
   return soma;
 }
 
@@ -74,8 +77,9 @@ function getOldestFromFirstSpecies(id) {
 
 function increasePrices(percentage) {
   // seu código aqui
+  
 }
-
+console.log(data.prices);
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
 }
