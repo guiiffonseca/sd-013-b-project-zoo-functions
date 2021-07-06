@@ -71,7 +71,7 @@ function getOldestFromFirstSpecies(id) {
   const animais = species.find((specie) => specie.id === info).residents;
   const animalVelho = animais.sort((age1, age2) => age2.age - age1.age)[0];
 
-  return [`${animalVelho.name}s`, `${animalVelho.sex}`, animalVelho.age];
+  return [`${animalVelho.name}`, `${animalVelho.sex}`, animalVelho.age];
 }
 
 function increasePrices(percentage = 0) {
