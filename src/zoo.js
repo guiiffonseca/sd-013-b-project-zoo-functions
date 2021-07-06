@@ -145,9 +145,16 @@ function getOldestFromFirstSpecies(id) {
 // para o retorno acessei os valores do objeto da chave residents e busquei o animal com a idade igual a idade maxima.
 
 function increasePrices(percentage) {
-  // seu código aqui
-  // price * ( 100 + percentual ) / 100
+  const allPrices = Object.entries(data.prices);
+  allPrices.forEach((entry) => {
+    const newPrice = (entry[1] + entry[1] * (percentage / 100));
+    data.prices[entry[0]] = Math.round(newPrice * 100) / 100;
+  });
 }
+
+// criei uma constante para acessar o objeto prices e fiz um forEach para executar a função em cada elemento.
+// a constante newPrice vai pegar o preço atual (entry[1]) e vai somar com a porcentagem + o preço.
+// depois eu pego a chave do objeto prices (entry[0]) e adiciono o novo valor arredondado com 2 casas decimais.
 
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
