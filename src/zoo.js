@@ -64,7 +64,6 @@ function getAnimalMap(options) {
 }
 /* -------------------------------------------------------------------- */
 function getSchedule(dayName, index) {
-  // seu código aqui
   const obj = {};
   Object.entries(hours).forEach((valor) => {
     obj[valor[0]] = `Open from ${valor[1].open}am until ${valor[1].close - 12}pm`;
@@ -74,16 +73,15 @@ function getSchedule(dayName, index) {
     return obj;
   }
   const objDay = {};
-  Object.entries(obj).find((dia) => {
+  Object.entries(obj).forEach((dia) => {
     if (dayName === Object.values(dia)[0]) {
-      objDay[Object.values(dia)[0]] = Object.values(dia)[1]
-    };
-  })
+      const p = Object.values(dia)[0];
+      const q = Object.values(dia)[1];
+      objDay[p] = q;
+    }
+  });
   return objDay;
 }
-
-console.log(getSchedule('Tuesday'));
-
 /* -------------------------------------------------------------------- */
 function getOldestFromFirstSpecies(id) {
   // pega o id do 1º animal q o func cuida, através da comparação do id do funcionário passado como  como parâmetro.
