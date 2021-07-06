@@ -1,4 +1,4 @@
-const { species, employees, prices } = require('./data');
+const { species, employees, prices, hours } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...idAnimal) {
@@ -63,9 +63,27 @@ function getAnimalMap(options) {
   // seu código aqui
 }
 /* -------------------------------------------------------------------- */
-function getSchedule(dayName) {
+function getSchedule(dayName, index) {
   // seu código aqui
+  const obj = {};
+  Object.entries(hours).forEach((valor) => {
+    obj[valor[0]] = `Open from ${valor[1].open}am until ${valor[1].close - 12}pm`;
+  });
+  obj.Monday = 'CLOSED';
+  if (dayName === undefined) {
+    return obj;
+  }
+  const objDay = {};
+  Object.entries(obj).find((dia) => {
+    if (dayName === Object.values(dia)[0]) {
+      objDay[Object.values(dia)[0]] = Object.values(dia)[1]
+    };
+  })
+  return objDay;
 }
+
+console.log(getSchedule('Tuesday'));
+
 /* -------------------------------------------------------------------- */
 function getOldestFromFirstSpecies(id) {
   // pega o id do 1º animal q o func cuida, através da comparação do id do funcionário passado como  como parâmetro.
@@ -94,6 +112,7 @@ function increasePrices(percentage) {
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
 }
+
 module.exports = {
   calculateEntry,
   getSchedule,
