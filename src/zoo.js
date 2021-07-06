@@ -1,7 +1,6 @@
+// const { removeListener } = require('process');
 const { species, employees } = require('./data');
 const data = require('./data');
-const importUtil = require('util');
-const { removeListener } = require('process');
 
 function getSpeciesByIds(...ids) {
   return species.filter((specie) => ids.find((id) => id === specie.id));
@@ -64,10 +63,6 @@ const filterAnimalLocation = (arg) => species.filter((specie) =>
   specie.location === arg).reduce((acc, value) =>
   acc.concat(value.name), []);
 
-// const animalsName = (arg) => species.filter((specie) =>
-//   specie.location === arg).map((specie) =>
-//   specie.residents.map((resident) => resident.name));
-
 const animalsName = (arg) =>
   species.filter((specie) =>
     specie.location === arg).map((specie) =>
@@ -80,14 +75,22 @@ const animalsSeparatedByNamesAndSex = (arg, sex) =>
     return ({ [specie.name]: residentNames.map((residentName) => residentName.name) });
   });
 
+const includeTrueMap = species.reduce((acc, value) =>
+  Object.assign(acc, { [value.location]: animalsName(value.location) }), {});
+
 const animalsNameSorted = (arg) => species.filter((specie) =>
   specie.location === arg).map((specie) =>
   ({ [specie.name]: specie.residents.map((resident) => resident.name).sort() }));
 
+const sortedAnimalsMap = species.reduce((acc, value) =>
+  Object.assign(acc, { [value.location]: animalsNameSorted(value.location) }), {});
+
+const animalsLocationWithoutArgs = species.reduce((acc, value) =>
+  Object.assign(acc, { [value.location]: filterAnimalLocation(value.location) }), {});
+
 function getAnimalMap({ includeNames = false, sex, sorted = false } = {}) {
-  if (sorted) {
-    return species.reduce((acc, value) =>
-      Object.assign(acc, { [value.location]: animalsNameSorted(value.location) }), {});
+  if (includeNames && sorted) {
+    return sortedAnimalsMap;
   }
   if (sex) {
     return species.reduce((acc, value) =>
@@ -95,14 +98,11 @@ function getAnimalMap({ includeNames = false, sex, sorted = false } = {}) {
     {});
   }
   if (includeNames) {
-    return species.reduce((acc, value) =>
-      Object.assign(acc, { [value.location]: animalsName(value.location) }), {});
+    return includeTrueMap;
   }
-  const animalsLocationWithoutArgs = species.reduce((acc, value) =>
-    Object.assign(acc, { [value.location]: filterAnimalLocation(value.location) }), {});
   return animalsLocationWithoutArgs;
 }
-console.dir(getAnimalMap(), { depth: null });
+console.dir(getAnimalMap({ sex: 'male' }), { depth: null });
 const { hours } = data;
 const suportGetSchedule = (dayName) =>
   Object.entries(hours).find((day, index) =>
