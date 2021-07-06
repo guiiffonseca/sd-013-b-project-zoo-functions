@@ -67,12 +67,28 @@ function getSchedule(dayName) {
   // seu código aqui
 }
 
+// Lucas Caribé me ajudou!
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
+  const firstAnimal = employees
+    .find(({ id: ids }) => ids === id)
+    .responsibleFor[0];
+  const oldAnimal = species
+    .find(({ id: iD }) => iD === firstAnimal).residents
+    .reduce((old, resit) => {
+      if (resit.age > old.age) {
+        return resit;
+      }
+      return old;
+    });
+  return Object.values(oldAnimal);
 }
 
 function increasePrices(percentage) {
   // seu código aqui
+  prices.Adult = Math.ceil(prices.Adult * (100 + percentage)) / 100;
+  prices.Child = Math.ceil(prices.Child * (100 + percentage)) / 100;
+  prices.Senior = Math.ceil(prices.Senior * (100 + percentage)) / 100;
 }
 
 function getEmployeeCoverage(idOrName) {
