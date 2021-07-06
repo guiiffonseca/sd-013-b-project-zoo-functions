@@ -99,11 +99,12 @@ function countAnimals(species) {
     if (!species) {
       const nome = especie.name;
       const qtd = especie.residents.length;
-      // meu obj objEspecies, na chave 'nome' recebe como valor a 'qtd'      
+      // meu obj objEspecies, na chave 'nome' recebe como valor a 'qtd'
       objEspecies[nome] = qtd;
-    } else {
-      if (species === especie.name) objEspecies = especie.residents.length;
+    } else if (species === especie.name) {
+      objEspecies = especie.residents.length;
     }
+
     return objEspecies;
   }, {});
   return contagemAnimal;
