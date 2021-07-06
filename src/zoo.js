@@ -1,5 +1,5 @@
 const data = require('./data');
-// const { species, employees, hours, prices } = require('./data');
+const { species, employees, hours, prices } = require('./data');
 
 function getSpeciesByIds(...ids) {
   if (!ids) return []; // retorna vazio se não entrar parametro
@@ -18,7 +18,7 @@ function getEmployeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  return { ...personalInfo, ...associatedWith };
+  return { ...personalInfo, ...associatedWith }
 }
 
 function isManager(id) {
@@ -85,7 +85,10 @@ function oldestAnimal(animal) {
 }
 
 function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+  function getOldestFromFirstSpecies(employeId) {
+    const employeAnimalId = employees.find(({ id }) => id === employeId).responsibleFor[0];
+    const animals = species.find(({ id: animalId }) => animalId === employeAnimalId).residents;
+    return Object.values(oldestAnimal(animals));
 }
 
 function increasePrices(percentage) { // Feito no plantão do Cajueiro
