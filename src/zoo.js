@@ -24,20 +24,7 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  for (let index = 0; index < employees.length; index += 1) {
-    const test = employees[index].managers.some((manager) => manager === id);
-    if (test === true) {
-      return test;
-    }
-  }
-  return false;
-}
-
-function emptyArrayTest(arr) {
-  if (arr === undefined) {
-    return [];
-  }
-  return arr;
+  return !!employees.find(({ managers }) => managers.includes(id));
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
