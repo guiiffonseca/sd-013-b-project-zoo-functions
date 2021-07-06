@@ -79,7 +79,7 @@ function increasePrices(percentage = 0) {
     let key = prices[price];
     // console.log(key);
     key = Math.ceil((key + (percentage / 100) * key) * 100) / 100;
-    console.log(key);
+    // console.log(key);
     prices[price] = key;
     // console.log(data.prices.Adult);
   });
@@ -87,23 +87,25 @@ function increasePrices(percentage = 0) {
 
 // Ajuda do Lucio Bj
 // increasePrices(50);
-console.log(prices);
+// console.log(prices);
 
 function getEmployeeCoverage(idOrName) {
-  // const newObejct = {};
-  // species.forEach((specie) => { newObejct[specie.id] = specie.name; });
-  // const object = {};
-  // employees.forEach((employee) => {
-  //   object[`${employee.firstName} ${employee.lastName}`] = employee.responsibleFor.map((name) =>
-  //     newObejct[name]);
-  // });
-  // if (!idOrName) return object;
-  // const responde = {};
-  // employees.filter(({ id, firstName, lastName }) => {
-  //   if (firstName === idOrName || lastName === idOrName || id === idOrName) {
-  //     responde[`${firstName.firstName} ${lastName.lastName}`] = newObejct;
-  //   }
-  // });
+  const newObejct = {};
+  species.forEach((specie) => { newObejct[specie.id] = specie.name; });
+  const object = {};
+  employees.forEach((employee) => {
+    object[`${employee.firstName} ${employee.lastName}`] = employee.responsibleFor.map((name) =>
+      newObejct[name]);
+  });
+  if (!idOrName) return object;
+  const employeeSelected = employees
+    .find(({ id, firstName, lastName }) => idOrName === id
+  || idOrName === firstName || idOrName === lastName);
+  return {
+    [`${employeeSelected.firstName} ${employeeSelected.lastName}`]:
+    employeeSelected.responsibleFor.map((name) =>
+      newObejct[name]),
+  };
 }
 
 getEmployeeCoverage('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1');
