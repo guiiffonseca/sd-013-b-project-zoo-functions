@@ -39,7 +39,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 
 function countAnimals(speciess) {
   // seu código aqui
-  if (speciess === undefined) {
+  if (!speciess) {
     return species.reduce((accumulator, correntValue) => {
       accumulator[correntValue.name] = correntValue.residents.length;
       return accumulator;
@@ -173,8 +173,34 @@ function increasePrices(percentage) {
   prices.Senior = +(Math.round((Senior + Senior * (percentage / 100)) * 100) / 100).toFixed(2);
 }
 
+const employeeList = () => {
+  const employeesZoo = employees.reduce((accumulator, currentValue) => {
+    accumulator[`${currentValue.firstName} ${currentValue.lastName}`] = currentValue.responsibleFor
+      .map((element) => species.find(({ id }) => id === element).name);
+    return accumulator;
+  }, {});
+  return employeesZoo;
+};
+
+const employee = (idOrName) => {
+  const employeeZoo = employees.reduce((accumulator, currentValue) => {
+    if (
+      currentValue.firstName === idOrName
+      || currentValue.lastName === idOrName
+      || currentValue.id === idOrName
+    ) {
+      accumulator[`${currentValue.firstName} ${currentValue.lastName}`] = currentValue
+        .responsibleFor.map((element) => species.find(({ id }) => id === element).name);
+    }
+    return accumulator;
+  }, {});
+  return employeeZoo;
+};
+
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
+  if (idOrName) return employee(idOrName);
+  if (!idOrName) return employeeList();
 }
 
 module.exports = {
