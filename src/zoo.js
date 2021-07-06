@@ -70,7 +70,8 @@ function getOldestFromFirstSpecies(id) {
   // seu código aqui
 }
 
-const doPercentage = (priceType, percentage) => Math.ceil(((priceType * (percentage / 100)) + priceType) * 100,) / 100;
+const doPercentage = (priceType, percentage) => { return Math.ceil(
+  ((priceType * (percentage / 100)) + priceType) * 100,) / 100}
 
 function increasePrices(percentage) {
   // seu código aqui
