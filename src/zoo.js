@@ -57,7 +57,7 @@ function calculateEntry(entrants = 0) {
   if (Object.keys(entrants).length === 0) return 0;
   return ((Adult * prices.Adult) + (Child * prices.Child) + (Senior * prices.Senior));
 }
-// console.log();
+
 function getAnimalMap(options) {
   // seu código aqui
 }
@@ -70,8 +70,9 @@ function getOldestFromFirstSpecies(id) {
   // seu código aqui
 }
 
-const doPercentage = (priceType, percentage) => { return Math.ceil(
-  ((priceType * (percentage / 100)) + priceType) * 100,) / 100}
+const doPercentage = (priceType, percentage) => {
+  return Math.ceil(((priceType * (percentage / 100)) + priceType) * 100,) / 100
+}
 
 function increasePrices(percentage) {
   // seu código aqui
