@@ -100,14 +100,15 @@ function getOldestFromFirstSpecies(id) {
   const IdAnimal = species.find((specie) => specie.id === firstSpecieId);
   const IdResidents = IdAnimal.residents.sort((a, b) => +(a.age < b.age) || +(a.age === b.age) - 1);
   const result = Object.values(IdResidents[0]);
+
   return result;
-  // const getOldest = (oldest, age) => ((oldest > age) ? oldest : age);
-  // const residents = species.map((specie) => specie.residents);
-  // const oldest = residents.reduce(getOldest);
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  const values = Object.values(prices);
+  const newValues = values.map((value) => Math.round((value * (1 + percentage / 100)) * 100) / 100);
+  const { Adult, Senior, Child } = [...newValues];
+  return (Adult, Senior, Child);
 }
 
 function getEmployeeCoverage(idOrName) {
