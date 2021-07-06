@@ -1,4 +1,4 @@
-const { species, employees, prices } = require('./data');
+const { species, employees, prices, hours } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -117,19 +117,49 @@ function calculateEntry(entrants = { Adult: 0, Child: 0, Senior: 0 }) {
 }
 
 function getAnimalMap(options) {
-  // seu código aqui
+  if (options === undefined) {
+
+  }
 }
 
 function getSchedule(dayName) {
-  // seu código aqui
+  if (dayName === undefined) {
+    return {
+      'Tuesday': `Open from ${hours.Tuesday.open}am until ${hours.Tuesday.close - 12}pm`,
+      'Wednesday': `Open from ${hours.Wednesday.open}am until ${hours.Wednesday.close - 12}pm`,
+      'Thursday': `Open from ${hours.Thursday.open}am until ${hours.Thursday.close - 12}pm`,
+      'Friday': `Open from ${hours.Friday.open}am until ${hours.Friday.close - 12}pm`,
+      'Saturday': `Open from ${hours.Saturday.open}am until ${hours.Saturday.close - 12}pm`,
+      'Sunday': `Open from ${hours.Sunday.open}am until ${hours.Sunday.close - 12}pm`,
+      'Monday': 'CLOSED'
+    };
+  }
+  if (dayName === 'Monday') {
+    const answer = {};
+    answer[dayName] = 'CLOSED';
+    return answer;
+  }
+  const day = Object.entries(hours).find((element) => element[0] === dayName);
+  const schedule =  `Open from ${day[1].open}am until ${day[1].close - 12}pm`;
+  const answer = {};
+  answer[dayName] = schedule;
+  return answer;
 }
 
 function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+  const employeeObject =  employees.find((element) => element.id === id)
+  const firstAnimal = species.find((element) => element.id === employeeObject.responsibleFor[0])
+  const sortedAnimalsByAge = firstAnimal.residents.sort((elementA, elementB) => elementB.age - elementA.age)
+  return Object.values(sortedAnimalsByAge[0])
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  const multiplier = (100 + percentage)/100;
+  let newPrices = prices;
+  newPrices.Adult = parseFloat((Math.round(((prices.Adult * 100) * multiplier)) / 100).toFixed(2));
+  newPrices.Child = parseFloat((Math.round(((prices.Child * 100) * multiplier)) / 100).toFixed(2));
+  newPrices.Senior = parseFloat((Math.round(((prices.Senior * 100) * multiplier)) / 100).toFixed(2));
+  return newPrices;
 }
 
 function getEmployeeCoverage(idOrName) {
