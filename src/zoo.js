@@ -1,6 +1,9 @@
 const { species, employees } = require('./data');
 const data = require('./data');
 
+const managersIds = ['9e7d4524-363c-416a-8759-8aa7e50c0992',
+  'fdb2543b-5662-46a7-badc-93d960fdc0a8', '0e7b460e-acf4-4e17-bcb3-ee472265db83'];
+
 function getSpeciesByIds(...ids) {
   return ids.map((specieId) =>
     species.find((specie) => specie.id === specieId));
@@ -26,17 +29,26 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  const managersIds = ['9e7d4524-363c-416a-8759-8aa7e50c0992',
-    'fdb2543b-5662-46a7-badc-93d960fdc0a8', '0e7b460e-acf4-4e17-bcb3-ee472265db83'];
   return !!managersIds.find((managerId) => managerId === id);
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  return employees.push({
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  });
 }
 
-function countAnimals() {
-  // seu código aqui
+function countAnimals(specie) {
+  // Consultado em: https://stackoverflow.com/questions/19874555/how-do-i-convert-array-of-objects-into-one-object-in-javascript
+  if (specie === undefined) {
+    return species
+      .reduce((obj, animal) => ({ ...obj, [animal.name]: animal.residents.length }), {});
+  }
+  return species.find((animal) => animal.name === specie).residents.length;
 }
 
 function calculateEntry(entrants) {
