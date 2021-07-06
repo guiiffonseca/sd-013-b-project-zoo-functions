@@ -1,4 +1,4 @@
-const { employees, prices } = require('./data');
+const { employees, prices, species } = require('./data');
 const data = require('./data');
 
 /* 1. Esta função é responsável pela busca das espécies de animais por id.
@@ -132,8 +132,22 @@ function increasePrices(percentage) {
  é responsável */
 
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+  const employeeInfo = (empList) => {
+    const objReady = empList.reduce((acc, empl) => ({ ...acc,
+      [`${empl.firstName} ${empl.lastName}`]: empl.responsibleFor.map((anim) =>
+        data.species.find((spec) => spec.id === anim).name) }), {});
+    return objReady;
+  };
+  if (idOrName) {
+    const subjEmpl = data.employees.find((any) =>
+      idOrName === any.firstName
+   || idOrName === any.lastName
+   || idOrName === any.id);
+    return employeeInfo([subjEmpl]);
+  }
+  return employeeInfo(data.employees);
 }
+
 module.exports = {
   calculateEntry,
   getSchedule,
