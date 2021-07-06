@@ -26,7 +26,9 @@ function getEmployeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  let employee = {};
+  employee = Object.assign(personalInfo, associatedWith);
+  return employee;
 }
 
 function isManager(id) {
@@ -37,8 +39,9 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
 }
 
-// 1- Encontrar todos os animais e suas quantidades;
-// 2- Encontrar o animal e ver o comprimento de residents;
+// 1- Se o array for vazio retornar todos os animais e residents;
+// 2- Criar um objeto vazio e adicionar os animais e residents dentro dele;
+// 3- Encontrar o animal e ver o comprimento de residents;
 function countAnimals(species1) {
   const animals = {};
   if (species1 === undefined) {
