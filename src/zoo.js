@@ -97,13 +97,11 @@ function countAnimals(species) {
   const contagemAnimal = especies.reduce((todasEspecies, especie) => {
     if (!species) {
       const nome = especie.name;
-      const qtd = especie.residents.length;    
+      const qtd = especie.residents.length;
       // meu obj todasEspecies, na chave 'nome' recebe como valor a 'qtd'
       todasEspecies[nome] = qtd;
-    } else {
-      especies.find((especie) => {
-        if (especie.name === species) todasEspecies = especie.residents.length;
-      });
+    } else {      
+        if (species === especie.name) todasEspecies = especie.residents.length;
     }
     return todasEspecies;
   }, {});
