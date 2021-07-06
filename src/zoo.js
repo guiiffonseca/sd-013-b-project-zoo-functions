@@ -57,26 +57,73 @@ function calculateEntry(entrants) {
   return total;
 }
 
+// const includes = (newObject) => {
+//   data.species.forEach((specie) => {
+//     const object = {};
+//     object[specie.name] = specie.residents.map((value) => value.name);
+//     newObject[specie.location].push(object);
+//   });
+// };
 
+// const sorted = (newObject) => {
+//   data.species.forEach((specie) => {
+//     const object = {};
+//     object[specie.name] = specie.residents.map((value) => value.name).sort();
+//     newObject[specie.location].push(object);
+//   });
+// };
 
+// const sexMax = (newObject) => {
+//   data.species.forEach((specie) => {
+//     const object = {};
+//     object[specie.name] = specie.residents.map((value) => value.name);
+//     newObject[specie.location].push(object);
+//   });
+// };
+
+// const sexSort = (newObject) => {};
+
+// const validacoes = (option) => {
+//   let func = 0;
+//   if (option.includeNames && option.sorted) {
+//     func = sorted;
+//   } else if (option.includeNames) {
+//     func = includes;
+//   }
+//   return func;
+// };
+
+const location = (loc) => data.species.filter((value) => value.location === loc);
+const locationSpecieName = ((local) => location(local).map(({ name }) => name));
+const locationAnimalName = ((local) => location(local).map((specie) => {
+  const newObject = {};
+  newObject[specie.name] = specie.residents.map((resident) => resident.name);
+  return newObject;
+}));
+const locationAnimalNameSorted = ((local) => location(local).map((specie) => {
+  const newObject = {};
+  newObject[specie.name] = specie.residents.map((resident) => resident.name).sort();
+  return newObject;
+}));
+const object = {
+  NE: locationSpecieName('NE'),
+  NW: locationSpecieName('NW'),
+  SE: locationSpecieName('SE'),
+  SW: locationSpecieName('SW'),
+};
 function getAnimalMap(options) {
-  const newObject = {
-    NE: [],
-    NW: [],
-    SE: [],
-    SW: [],
-  };
-  if (!options) {
-    data.species.forEach((specie) => {
-      newObject[specie.location].push(specie.name);
+  const newObject = { ...object };
+  const objectKeys = Object.keys(newObject);
+  if (!!options && Object.keys(options).includes('includeNames')) {
+    objectKeys.forEach((value) => {
+      newObject[value] = locationAnimalName(value);
     });
-    return newObject;
+    if (Object.keys(options).includes('sorted')) {
+      objectKeys.forEach((value) => {
+        newObject[value] = locationAnimalNameSorted(value);
+      });
+    }
   }
-  data.species.forEach((specie) => {
-    const object = {};
-    object[specie.name] = specie.residents.map((value) => value.name);
-    newObject[specie.location].push(object);
-  });
   return newObject;
 }
 function getSchedule(dayName) {
