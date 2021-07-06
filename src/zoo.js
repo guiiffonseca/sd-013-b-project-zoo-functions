@@ -1,4 +1,4 @@
-const { species, employees, prices } = require('./data');
+const { species, employees, hours, prices } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -71,22 +71,42 @@ function getOldestFromFirstSpecies(id) {
   const animais = species.find((specie) => specie.id === info).residents;
   const animalVelho = animais.sort((age1, age2) => age2.age - age1.age)[0];
 
-  return [`${animalVelho.name}`, `${animalVelho.sex}`, animalVelho.age];
+  return [`${animalVelho.name}s`, `${animalVelho.sex}`, animalVelho.age];
 }
 
-function increasePrices(percentage) {
-  // seu código aqui
+function increasePrices(percentage = 0) {
+  Object.keys(prices).forEach((price) => {
+    let key = prices[price];
+    // console.log(key);
+    key = Math.ceil((key + (percentage / 100) * key) * 100) / 100;
+    console.log(key);
+    prices[price] = key;
+    // console.log(data.prices.Adult);
+  });
 }
+
+// Ajuda do Lucio Bj
+// increasePrices(50);
+console.log(prices);
 
 function getEmployeeCoverage(idOrName) {
-//   const list = {};
-//   employees.forEach((employee) => {
-//     list[employee.name] = employee.responsibleFor;
-//   });
-//   console.log(list);
+  // const newObejct = {};
+  // species.forEach((specie) => { newObejct[specie.id] = specie.name; });
+  // const object = {};
+  // employees.forEach((employee) => {
+  //   object[`${employee.firstName} ${employee.lastName}`] = employee.responsibleFor.map((name) =>
+  //     newObejct[name]);
+  // });
+  // if (!idOrName) return object;
+  // const responde = {};
+  // employees.filter(({ id, firstName, lastName }) => {
+  //   if (firstName === idOrName || lastName === idOrName || id === idOrName) {
+  //     responde[`${firstName.firstName} ${lastName.lastName}`] = newObejct;
+  //   }
+  // });
 }
 
-getEmployeeCoverage();
+getEmployeeCoverage('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1');
 
 module.exports = {
   calculateEntry,
