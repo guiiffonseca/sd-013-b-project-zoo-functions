@@ -49,44 +49,40 @@ function calculateEntry(entrants) {
   }
 }
 
-const getNamesLoc = (info) => {
-  return species.filter((animal) => animal.location === info)
+const getNamesLoc = (info) => species.filter((animal) => animal.location === info)
   .map((obj) => obj.name);
-}
 
-const getAnimalName = (info) => {
-  return species.reduce((acc, { name, location, residents }) => {
-    if (location === info) acc.push({ [name]: residents
-    .map(({ name }) => name) });
+const getAnimalName = (info) => species
+  .reduce((acc, { name, location, residents }) => {
+    if (location === info) { acc.push({ [name]: residents
+      .map((animal) => animal.name) }) };
     return acc;
   }, []);
-}
 
-const sortedNames = (info) => {
-  return species.reduce((acc, { name, location, residents }) => {
-    if (location === info) acc.push({ [name]: residents
-    .map(({ name }) => name).sort() });
+const sortedNames = (info) => species
+  .reduce((acc, { name, location, residents }) => {
+    if (location === info) { acc.push({ [name]: residents
+      .map((animal) => animal.name).sort() }) };
     return acc;
   }, []);
-}
 
-const femaleNames = (info) => {
-  return species.reduce((acc, { name, location, residents }) => {
-    if (location === info) acc.push({ [name]: residents
-      .filter(({ sex}) => sex === 'female')
-      .map(({name}) => name) });
+const femaleNames = (info) => species
+  .reduce((acc, { name, location, residents }) => {
+    if (location === info) { acc.push({ [name]: residents
+      .filter(({ sex }) => sex === 'female')
+      .map((animal) => animal.name) }) };
     return acc;
   }, []);
-}
 
-const femaleSort = (info) => {
-  return species.reduce((acc, { name, location, residents }) => {
-    if (location === info) acc.push({ [name]: residents
-      .filter(({ sex}) => sex === 'female')
-      .map(({name}) => name).sort() });
+
+const femaleSort = (info) => species
+  .reduce((acc, { name, location, residents }) => {
+    if (location === info) { acc.push({ [name]: residents
+      .filter(({ sex }) => sex === 'female')
+      .map((animal) => animal.name).sort() }) };
     return acc;
   }, []);
-}
+
 
 function getAnimalMap(options) {
   const location = ['NE', 'NW', 'SW', 'SE'];
@@ -101,15 +97,13 @@ function getAnimalMap(options) {
         return acc };
       if (includeNames === true && sex === 'female' && !sorted) { acc[curr] = femaleNames(curr);
         return acc };
-      if (includeNames === true && sorted === true && sex === 'female') {
-        acc[curr] = femaleSort(curr);
-        return acc;
-      }
+      if (includeNames === true && sorted === true && sex === 'female') { 
+        acc[curr] = femaleSort(curr); return acc; }
       acc[curr] = getNamesLoc(curr);
       return acc;
-    }
+    };
   }, {});
-}
+};
 
 function getSchedule(dayName) {
   const schedule = Object.entries(hours).reduce((acc, [day, hour]) => {
