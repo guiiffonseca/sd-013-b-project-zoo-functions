@@ -6,13 +6,18 @@ function getSpeciesByIds(...ids) {
 }
 
 function getAnimalsOlderThan(animal, age) {
-  return species.find((spec) => spec.name === animal)
+  return species
+    .find((spec) => spec.name === animal)
     .residents.every((resident) => resident.age >= age);
 }
 
 function getEmployeeByName(employeeName) {
-  return employees.find(({ firstName, lastName }) =>
-    (firstName === employeeName || lastName === employeeName)) || {};
+  return (
+    employees.find(
+      ({ firstName, lastName }) =>
+        firstName === employeeName || lastName === employeeName,
+    ) || {}
+  );
 }
 // nesta função caso o return não satisfaça a condição passada pelo find retorna automagicamente  o array vazio.
 
@@ -25,7 +30,13 @@ function isManager(id) {
 }
 //  o find nesta função busca e retorna o elemento ou undefined, logo em seguida o includes vai verificar e retornar true ou false.
 
-function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+function addEmployee(
+  id,
+  firstName,
+  lastName,
+  managers = [],
+  responsibleFor = [],
+) {
   const newObj = {
     id,
     firstName,
@@ -37,7 +48,15 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 function countAnimals(speciesAgain) {
-  // seu código aqui
+  const createObj = {};
+  data.species.forEach((spec) => {
+    createObj[spec.name] = spec.residents.length;
+  });
+  if (!speciesAgain) {
+    return createObj;
+  }
+  const getIndividual = Object.entries(createObj).find((element) => element[0] === speciesAgain);
+  return getIndividual[1];
 }
 
 function calculateEntry(entrants) {
