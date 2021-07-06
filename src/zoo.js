@@ -56,53 +56,28 @@ function calculateEntry(entrants) {
   });
   return total;
 }
-
-// const includes = (newObject) => {
-//   data.species.forEach((specie) => {
-//     const object = {};
-//     object[specie.name] = specie.residents.map((value) => value.name);
-//     newObject[specie.location].push(object);
-//   });
-// };
-
-// const sorted = (newObject) => {
-//   data.species.forEach((specie) => {
-//     const object = {};
-//     object[specie.name] = specie.residents.map((value) => value.name).sort();
-//     newObject[specie.location].push(object);
-//   });
-// };
-
-// const sexMax = (newObject) => {
-//   data.species.forEach((specie) => {
-//     const object = {};
-//     object[specie.name] = specie.residents.map((value) => value.name);
-//     newObject[specie.location].push(object);
-//   });
-// };
-
-// const sexSort = (newObject) => {};
-
-// const validacoes = (option) => {
-//   let func = 0;
-//   if (option.includeNames && option.sorted) {
-//     func = sorted;
-//   } else if (option.includeNames) {
-//     func = includes;
-//   }
-//   return func;
-// };
-
 const location = (loc) => data.species.filter((value) => value.location === loc);
+
 const locationSpecieName = ((local) => location(local).map(({ name }) => name));
-const locationAnimalName = ((local) => location(local).map((specie) => {
+
+const locationAnimalName = ((local, sex) => location(local).map((specie) => {
   const newObject = {};
-  newObject[specie.name] = specie.residents.map((resident) => resident.name);
+  if (sex !== undefined) {
+    newObject[specie.name] = specie.residents
+      .filter((sexos) => sexos.sex === sex).map((resident) => resident.name);
+  } else {
+    newObject[specie.name] = specie.residents.map((resident) => resident.name);
+  }
   return newObject;
 }));
-const locationAnimalNameSorted = ((local) => location(local).map((specie) => {
+
+const locationAnimalNameSorted = ((local, sex) => location(local).map((specie) => {
   const newObject = {};
   newObject[specie.name] = specie.residents.map((resident) => resident.name).sort();
+  if (sex !== undefined) {
+    newObject[specie.name] = specie.residents
+      .filter((sexos) => sexos.sex === sex).map((resident) => resident.name).sort();
+  }
   return newObject;
 }));
 const object = {
@@ -116,11 +91,11 @@ function getAnimalMap(options) {
   const objectKeys = Object.keys(newObject);
   if (!!options && Object.keys(options).includes('includeNames')) {
     objectKeys.forEach((value) => {
-      newObject[value] = locationAnimalName(value);
+      newObject[value] = locationAnimalName(value, options.sex);
     });
     if (Object.keys(options).includes('sorted')) {
       objectKeys.forEach((value) => {
-        newObject[value] = locationAnimalNameSorted(value);
+        newObject[value] = locationAnimalNameSorted(value, options.sex);
       });
     }
   }
