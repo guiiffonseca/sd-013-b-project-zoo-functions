@@ -63,22 +63,22 @@ function getAnimalMap(options) {
 }
 
 function DaySchedule(day) {
-  const result = {};
-  result[day] = (day === 'Monday') ? 'CLOSED'
+  const schedule = {};
+  schedule[day] = (day === 'Monday') ? 'CLOSED'
     : `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`;
-  return result;
+  return schedule;
 }
 
 function getSchedule(dayName) {
   // seu código aqui
   const days = Object.keys(hours);
-  const result = {};
+  const schedule = {};
   if (!dayName) {
     days.forEach((day) => {
-      if (day === 'Monday') result[day] = 'CLOSED';
-      else result[day] = `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`;
+      if (day === 'Monday') schedule[day] = 'CLOSED';
+      else schedule[day] = `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`;
     });
-    return result;
+    return schedule;
   }
   return DaySchedule(dayName);
 }
