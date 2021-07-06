@@ -18,7 +18,7 @@ function getEmployeeByName(employeeName) {
     (employee) => 
       employee.firstName === employeeName || employee.lastName === employeeName
   );
-}:
+}
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
