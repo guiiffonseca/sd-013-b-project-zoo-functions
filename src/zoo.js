@@ -1,5 +1,5 @@
 const data = require('./data');
-const { species, employees } = data;
+const { species, employees, hours, prices } = require('./data');
 
 function getSpeciesByIds(...ids) {
   if (!ids) return []; // retorna vazio se não entrar parametro
@@ -25,15 +25,32 @@ function isManager(id) {
   return !!employees.find(({ managers }) => managers.includes(id));
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  const employee = {
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  };
+
+  data.employees.push(employee);
 }
 
-function countAnimals(speciess) {
-  // seu código aqui
-}
+function countAnimals(species = {}) {
+  let animals = {};
+  if (typeof (species) === 'object') {
+    data.species.forEach((specie) => {
+      animals[specie.name] = specie.residents.length;
+    });
+  } else {
+    const animalCategory = data.species.find((specie) => specie.name === species);
+    animals = animalCategory.residents.length;
+  }
+  return animals;
+  }
 
-function calculateEntry(entrants) {
+function calculateEntry(entrants = {}) {
   // seu código aqui
 }
 
@@ -42,15 +59,39 @@ function getAnimalMap(options) {
 }
 
 function getSchedule(dayName) {
-  // seu código aqui
+  const schedule = {};
+  if (!dayName) {
+    Object.keys(hours).forEach((day) => { schedule[day] = formatHour(hours[day]); });
+    return schedule;
+  }
+
+  if (dayName === 'Monday') {
+    schedule[dayName] = 'CLOSED';
+    return schedule;
+  }
+  schedule[dayName] = formatHour(hours[dayName]);
+
+  return schedule;
+}
+
+function oldestAnimal(animal) {
+  const oldAnimal = animal.reduce((oldest, actual) => {
+    if (actual.age > oldest.age) {
+      return actual;
+    }
+    return oldest;
+  });
+  return oldAnimal;
 }
 
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
 }
 
-function increasePrices(percentage) {
-  // seu código aqui
+function increasePrices(percentage) { // Feito no plantão do Cajueiro
+  prices.Adult = (Math.round((prices.Adult * (1 + (percentage / 100))) * 100)) / 100;
+  prices.Child = (Math.round((prices.Child * (1 + (percentage / 100))) * 100)) / 100;
+  prices.Senior = (Math.round((prices.Senior * (1 + (percentage / 100))) * 100)) / 100;
 }
 
 function getEmployeeCoverage(idOrName) {
