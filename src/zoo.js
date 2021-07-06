@@ -1,5 +1,5 @@
 const data = require('./data');
-const { species, employees, hours, prices } = require('./data');
+// const { species, employees, hours, prices } = require('./data');
 
 function getSpeciesByIds(...ids) {
   if (!ids) return []; // retorna vazio se não entrar parametro
@@ -48,7 +48,7 @@ function countAnimals(species = {}) {
     animals = animalCategory.residents.length;
   }
   return animals;
-  }
+}
 
 function calculateEntry(entrants = {}) {
   // seu código aqui
