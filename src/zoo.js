@@ -1,6 +1,6 @@
 const data = require('./data');
 
-const { species, employees, prices, hours } = data;
+const { species, employees, prices, } = data;
 
 function getSpeciesByIds(...ids) {
   // seu código aqui
@@ -64,11 +64,6 @@ function getAnimalMap(options) {
 
 function getSchedule(dayName) {
   // seu código aqui
-  if (!dayName) {
-    return {
-      
-    }
-  }
 }
 
 function getOldestFromFirstSpecies(id) {
