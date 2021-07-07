@@ -66,7 +66,6 @@ const animaBaylLocation = (animalLocation) => {
     return undefined;
   });
   byLocation[animalLocation] = arrayByName;
-  return byLocation;
 };
 
 // Com a opção `includeNames: true` e `sorted: true`(opcional) especificada, retorna nomes de animais'
@@ -85,7 +84,6 @@ const animalBayName = (animalLocation, sorted) => {
     return undefined;
   });
   byLocation[animalLocation] = arrayByName;
-  return byLocation;
 };
 
 // Com a opção `sex: \'female\'` ou `sex: \'male\'` especificada e a opção `sort: true`(opcional) especificada, retorna somente nomes de animais macho/fêmea com os nomes dos animais ordenados
@@ -106,38 +104,28 @@ const animalBaysex = (animalLocation, sorted, animalSex) => {
     return undefined;
   });
   byLocation[animalLocation] = arrayBySex;
-  return byLocation;
 };
 
 // cria novo catalago
-const newCatalog = (callback, sorted, sex) => {
-  species.map(({ location }) => callback(location, sorted, sex));
+
+const newCatalog = (options) => {
+  species.map(({ location }) => {
+    if (options.sex) {
+      return animalBaysex(location, options.sorted || false, options.sex);
+    }
+    return animalBayName(location, options.sorted || false);
+  });
   return byLocation;
 };
-
 //-------------------------------------------------------------------------
-const sortedOn = (options) => {
-  if (options.sex === 'female' || options.sex === 'male') {
-    return newCatalog(animalBaysex, true, options.sex);
-  }
-  return newCatalog(animalBayName, true, options.sex);
-};
-
-const sortedOff = (options) => {
-  if (options.sex === 'female' || options.sex === 'male') {
-    return newCatalog(animalBaysex, false, options.sex);
-  }
-  return newCatalog(animalBayName, false);
-};
-//---------------------------------------------------------------------------
 
 function getAnimalMap(options) {
   // seu código aqui
   if (!options || !options.includeNames) {
-    return newCatalog(animaBaylLocation);
+    species.map(({ location }) => animaBaylLocation(location));
+    return byLocation;
   }
-  if (options.sorted) return sortedOn(options);
-  if (!options.sorted) return sortedOff(options);
+  return newCatalog(options);
 }
 
 function getSchedule(dayName) {
