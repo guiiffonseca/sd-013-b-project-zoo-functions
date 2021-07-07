@@ -22,10 +22,11 @@ function getEmployeeByName(employeeName) {
   // seu código aqui
   if (employeeName === undefined) {
     return {};
-  } else {
-    let employeeSearch = empregados.find((empregado) => empregado.firstName === employeeName|| empregado.lastName === employeeName|| `${empregados.firstName} + ${empregados.lastName}` === employeeName);
-    return employeeSearch;
   }
+  let employeeSearch = empregados.find((empregado) => empregado.firstName === employeeName || empregado.lastName === employeeName ||
+   `${empregados.firstName} + ${empregados.lastName}` === employeeName);
+  return employeeSearch;
+  
 }
 
 function createEmployee(personalInfo, associatedWith) {
