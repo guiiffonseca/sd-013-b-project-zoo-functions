@@ -19,8 +19,9 @@ function getEmployeeByName(employeeName) {
     firstName === employeeName || lastName === employeeName);
 }
 
-function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+function createEmployee(personalInfo, associatedWith) { // Ref: https://www.codingame.com/playgrounds/7998/es6-tutorials-spread-operator-with-fun
+  const info = { ...personalInfo, ...associatedWith }; // spread operator - Concatenação
+  return info;
 }
 
 function isManager(id) {
