@@ -1,4 +1,3 @@
-const { species } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -67,7 +66,7 @@ function calculateEntry(entrants = 0) {
     .reduce((acc, [typeEntrant, amount]) => acc + data.prices[typeEntrant] * amount, 0);
 }
 
-// new Set permite armazenar valores unicos ( valor repetido não armazena );
+// new Set permite armazenar valores unicos ( valor repetido não armazena ); [ ne, nw, se, sw]
 const locations = () => [...new Set(data.species.map((specie) => specie.location))]; // spread em um array
 
 function withoutParameter() {
@@ -91,7 +90,7 @@ function withSexParameter(options) {
         }
         let residentName = allResidents.map(({ name }) => name); // agora so precisamos de um array com os nomes dos animais
         if (sorted) {
-          residentName = residentName.sort();
+          residentName = residentName.sort(); // transforma o array de nomes em ordem alfabetica
         }
         return { [animal.name]: residentName }; // cria o objeto
       });
