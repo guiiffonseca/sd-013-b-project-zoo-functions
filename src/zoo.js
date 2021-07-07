@@ -25,7 +25,7 @@ function createEmployee(personalInfo, associatedWith) { // Ref: https://www.codi
 }
 
 function isManager(id) {
-  // seu código aqui
+  return employees.some(({ managers }) => managers.includes(id)); // 1º Verifica se ao menos um dos elementos está incluído no Managers
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
