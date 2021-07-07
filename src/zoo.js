@@ -18,7 +18,7 @@ function getEmployeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  return { ...personalInfo, ...associatedWith }
+  return { ...personalInfo, ...associatedWith };
 }
 
 function isManager(id) {
@@ -59,29 +59,19 @@ function getAnimalMap(options) {
 }
 
 function getSchedule(dayName) {
-  const schedule = {};
-  if (!dayName) {
-    Object.keys(hours).forEach((day) => { schedule[day] = formatHour(hours[day]); });
-    return schedule;
-  }
+  // const schedule = {};
+  // if (!dayName) {
+  //   Object.keys(hours).forEach((day) => { schedule[day] = formatHour(hours[day]); });
+  //   return schedule;
+  // }
 
-  if (dayName === 'Monday') {
-    schedule[dayName] = 'CLOSED';
-    return schedule;
-  }
-  schedule[dayName] = formatHour(hours[dayName]);
+  // if (dayName === 'Monday') {
+  //   schedule[dayName] = 'CLOSED';
+  //   return schedule;
+  // }
+  // schedule[dayName] = formatHour(hours[dayName]);
 
-  return schedule;
-}
-
-function oldestAnimal(animal) {
-  const oldAnimal = animal.reduce((oldest, actual) => {
-    if (actual.age > oldest.age) {
-      return actual;
-    }
-    return oldest;
-  });
-  return oldAnimal;
+  // return schedule;
 }
 
 function getOldestFromFirstSpecies(id) {
