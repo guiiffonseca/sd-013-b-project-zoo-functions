@@ -65,34 +65,20 @@ function animalsByLocation() {
   return result;
 }
 
-function animalsWithNames() {
-  const animals = species.reduce((acc, current) => {
-    if (acc[current.location]) {
-      acc[current.location].push({ [current.name]:
-        current.residents.map((element) => element.name) });
-    } else {
-      acc[current.location] = [{ [current.name]:
-        current.residents.map((element) => element.name) }];
-    }
-    return acc;
-  }, {});
+function getResidents(animal) {
+  return species.find(({ name, residents }) => animal === name).residents
+    .map(({ name }) => name);
+}
 
+function animalsWithNames(object) {
+  const animals = { ...object };
+  Object.keys(object).forEach((location) => {
+    animals[location] = object[location].map((element) => (({ [element]: getResidents(element) })));
+  });
   return animals;
 }
 
 function animalsSortedByName() {
-  const animals = species.reduce((acc, current) => {
-    if (acc[current.location]) {
-      acc[current.location].push({ [current.name]:
-        current.residents.map((element) => element.name).sort() });
-    } else {
-      acc[current.location] = [{ [current.name]:
-        current.residents.map((element) => element.name).sort() }];
-    }
-    return acc;
-  }, {});
-
-  return animals;
 }
 
 function animalsSortedBySex(currentSex) {
@@ -100,11 +86,11 @@ function animalsSortedBySex(currentSex) {
     if (acc[current.location]) {
       acc[current.location].push({ [current.name]:
         current.residents.filter((element) =>
-          element.sex === currentSex).map((element) => element.name).sort() });
+          element.sex === currentSex).map((element) => element.name) });
     } else {
       acc[current.location] = [{ [current.name]:
         current.residents.filter((element) =>
-          element.sex === currentSex).map((element) => element.name).sort() }];
+          element.sex === currentSex).map((element) => element.name) }];
     }
     return acc;
   }, {});
@@ -113,23 +99,25 @@ function animalsSortedBySex(currentSex) {
 }
 
 function getAnimalMap(options) {
-  let result;
+  let result = animalsByLocation();
   if (options === undefined) {
-    return animalsByLocation();
+    return result;
   }
   const { includeNames: name, sorted, sex } = options;
   if (name) {
-    result = animalsWithNames();
-  }
-  if (sorted) {
-    result = animalsSortedByName();
+    return animalsWithNames(result);
   }
   if (sex) {
     result = animalsSortedBySex(sex);
   }
+  if (sorted) {
+    return animalsSortedByName();
+  }
 
   return result;
 }
+
+const options = { includeNames: true };
 
 function showAllSchedule() {
   const result = {};
@@ -151,14 +139,18 @@ function getSchedule(dayName) {
   return schedule;
 }
 
-console.log(getSchedule('Tuesday'));
-
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  Object.keys(prices).forEach((age) => {
+    const increase = (((prices[age] / 100) * percentage));
+    const finalPrice = Math.ceil((prices[age] + increase) * 100) / 100;
+    // const finalPrice = (parseFloat((prices[age] + incrise).toPrecision(4)));
+    prices[age] = finalPrice;
+  });
+  return prices;
 }
 
 function getEmployeeCoverage(idOrName) {
