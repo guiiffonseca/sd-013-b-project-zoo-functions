@@ -73,16 +73,25 @@ function getSchedule(dayName) {
 
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
+  const colaborador = data.employees.find((value) => value.id === id);
+  const animal = species.find((value2) => value2.id === colaborador.responsibleFor[0]);
+  const maisVelho = animal.residents
+    .reduce((acc, value) => ((value.age > acc) ? value.age : acc), 0);
+  const xablau = animal.residents.find((value) => value.age === maisVelho);
+  return [xablau.name, xablau.sex, maisVelho];
 }
 
+console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
 function increasePrices(percentage) {
   // seu código aqui
-  data.prices.Adult += (data.prices.Adult * percentage) / 100;
-  data.prices.Adult = Math.round(data.prices.Adult * 100) / 100;
-  data.prices.Child += (data.prices.Child * percentage) / 100;
-  data.prices.Child = Math.round(data.prices.Child * 100) / 100;
-  data.prices.Senior += (data.prices.Senior * percentage) / 100;
-  data.prices.Senior = Math.round(data.prices.Senior * 100) / 100;
+  function increase(pessoa) {
+    let result = pessoa + (pessoa * percentage) / 100;
+    result = Math.round(result * 100) / 100;
+    return result;
+  }
+  data.prices.Adult = increase(data.prices.Adult);
+  data.prices.Child = increase(data.prices.Child);
+  data.prices.Senior = increase(data.prices.Senior);
   return data.prices;
 }
 
