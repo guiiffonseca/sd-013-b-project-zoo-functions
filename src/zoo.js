@@ -1,5 +1,5 @@
 const data = require('./data');
-const { species, employees, hours, prices } = require('./data');
+const { species, employees, prices } = require('./data');
 
 function getSpeciesByIds(...ids) {
   if (!ids) return []; // retorna vazio se não entrar parametro
@@ -38,16 +38,16 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 function countAnimals(species = {}) {
-  let animals = {};
-  if (typeof (species) === 'object') {
-    data.species.forEach((specie) => {
-      animals[specie.name] = specie.residents.length;
-    });
-  } else {
-    const animalCategory = data.species.find((specie) => specie.name === species);
-    animals = animalCategory.residents.length;
-  }
-  return animals;
+  // let animals = {};
+  // if (typeof (species) === 'object') {
+  //   data.species.forEach((specie) => {
+  //     animals[specie.name] = specie.residents.length;
+  //   });
+  // } else {
+  //   const animalCategory = data.species.find((specie) => specie.name === species);
+  //   animals = animalCategory.residents.length;
+  // }
+  // return animals;
 }
 
 function calculateEntry(entrants = {}) {
