@@ -1,4 +1,5 @@
 const { species } = require('./data');
+
 const data = require('./data');
 
 const getSpeciesByIds = (...rest) => species.filter((especie) => rest.includes(especie.id));
