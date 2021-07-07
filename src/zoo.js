@@ -143,8 +143,40 @@ function increasePrices(percentage) {
   // prices.Child = prices.Child + (prices.Child / 100 * percentage) + 0.005;
 }
 
+function animalName(ids) {
+  const animais = [];
+  ids.forEach((id) => {
+    species.forEach((specie) => {
+      if (specie.id === id) {
+        animais.push(specie.name);
+      }
+    });
+  });
+  return animais;
+}
+
+function addAll(peoples) {
+  const allPeople = peoples.reduce((acc, people) => {
+    acc[`${people.firstName} ${people.lastName}`] = animalName(people.responsibleFor);
+    return acc;
+  }, {});
+  return allPeople;
+}
+
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+  let returnPeople;
+  const peoples = employees;
+
+  if (idOrName === undefined) {
+    return addAll(peoples);
+  }
+
+  peoples.forEach((peo) => {
+    if (peo.id === idOrName || peo.firstName === idOrName || peo.lastName === idOrName) {
+      returnPeople = { [`${peo.firstName} ${peo.lastName}`]: animalName(peo.responsibleFor) };
+    }
+  });
+  return returnPeople;
 }
 
 module.exports = {
