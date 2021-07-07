@@ -69,15 +69,6 @@ function calculateEntry(entrants) {
 }
 
 function getAnimalMap(options) {
-  //1- A função é responsável pelo mapeamento geográfico das espécies e seus animais, podendo
-  // ainda filtrá-los por ordem alfabética e gênero, por exemplo
-// 2- Sem parâmetros, retorna animais categorizados por localização
-/*const expected = {
-      NE: ['lions', 'giraffes'],
-      NW: ['tigers', 'bears', 'elephants'],
-      SE: ['penguins', 'otters'],
-      SW: ['frogs', 'snakes']
-    };*/
   if (options === undefined){
     let mapgenero = [];
     let animal = [];
@@ -97,7 +88,6 @@ function getSchedule(dayName) {
 
 function getOldestFromFirstSpecies(id) {
   const specieId = data.employees.find((employee) =>  employee.id === id).responsibleFor[0];
-
   const relSpecie = data.species.find((specie) => specieId === specie.id).residents
   .reduce((velho, resident) => {
     if (velho.age < resident.age) {
