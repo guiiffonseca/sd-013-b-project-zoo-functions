@@ -121,7 +121,7 @@ function calculateEntry(entrants = 0) {
     const qtdPessoas = entrants[chavePessoa]; // 2 || 3 || 1
 
     chavesPrecos.forEach((chavePreco) => {
-      let precoUnitario = precos[chavePreco] // 49.99 || 24.99 || 20.99
+      const precoUnitario = precos[chavePreco]; // 49.99 || 24.99 || 20.99
 
       if (chavePreco === chavePessoa) {
         valorTotal = precoUnitario * qtdPessoas;
@@ -131,8 +131,6 @@ function calculateEntry(entrants = 0) {
   });
   return somatudo;
 }
-
-calculateEntry({ 'Adult': 2, 'Child': 3, 'Senior': 1 });
 
 function getAnimalMap(options) {
   // 9
