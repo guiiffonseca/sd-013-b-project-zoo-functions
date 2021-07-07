@@ -69,17 +69,8 @@ function calculateEntry(entrants) {
 }
 
 function getAnimalMap(options) {
-  if (options === undefined){
-    let mapgenero = [];
-    let animal = [];
-    data.species.forEach((element,index) => {
-      mapgenero.push(element.name[index]);
-      animal.push(element.location[index]);
-    });
-    console.log(mapgenero);
-  }
+  //
 }
-getAnimalMap()
 
 
 function getSchedule(dayName) {
