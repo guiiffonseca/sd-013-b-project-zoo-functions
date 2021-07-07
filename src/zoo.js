@@ -23,7 +23,8 @@ function getEmployeeByName(employeeName) {
   if (employeeName === undefined) {
     return {};
   }
-  let employeeSearch = empregados.find((empregado) => empregado.firstName === employeeName || empregado.lastName === employeeName);
+  const employeeSearch = empregados.find(
+    (empregado) => empregado.firstName === employeeName || empregado.lastName === employeeName);
   return employeeSearch;
   
 }
