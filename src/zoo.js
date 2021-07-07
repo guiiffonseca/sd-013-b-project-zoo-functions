@@ -83,22 +83,19 @@ function getSchedule(dayName) {
 }
 
 function getOldestFromFirstSpecies(id) {
-  // achar funcionário pelo id
-  // verificar qual o primeiro índice da chave responsabilityFor
   const firstAnimal = employees.find((people) => people.id === id).responsibleFor[0];
-  // usar o id recebido no passo anterior para pegar a espécie com esse id.
-  const animalSpecie = species.find((specie) => specie.id === firstAnimal).residents;
-  // .reduce((old, resident) => resident.age > old.age ? old = resident : old = old);
-  // verificar na chave residents desse id, qual índice tem a chave age com o valor mais alto.
-  let residentOld = animalSpecie[0];
-  console.log(residentOld);
-  for (let index = 0; index < animalSpecie.length; index += 1) {
-    if (animalSpecie[index].age > residentOld.age) {
-      residentOld = animalSpecie[index];
-    }
-  }
-  // retorna um object.values desse objeto.
-  return Object.values(residentOld);
+  const animalSpecie = species
+    .find((specie) => specie.id === firstAnimal).residents
+    .sort((resA, resB) => {
+      if (resA.age < resB.age) {
+        return 1;
+      }
+      if (resA.age > resB.age) {
+        return -1;
+      }
+      return 0;
+    });
+  return Object.values(animalSpecie[0]);
 }
 
 function increasePrices(percentage) {
