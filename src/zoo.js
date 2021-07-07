@@ -1,3 +1,4 @@
+const { species } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -59,15 +60,60 @@ function countAnimals(speciesName) {
   }
   return allAnimalsObject[speciesName];
 }
-// O parâmetro entrants recebe um objeto que contém as chaves Adult, Child e Senior, com suas respectivas quantidades de pessoas
+
 function calculateEntry(entrants = 0) {
   const entrantsArray = Object.entries(entrants);
   return entrantsArray
     .reduce((acc, [typeEntrant, amount]) => acc + data.prices[typeEntrant] * amount, 0);
 }
 
-function getAnimalMap(options) {
-  // seu código aqui
+// new Set permite armazenar valores unicos ( valor repetido não armazena );
+const locations = () => [...new Set(data.species.map((specie) => specie.location))]; // spread em um array
+
+function withoutParameter() {
+  const fullAnimalMap = {};
+  locations().forEach((location) => {
+    fullAnimalMap[location] = data.species.filter((specie) => specie.location === location)
+      .map((animal) => animal.name);
+  });
+  return fullAnimalMap;
+}
+
+function withSexParameter(options) {
+  const { sex, sorted } = options;
+  const obj = {}; // objeto vazio
+  locations().forEach((location) => { // para cada localização [ NE, NW, SE, SW]
+    obj[location] = data.species.filter((specie) => specie.location === location) // {chave do obj = NE} : [ primeiro filtra pela localização]
+      .map((animal) => { // [ depois cria um array com as seguintes regras]
+        let allResidents = animal.residents; // vamos procurar dentro de todos os residents ( animais )
+        if (sex) { // primeiro verifica o sexo, se tiver esse parametro
+          allResidents = allResidents.filter((resident) => resident.sex === sex); // os residents agora serão somente os da mesma localização e do mesmo sexo
+        }
+        let residentName = allResidents.map(({ name }) => name); // agora so precisamos de um array com os nomes dos animais
+        if (sorted) {
+          residentName = residentName.sort();
+        }
+        return { [animal.name]: residentName }; // cria o objeto
+      });
+    return true;
+  });
+  return obj;
+}
+
+function getAnimalMap(options = {}) {
+  const { includeNames, sex, sorted } = options;
+  const animalMap = withoutParameter();
+  const animalMapWithSex = withSexParameter(options);
+  if (!includeNames) {
+    return animalMap;
+  }
+  if (sex) {
+    return animalMapWithSex;
+  }
+  if (sorted) {
+    return animalMapWithSex;
+  }
+  return animalMapWithSex;
 }
 
 function getSchedule(dayName) {
@@ -98,7 +144,7 @@ function getOldestFromFirstSpecies(id) {
   });
   return [speciesResidents.name, speciesResidents.sex, speciesResidents.age];
 }
-// parseFloat(Mathround(14,)).toFixed(4)
+
 function increasePrices(percentage) {
   const formatedPercentage = 1 + (percentage / 100);
   data.prices.Adult = Math.round(data.prices.Adult * formatedPercentage * 100) / 100;
