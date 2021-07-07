@@ -1,4 +1,4 @@
-const { employees } = require('./data');
+const { employees, prices } = require('./data');
 const { species } = require('./data');
 const data = require('./data');
 
@@ -52,13 +52,18 @@ function countAnimals(specie) {
 }
 
 function calculateEntry(entrants) {
-  if (entrants === undefined || {}) {
+  if (entrants === undefined || entrants === {}) {
     return 0;
   }
-  // dar um jeito de acessar as chaves de entrants (talvez object.keys)
+  // recuperar as 3 chaves de entrants
+  const { Adult = 0, Senior = 0, Child = 0 } = entrants;
   // recuperar as 3 chaves de prices
+  const adult = prices.Adult * Adult;
+  const child = prices.Child * Child;
+  const senior = prices.Senior * Senior;
   // somar cada uma delas
   // retornar a soma de todos eles
+  return adult + child + senior;
 }
 
 function getAnimalMap(options) {
