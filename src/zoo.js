@@ -124,17 +124,19 @@ function increasePrices(percentage) {
 function getEmployeeCoverage(idOrName) {
   // acompanhei Filipe Guto na mentoria do Cajueiro e segui o mesmo raciocinio, porem fiquei com algumas dificuldades de entendimento do código
   const newObj = {};
-  species.forEach((specie) => { newObj[specie.id] = specie.name; }); 
+  species.forEach((specie) => { newObj[specie.id] = specie.name; });
   const obj = {};
-  employees.forEach((employee) => {
-    obj[`${employee.firstName} ${employee.lastName}`] = employee.responsibleFor.map((name) => newObj[name]);
+  employees.forEach((emp) => {
+    obj[`${emp.firstName} ${emp.lastName}`] = emp.responsibleFor.map((name) => newObj[name]);
   });
   if (!idOrName) return obj;
   const empSelec = employees
     .find(({ id, firstName, lastName }) => idOrName === id
     || idOrName === firstName || idOrName === lastName);
   return {
-    [`${empSelec.firstName} ${empSelec.lastName}`]: empSelec.responsibleFor.map((name) => newObj[name]),
+    [`${empSelec.firstName} ${empSelec.lastName}`]: empSelec.responsibleFor.map(
+      (name) => newObj[name],
+    ),
   };
 }
 
