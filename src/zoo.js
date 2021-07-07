@@ -124,11 +124,15 @@ function getOldestFromFirstSpecies(id) {
   const animalOld = animals.reduce((acc, crr) => (acc.age > crr.age ? acc : crr));
   return [animalOld.name, animalOld.sex, animalOld.age];
 }
-console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
-function increasePrices(percentage) {
-  // seu código aqui
-}
 
+function increasePrices(percentage) {
+  data.prices.Adult = parseFloat(((Math
+    .round(data.prices.Adult * percentage) / 100) + data.prices.Adult).toFixed(2));
+  data.prices.Child = parseFloat(((Math
+    .round(data.prices.Child * percentage) / 100) + data.prices.Child).toFixed(2));
+  data.prices.Senior = parseFloat(((Math
+    .round(data.prices.Senior * percentage) / 100) + data.prices.Senior).toFixed(2));
+}
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
 }
