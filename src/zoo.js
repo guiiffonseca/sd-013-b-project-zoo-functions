@@ -101,10 +101,34 @@ function getAnimalMap(options) {
   }
   return newObject;
 }
+const dayOpened = (week) => {
+  const control = {};
+  week.forEach((value) => {
+    control[value[0]] = `Open from ${value[1].open}am until ${value[1].close - 12}pm`;
+    control.Monday = 'CLOSED';
+  });
+  return control;
+};
+const oneDayOpened = (week, day) => {
+  const control = {};
+  if (day !== undefined) {
+    const dayOpen = week.find((value) => value[0] === day);
+    if (dayOpen[0] === 'Monday') {
+      control.Monday = 'CLOSED';
+    } else {
+      control[dayOpen[0]] = `Open from ${dayOpen[1].open}am until ${dayOpen[1].close - 12}pm`;
+    }
+  }
+  return control;
+};
+
 function getSchedule(dayName) {
-  // seu código aqui
+  const weeks = Object.entries(data.hours);
+  if (!dayName) return dayOpened(weeks);
+  return oneDayOpened(weeks, dayName);
 }
 
+console.log(getSchedule('Monday'));
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
 }
