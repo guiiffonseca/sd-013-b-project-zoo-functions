@@ -18,6 +18,7 @@ const { species, employees, prices, hours } = data;
 
 // const limitDecimals = (expresssion, amountDecimals) =>
 //   Number(parseFloat(expresssion).toFixed(amountDecimals));
+const converter = (number) => Math.ceil(number * 100) / 100;
 
 const alreadyExistsInDataBase = (employeeId) => employees.some(({ id }) => id === employeeId);
 
@@ -140,9 +141,6 @@ function getSchedule(dayName) {
   }
 }
 
-// console.log(getSchedule());
-// console.log(getSchedule('Monday'));
-
 function getOldestFromFirstSpecies(id) {
   const idFisrtSpecie = employees.find((employee) => employee.id === id).responsibleFor[0];
   const animalsList = species.filter((specie) => specie.id === idFisrtSpecie)
@@ -155,12 +153,26 @@ function getOldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  Object.entries(prices).forEach((element) => {
+    prices[element[0]] = ((converter((element[1]) * (converter(percentage) / 100) + element[1])));
+  });
+  return prices;
 }
 
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+  let aux = '';
+  const idFilter = employees.filter(({ id }) => id === idOrName);
+  const nameFilter = employees
+    .filter(({ firstName, lastName }) => `${firstName} ${lastName}`
+      .includes(idOrName));
+  if (idFilter.length !== 0) {
+    aux = idFilter;
+  } else aux = nameFilter;
+  const animalIdsArray = aux.map(({ responsibleFor }) => responsibleFor)
+    .reduce((acc, item) => acc + item);
+  return animalIdsArray;
 }
+console.log(getEmployeeCoverage('Elser'));
 
 module.exports = {
   calculateEntry,
