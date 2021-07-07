@@ -76,9 +76,6 @@ function getSchedule(dayName) {
       allHours[entry[0]] = `Open from ${entry[1].open}am until ${entry[1].close - 12}pm`;
     }
   });
-  // if (dayName === 'Monday') {
-  //   return { [dayName]: 'CLOSED' };
-  // }
   if (dayName !== undefined) {
     return { [dayName]: allHours[dayName] };
   }
@@ -86,7 +83,22 @@ function getSchedule(dayName) {
 }
 
 function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+  // achar funcionário pelo id
+  // verificar qual o primeiro índice da chave responsabilityFor
+  const firstAnimal = employees.find((people) => people.id === id).responsibleFor[0];
+  // usar o id recebido no passo anterior para pegar a espécie com esse id.
+  const animalSpecie = species.find((specie) => specie.id === firstAnimal).residents;
+  // .reduce((old, resident) => resident.age > old.age ? old = resident : old = old);
+  // verificar na chave residents desse id, qual índice tem a chave age com o valor mais alto.
+  let residentOld = animalSpecie[0];
+  console.log(residentOld);
+  for (let index = 0; index < animalSpecie.length; index += 1) {
+    if (animalSpecie[index].age > residentOld.age) {
+      residentOld = animalSpecie[index];
+    }
+  }
+  // retorna um object.values desse objeto.
+  return Object.values(residentOld);
 }
 
 function increasePrices(percentage) {
