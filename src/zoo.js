@@ -44,8 +44,6 @@ function countAnimals(speciesParam) {
   if (speciesParam !== undefined) {
     return species.find((specie) => specie.name === speciesParam).residents.length;
   }
-  // const allAnimals = species.forEach((specie) => ({ [specie.name]: specie.residents.length }));
-  // return allAnimals;
   const allAnimals = {
     lions: species.find((specie) => specie.name === 'lions').residents.length,
     tigers: species.find((specie) => specie.name === 'tigers').residents.length,
@@ -88,11 +86,14 @@ function getAnimalMap(options) {
 }
 // Recuperar horários
 // recuperar valores de abertura e fechamento
-const { hours } = data;
+// const { hours } = data;
 function getSchedule(dayName) {
   // seu código aqui
-  return hours;
+  // const arrayOfDays = Object.entries(hours);
+  // const AllmessagesObject = arrayOfDays.forEach((day) => console.log(({ [day[0]]: `Open from ${(day[1]).open}am to ${(day[1].close)}pm` })));
+  if (dayName === 'Monday') return 'CLOSED';
 }
+getSchedule();
 
 function getOldestFromFirstSpecies(id) {
   const person = employees.find((employee) => employee.id === id);
@@ -111,20 +112,19 @@ function increasePrices(percentage) {
 }
 
 function getEmployeeCoverage(idOrName) {
-  const employee = employees.find((emp) => {
-    if (emp.id === idOrName || emp.firstName === idOrName || emp.lastName === idOrName);
-    return emp;
-  });
-  const responsibleForIds = Object.values(employee.responsibleFor);
-  const animals = species.filter((specie, index) => specie.id === responsibleForIds[index]);
+  const employee = employees.find((emp) => (emp.id === idOrName || emp.firstName === idOrName || emp.lastName === idOrName));
+  const responsibleForIds = employee.responsibleFor;
+  const animals = species.filter((specie, index) => (specie.id === responsibleForIds[index]));
   const animalsName = animals.map((animal) => animal.name);
+
   const employeeInfo = {
     [`${employee.firstName} ${employee.lastName}`]: animalsName,
   };
   return employeeInfo;
 }
-getEmployeeByName('Sharonda');
+// console.log(getEmployeeCoverage('Stephanie'));
 
+// Objeto com forEach
 module.exports = {
   calculateEntry,
   getSchedule,
