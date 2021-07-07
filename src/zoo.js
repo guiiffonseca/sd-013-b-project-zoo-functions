@@ -72,7 +72,6 @@ function getAnimalMap(options) {
   //
 }
 
-
 function getSchedule(dayName) {
   // seu código aqui
 }
@@ -82,10 +81,10 @@ function getOldestFromFirstSpecies(id) {
   const relSpecie = data.species.find((specie) => specieId === specie.id).residents
   .reduce((velho, resident) => {
     if (velho.age < resident.age) {
-      return resident;
+         return resident;
     }
-  return velho;
-  });
+    return velho;
+    });
 return Object.values(relSpecie);
 }
 
