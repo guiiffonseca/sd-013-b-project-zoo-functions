@@ -102,6 +102,10 @@ function getSchedule(dayName) {
 
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
+  /*  const firstSpecies = employees.find(({ id: currId }) => currId === id).responsibleFor[0];
+  const {name, sex, age} = residents;
+  const oldestSpecies = [firstSpecies.residents.name, firstSpecies.residents.sex, firstSpecies.residents.age];
+  return oldestSpecies;  */
 }
 
 function increasePrices(percentage) {
@@ -118,7 +122,20 @@ function increasePrices(percentage) {
 }
 
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+  // acompanhei Filipe Guto na mentoria do Cajueiro e segui o mesmo raciocinio, porem fiquei com algumas dificuldades de entendimento do código
+  const newObj = {};
+  species.forEach((specie) => { newObj[specie.id] = specie.name; }); 
+  const obj = {};
+  employees.forEach((employee) => {
+    obj[`${employee.firstName} ${employee.lastName}`] = employee.responsibleFor.map((name) => newObj[name]);
+  });
+  if (!idOrName) return obj;
+  const empSelec = employees
+    .find(({ id, firstName, lastName }) => idOrName === id
+    || idOrName === firstName || idOrName === lastName);
+  return {
+    [`${empSelec.firstName} ${empSelec.lastName}`]: empSelec.responsibleFor.map((name) => newObj[name]),
+  };
 }
 
 module.exports = {
