@@ -101,6 +101,7 @@ function getAnimalMap(options) {
   }
   return newObject;
 }
+
 const dayOpened = (week) => {
   const control = {};
   week.forEach((value) => {
@@ -109,30 +110,21 @@ const dayOpened = (week) => {
   });
   return control;
 };
-const oneDayOpened = (week, day) => {
-  const control = {};
-  if (day !== undefined) {
-    const dayOpen = week.find((value) => value[0] === day);
-    if (dayOpen[0] === 'Monday') {
-      control.Monday = 'CLOSED';
-    } else {
-      control[dayOpen[0]] = `Open from ${dayOpen[1].open}am until ${dayOpen[1].close - 12}pm`;
-    }
-  }
-  return control;
-};
 
 function getSchedule(dayName) {
   const weeks = Object.entries(data.hours);
+  const control = dayOpened(weeks);
   if (!dayName) return dayOpened(weeks);
-  return oneDayOpened(weeks, dayName);
+  return { [dayName]: control[dayName] };
 }
 
-console.log(getSchedule('Monday'));
 function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+  const specie = data.employees.find((employee) => employee.id === id).responsibleFor[0];
+  const animals = data.species.find((value) => value.id === specie).residents;
+  const animalOld = animals.reduce((acc, crr) => (acc.age > crr.age ? acc : crr));
+  return [animalOld.name, animalOld.sex, animalOld.age];
 }
-
+console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
 function increasePrices(percentage) {
   // seu código aqui
 }
