@@ -89,22 +89,63 @@ function getAnimalLocations() {
   return getAnimalLocation;
 }
 
-// function getAnimalNames() {
-//   const getNameAnimals = data.species.reduce((acc, curr) => {
-//     if (!acc[curr.location]) {
-//       acc[curr.location] = [{curr}];
-//       return acc;
-//     }
-//     acc[curr.location].push(curr.name);
-//     return acc;
-//   }, {});
-//   return getNameAnimals;
-// }
+function getAnimalNames() {
+  const teste = data.species.reduce((acc, curr) => {
+    acc[curr.location] = data.species.filter((valor) => valor.location === curr.location)
+      .map((animal) => ({ [animal.name]: animal.residents.map(({ name }) => name) }));
+    return acc;
+  }, {});
+  return teste;
+}
 
+function getSortedAnimals() {
+  const teste = data.species.reduce((acc, curr) => {
+    acc[curr.location] = data.species.filter((valor) => valor.location === curr.location)
+      .map((animal) => ({ [animal.name]: animal.residents.map(({ name }) => name).sort() }));
+    return acc;
+  }, {});
+  return teste;
+}
+
+function getAnimalsBySex() {
+  const animalSex = data.species.reduce((acc, curr) => {
+    acc[curr.location] = data.species
+      .filter((elemento1) => elemento1.location === curr.location)
+      .map((elemento2) => ({ [elemento2.name]: elemento2.residents
+        .filter((elemento3) => elemento3.sex === 'female').map(({ name }) => name) }));
+    return acc;
+  }, {});
+  return animalSex;
+}
+
+function getAnimalsBySexSorted() {
+  const animalSexSorted = data.species.reduce((acc, curr) => {
+    acc[curr.location] = data.species
+      .filter((elemento1) => elemento1.location === curr.location)
+      .map((elemento2) => ({ [elemento2.name]: elemento2.residents
+        .filter((elemento3) => elemento3.sex === 'female').map(({ name }) => name).sort() }));
+    return acc;
+  }, {});
+  return animalSexSorted;
+}
+function fixEslint1(options) {
+  if (options.sex === 'female') return getAnimalLocations();
+  if (options.includeNames) return getAnimalNames();
+}
+function fixEslint2(options) {
+  if (options.includeNames && options.sex === 'female') return getAnimalsBySex();
+  if (options.includeNames && options.sorted) return getSortedAnimals();
+  return fixEslint1(options);
+}
 function getAnimalMap(options) {
-  if (!options) {
-    return getAnimalLocations();
+  /* Consultei o repositório do Amós Rodrigues para resolver essa parte.
+  Link: https://github.com/tryber/sd-013-b-project-zoo-functions/blob/Amos-Rodrigues-project-zoo-functions/src/zoo.js
+  */
+  if (!options) return getAnimalLocations();
+  if (options.includeNames && options.sex === 'female' && options.sorted) {
+    return getAnimalsBySexSorted();
   }
+  return fixEslint2(options);
 }
 
 function getSchedule(dayName) {
@@ -154,17 +195,16 @@ function getEmployeeCoverage(idOrName) {
   if (!idOrName) {
     return getFullList;
   }
-  const teste = {};
+  const getSpecificPerson = {};
   data.employees.map((teste2) => {
     if (teste2.id === idOrName || teste2.firstName === idOrName || teste2.lastName === idOrName) {
-      teste[`${teste2.firstName} ${teste2.lastName}`] = teste2.responsibleFor
+      getSpecificPerson[`${teste2.firstName} ${teste2.lastName}`] = teste2.responsibleFor
         .map((elemento) => data.species.find((elemento2) => elemento2.id === elemento).name);
     }
-    return teste;
+    return getSpecificPerson;
   });
-  return teste;
+  return getSpecificPerson;
 }
-console.log(getEmployeeCoverage('Azevado'));
 
 module.exports = {
   calculateEntry,
