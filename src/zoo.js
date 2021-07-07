@@ -25,7 +25,7 @@ function getEmployeeByName(employeeName) {
   }
   const employeeSearch = empregados.find(
     (empregado) => empregado.firstName === employeeName || empregado.lastName === employeeName,
-    );
+  );
   return employeeSearch;
 }
 
