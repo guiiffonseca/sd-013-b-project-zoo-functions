@@ -91,8 +91,8 @@ function getEmployeeCoverage(idOrName) {
       const fullName = `${employee.firstName} ${employee.lastName}`;
       const animals = [];
       employee.responsibleFor.forEach((ani) =>
-        animals.push(species.find((spec) => spec.id === ani).name))
-        allEmployees[fullName] = animals;
+        animals.push(species.find((spec) => spec.id === ani).name));
+      allEmployees[fullName] = animals;
     });
     return allEmployees;
   }
