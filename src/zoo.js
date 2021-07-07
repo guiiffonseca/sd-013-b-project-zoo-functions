@@ -28,8 +28,14 @@ function isManager(id) {
   return employees.some(({ managers }) => managers.includes(id)); // 1º Verifica se ao menos um dos elementos está incluído no Managers
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) { // Ref:https://ui.dev/shorthand-properties/
+  employees.push({ // Adicionar ao final do Array um novo Objeto;    // Default Parameters https://www.w3schools.com/howto/howto_js_default_parameters.asp
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  });
 }
 
 function countAnimals(species1) {
