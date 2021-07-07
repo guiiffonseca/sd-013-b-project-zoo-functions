@@ -1,4 +1,4 @@
-const { species } = require('./data');
+const { species, employees } = require('./data');
 const data = require('./data');
 
 // A colega de turma Mayu fez um code review e indicou usar o Rest no 1º Desafio
@@ -13,7 +13,10 @@ function getAnimalsOlderThan(animal, age) {
 }
 
 function getEmployeeByName(employeeName) {
-  // seu código aqui
+  if (!employeeName) return {}; // 1º Verificar se não possui parâmetros, então retorna um objeto vazio
+
+  return employees.find(({ firstName, lastName }) => // 2º Encontrar se o firstName ou lastName é igual ao argumento
+    firstName === employeeName || lastName === employeeName);
 }
 
 function createEmployee(personalInfo, associatedWith) {
