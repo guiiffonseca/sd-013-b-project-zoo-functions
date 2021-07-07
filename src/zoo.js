@@ -2,6 +2,7 @@ const data = require('./data');
 
 const especies = data.species;
 const empregados = data.employees;
+const precos = data.prices;
 
 const getSpeciesByIds = (...ids) => {
   // seu código aqui
@@ -95,7 +96,7 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 function countAnimals(species) {
   // Ajuda do Cajueiro | todasEspecies é o meu obj vazio {}
   const contagemAnimal = especies.reduce((todasEspecies, especie) => {
-    let objEspecies = todasEspecies;
+    let objEspecies = todasEspecies; // essa variável é só pq o lint reclama se a atribuição for direta no parâmetro da função
     if (!species) {
       const nome = especie.name;
       const qtd = especie.residents.length;
@@ -110,28 +111,47 @@ function countAnimals(species) {
   return contagemAnimal;
 }
 
-function calculateEntry(entrants) {
-  // seu código aqui
+function calculateEntry(entrants = 0) {
+  const chavesPessoas = Object.keys(entrants); // ex.:['Adult','Child', 'Senior']
+  const chavesPrecos = Object.keys(precos); // ['Adult', 'Senior', 'Child']
+  let valorTotal = 0;
+  let somatudo = 0;
+
+  chavesPessoas.forEach((chavePessoa) => {
+    const qtdPessoas = entrants[chavePessoa]; // 2 || 3 || 1
+
+    chavesPrecos.forEach((chavePreco) => {
+      let precoUnitario = precos[chavePreco] // 49.99 || 24.99 || 20.99
+
+      if (chavePreco === chavePessoa) {
+        valorTotal = precoUnitario * qtdPessoas;
+      }
+    });
+    somatudo += valorTotal;
+  });
+  return somatudo;
 }
 
+calculateEntry({ 'Adult': 2, 'Child': 3, 'Senior': 1 });
+
 function getAnimalMap(options) {
-  // seu código aqui
+  // 9
 }
 
 function getSchedule(dayName) {
-  // seu código aqui
+  // s10
 }
 
 function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+  // 11
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  // 12
 }
 
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+  // 13
 }
 
 module.exports = {
