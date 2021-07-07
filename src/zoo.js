@@ -1,4 +1,5 @@
 const data = require('./data');
+const { hours } = require('./data');
 
 function getSpeciesByIds(...ids) {
   const speciesById = ids.map((id) => data.species.find((specie) => specie.id === id));
@@ -66,7 +67,23 @@ function getAnimalMap(options) {
 }
 
 function getSchedule(dayName) {
-  // seu código aqui
+  const day = {};
+  const days = {
+    Tuesday: `Open from ${hours.Tuesday.open}am until ${hours.Tuesday.close - 12}pm`,
+    Wednesday: `Open from ${hours.Wednesday.open}am until ${hours.Wednesday.close - 12}pm`,
+    Thursday: `Open from ${hours.Thursday.open}am until ${hours.Thursday.close - 12}pm`,
+    Friday: `Open from ${hours.Friday.open}am until ${hours.Friday.close - 12}pm`,
+    Saturday: `Open from ${hours.Saturday.open}am until ${hours.Saturday.close - 12}pm`,
+    Sunday: `Open from ${hours.Sunday.open}am until ${hours.Sunday.close - 12}pm`,
+    Monday: 'CLOSED',
+  };
+  if (dayName === undefined) { return days; }
+  if (typeof dayName === 'string') {
+    Object.keys(days).forEach((select) => {
+      if (dayName === select) { day[dayName] = days[select]; }
+    });
+  }
+  return day;
 }
 
 function getOldestFromFirstSpecies(id) {
