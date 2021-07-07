@@ -74,9 +74,9 @@ function getSchedule(dayName) {
   // return schedule;
 }
 function getOldestFromFirstSpecies(employeId) {
-    const employeAnimalId = employees.find(({ id }) => id === employeId).responsibleFor[0];
-    const animals = species.find(({ id: animalId }) => animalId === employeAnimalId).residents;
-    return Object.values(oldestAnimal(animals));
+    // const employeAnimalId = employees.find(({ id }) => id === employeId).responsibleFor[0];
+    // const animals = species.find(({ id: animalId }) => animalId === employeAnimalId).residents;
+    // return Object.values(oldestAnimal(animals));
 }
 
 function increasePrices(percentage) { // Feito no plantão do Cajueiro
