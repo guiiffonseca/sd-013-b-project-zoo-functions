@@ -41,7 +41,10 @@ function countAnimals(pecies) {
 }
 
 function calculateEntry(entrants) {
-  // seu código aqui
+  if (entrants === undefined) return 0;
+  const { Adult = 0, Child = 0, Senior = 0 } = entrants;
+  const price = Adult * 49.99 + Senior * 24.99 + Child * 20.99;
+  return price;
 }
 
 function getAnimalMap(options) {
