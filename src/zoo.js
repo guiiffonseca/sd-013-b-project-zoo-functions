@@ -1,5 +1,5 @@
 const data = require('./data');
-const { species, employees, hours, prices } = require('./data');
+const { species, employees, prices } = require('./data');
 
 function getSpeciesByIds(...ids) {
   if (!ids) return []; // retorna vazio se não entrar parametro
@@ -64,13 +64,11 @@ function getSchedule(dayName) {
   //   Object.keys(hours).forEach((day) => { schedule[day] = formatHour(hours[day]); });
   //   return schedule;
   // }
-  
   // if (dayName === 'Monday') {
   // schedule[dayName] = 'CLOSED';
   // return schedule;
   // }
   // schedule[dayName] = formatHour(hours[dayName]);
-  
   // return schedule;
 }
 
