@@ -84,17 +84,36 @@ function getAnimalMap(options) {
     SW: sws.map((sw) => sw.name),
   };
 }
-// Recuperar horários
-// recuperar valores de abertura e fechamento
-// const { hours } = data;
-function getSchedule(dayName) {
-  // seu código aqui
-  // const arrayOfDays = Object.entries(hours);
-  // const AllmessagesObject = arrayOfDays.forEach((day) => console.log(({ [day[0]]: `Open from ${(day[1]).open}am to ${(day[1].close)}pm` })));
-  if (dayName === 'Monday') return 'CLOSED';
-}
-getSchedule();
 
+const { hours } = data;
+
+function getSchedule(dayName) {
+  const arrayOfDays = Object.entries(hours);
+  const daySearched = arrayOfDays.find((day) => day[0] === dayName);
+  const arrayDays = Object.entries(hours);
+  if (dayName !== undefined) {
+    const daySchedule = {
+      [dayName]: `Open from ${daySearched[1].open}am until ${daySearched[1].close - 12}pm`,
+    };
+    if (dayName === 'Monday') daySchedule[dayName] = 'CLOSED';
+    return daySchedule;
+  }
+  return arrayDays.forEach((day) => console.log(({
+    [day[arrayDays.length - 1]]: 'CLOSED',
+    [day[0]]: `Open from ${day[1].open}am until ${day[1].close - 12}pm`,
+  })));
+}
+console.log(getSchedule('Monday'));
+// 'Tuesday': 'Open from 8am until 6pm'
+// hours: {
+//   Tuesday: { open: 8, close: 18 },
+//   Wednesday: { open: 8, close: 18 },
+//   Thursday: { open: 10, close: 20 },
+//   Friday: { open: 10, close: 20 },
+//   Saturday: { open: 8, close: 22 },
+//   Sunday: { open: 8, close: 20 },
+//   Monday: { open: 0, close: 0 },
+// },
 function getOldestFromFirstSpecies(id) {
   const person = employees.find((employee) => employee.id === id);
   const firstSpecieId = person.responsibleFor[0];
@@ -112,13 +131,13 @@ function increasePrices(percentage) {
 }
 
 function getEmployeeCoverage(idOrName) {
-  const employee = employees.find((emp) => (emp.id === idOrName || emp.firstName === idOrName || emp.lastName === idOrName));
-  const responsibleForIds = employee.responsibleFor;
-  const animals = species.filter((specie, index) => (specie.id === responsibleForIds[index]));
-  const animalsName = animals.map((animal) => animal.name);
+  // const employee = employees.find((emp) => (emp.id === idOrName || emp.firstName === idOrName || emp.lastName === idOrName));
+  // const responsibleForIds = employee.responsibleFor;
+  // const animals = species.filter((specie, index) => (specie.id === responsibleForIds[index]));
+  // const animalsName = animals.map((animal) => animal.name);
 
   const employeeInfo = {
-    [`${employee.firstName} ${employee.lastName}`]: animalsName,
+    // [`${employee.firstName} ${employee.lastName}`]: animalsName,
   };
   return employeeInfo;
 }
