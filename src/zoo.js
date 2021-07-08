@@ -122,18 +122,26 @@ function getOldestFromFirstSpecies(id) {
   let biggerAge = 0;
   const firstSpecieId = employees.find((employee) => employee.id === id).responsibleFor[0];
   const foundSpecie = species.find((specie) => specie.id === firstSpecieId);
+
   foundSpecie.residents
     .forEach((resident) => {
       if (resident.age > biggerAge) {
         biggerAge = resident.age;
       }
     });
+
   const oldest = foundSpecie.residents.find((resident) => resident.age === biggerAge);
   return Object.values(oldest);
 }
 
 function increasePrices(percentage) {
   // seu código aqui
+  Object.entries(prices).forEach(([key, value]) => {
+    const increasedPrice = value + (value * (percentage / 100));
+    prices[key] = Math.round((increasedPrice + Number.EPSILON) * 100) / 100;
+  });
+
+  return prices;
 }
 
 function getEmployeeCoverage(idOrName) {
