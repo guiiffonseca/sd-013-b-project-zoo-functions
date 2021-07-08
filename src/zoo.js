@@ -40,6 +40,22 @@ const calcValues = (amount, type) => {
   return amount * multiplier;
 };
 
+const scheduleList = (dayName, element) => {
+  const schedule = {};
+  const msg = `Open from ${element[1].open}am until ${element[1].close - 12}pm`;
+  schedule[element[0]] = dayName === 'Monday' ? 'CLOSED' : msg;
+  return schedule;
+};
+
+const scheduleRow = () => {
+  const schedule = {};
+  Object.entries(hours).forEach((element) => {
+    const msg = `Open from ${element[1].open}am until ${element[1].close - 12}pm`;
+    schedule[element[0]] = element[0] === 'Monday' ? 'CLOSED' : msg;
+  });
+  return schedule;
+};
+
 // ------------------------------------------------------------------------------------ //
 
 const getSpeciesByIds = (...idSpecies) =>
@@ -131,14 +147,10 @@ const getAnimalsByLocation = () => {
 
 function getSchedule(dayName) {
   if (!dayName) {
-    const schedule = {};
-    Object.entries(hours).forEach((element) => {
-      let msg = `Open from ${element[1].open}am until ${element[1].close - 12}pm`;
-      msg = element[0] === 'Monday' ? 'CLOSED' : msg;
-      schedule[element[0]] = msg;
-    });
-    return schedule;
+    return scheduleRow();
   }
+  const objectRow = Object.entries(hours).find((name) => name[0] === dayName);
+  return scheduleList(dayName, objectRow);
 }
 
 function getOldestFromFirstSpecies(id) {
@@ -159,20 +171,31 @@ function increasePrices(percentage) {
   return prices;
 }
 
-function getEmployeeCoverage(idOrName) {
+const getAnimalsByEmployee = (idByEmployee) => {
+  const list = [];
+  idByEmployee.forEach((element) => {
+    list.push(species
+      .reduce((acc, { id, name }) => (id === element || name === element ? name : acc)));
+  });
+  return list;
+};
+
+const getEmployeeCoverage = (idOrName) => {
   let aux = '';
   const idFilter = employees.filter(({ id }) => id === idOrName);
-  const nameFilter = employees
-    .filter(({ firstName, lastName }) => `${firstName} ${lastName}`
-      .includes(idOrName));
+  const nameFilter = employees.filter(({ firstName, lastName }) => `${firstName} ${lastName}`
+    .includes(idOrName));
   if (idFilter.length !== 0) {
     aux = idFilter;
   } else aux = nameFilter;
-  const animalIdsArray = aux.map(({ responsibleFor }) => responsibleFor)
-    .reduce((acc, item) => acc + item);
+  // console.log(aux);
+  const animalIdsArray = getAnimalsByEmployee(aux.map(({ responsibleFor }) => responsibleFor)
+    .reduce((acc, item) => acc + item));
   return animalIdsArray;
-}
-console.log(getEmployeeCoverage('Elser'));
+};
+
+// console.log(getEmployeeCoverage('Elser'));
+// console.log(getAnimalsByEmployee(getEmployeeCoverage('Azevado')));
 
 module.exports = {
   calculateEntry,
