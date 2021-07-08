@@ -90,7 +90,7 @@ function getAllEmployees(idOrName) {
     const fullName = `${employee.firstName} ${employee.lastName}`;
     const animals = [];
     employee.responsibleFor.forEach((ani) =>
-    animals.push(species.find((spec) => spec.id === ani).name));
+      animals.push(species.find((spec) => spec.id === ani).name));
     allEmployees[fullName] = animals;
   });
   return allEmployees;
@@ -99,15 +99,16 @@ function getAllEmployees(idOrName) {
 function getEmployeeCoverage(idOrName) {
   if (!idOrName) return getAllEmployees(idOrName);
   const allEmployees = { };
-  employees.forEach(( { firstName, lastName, id, responsibleFor }) => {
+  employees.forEach(({ firstName, lastName, id, responsibleFor }) => {
     if (idOrName === firstName || idOrName === lastName || idOrName === id) {
-    const fullName = `${firstName} ${lastName}`;
-    const animals = [];
+      const fullName = `${firstName} ${lastName}`;
+      const animals = [];
       responsibleFor.forEach((animal) => {
       animals.push(species.find((specie) => specie.id === animal).name);
-      allEmployees[fullName] = animals;
-    })
-  }})
+        allEmployees[fullName] = animals;
+      });
+    }
+  });
   return allEmployees;
 }
 
