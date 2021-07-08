@@ -153,13 +153,14 @@ function getSchedule(dayName) {
   return defSchedule;
 }
 
-console.log(getSchedule('Monday'));
-
 // REQUISITO 11
-
 function getOldestFromFirstSpecies(id) {
+  const getEmployee = data.employees.find((employee) => employee.id === id).responsibleFor[0];
+  const getAnimal = data.species.find((animal) => animal.id === getEmployee).residents;
+  const getOlder = getAnimal.reduce((acc, actual) => (acc.age > actual.age ? acc : actual));
+  return [getOlder.name, getOlder.sex, getOlder.age];
 }
-
+console.log(getOldestFromFirstSpecies('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
 // REQUISITO 12
 
 function increasePrices(percentage) {
