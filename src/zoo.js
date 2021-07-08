@@ -1,5 +1,5 @@
 const data = require('./data');
-const { species } = require('./data');
+const { species, employees } = require('./data');
 
 // Usei rest para que fosse possível passar vários parâmetros ao mesmo tempo.
 // Usei o .filter pois retorna um novo array com os objetos que passam na regra de negócio
@@ -19,8 +19,14 @@ function getAnimalsOlderThan(animalName, animalAge) {
     .residents.every(({ age }) => age >= animalAge);
 }
 
-function getEmployeeByName(employeeName) {
-  // seu código aqui
+// Caso não seja passado um parâmetro a função deve retornar um obj vazio
+// Usei o .find para encontrar o funcionário com um nome ou sobrenome igual ao parâmetro passado
+// .find retorna um obj
+function getEmployeeByName(name) {
+  if (name === undefined) {
+    return {};
+  }
+  return employees.find(({ firstName, lastName }) => firstName === name || lastName === name);
 }
 
 function createEmployee(personalInfo, associatedWith) {
