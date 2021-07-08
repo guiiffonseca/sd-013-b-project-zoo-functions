@@ -84,19 +84,34 @@ function increasePrices(percentage) {
   });
 }
 
-function getEmployeeCoverage(idOrName) {
+function getAllEmployees(idOrName) {
   const allEmployees = { };
-  if (!idOrName) {
-    employees.forEach((employee) => {
-      const fullName = `${employee.firstName} ${employee.lastName}`;
-      const animals = [];
-      employee.responsibleFor.forEach((ani) =>
-        animals.push(species.find((spec) => spec.id === ani).name));
-      allEmployees[fullName] = animals;
-    });
-    return allEmployees;
-  }
+  employees.forEach((employee) => {
+    const fullName = `${employee.firstName} ${employee.lastName}`;
+    const animals = [];
+    employee.responsibleFor.forEach((ani) =>
+    animals.push(species.find((spec) => spec.id === ani).name));
+    allEmployees[fullName] = animals;
+  });
+  return allEmployees;
 }
+
+function getEmployeeCoverage(idOrName) {
+  if (!idOrName) return getAllEmployees(idOrName);
+  const allEmployees = { };
+  employees.forEach(( { firstName, lastName, id, responsibleFor }) => {
+    if (idOrName === firstName || idOrName === lastName || idOrName === id) {
+    const fullName = `${firstName} ${lastName}`;
+    const animals = [];
+      responsibleFor.forEach((animal) => {
+      animals.push(species.find((specie) => specie.id === animal).name);
+      allEmployees[fullName] = animals;
+    })
+  }})
+  return allEmployees;
+}
+
+console.log(getEmployeeCoverage('Stephanie'));
 
 module.exports = {
   calculateEntry,
