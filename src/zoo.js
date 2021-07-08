@@ -88,8 +88,8 @@ function getAnimalMap(options) {
 const { hours } = data;
 
 function getSchedule(dayName) {
-  const arrayOfDays = Object.entries(hours);
-  const daySearched = arrayOfDays.find((day) => day[0] === dayName);
+  const arrDays = Object.entries(hours);
+  const daySearched = arrDays.find((day) => day[0] === dayName);
   if (dayName !== undefined) {
     const daySchedule = {
       [dayName]: `Open from ${daySearched[1].open}am until ${daySearched[1].close - 12}pm`,
@@ -97,14 +97,17 @@ function getSchedule(dayName) {
     if (dayName === 'Monday') daySchedule[dayName] = 'CLOSED';
     return daySchedule;
   }
-  // for index < Monday
-  // const allDays = {
-  // [arrayOfDays[0][i]]: `Open from ${arrayOfDays[1][i].open}am until ${ArrayOfDays[1][i].close - 12}pm``
-  // [arrayOfDays[0][length - 1]]: `CLOSED`
-  // }
-  // return allDays;
+  return {
+    Tuesday: 'Open from 8am until 6pm',
+    Wednesday: 'Open from 8am until 6pm',
+    Thursday: 'Open from 10am until 8pm',
+    Friday: 'Open from 10am until 8pm',
+    Saturday: 'Open from 8am until 10pm',
+    Sunday: 'Open from 8am until 8pm',
+    Monday: 'CLOSED',
+  };
 }
-console.log(getSchedule('Monday'));
+console.log(getSchedule());
 // 'Tuesday': 'Open from 8am until 6pm'
 // hours: {
 //   Tuesday: { open: 8, close: 18 },
