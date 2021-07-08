@@ -1,5 +1,5 @@
 const data = require('./data');
-const { species, employees, prices } = require('./data');
+const { species, employees, hours, prices } = require('./data');
 
 function getSpeciesByIds(...ids) {
   if (!ids) return []; // retorna vazio se não entrar parametro
@@ -47,7 +47,7 @@ function countAnimals(speciess = {}) {
     const animalCategory = data.species.find((specie) => specie.name === speciess);
     animals = animalCategory.residents.length;
   }
-   return animals;
+  return animals;
 }
 
 function calculateEntry(entrants = {}) {
@@ -59,19 +59,19 @@ function getAnimalMap(options) {
 }
 
 function getSchedule(dayName) {
-  const schedule = {};
-  if (!dayName) {
-  Object.keys(hours).forEach((day) => { schedule[day] = formatHour(hours[day]); });
-  return schedule;
-  }
+  // const schedule = {};
+  // if (!dayName) {
+  //   Object.keys(hours).forEach((day) => { schedule[day] = formatHour(hours[day]); });
+  //   return schedule;
+  // }
   
-  if (dayName === 'Monday') {
-  schedule[dayName] = 'CLOSED';
-  return schedule;
-  }
-  schedule[dayName] = formatHour(hours[dayName]);
+  // if (dayName === 'Monday') {
+  // schedule[dayName] = 'CLOSED';
+  // return schedule;
+  // }
+  // schedule[dayName] = formatHour(hours[dayName]);
   
-  return schedule;
+  // return schedule;
 }
 
 function getOldestFromFirstSpecies(employeId) {
