@@ -91,8 +91,19 @@ function increasePrices(percentage) {
   prices.Senior = Math.ceil(prices.Senior * (100 + percentage)) / 100;
 }
 
-function getEmployeeCoverage(idOrName) {
+const getSpeciesNamesInOrder = (...ids) => {
+  const { species: speciees } = data;
+  return ids.map((id) => speciees.find((specie) => specie.id === id).name);
+};
+
+function getEmployeeCoverage(x) {
   // seu código aqui
+  return employees
+    .filter(({ id, firstName, lastName }) => !x || x === id || x === firstName || x === lastName)
+    .reduce((coverage, { firstName, lastName, responsibleFor }) => ({
+      ...coverage,
+      [`${firstName} ${lastName}`]: getSpeciesNamesInOrder(...responsibleFor),
+    }), {});
 }
 
 module.exports = {
