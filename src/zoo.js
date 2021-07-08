@@ -12,7 +12,8 @@ const getEmployeeByName = (employeeName) => {
   if (!employeeName) {
     return {};
   }
-  return employees.find((nome) => (nome.firstName === employeeName || nome.lastName === employeeName));
+  return employees.find((nome) =>
+    (nome.firstName === employeeName || nome.lastName === employeeName));
 };
 
 function createEmployee(personalInfo, associatedWith) {
