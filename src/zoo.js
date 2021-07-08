@@ -139,29 +139,18 @@ function getAnimalMap(options) {
 }
 
 function getSchedule(dayName) {
-  // sem parametro, retorna o objeto 'hours' inteiro
   const arrayHorario = Object.entries(hours);
-/*   const retorno = { 
-  'Tuesday': 'Open from 8am until 6pm',
-  'Wednesday': 'Open from 8am until 6pm',
-  'Thursday': 'Open from 10am until 8pm',
-  'Friday': 'Open from 10am until 8pm',
-  'Saturday': 'Open from 8am until 10pm',
-  'Sunday': 'Open from 8am until 8pm',
-  'Monday': 'CLOSED'
-} */
+  let agenda1 = {};
 
-const agenda1 = arrayHorario.reduce((acumulador, valorAtual) => {
-  let objetoHorario = acumulador;
-  let indexSemana = 0;
-  let indexHora = 1;
-  let horaFechar = 0;
+  if (!dayName) {
+    agenda1 = arrayHorario.reduce((acumulador, valorAtual) => {
+      let objetoHorario = acumulador;
+      let indexSemana = 0;
+      let indexHora = 1;
+      let horaFechar = 0;
 
-    if (valorAtual[indexSemana] === 'Monday') {
-      objetoHorario[valorAtual[indexSemana]] = 'CLOSED';
-    } else {
       let indexHoraFechar = valorAtual[indexHora].close;
-      switch(indexHoraFechar) {
+      switch (indexHoraFechar) {
         case 18:
           horaFechar = 6;
           break;
@@ -172,19 +161,54 @@ const agenda1 = arrayHorario.reduce((acumulador, valorAtual) => {
           horaFechar = 10;
           break;
       }
-      objetoHorario[valorAtual[indexSemana]] = `Open from ${valorAtual[indexHora].open}am until ${horaFechar}pm`;
-    }  
 
-    return objetoHorario;
-  }, {});
+      if (valorAtual[indexSemana] === 'Monday') {
+        objetoHorario[valorAtual[indexSemana]] = 'CLOSED';
+      } else {
+        objetoHorario[valorAtual[indexSemana]] = `Open from ${valorAtual[indexHora].open}am until ${horaFechar}pm`;
+      }
 
-  // arrayHorario[0][1].open;
-  // arrayHorario[0][1].close;
-  // arrayHorario[1][1].open;
-  // arrayHorario[1][1].close;
-  // arrayHorario[2][1].close;
+      return objetoHorario;
+    }, {});
+
+  } else {
+    switch (dayName) {
+      case 'Tuesday':
+        frase = `Open from ${arrayHorario[0][1].open}am until 6pm`;
+        break;
+
+      case 'Wednesday':
+        frase = `Open from ${arrayHorario[1][1].open}am until 6pm`;
+        break;
+
+      case 'Thursday':
+        frase = `Open from ${arrayHorario[2][1].open}am until 8pm`;
+
+      case 'Friday':
+        frase = `Open from ${arrayHorario[3][1].open}am until 8pm`;
+        break;
+
+      case 'Saturday':
+        frase = `Open from ${arrayHorario[4][1].open}am until 10pm`;
+        break;
+
+      case 'Sunday':
+        frase = `Open from ${arrayHorario[5][1].open}am until 8pm`;
+        break;
+
+      case 'Monday':
+        frase = 'CLOSED';
+        break;
+    }
+    agenda1[`${dayName}`] = frase;
+  }
   return agenda1;
 }
+// arrayHorario[0][1].open;
+// arrayHorario[0][1].close;
+// arrayHorario[1][1].open;
+// arrayHorario[1][1].close;
+// arrayHorario[2][1].close;
 
 function getOldestFromFirstSpecies(id) {
   // 11
