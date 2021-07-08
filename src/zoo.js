@@ -60,7 +60,6 @@ function getSchedule(dayName) {
     schedule[day] = `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`;
     if (index === days.length - 1) schedule[day] = 'CLOSED';
   });
-
   if (!dayName) return schedule;
   return { [dayName]: schedule[dayName] };
 }
