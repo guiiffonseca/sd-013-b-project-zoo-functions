@@ -117,8 +117,6 @@ function getAnimalMap(options) {
   return result;
 }
 
-const options = { includeNames: true };
-
 function showAllSchedule() {
   const result = {};
   Object.keys(hours).forEach((element) => {
@@ -147,15 +145,31 @@ function increasePrices(percentage) {
   Object.keys(prices).forEach((age) => {
     const increase = (((prices[age] / 100) * percentage));
     const finalPrice = Math.ceil((prices[age] + increase) * 100) / 100;
-    // const finalPrice = (parseFloat((prices[age] + incrise).toPrecision(4)));
     prices[age] = finalPrice;
   });
   return prices;
 }
+function getAnimalById(array) {
+  return array.map((id) => getSpeciesByIds(id)[0].name);
+}
 
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+  const result = {};
+  if (idOrName) {
+    const employer = employees.find(({ firstName, lastName, id }) => firstName === idOrName
+      || lastName === idOrName
+      || id === idOrName);
+    const { firstName, lastName, responsibleFor } = employer;
+    result[`${firstName} ${lastName}`] = getAnimalById(responsibleFor);
+  } else {
+    employees.forEach(({ firstName, lastName, responsibleFor }) => {
+      result[`${firstName} ${lastName}`] = getAnimalById(responsibleFor);
+    });
+  }
+  return result;
 }
+
+console.log(getEmployeeCoverage('Nigel'));
 
 module.exports = {
   calculateEntry,
