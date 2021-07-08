@@ -59,24 +59,26 @@ function getAnimalMap(options) {
 }
 
 function getSchedule(dayName) {
-  // const schedule = {};
-  // if (!dayName) {
-  //   Object.keys(hours).forEach((day) => { schedule[day] = formatHour(hours[day]); });
-  //   return schedule;
-  // }
-  // if (dayName === 'Monday') {
-  // schedule[dayName] = 'CLOSED';
-  // return schedule;
-  // }
-  // schedule[dayName] = formatHour(hours[dayName]);
-  // return schedule;
+  const schedule = {};
+  if (!dayName) {
+    Object.keys(hours).forEach((day) => { schedule[day] = formatHour(hours[day]); });
+    return schedule;
+  }
+  if (dayName === 'Monday') {
+  schedule[dayName] = 'CLOSED';
+  return schedule;
+  }
+  schedule[dayName] = formatHour(hours[dayName]);
+  return schedule;
 }
 
 function getOldestFromFirstSpecies(employeId) {
-
+  // const employeAnimalId = employees.find(({ id }) => id === employeId).responsibleFor[0];
+  // const animals = species.find(({ id: animalId }) => animalId === employeAnimalId).residents;
+  //   return Object.values(oldestAnimal(animals));
 }
 
-function increasePrices(percentage) { // Feito no plantão do Cajueiro
+function increasePrices(percentage) { // Feito na monitoria do Cajueiro
   prices.Adult = (Math.round((prices.Adult * (1 + (percentage / 100))) * 100)) / 100;
   prices.Child = (Math.round((prices.Child * (1 + (percentage / 100))) * 100)) / 100;
   prices.Senior = (Math.round((prices.Senior * (1 + (percentage / 100))) * 100)) / 100;
