@@ -94,7 +94,7 @@ function increasePrices(percentage) {
   data.prices.Senior *= percentage + 100;
   data.prices.Senior = Math.ceil(data.prices.Senior) / 100;
   data.prices.Child *= percentage + 100;
-  data.prices.Child = Math.ceil(data.prices.Child) / 100; 
+  data.prices.Child = Math.ceil(data.prices.Child) / 100;
   return data.prices;
 }
 
