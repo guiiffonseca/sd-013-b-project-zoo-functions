@@ -59,23 +59,11 @@ function getAnimalMap(options) {
 }
 
 function getSchedule(dayName) {
-  // const schedule = {};
-  // if (!dayName) {
-  //   Object.keys(hours).forEach((day) => { schedule[day] = formatHour(hours[day]); });
-  //   return schedule;
-  // }
-  // if (dayName === 'Monday') {
-  // schedule[dayName] = 'CLOSED';
-  // return schedule;
-  // }
-  // schedule[dayName] = formatHour(hours[dayName]);
-  // return schedule;
+
 }
 
 function getOldestFromFirstSpecies(employeId) {
-  // const employeAnimalId = employees.find(({ id }) => id === employeId).responsibleFor[0];
-  // const animals = species.find(({ id: animalId }) => animalId === employeAnimalId).residents;
-  //   return Object.values(oldestAnimal(animals));
+
 }
 
 function increasePrices(percentage) { // Feito na monitoria do Cajueiro
