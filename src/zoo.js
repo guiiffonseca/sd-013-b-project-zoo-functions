@@ -1,10 +1,5 @@
 const data = require('./data');
 
-const { employees } = data;
-const { burlId } = data;
-const { stephanieId } = data;
-const { olaId } = data;
-
 function getSpeciesByIds(...ids) {
   const seletor = data.species.filter(({ id }) => ids.includes(id));
   return seletor;
@@ -40,13 +35,11 @@ function isManager(id) {
     }
     return false;
   };
-  console.log(burlId);
   return test();
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   const newEmployee = { id, firstName, lastName, managers, responsibleFor };
-  console.log(newEmployee);
   return data.employees.push(newEmployee);
 }
 
@@ -63,10 +56,16 @@ function countAnimals(species) {
   return quant;
 }
 
-function calculateEntry(entrants) {
-  if (!entrants || {}) {
+function calculateEntry(entrants) { 
+  if (!entrants || Object.values(entrants).length === 0) {
     return 0;
   }
+  const adult = data.prices.Adult;
+  const child = data.prices.Child;
+  const senior = data.prices.Senior;
+  const calculate = Object.values(entrants).forEach(element => {
+  });
+
 }
 
 function getAnimalMap(options) {
@@ -74,7 +73,10 @@ function getAnimalMap(options) {
 }
 
 function getSchedule(dayName) {
-      // seu código aqui
+  if (!dayName) {
+    return 0;
+  }
+
 }
 
 function getOldestFromFirstSpecies(id) {
@@ -104,10 +106,3 @@ module.exports = {
       increasePrices,
       createEmployee,
 };
-
-// // const countAnimal = data.species.map(
-// //   (element) => element.residents.length,
-// // );
-// // const result = {};
-// // const resultado = findAnimal.forEach((key, i) => result[key] = countAnimal[i])
-// console.log(findAnimal, countAnimal);
