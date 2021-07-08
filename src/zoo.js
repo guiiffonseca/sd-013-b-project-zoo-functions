@@ -1,4 +1,4 @@
-const { species, employees, prices } = require('./data');
+const { species, employees, prices, hours } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -30,6 +30,7 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
+  // seu código aqui
   const employeeById = employees.some((employee) => employee.managers.includes(id));
   return employeeById;
 }
@@ -62,12 +63,58 @@ function calculateEntry(entrants) {
   );
 }
 
+// const emptyLocation = {
+//   NE: [],
+//   NW: [],
+//   SE: [],
+//   SW: [],
+// };
+
+// function emptyOptions() {
+//   const animalsByLocation = {
+//     NE: [],
+//     NW: [],
+//     SE: [],
+//     SW: [],
+//   };
+//   species.forEach(({ name, location }) => animalsByLocation[location].push(name));
+//   return animalsByLocation;
+// }
+
+// function includedNames() {
+//   const namedAnimals = {
+//     NE: [],
+//     NW: [],
+//     SE: [],
+//     SW: [],
+//   };
+//   species.forEach(({ name, location, residents }) => namedAnimals[location]
+//     .push({ [name]: [...residents
+//       .map((resident) => resident.name)] }));
+//   return namedAnimals;
+// }
+
 function getAnimalMap(options) {
   // seu código aqui
+  // if (!options || !options.includeNames) return emptyOptions();
+  // if (options.includeNames === true) return includedNames();
 }
 
 function getSchedule(dayName) {
   // seu código aqui
+  const daysShedule = {};
+
+  Object.keys(hours).forEach((key) => {
+    if (hours[key].open !== 0) {
+      daysShedule[key] = `Open from ${hours[key].open}am until ${hours[key].close - 12}pm`;
+    } else {
+      daysShedule[key] = 'CLOSED';
+    }
+  });
+
+  if (dayName === undefined) return daysShedule;
+  const dayShedule = { [dayName]: daysShedule[dayName] };
+  return dayShedule;
 }
 
 function getOldestFromFirstSpecies(id) {
