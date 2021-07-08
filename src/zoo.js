@@ -90,7 +90,6 @@ const { hours } = data;
 function getSchedule(dayName) {
   const arrayOfDays = Object.entries(hours);
   const daySearched = arrayOfDays.find((day) => day[0] === dayName);
-  const arrayDays = Object.entries(hours);
   if (dayName !== undefined) {
     const daySchedule = {
       [dayName]: `Open from ${daySearched[1].open}am until ${daySearched[1].close - 12}pm`,
@@ -98,10 +97,12 @@ function getSchedule(dayName) {
     if (dayName === 'Monday') daySchedule[dayName] = 'CLOSED';
     return daySchedule;
   }
-  return arrayDays.forEach((day) => console.log(({
-    [day[arrayDays.length - 1]]: 'CLOSED',
-    [day[0]]: `Open from ${day[1].open}am until ${day[1].close - 12}pm`,
-  })));
+  // for index < Monday
+  // const allDays = {
+  // [arrayOfDays[0][i]]: `Open from ${arrayOfDays[1][i].open}am until ${ArrayOfDays[1][i].close - 12}pm``
+  // [arrayOfDays[0][length - 1]]: `CLOSED`
+  // }
+  // return allDays;
 }
 console.log(getSchedule('Monday'));
 // 'Tuesday': 'Open from 8am until 6pm'
