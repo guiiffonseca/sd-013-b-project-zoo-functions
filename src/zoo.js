@@ -1,8 +1,10 @@
+const { hours } = require('./data');
 const data = require('./data');
 
 const especies = data.species;
 const empregados = data.employees;
 const precos = data.prices;
+const horario = data.hours;
 
 const getSpeciesByIds = (...ids) => {
   // seu código aqui
@@ -137,7 +139,51 @@ function getAnimalMap(options) {
 }
 
 function getSchedule(dayName) {
-  // s10
+  // sem parametro, retorna o objeto 'hours' inteiro
+  const arrayHorario = Object.entries(hours);
+/*   const retorno = { 
+  'Tuesday': 'Open from 8am until 6pm',
+  'Wednesday': 'Open from 8am until 6pm',
+  'Thursday': 'Open from 10am until 8pm',
+  'Friday': 'Open from 10am until 8pm',
+  'Saturday': 'Open from 8am until 10pm',
+  'Sunday': 'Open from 8am until 8pm',
+  'Monday': 'CLOSED'
+} */
+
+const agenda1 = arrayHorario.reduce((acumulador, valorAtual) => {
+  let objetoHorario = acumulador;
+  let indexSemana = 0;
+  let indexHora = 1;
+  let horaFechar = 0;
+
+    if (valorAtual[indexSemana] === 'Monday') {
+      objetoHorario[valorAtual[indexSemana]] = 'CLOSED';
+    } else {
+      let indexHoraFechar = valorAtual[indexHora].close;
+      switch(indexHoraFechar) {
+        case 18:
+          horaFechar = 6;
+          break;
+        case 20:
+          horaFechar = 8;
+          break;
+        case 22:
+          horaFechar = 10;
+          break;
+      }
+      objetoHorario[valorAtual[indexSemana]] = `Open from ${valorAtual[indexHora].open}am until ${horaFechar}pm`;
+    }  
+
+    return objetoHorario;
+  }, {});
+
+  // arrayHorario[0][1].open;
+  // arrayHorario[0][1].close;
+  // arrayHorario[1][1].open;
+  // arrayHorario[1][1].close;
+  // arrayHorario[2][1].close;
+  return agenda1;
 }
 
 function getOldestFromFirstSpecies(id) {
