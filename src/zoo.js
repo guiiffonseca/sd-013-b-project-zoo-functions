@@ -52,11 +52,12 @@ function countAnimals(element) {
 }
 
 function calculateEntry(entrants = {}) {
+  const { Adult = 0, Child = 0, Senior = 0 } = entrants;
   if (!entrants || !Object.entries(entrants).length) {
     return 0;
   }
-    return (prices.Adult * entrants.Adult || 0) + (prices.Child * entrants.Child 
-    || 0) + (prices.Senior * entrants.Senior || 0);
+  return (prices.Adult * Adult) + (prices.Child * Child
+  ) + (prices.Senior * Senior);
 }
 
 function getAnimalMap(options) {
