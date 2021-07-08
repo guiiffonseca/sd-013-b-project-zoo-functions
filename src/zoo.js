@@ -40,21 +40,21 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   data.employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
 
-function countAnimals(species) {
+function countAnimals(element) {
   // seu código aqui
   const procuraA = data.species;
-  if (!species) {
+  if (!element) {
     return procuraA.reduce((acc, { residents, name }) => {
       acc[name] = residents.length;
       return acc;
     }, {});
-  } return procuraA.find(({ name }) => name === species).residents.length;
+  } return procuraA.find(({ name }) => name === element).residents.length;
 }
 
 function calculateEntry(entrants = {}) {
   if (!entrants || !Object.entries(entrants).length) {
     return 0;
-    }   
+  }
     return (prices.Adult * entrants.Adult || 0) + (prices.Child * entrants.Child 
     || 0) + (prices.Senior * entrants.Senior || 0);
 }
