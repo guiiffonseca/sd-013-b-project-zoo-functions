@@ -50,19 +50,13 @@ function addEmployee(id, firstName, lastName, mngrs = [], respFor = []) {
 }
 
 function countAnimals(speciesName) {
-  if (speciesName) {
-    const foundSpecies = species.find(({ name }) => name === speciesName);
-
-    return foundSpecies.residents.length;
-  }
-
   const animalCount = {};
 
   species.forEach(({ name, residents }) => {
     animalCount[name] = residents.length;
   });
 
-  return animalCount;
+  return speciesName ? animalCount[speciesName] : animalCount;
 }
 
 function calculateEntry(entrants) {
@@ -120,25 +114,15 @@ function getAnimalMap(options) {
 }
 
 // getSchedule
-function convertTime(time) {
-  if (time === 0) return 0;
-
-  const tempTime = time % 12 || 12;
-
-  if (time < 12 || time === 24) return `${tempTime}am`;
-
-  return `${tempTime}pm`;
-}
-
 function getSchedule(dayName) {
   const formattedSchedule = {};
 
   Object.keys(hours).forEach((day) => {
-    const openTime = convertTime(hours[day].open);
-    const closeTime = convertTime(hours[day].close);
+    const openTime = hours[day].open;
+    const closeTime = hours[day].close - 12;
 
     if (openTime && closeTime) {
-      formattedSchedule[day] = `Open from ${openTime} until ${closeTime}`;
+      formattedSchedule[day] = `Open from ${openTime}am until ${closeTime}pm`;
     } else {
       formattedSchedule[day] = 'CLOSED';
     }
@@ -177,9 +161,9 @@ function calculateValue(oldValue, percentage) {
 }
 
 function increasePrices(percentage) {
-  prices.Adult = calculateValue(prices.Adult, percentage);
-  prices.Senior = calculateValue(prices.Senior, percentage);
-  prices.Child = calculateValue(prices.Child, percentage);
+  Object.entries(prices).forEach(([key, value]) => {
+    prices[key] = calculateValue(value, percentage);
+  });
 }
 
 // getEmployeeCoverage
@@ -194,19 +178,21 @@ function findByIdOrName({ id, firstName, lastName }, idOrName) {
 }
 
 function getEmployeeCoverage(idOrName) {
-  if (idOrName) {
-    const { firstName, lastName, responsibleFor } = employees
-      .find((employee) => findByIdOrName(employee, idOrName));
-
-    return { [`${firstName} ${lastName}`]: getAssignedAnimals(responsibleFor) };
-  }
-
   const assignedAnimals = {};
 
   employees.forEach(({ firstName, lastName, responsibleFor }) => {
     const key = `${firstName} ${lastName}`;
     assignedAnimals[key] = getAssignedAnimals(responsibleFor);
   });
+
+  if (idOrName) {
+    const { firstName, lastName } = employees
+      .find((employee) => findByIdOrName(employee, idOrName));
+
+    const key = `${firstName} ${lastName}`;
+
+    return { [key]: assignedAnimals[key] };
+  }
 
   return assignedAnimals;
 }
