@@ -1,4 +1,6 @@
 const data = require('./data');
+// Desestruturei o objeto contido no arquivo data.js
+// Transformar suas chaves em variáveis.
 const { species, employees } = require('./data');
 
 // Usei rest para que fosse possível passar vários parâmetros ao mesmo tempo.
@@ -29,8 +31,11 @@ function getEmployeeByName(name) {
   return employees.find(({ firstName, lastName }) => firstName === name || lastName === name);
 }
 
+// Usei spread nos parâmetros da função pois ele permite que um obj seja expandido
+// Me permite fazer um merge dos objetos na order que eu coloco os parâmetros
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  const newEmployee = { ...personalInfo, ...associatedWith };
+  return newEmployee;
 }
 
 function isManager(id) {
