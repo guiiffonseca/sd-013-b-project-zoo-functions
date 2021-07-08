@@ -38,16 +38,16 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 function countAnimals(speciess = {}) {
-  // let animals = {};
-  // if (typeof (species) === 'object') {
-  //   data.species.forEach((specie) => {
-  //     animals[specie.name] = specie.residents.length;
-  //   });
-  // } else {
-  //   const animalCategory = data.species.find((specie) => specie.name === species);
-  //   animals = animalCategory.residents.length;
-  // }
-  // return animals;
+  let animals = {};
+  if (typeof (speciess) === 'object') {
+    data.species.forEach((specie) => {
+      animals[specie.name] = specie.residents.length;
+    });
+  } else {
+    const animalCategory = data.species.find((specie) => specie.name === speciess);
+    animals = animalCategory.residents.length;
+  }
+   return animals;
 }
 
 function calculateEntry(entrants = {}) {
@@ -59,7 +59,19 @@ function getAnimalMap(options) {
 }
 
 function getSchedule(dayName) {
-
+  const schedule = {};
+  if (!dayName) {
+  Object.keys(hours).forEach((day) => { schedule[day] = formatHour(hours[day]); });
+  return schedule;
+  }
+  
+  if (dayName === 'Monday') {
+  schedule[dayName] = 'CLOSED';
+  return schedule;
+  }
+  schedule[dayName] = formatHour(hours[dayName]);
+  
+  return schedule;
 }
 
 function getOldestFromFirstSpecies(employeId) {
