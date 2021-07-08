@@ -13,7 +13,7 @@ function getAnimalsOlderThan(animal, age) {
   const { residents } = species.find(({ name }) => name === animal);
   return residents.every(({ age: animalAge }) => animalAge >= age);
 }
-console.log(getAnimalsOlderThan('otters', 7));
+
 function getEmployeeByName(employeeName) {
   // seu código aqui
 }
