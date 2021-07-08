@@ -1,4 +1,4 @@
-const { species, employees, prices, hours } = require('./data');
+const { species, employees } = require('./data');
 
 function getSpeciesByIds(...ids) {
   const speciesList = [];
@@ -34,8 +34,16 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   return employees.push(createEmployee({ id, firstName, lastName }, { managers, responsibleFor }));
 }
 
-function countAnimals(species) {
-  // seu código aqui
+function countAnimals(specie) {
+  if (!specie) {
+    const relatory = {};
+    species.forEach(({ name, residents }) => {
+      relatory[name] = residents.length;
+    });
+    return relatory;
+  }
+  const { residents } = species.find(({ name }) => name === specie);
+  return residents.length;
 }
 
 function calculateEntry(entrants) {
