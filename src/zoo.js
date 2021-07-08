@@ -98,12 +98,25 @@ function getOldestFromFirstSpecies(id) {
   return Object.values(animalSpecie[0]);
 }
 
+// const { Adult, Senior, Child } = prices;
+// prices.Adult = parseFloat((Adult + (Adult * (percentage / 100))).toPrecision(4));
+// data.prices.Senior = (Senior + (Senior * (percentage / 100)));
+// data.prices.Child = Child + (Child * (percentage / 100));
 function increasePrices(percentage) {
-  // seu código aqui
+  const porc = (price) => Math.ceil((price + price * (percentage / 100)) * 100) / 100;
+  prices.Adult = porc(prices.Adult);
+  prices.Senior = porc(prices.Senior);
+  prices.Child = porc(prices.Child);
 }
 
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+//   const allEmployees = {};
+// if (idOrName === undefined) {
+//   employees.forEach((employee) => {
+//     allEmployees[`${employee.firstName} ${employee.lastName}`] = employee.responsibleFor
+//     .forEach((id) => species.);
+//   });
+// };
 }
 
 module.exports = {
