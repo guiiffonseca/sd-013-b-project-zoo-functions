@@ -1,4 +1,4 @@
-const { species, employees, prices } = require('./data');
+const { species, employees, prices, hours } = require('./data');
 
 function getSpeciesByIds(...ids) {
   const speciesList = [];
@@ -51,11 +51,18 @@ function calculateEntry(entrants = 0) {
 }
 
 function getAnimalMap(options) {
-  // seu código aqui
 }
 
 function getSchedule(dayName) {
-  // seu código aqui
+  const schedule = {};
+  const days = Object.keys(hours);
+  days.forEach((day, index) => {
+    schedule[day] = `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`;
+    if (index === days.length - 1) schedule[day] = 'CLOSED';
+  });
+
+  if (!dayName) return schedule;
+  return { [dayName]: schedule[dayName] };
 }
 
 function getOldestFromFirstSpecies(id) {
