@@ -81,7 +81,6 @@ function getOldestFromFirstSpecies(id) {
   return [xablau.name, xablau.sex, maisVelho];
 }
 
-console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
 function increasePrices(percentage) {
   // seu código aqui
   function increase(pessoa) {
@@ -96,7 +95,24 @@ function increasePrices(percentage) {
 }
 
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+  if (idOrName !== undefined) {
+    const objeto = {};
+    const procura = data.employees.find((value) => value.id === idOrName
+  || value.firstName === idOrName || value.lastName === idOrName);
+    const animal = procura.responsibleFor.map((value) =>
+      (species.find((value2) => value2.id === value)));
+    const temp = animal.map((value) => value.name);
+    objeto[`${procura.firstName} ${procura.lastName}`] = temp;
+    return objeto;
+  }
+  const objeto2 = {};
+  data.employees.map((value) => {
+    const animal2 = value.responsibleFor.map((value2) =>
+      (species.find((value3) => value3.id === value2))).map((value4) => value4.name);
+    objeto2[`${value.firstName} ${value.lastName}`] = animal2;
+    return objeto2;
+  });
+  return objeto2;
 }
 
 module.exports = {
