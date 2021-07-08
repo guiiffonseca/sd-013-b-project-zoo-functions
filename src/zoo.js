@@ -6,20 +6,20 @@ function getSpeciesByIds(...ids) {
   return species.filter((specie) => ids.includes(specie.id));
 }
 
-function getAnimalsOlderThan(animal, age) {
+function getAnimalsOlderThan(animal, Age) {
   return species.find((Animal) => Animal.name === animal)
-    .residents.every((foundAnimal) => foundAnimal.age >= age);
+    .residents.every(({ age }) => age >= Age);
 }
 
 function getEmployeeByName(employeeName) {
   return employees.find(({ firstName, lastName }) =>
-    firstName === employeeName || lastName === employeeName) || {};
+    firstName === employeeName || lastName === employeeName) || {}; // Funcao find retorna undefined quando nao entra nada. Dando as opcoes undefined e {} para o return, sera retornado o {}.
 }
 
 function createEmployee(personalInfo, associatedWith) {
   return { ...personalInfo, ...associatedWith };
 }
-
+// https://brianflove.com/2014-09-02/whats-the-double-exclamation-mark-for-in-javascript/#:~:text=If%20you%20have%20ever%20noticed,(true%20or%20false)%20value.
 function isManager(id) {
   return !!employees.find(({ managers }) => managers.includes(id));
 }
@@ -43,12 +43,32 @@ function calculateEntry(entrants) {
   return (Adult * prices.Adult + Senior * prices.Senior + Child * prices.Child);
 }
 
-function getAnimalMap(options) {
-  //
+const sortASpecieResidents = ({ sorted, sex, residents }) => {
+  const specieResidents = residents
+    .filter((resident) => resident.sex === sex || sex === '')
+    .map(({ name }) => name);
+  if (!sorted) {
+    return specieResidents;
+  } return specieResidents.sort();
+};
+
+function getAnimalMap({ includeNames = false, sorted = false, sex = '' } = {}) {
+  const animalMap = { NE: [], NW: [], SE: [], SW: [] };
+  species.forEach(({ name, location, residents }) => {
+    if (!includeNames) {
+      animalMap[location].push(name);
+    } else {
+      const animalNames = {
+        [name]: sortASpecieResidents({ sorted, sex, residents }),
+      };
+      animalMap[location].push(animalNames);
+    }
+  });
+  return animalMap;
 }
 
 function formatDays() {
-  const formattedDays = { };
+  const formattedDays = {};
   const daysArr = Object.keys(hours);
   daysArr.forEach((day) => {
     const openHour = hours[day].open;
