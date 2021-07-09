@@ -67,9 +67,48 @@ function getAnimalMap(options) {
   // seu código aqui
 }
 
+function arrumaDataHora() {
+  const array = data.hours;
+  const objeto = {};
+  Object.keys(array).map((value, index) => {
+    if (Object.values(array)[index].open !== 0) {
+      objeto[value] = `Open from ${Object.values(array)[index]
+        .open}am until ${Object.values(array)[index].close - 12}pm`;
+    } else {
+      objeto[value] = 'CLOSED';
+    }
+    return 'teste';
+  });
+  return (objeto);
+}
+
+function procuraDia(dayName) {
+  const array = data.hours;
+  const obj = Object.keys(array);
+  const objeto = {};
+  obj.map((value, index) => {
+    if (value === dayName) {
+      if (Object.values(array)[index].open !== 0) {
+        objeto[value] = `Open from ${Object.values(array)[index]
+          .open}am until ${Object.values(array)[index].close - 12}pm`;
+      } else {
+        objeto[value] = 'CLOSED';
+      }
+      return 'teste';
+    }
+  });
+  return objeto;
+}
+
 function getSchedule(dayName) {
   // seu código aqui
+  if (dayName === undefined) {
+    return arrumaDataHora();
+  }
+  return procuraDia(dayName);
 }
+
+console.log(getSchedule('Tuesday'));
 
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
