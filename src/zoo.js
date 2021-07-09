@@ -96,6 +96,8 @@ function getOldestFromFirstSpecies(id) {
   // retorna o ultimo da lista
 }
 
+// increasePrices com ajuda da Mayu <3
+
 const newValue = (price, percentage) => {
   const value = price + ((price / 100) * percentage);
   return (Math.ceil(value * 100) / 100);
