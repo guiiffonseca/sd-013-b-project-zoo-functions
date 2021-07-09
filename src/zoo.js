@@ -89,9 +89,9 @@ function getSchedule(dayName) {
 
 function getOldestFromFirstSpecies(id) {
   // recuperar o funcionario pelo id
-  const employee = employees.id === id;
-  // pegar a primeira especie com o find em responsibleFor
-  const animal = employees.find((specie) => specie.name === specie.name).responsibleFor[0];
+  // const employee = employees.id === id;
+  // // pegar a primeira especie com o find em responsibleFor
+  // const animal = employees.find((specie) => specie.name === specie.name).responsibleFor[0];
   // ordenar a lista de animais pela idade com o sort
   // retorna o ultimo da lista
 }
@@ -112,13 +112,13 @@ function increasePrices(percentage) {
 }
 
 function getEmployeeCoverage(idOrName) {
-  const employeeAndResponsibleFor = {};
-  if (idOrName === undefined) {
-    employees.forEach((person) => {
-      // return employeeAndResponsibleFor[`${person.firstName} ${person.lastName}`] = person.responsibleFor;
-    });
-    // console.log(employeeAndResponsibleFor);
-  }
+  // const employeeAndResponsibleFor = {};
+  // if (idOrName === undefined) {
+  //   employees.forEach((person) => {
+  //     // return employeeAndResponsibleFor[`${person.firstName} ${person.lastName}`] = person.responsibleFor;
+  //   });
+  //   // console.log(employeeAndResponsibleFor);
+  // }
   // pegar firstName e lastName em forma de string E o array responsibleFor
   // recuperar funcionario por id ou nome
   // retornar a chave responsible for
