@@ -235,7 +235,15 @@ function getOldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // 12
+  const precosOriginais = Object.keys(precos); // [ Adult, Senior, Child ]
+  const porcentagem = (percentage / 100) + 1;
+
+  precosOriginais.forEach((chave) => {
+    const precoAtualizado = precos[chave] * porcentagem;
+    const precoReajustado = (Math.ceil(precoAtualizado * 100) / 100);
+
+    precos[chave] = precoReajustado;
+  });
 }
 
 function getEmployeeCoverage(idOrName) {
