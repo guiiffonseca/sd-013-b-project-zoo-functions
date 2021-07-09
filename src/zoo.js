@@ -1,4 +1,4 @@
-const { species, employees } = require('./data');
+const { species, employees, prices } = require('./data');
 const data = require('./data');
 
 // A colega de turma Mayu fez um code review e indicou usar o Rest no 1º Desafio
@@ -48,8 +48,16 @@ function countAnimals(species1) {
   return findAnimal.residents.length;
 }
 
-function calculateEntry(entrants) {
-  // seu código aqui
+function calculateEntry(entrants) { // Com a ajuda da colega de Turma Mayu, consegui realizar o Requisito com HOF.
+  let result = 0;
+  if (!entrants || entrants === {}) {
+    return 0; // 1º Caso não tiver argumento ou receber um objeto vazio, retornar 0
+  }
+  Object.entries(entrants).forEach((personEquant) => {
+    result += personEquant[1] * prices[personEquant[0]];
+    return result;
+  });
+  return result;
 }
 
 function getAnimalMap(options) {
