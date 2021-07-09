@@ -52,12 +52,28 @@ function getAnimalMap(options) {
 }
 
 function getSchedule(dayName) {
-  // seu código aqui
+  const cronograma = {
+    Tuesday: 'Open from 8am until 6pm',
+    Wednesday: 'Open from 8am until 6pm',
+    Thursday: 'Open from 10am until 8pm',
+    Friday: 'Open from 10am until 8pm',
+    Saturday: 'Open from 8am until 10pm',
+    Sunday: 'Open from 8am until 8pm',
+    Monday: 'CLOSED',
+  };
+
+  if (dayName === undefined) return cronograma;
+  return { [dayName]: cronograma[dayName] };
 }
 
 function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+  const responsavelPor = data.employees.find((employee) => employee.id === id).responsibleFor[0];
+  const animal = data.species.find((specie) => specie.id === responsavelPor).residents;
+  const animalMaisVelho = animal.sort((animalA, animalB) => animalB.age - animalA.age)[0];
+  return [animalMaisVelho.name, animalMaisVelho.sex, animalMaisVelho.age];
 }
+
+console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
 
 function increasePrices(percentage) {
   // seu código aqui
