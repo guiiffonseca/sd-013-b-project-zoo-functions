@@ -89,20 +89,39 @@ function getSchedule(dayName) {
 
 function getOldestFromFirstSpecies(id) {
   // recuperar o funcionario pelo id
+  const employee = employees.id === id;
   // pegar a primeira especie com o find em responsibleFor
+  const animal = employees.find((specie) => specie.name === specie.name).responsibleFor[0];
   // ordenar a lista de animais pela idade com o sort
   // retorna o ultimo da lista
 }
 
+const newValue = (price, percentage) => {
+  const value = price + ((price / 100) * percentage);
+  return (Math.ceil(value * 100) / 100);
+};
+
 function increasePrices(percentage) {
-  // seu código aqui
+  const teste = Object.entries(prices);
+  teste.forEach((price) => {
+    // prices[price[0]] = newValue(price[1], percentage);
+    prices[price[0]] = newValue(prices[price[0]], percentage);
+  });
 }
 
 function getEmployeeCoverage(idOrName) {
-  // deixar um default parameter com todos os funcionarios e seus responsible for
+  const employeeAndResponsibleFor = {};
+  if (idOrName === undefined) {
+    employees.forEach((person) => {
+      // return employeeAndResponsibleFor[`${person.firstName} ${person.lastName}`] = person.responsibleFor;
+    });
+    // console.log(employeeAndResponsibleFor);
+  }
+  // pegar firstName e lastName em forma de string E o array responsibleFor
   // recuperar funcionario por id ou nome
   // retornar a chave responsible for
 }
+getEmployeeCoverage();
 
 module.exports = {
   calculateEntry,
