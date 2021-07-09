@@ -38,8 +38,11 @@ function createEmployee(personalInfo, associatedWith) {
   return newEmployee;
 }
 
+// Usei .some pois meu objetivo é verificar se o funcionário que possui o id(parâmetro da função) passado é um gerente ou não.
+// .some retorna um boolean
+// managers é um array por isso usei o .includes
 function isManager(id) {
-  // seu código aqui
+  return employees.some(({ managers }) => managers.includes(id));
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
