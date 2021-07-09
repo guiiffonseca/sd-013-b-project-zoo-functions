@@ -1,4 +1,4 @@
-const { species } = require('./data');
+const { species, employees } = require('./data');
 const data = require('./data');
 
 // eslint-disable-next-line no-shadow
@@ -17,6 +17,9 @@ function getAnimalsOlderThan(animal, age) {
 
 function getEmployeeByName(employeeName) {
   // seu código aqui
+  if (employeeName === undefined) return {};
+  return employees.find((employee) =>
+    employeeName === employee.fistName || employeeName === employee.lastName);
 }
 
 function createEmployee(personalInfo, associatedWith) {
