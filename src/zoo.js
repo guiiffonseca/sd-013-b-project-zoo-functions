@@ -1,5 +1,5 @@
 const data = require('./data');
-const { species, employees, prices } = require('./data');
+const { species, employees, prices, hours } = require('./data');
 
 function getSpeciesByIds(...ids) {
   if (!ids) return []; // retorna vazio se não entrar parametro
@@ -61,11 +61,20 @@ function getAnimalMap(options) {
 }
 
 function getSchedule(dayName) {
-
+const hour = Object.keys(hours);
+const days = hour.reduce((acumulator, currentValue) => {
+  acumulator[currentValue] = `Open from ${hours[currentValue].open}am until ${hours[currentValue].close - 12}pm`;
+  return acumulator;
+}, {});
+days.Monday ='CLOSED';
+if (dayName in days) {
+  return { [dayName]: days[dayName] };
+}
+return days;
 }
 
-function getOldestFromFirstSpecies(employeId) {
-// const foundOldAnimal = employee.find((employeId) => employee.id === id);
+function getOldestFromFirstSpecies(employeeId) {
+// const foundOldAnimal = employee.find((employeeId) => employee.id === id);
 }
 
 function increasePrices(percentage) { // Feito na monitoria do Cajueiro
