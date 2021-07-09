@@ -4,7 +4,6 @@ const data = require('./data');
 const especies = data.species;
 const empregados = data.employees;
 const precos = data.prices;
-const horario = data.hours;
 
 const getSpeciesByIds = (...ids) => {
   // seu código aqui
@@ -138,7 +137,7 @@ function getAnimalMap(options) {
   // 9
 }
 
-function getSchedule(dayName) {
+/* function getSchedule(dayName) {
   const arrayHorario = Object.entries(hours);
   let agenda1 = {};
 
@@ -203,12 +202,33 @@ function getSchedule(dayName) {
     agenda1[`${dayName}`] = frase;
   }
   return agenda1;
-}
+} */
 // arrayHorario[0][1].open;
 // arrayHorario[0][1].close;
 // arrayHorario[1][1].open;
 // arrayHorario[1][1].close;
 // arrayHorario[2][1].close;
+
+function getSchedule(dayName) {
+  const arrayHorario = Object.keys(hours);
+  let agenda1 = {};
+
+  agenda1 = arrayHorario.reduce((acumulador, valorAtual) => {
+    let objetoHorario = acumulador;
+    if (valorAtual === 'Monday') {
+      objetoHorario[valorAtual] = 'CLOSED';
+    } else {
+      objetoHorario[valorAtual] = `Open from ${hours[valorAtual].open}am until ${hours[valorAtual].close - 12}pm`;
+    }
+    return objetoHorario;
+  }, {});
+
+  if (dayName in agenda1) {
+    // lembrando que os colchetes indicam que o eu que quero pegar é o que o dayname representa, ou seja, de dayname for monday eu quero pegar no meu objeto a chave monday
+    return agenda1 = { [dayName]: agenda1[dayName] };
+  }
+  return agenda1;
+}
 
 function getOldestFromFirstSpecies(id) {
   // 11
