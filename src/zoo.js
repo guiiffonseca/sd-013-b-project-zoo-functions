@@ -1,7 +1,10 @@
 const data = require('./data');
 
-function getSpeciesByIds(ids) {
-
+// Refer1: https://pt.stackoverflow.com/questions/232954/como-passar-um-array-como-par%C3%A2metro-para-fun%C3%A7%C3%A3o
+// Refer2: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/includes
+function getSpeciesByIds(...ids) {
+  if (ids.length === 0) return [];
+  return data.species.filter(({ id }) => ids.includes(id));
 }
 
 function getAnimalsOlderThan(animal, age) {
