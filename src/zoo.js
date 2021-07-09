@@ -54,12 +54,115 @@ function calculateEntry(entrants) {
   return (Adult + Senior + Child);
 }
 
+function getAllRegions() {
+  const allRegions = data.species.map((animal) => animal.location);
+  return [...new Set(allRegions)];
+}
+
+function createObjRegions() {
+  return getAllRegions().reduce((acc, value) => ({ ...acc, [value]: [] }), {});
+}
+
+function noOptions() {
+  const objRegions = createObjRegions();
+  data.species.forEach((animal) => {
+    if (getAllRegions().includes(animal.location)) {
+      objRegions[animal.location].push(animal.name);
+    }
+  });
+  return objRegions;
+}
+
+function noSortSex() {
+  const objRegions = createObjRegions();
+  data.species.forEach((animal) => {
+    if (getAllRegions().includes(animal.location)) {
+      const name = animal.residents.map((animalName) => animalName.name);
+      objRegions[animal.location].push({ [animal.name]: name });
+    }
+  });
+  return objRegions;
+}
+
+function noSex() {
+  const objRegions = createObjRegions();
+  data.species.forEach((animal) => {
+    if (getAllRegions().includes(animal.location)) {
+      const name = animal.residents.map((animalName) => animalName.name).sort();
+      objRegions[animal.location].push({ [animal.name]: name });
+    }
+  });
+  return objRegions;
+}
+
+function noSort(sex) {
+  const objRegions = createObjRegions();
+  data.species.forEach((animal) => {
+    if (getAllRegions().includes(animal.location)) {
+      let name = animal.residents.map((animalName) => {
+        if (animalName.sex === sex) return animalName.name;
+        return undefined;
+      });
+      name = name.filter((isUndf) => isUndf !== undefined);
+      objRegions[animal.location].push({ [animal.name]: name });
+    }
+  });
+  return objRegions;
+}
+
+function allOptions(sex) {
+  const objRegions = createObjRegions();
+  data.species.forEach((animal) => {
+    if (getAllRegions().includes(animal.location)) {
+      let name = animal.residents.map((animalName) => {
+        if (animalName.sex === sex) {
+          return animalName.name;
+        }
+        return undefined;
+      });
+      name = name.filter((isUndf) => isUndf !== undefined).sort();
+      objRegions[animal.location].push({ [animal.name]: name });
+    }
+  });
+  return objRegions;
+}
+
+function includesName(sorted, sex) {
+  if (!sorted && !sex) return noSortSex();
+  if (!sex) return noSex();
+  if (!sorted) return noSort(sex);
+  return allOptions(sex);
+}
+
 function getAnimalMap(options) {
-  // seu código aqui
+  if (!options || !options.includeNames) return noOptions();
+  const { sorted = false, sex = false } = options;
+  return includesName(sorted, sex);
+}
+
+function parseHours(dayName, hours) {
+  if (dayName !== 'Monday') {
+    return {
+      [dayName]: `Open from ${hours.Tuesday.open}am until ${hours.Tuesday.close - 12}pm`,
+    };
+  }
+  return { [dayName]: 'CLOSED' };
 }
 
 function getSchedule(dayName) {
-  // seu código aqui
+  const { hours } = data;
+  if (!dayName) {
+    return {
+      Tuesday: `Open from ${hours.Tuesday.open}am until ${hours.Tuesday.close - 12}pm`,
+      Wednesday: `Open from ${hours.Wednesday.open}am until ${hours.Wednesday.close - 12}pm`,
+      Thursday: `Open from ${hours.Thursday.open}am until ${hours.Thursday.close - 12}pm`,
+      Friday: `Open from ${hours.Friday.open}am until ${hours.Friday.close - 12}pm`,
+      Saturday: `Open from ${hours.Saturday.open}am until ${hours.Saturday.close - 12}pm`,
+      Sunday: `Open from ${hours.Sunday.open}am until ${hours.Sunday.close - 12}pm`,
+      Monday: 'CLOSED',
+    };
+  }
+  return parseHours(dayName, hours);
 }
 
 function getOldestFromFirstSpecies(id) {
