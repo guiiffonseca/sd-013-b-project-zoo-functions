@@ -45,8 +45,10 @@ function isManager(id) {
   return employees.some(({ managers }) => managers.includes(id));
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+// Coloquei um default value = [] nos arrays managers e responsibleFor caso não seja passado nenhum valor para esses parâmetros
+// Fiz o push de um novo objeto employee no array employees que se encontra no arquivo data.js
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
 
 function countAnimals(animalsSpecies) {
