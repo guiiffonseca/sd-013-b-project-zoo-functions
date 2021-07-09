@@ -38,9 +38,8 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 function countAnimals(specie) {
-  // // deixar um default parameter
   const allAnimals = {};
-  if (specie === undefined) {
+  if (!specie) {
     species.forEach((animalSpecie) => {
       allAnimals[animalSpecie.name] = animalSpecie.residents.length;
     });
@@ -52,7 +51,7 @@ function countAnimals(specie) {
 }
 
 function calculateEntry(entrants) {
-  if (entrants === undefined || entrants === {}) {
+  if (!entrants || entrants === {}) {
     return 0;
   }
   // recuperar as 3 chaves de entrants
@@ -97,7 +96,6 @@ function getOldestFromFirstSpecies(id) {
 }
 
 // increasePrices com ajuda da Mayu <3
-
 const newValue = (price, percentage) => {
   const value = price + ((price / 100) * percentage);
   return (Math.ceil(value * 100) / 100);
@@ -106,24 +104,35 @@ const newValue = (price, percentage) => {
 function increasePrices(percentage) {
   const teste = Object.entries(prices);
   teste.forEach((price) => {
-    // prices[price[0]] = newValue(price[1], percentage);
     prices[price[0]] = newValue(prices[price[0]], percentage);
+    // prices[price[0]] = newValue(price[1], percentage);
   });
 }
 
+// getEmployeeCoverage com ajuda da Mayu <3
+const idToName = (responsibleFor) => responsibleFor.map((respFor) => species
+  .find((animal) => animal.id === respFor).name);
+//  a minha dica é você fazer uma outra função só para converter esses ids nos nomes dos animais. Essa função vai receber como parâmetro o responsibleFor, e a partir daí, você vai percorrer esses elementos podendo usar um find para encontrar no species os elementos que possuam os mesmos ids e assim resgatar o nome do animal. Se ficou confuso, eu posso te mostrar
+// const animalName = species.find((animal) => responsibleFor.includes(animal.id));
+// return animalName.name;
+// console.log(animalName);
+
 function getEmployeeCoverage(idOrName) {
-  // const employeeAndResponsibleFor = {};
-  // if (idOrName === undefined) {
-  //   employees.forEach((person) => {
-  //     // return employeeAndResponsibleFor[`${person.firstName} ${person.lastName}`] = person.responsibleFor;
-  //   });
-  //   // console.log(employeeAndResponsibleFor);
-  // }
-  // pegar firstName e lastName em forma de string E o array responsibleFor
-  // recuperar funcionario por id ou nome
-  // retornar a chave responsible for
+  const employeeAndResponsibleFor = {};
+  if (!idOrName) {
+    employees.forEach((person) => {
+      const fullName = `${person.firstName} ${person.lastName}`;
+      employeeAndResponsibleFor[fullName] = idToName(person.responsibleFor);
+    });
+    return employeeAndResponsibleFor;
+  }
+  const employee = employees.find((emp) => emp.id === idOrName
+    || emp.firstName === idOrName || emp.lastName === idOrName);
+  const fullName = `${employee.firstName} ${employee.lastName}`;
+  employeeAndResponsibleFor[fullName] = idToName(employee.responsibleFor);
+  return employeeAndResponsibleFor;
+  // console.log(result);
 }
-getEmployeeCoverage();
 
 module.exports = {
   calculateEntry,
