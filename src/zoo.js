@@ -94,8 +94,8 @@ function procuraDia(dayName) {
       } else {
         objeto[value] = 'CLOSED';
       }
-      return 'teste';
     }
+    return 'teste';
   });
   return objeto;
 }
