@@ -1,5 +1,7 @@
 const data = require('./data');
 
+const { employees, hours } = data;
+
 function getSpeciesByIds(...ids) {
   const request = [];
   const arrayId = ids;
@@ -18,7 +20,7 @@ function getAnimalsOlderThan(animal, age) {
 
 function getEmployeeByName(employeeName) {
   if (employeeName !== undefined) {
-    return data.employees
+    return employees
       .find((element) => element.firstName === employeeName || element.lastName === employeeName);
   }
   return {};
@@ -33,7 +35,7 @@ function isManager(id) {
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-  data.employees.push({
+  employees.push({
     id,
     firstName,
     lastName,
@@ -66,8 +68,30 @@ function getAnimalMap(options) {
   // seu código aqui
 }
 
+function getTime(hour) {
+  if (hour <= 12) {
+    return `${hour}am`;
+  }
+  return `${hour - 12}pm`;
+}
+
 function getSchedule(dayName) {
-  // seu código aqui
+  const hour = Object.keys(hours);
+  const dayMessage = {};
+  hour.forEach((day) => {
+    const response = `Open from ${getTime(hours[day].open)} until ${getTime(hours[day].close)}`;
+    if (day !== 'Monday') {
+      dayMessage[day] = response;
+    } else {
+      dayMessage[day] = 'CLOSED';
+    }
+  });
+  if (dayName === undefined) {
+    return dayMessage;
+  }
+  return {
+    [dayName]: dayMessage[dayName],
+  };
 }
 
 function getOldestFromFirstSpecies(id) {
