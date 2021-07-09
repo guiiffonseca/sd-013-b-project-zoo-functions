@@ -156,11 +156,20 @@ function getOldestFromFirstSpecies(id) {
   const animal = data.species.filter((searchedSpecies) => searchedSpecies.id === speciesId)[0];
   animal.residents.sort((a, b) => b.age - a.age);
   const searchedAnimal = animal.residents[0];
+
   return Object.values(searchedAnimal);
 }
 
 function increasePrices(percentage) {
   // seu código aqui
+  const { prices } = data;
+  const keys = Object.keys(prices);
+  for (let index = 0; index < keys.length; index += 1) {
+    prices[keys[index]] = prices[keys[index]] * (percentage / 100) + prices[keys[index]];
+    prices[keys[index]] = Math.round((prices[keys[index]] + Number.EPSILON) * 100) / 100;
+  }
+
+  return prices;
 }
 
 function getEmployeeCoverage(idOrName) {
