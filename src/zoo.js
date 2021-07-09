@@ -1,3 +1,4 @@
+const { prices, hours } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -56,53 +57,56 @@ function countAnimals(species) {
   return quant;
 }
 
-function calculateEntry(entrants) { 
+function calculateEntry(entrants) {
   if (!entrants || Object.values(entrants).length === 0) {
     return 0;
   }
-  const adult = data.prices.Adult;
-  const child = data.prices.Child;
-  const senior = data.prices.Senior;
-  const calculate = Object.values(entrants).forEach(element => {
-  });
-
+  // console.log(data.prices);
+  // console.log(Object.entries(entrants));
+  const calculate = Object.entries(entrants).reduce((acc, [type, quantity]) => {
+    const totalPrice = data.prices[type] * quantity;
+    return acc + totalPrice;
+  }, 0);
+  return calculate;
 }
 
 function getAnimalMap(options) {
-      // seu código aqui
+  // seu código aqui
 }
 
 function getSchedule(dayName) {
-  if (!dayName) {
-    return 0;
-  }
-
+  // if (!dayName) {
+  //     return const fullSchedule = `${Object.keys(hours)[index]}``:``
+  //     Open from ${Object.values(hours).open}am until ${Object.values(hours).close}pm`;
+  //     console.log(a);
+  //   }
+  //   return a;
 }
 
 function getOldestFromFirstSpecies(id) {
-      // seu código aqui
+  // seu código aqui
 }
 
 function increasePrices(percentage) {
-      // seu código aqui
+  // seu código aqui
 }
 
 function getEmployeeCoverage(idOrName) {
-      // seu código aqui
+  // seu código aqui
 }
 
 module.exports = {
-      calculateEntry,
-      getSchedule,
-      countAnimals,
-      getAnimalMap,
-      getSpeciesByIds,
-      getEmployeeByName,
-      getEmployeeCoverage,
-      addEmployee,
-      isManager,
-      getAnimalsOlderThan,
-      getOldestFromFirstSpecies,
-      increasePrices,
-      createEmployee,
+  calculateEntry,
+  getSchedule,
+  countAnimals,
+  getAnimalMap,
+  getSpeciesByIds,
+  getEmployeeByName,
+  getEmployeeCoverage,
+  addEmployee,
+  isManager,
+  getAnimalsOlderThan,
+  getOldestFromFirstSpecies,
+  increasePrices,
+  createEmployee,
 };
