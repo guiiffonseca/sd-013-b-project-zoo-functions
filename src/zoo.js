@@ -61,16 +61,17 @@ function getAnimalMap(options) {
 }
 
 function getSchedule(dayName) {
-const hour = Object.keys(hours);
-const days = hour.reduce((acumulator, currentValue) => {
-  acumulator[currentValue] = `Open from ${hours[currentValue].open}am until ${hours[currentValue].close - 12}pm`;
-  return acumulator;
+  const hour = Object.keys(hours);
+  const days = hour.reduce((acumulator, currentValue) => {
+    acumulator[currentValue] = `Open from ${hours[currentValue].open}am until 
+      ${hours[currentValue].close - 12}pm`;
+    return acumulator;
 }, {});
 days.Monday ='CLOSED';
 if (dayName in days) {
   return { [dayName]: days[dayName] };
 }
-return days;
+  return days;
 }
 
 function getOldestFromFirstSpecies(employeeId) {
