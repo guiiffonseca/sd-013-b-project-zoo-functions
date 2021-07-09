@@ -23,17 +23,21 @@ const createEmployee = (personalInfo, associatedWith) => ({ ...personalInfo, ...
 // ----------- REQUISITO 05 ----------- //
 const isManager = (id) => employees.some(({ managers }) => managers.includes(id));
 // ----------- REQUISITO 06 ----------- //
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
-}
+const addEmployee = (id, firstName, lastName, managers = [], responsibleFor = []) => employees
+  .push({ id, firstName, lastName, managers, responsibleFor });
+// ----------- REQUISITO 07 ----------- //
+const countAnimals = (especies) => {
+  const objeto = {};
+  if (!especies) {
+    species.forEach(({ name, residents }) => { objeto[name] = residents.length; });
+    return objeto;
+  }
+  const resultado = species.find(({ name }) => especies === name);
+  return resultado.residents.length;
+};
 
-function countAnimals(speciess) {
-  // seu código aqui
-}
-
-function calculateEntry(entrants) {
-  // seu código aqui
-}
+// ----------- REQUISITO 08 ----------- //
+const calculateEntry = (entrants) => {};
 
 function getAnimalMap(options) {
   // seu código aqui
