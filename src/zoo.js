@@ -87,8 +87,61 @@ function calculateEntry(entrants = {}) {
   return entry;
 }
 
-function getAnimalMap(options) {
+function animalMapNoParameter() {
+  const animalMap = data.species.reduce((accumulator, currentValue) => {
+    if (currentValue.location in accumulator) {
+      // Adicionar ao valor de cv.loc
+      accumulator[currentValue.location].push(currentValue.name);
+    } else {
+      // Criar nova key
+      accumulator[currentValue.location] = [currentValue.name];
+    }
+    return accumulator;
+  }, {});
+  return animalMap;
+}
+
+// function sortAnimalMap(mappedAnimals) {
+// }
+
+function animalMapIncludingNames(sort = false) {
+  const animalMap = data.species.reduce((accumulator, currentValue) => {
+    if (currentValue.location in accumulator) {
+      // Adicionar ao valor de cv.loc
+      accumulator[currentValue.location].push({
+        [currentValue.name]: currentValue.residents.map((resident) => resident.name),
+      });
+    } else {
+      // Criar nova key no formato de objeto
+      accumulator[currentValue.location] = [{
+        [currentValue.name]: currentValue.residents.map((resident) => resident.name),
+      }];
+    }
+    return accumulator;
+  }, {});
+  // if (sort) {
+  //   animalMap = sortAnimalMap(animalMap);
+  // }
+  return animalMap;
+}
+
+// eslint-disable-next-line max-lines-per-function
+function getAnimalMap(...options) {
   // seu código aqui
+  // Sem parâmetros, retorna um object com array de value
+  let animalMap;
+  if (options.length === 0) {
+    animalMap = animalMapNoParameter();
+  } else if (options.some((option) => option.includeNames === true)) {
+    if (options.some((option) => option.sorted === true)) {
+      animalMap = animalMapIncludingNames(true);
+    }
+    // Com a opção includeNames: true especificada, retorna nomes de animais
+    animalMap = animalMapIncludingNames();
+  } else {
+    animalMap = options;
+  }
+  return animalMap;
 }
 
 function getSchedule(dayName) {
@@ -97,6 +150,13 @@ function getSchedule(dayName) {
 
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
+  // Pega o objeto do funcionario pelo id
+  const searchedEmployee = data.employees.filter((employee) => employee.id === id)[0];
+  const speciesId = searchedEmployee.responsibleFor[0];
+  const animal = data.species.filter((searchedSpecies) => searchedSpecies.id === speciesId)[0];
+  animal.residents.sort((a, b) => b.age - a.age);
+  const searchedAnimal = animal.residents[0];
+  return Object.values(searchedAnimal);
 }
 
 function increasePrices(percentage) {
