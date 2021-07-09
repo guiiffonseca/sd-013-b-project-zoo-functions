@@ -39,7 +39,13 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 function countAnimals(species1) {
-  // seu código aqui
+  if (!species1) { // 1º Caso não tiver argumento,então
+    const animalsCount = { };
+    species.forEach(({ name, residents }) => { animalsCount[name] = residents.length; }); // 2º Percorrer o species e criar uma chave e atribuir um valor. Guardar o nome e o tamanho de residents na variável e retorna um objeto de animais e suas quantidades
+    return animalsCount;
+  }
+  const findAnimal = species.find(({ name }) => name === species1); // 3º Caso o argumento possuir o mesmo nomel, então retornar o tamanho a quantidade
+  return findAnimal.residents.length;
 }
 
 function calculateEntry(entrants) {
