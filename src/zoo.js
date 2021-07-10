@@ -48,7 +48,6 @@ function countAnimals(species) {
     const specieAnimal = data.species.find((specie) => specie.name === species);
     return specieAnimal.residents.length;
   }
-
   const countSpecies = {};
 
   data.species.forEach((specie) => {
@@ -75,7 +74,19 @@ function getAnimalMap(options) {
 }
 
 function getSchedule(dayName) {
-  // seu código aqui
+  const valorAcumulado = {};
+  Object.entries(data.hours).forEach((valor) => {
+    const key = valor[0];
+    const result = valor[1];
+    if (!dayName) {
+      if (key === 'Monday') {
+        valorAcumulado[key] = 'CLOSED';
+        return;
+      }
+      valorAcumulado[key] = `Open from ${result.open}am until ${result.close - 12}pm`;
+    }
+  });
+  return valorAcumulado;
 }
 
 function getOldestFromFirstSpecies(id) {
