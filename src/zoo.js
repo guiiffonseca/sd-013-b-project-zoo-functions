@@ -242,7 +242,7 @@ function getOldestFromFirstSpecies(id) {
   especies.forEach((especie) => {
     if (idDaEspecie === especie.id) primeiraEspecie = especie;
   });
-  primeiraEspecie.residents.filter((residente) => {
+  primeiraEspecie.residents.forEach((residente) => {
     if (residente.age > idadeInicial) {
       idadeInicial = residente.age;
       arrayDoMaisVelho = [residente.name, residente.sex, residente.age];
