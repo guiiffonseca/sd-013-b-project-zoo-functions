@@ -228,7 +228,7 @@ function getSchedule(dayName) {
   }, {});
 
   if (dayName in agenda1) {
-    // lembrando que os colchetes indicam que o eu que quero pegar é o que o dayname representa, ou seja, de dayname for monday eu quero pegar no meu objeto a chave monday
+    // lembrando que os colchetes indicam que o eu que quero pegar é o que o dayname representa, ou seja, se dayname for monday eu quero pegar no meu objeto a chave monday
     agenda1 = { [dayName]: agenda1[dayName] };
   }
   return agenda1;
@@ -266,8 +266,39 @@ function increasePrices(percentage) {
   });
 }
 
+/**
+     const expected = {
+      'Nigel Nelson': ['lions', 'tigers'],
+      'Burl Bethea': ['lions', 'tigers', 'bears', 'penguins'],
+      'Ola Orloff': ['otters', 'frogs', 'snakes', 'elephants'],
+      'Wilburn Wishart': ['snakes', 'elephants'],
+      'Stephanie Strauss': ['giraffes', 'otters'],
+      'Sharonda Spry': ['otters', 'frogs'],
+      'Ardith Azevado': ['tigers', 'bears'],
+      'Emery Elser': ['elephants', 'bears', 'lions']
+    }; 
+ *
+ */
 function getEmployeeCoverage(idOrName) {
   // 13
+  const responsabilidade = empregados.reduce((acumulador, empregadoAtual) => {
+    let empregadoResponsavelPor = acumulador;
+    const animaisDoEmpregado = [];
+    const {firstName, lastName, responsibleFor} = empregadoAtual;
+    // procura na especie o id correspondente no responsibleFor e capta o nome da especie, criando um array com todas as especie do empregadoAtual 
+    responsibleFor.forEach((idAnimal) => {
+      especies.forEach((especie) => {
+        if (idAnimal === especie.id) {
+          animaisDoEmpregado.push(especie.name);
+        }
+      });
+    });
+
+    empregadoResponsavelPor[`${firstName} ${lastName}`] = animaisDoEmpregado;
+    return empregadoResponsavelPor;
+  }, {});
+
+  return responsabilidade;
 }
 
 module.exports = {
