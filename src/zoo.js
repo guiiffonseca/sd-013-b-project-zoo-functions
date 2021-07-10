@@ -1,10 +1,11 @@
+/* eslint-disable max-len */
 const data = require('./data');
 
 const { species, employees, prices, hours } = data;
 
 const getSpeciesByIds = (...ids) => ids.map((id) => species.find((specie) => specie.id === id));
 
-function getAnimalsOlderThan(animal, age) {}
+const getAnimalsOlderThan = (animal, age) => species.find((sp) => sp.name === animal).residents.every((res) => res.age >= age);
 
 function getEmployeeByName(employeeName) {}
 
