@@ -51,8 +51,19 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
 
+// Criei um objeto vazio para receber a espécie e a respectiva quantidade de animais
+// Usei o .forEach para percorrer o nome das espécies e os residentes de cada espécie
+// .forEach adiciona ao objeto animals uma chave = nome dos animais e um valor = .length dos residentes(quantos são)
+// Se não for passado nenhum parâmetro eu retorno todo o objeto animals, senão eu retorno somente o número de residentes
 function countAnimals(animalsSpecies) {
-  // seu código aqui
+  const animals = {};
+  species.forEach(({ name, residents }) => {
+    animals[name] = residents.length;
+  });
+  if (!animalsSpecies) {
+    return animals;
+  }
+  return animals[animalsSpecies];
 }
 
 function calculateEntry(entrants) {
