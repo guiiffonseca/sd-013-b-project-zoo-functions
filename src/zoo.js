@@ -1,4 +1,3 @@
-const { prices } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -76,14 +75,19 @@ function getAnimalMap(options) {
 function getSchedule(dayName) {
   const valorAcumulado = {};
   Object.entries(data.hours).forEach((valor) => {
-    const key = valor[0];
-    const result = valor[1];
     if (!dayName) {
-      if (key === 'Monday') {
-        valorAcumulado[key] = 'CLOSED';
+      if (valor[0] === 'Monday') {
+        valorAcumulado[valor[0]] = 'CLOSED';
         return;
       }
-      valorAcumulado[key] = `Open from ${result.open}am until ${result.close - 12}pm`;
+      valorAcumulado[valor[0]] = `Open from ${valor[1].open}am until ${valor[1].close - 12}pm`;
+    }
+    if (dayName === valor[0]) {
+      if (valor[0] === 'Monday') {
+        valorAcumulado[valor[0]] = 'CLOSED';
+        return;
+      }
+      valorAcumulado[dayName] = `Open from ${valor[1].open}am until ${valor[1].close - 12}pm`;
     }
   });
   return valorAcumulado;
@@ -94,7 +98,15 @@ function getOldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  const originValue = Object.keys(data.prices);
+  const percentagem = (percentage / 100) + 1;
+
+  originValue.forEach((key) => {
+    const updatedValue = data.prices[key] * percentagem;
+    const valueJust = (Math.ceil(updatedValue * 100) / 100);
+
+    data.prices[key] = valueJust;
+  });
 }
 
 function getEmployeeCoverage(idOrName) {
