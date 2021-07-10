@@ -291,7 +291,7 @@ function increasePrices(percentage) {
 
 function auxCriaObjeto(idOrName, id, firstName, lastName, animaisDoEmpregado,
   empregadoResponsavelPor) {
-  let empregadoRespPor = empregadoResponsavelPor;
+  const empregadoRespPor = empregadoResponsavelPor;
   if (idOrName) {
     if (idOrName === id || idOrName === firstName || idOrName === lastName) {
       empregadoRespPor[`${firstName} ${lastName}`] = animaisDoEmpregado;
@@ -321,7 +321,6 @@ function getEmployeeCoverage(idOrName) {
 
     return empregadoResponsavelPor;
   }, {});
-
   return responsabilidade;
 }
 
