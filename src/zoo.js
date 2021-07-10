@@ -2,7 +2,8 @@ const data = require('./data');
 const { species, employees, prices } = require('./data');
 
 function getSpeciesByIds(...ids) {
-  // Pedir oras para entender como funciona o includes(). Complicado.
+  // Perdi oras para entender como funciona o includes(). Complicado.
+  // Mas consegui!!!
   return species.filter((animal) => ids.includes(animal.id));
 }
 
@@ -32,7 +33,11 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 function countAnimals(specie) {
-
+  if (!specie) {
+    return species.reduce((cvalue, { name, residents }) =>
+      ({ ...cvalue, [name]: residents.length }), {});
+  }
+  return species.find(({ name }) => name === specie).residents.length;
 }
 
 function calculateEntry({ Adult = 0, Child = 0, Senior = 0 } = 0) {
