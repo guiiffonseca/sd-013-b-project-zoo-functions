@@ -68,29 +68,53 @@ function calculateEntry(entrants = {}) {
   return valorAcumulado;
 }
 
-function getAnimalMap(options) {
-  // seu código aqui
+function getAnimalData(options, specie) {
+  const objComNome = {};
+  let nomeDosResidentes = [];
+  if (!options.sex) {
+    nomeDosResidentes = specie.residents.map((resident) => resident.name);
+  } else {
+    nomeDosResidentes = specie.residents.filter((resident) => resident.sex === options.sex)
+      .map((resident) => resident.name);
+  }
+  if (options.sorted === true) {
+    objComNome[specie.name] = nomeDosResidentes.sort();
+  } else {
+    objComNome[specie.name] = nomeDosResidentes;
+  }
+  return objComNome;
 }
 
+function getAnimalMap(options) {
+  const animalLocation = {};
+  data.species.forEach((specie) => {
+    if (!animalLocation[specie.location]) {
+      animalLocation[specie.location] = [];
+    }
+    if (!options || !options.includeNames) {
+      animalLocation[specie.location].push(specie.name);
+      return;
+    }
+    const objComNome = getAnimalData(options, specie);
+    animalLocation[specie.location].push(objComNome);
+  });
+  return animalLocation;
+}
+
+const isMonday = (dayName, day) => dayName === 'Monday' || (!dayName && day === 'Monday');
+
 function getSchedule(dayName) {
-  // const valorAcumulado = {};
-  // Object.entries(data.hours).forEach((valor) => {
-  //   if (!dayName) {
-  //     if (valor[0] === 'Monday') {
-  //       valorAcumulado[valor[0]] = 'CLOSED';
-  //       return;
-  //     }
-  //     valorAcumulado[valor[0]] = `Open from ${valor[1].open}am until ${valor[1].close - 12}pm`;
-  //   }
-  //   if (dayName === valor[0]) {
-  //     if (valor[0] === 'Monday') {
-  //       valorAcumulado[valor[0]] = 'CLOSED';
-  //       return;
-  //     }
-  //     valorAcumulado[dayName] = `Open from ${valor[1].open}am until ${valor[1].close - 12}pm`;
-  //   }
-  // });
-  // return valorAcumulado;
+  const valorAcumulado = {};
+  Object.entries(data.hours).forEach((valor) => {
+    if (isMonday(dayName, valor[0])) {
+      valorAcumulado.Monday = 'CLOSED';
+      return;
+    }
+    if (!dayName || dayName === valor[0]) {
+      valorAcumulado[valor[0]] = `Open from ${valor[1].open}am until ${valor[1].close - 12}pm`;
+    }
+  });
+  return valorAcumulado;
 }
 
 function getOldestFromFirstSpecies(id) {
@@ -107,6 +131,7 @@ function increasePrices(percentage) {
 
     data.prices[key] = valueJust;
   });
+  return data.prices;
 }
 
 function getEmployeeCoverage(idOrName) {
