@@ -62,7 +62,7 @@ function calculateEntry(entrants = {}) {
   // multiplicar o valor da entrado pela quantidade de entradas;
   // somar o total de entradas;
   Object.entries(entrants).forEach((valor) => {
-    valorAcumulado += prices[valor[0]] * valor[1];
+    valorAcumulado += data.prices[valor[0]] * valor[1];
   });
   // retornar o valor somado;
   return valorAcumulado;
@@ -73,24 +73,24 @@ function getAnimalMap(options) {
 }
 
 function getSchedule(dayName) {
-  const valorAcumulado = {};
-  Object.entries(data.hours).forEach((valor) => {
-    if (!dayName) {
-      if (valor[0] === 'Monday') {
-        valorAcumulado[valor[0]] = 'CLOSED';
-        return;
-      }
-      valorAcumulado[valor[0]] = `Open from ${valor[1].open}am until ${valor[1].close - 12}pm`;
-    }
-    if (dayName === valor[0]) {
-      if (valor[0] === 'Monday') {
-        valorAcumulado[valor[0]] = 'CLOSED';
-        return;
-      }
-      valorAcumulado[dayName] = `Open from ${valor[1].open}am until ${valor[1].close - 12}pm`;
-    }
-  });
-  return valorAcumulado;
+  // const valorAcumulado = {};
+  // Object.entries(data.hours).forEach((valor) => {
+  //   if (!dayName) {
+  //     if (valor[0] === 'Monday') {
+  //       valorAcumulado[valor[0]] = 'CLOSED';
+  //       return;
+  //     }
+  //     valorAcumulado[valor[0]] = `Open from ${valor[1].open}am until ${valor[1].close - 12}pm`;
+  //   }
+  //   if (dayName === valor[0]) {
+  //     if (valor[0] === 'Monday') {
+  //       valorAcumulado[valor[0]] = 'CLOSED';
+  //       return;
+  //     }
+  //     valorAcumulado[dayName] = `Open from ${valor[1].open}am until ${valor[1].close - 12}pm`;
+  //   }
+  // });
+  // return valorAcumulado;
 }
 
 function getOldestFromFirstSpecies(id) {
