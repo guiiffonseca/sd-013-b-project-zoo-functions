@@ -53,7 +53,7 @@ function getAnimalMap(options) {
 }
 
 function getSchedule(dayName) {
-  // seu código aqui
+
 }
 
 function getOldestFromFirstSpecies(id) {
@@ -61,7 +61,13 @@ function getOldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  // Tentei com Math.round e parceFloat mas tirava um centavo do resultado.
+  const A = Math.ceil(prices.Adult * (100 + percentage)) / 100;
+  const C = Math.ceil(prices.Child * (100 + percentage)) / 100;
+  const S = Math.ceil(prices.Senior * (100 + percentage)) / 100;
+  prices.Adult = A;
+  prices.Child = C;
+  prices.Senior = S;
 }
 
 function getEmployeeCoverage(idOrName) {
