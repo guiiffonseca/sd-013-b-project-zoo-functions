@@ -1,6 +1,8 @@
 const data = require('./data');
 
-function getSpeciesByIds(ids) {}
+const { species, employees, prices, hours } = data;
+
+const getSpeciesByIds = (...ids) => ids.map((id) => species.find((specie) => specie.id === id));
 
 function getAnimalsOlderThan(animal, age) {}
 
