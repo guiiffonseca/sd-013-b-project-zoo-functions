@@ -2,7 +2,7 @@ const { species, employees, prices, hours } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
-  return ids.map((id) => data.species.find((animal) => animal.id === id));
+  return ids.map((id) => species.find((animal) => animal.id === id));
 }
 
 function getAnimalsOlderThan(animal, age) {
@@ -26,8 +26,7 @@ function isManager(id) {
 // https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/includes
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-  const newEmp = { id, firstName, lastName, managers, responsibleFor };
-  return employees.push(newEmp);
+  return employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
 
 function countAnimals(especies) {
@@ -49,61 +48,62 @@ function calculateEntry(entrants) {
   }
 }
 
-const getNamesLoc = (info) => species.filter((animal) => animal.location === info)
-  .map((obj) => obj.name);
+// const getNamesLoc = (info) => species.filter((animal) => animal.location === info)
+//   .map((obj) => obj.name);
 
-const getAnimalName = (info) => species
-  .reduce((acc, { name, location, residents }) => {
-    if (location === info) { acc.push({ [name]: residents
-      .map((animal) => animal.name) }) };
-    return acc;
-  }, []);
+// const getAnimalName = (info) => species
+//   .reduce((acc, { name, location, residents }) => {
+//     if (location === info) { acc.push({ [name]: residents
+//       .map((animal) => animal.name) }) };
+//     return acc;
+//   }, []);
 
-const sortedNames = (info) => species
-  .reduce((acc, { name, location, residents }) => {
-    if (location === info) { acc.push({ [name]: residents
-      .map((animal) => animal.name).sort() }) };
-    return acc;
-  }, []);
+// const sortedNames = (info) => species
+//   .reduce((acc, { name, location, residents }) => {
+//     if (location === info) {
+//       acc.push({ [name]: residents
+//         .map((animal) => animal.name).sort() }); }
+//       return acc;
+//   }, []);
 
-const femaleNames = (info) => species
-  .reduce((acc, { name, location, residents }) => {
-    if (location === info) { acc.push({ [name]: residents
-      .filter(({ sex }) => sex === 'female')
-      .map((animal) => animal.name) }) };
-    return acc;
-  }, []);
+// const femaleNames = (info) => species
+//   .reduce((acc, { name, location, residents }) => {
+//     if (location === info) {
+//       acc.push({ [name]: residents
+//         .filter(({ sex }) => sex === 'female')
+//         .map((animal) => animal.name) }); }
+//       return acc;
+//   }, []);
 
+// const femaleSort = (info) => species
+//   .reduce((acc, { name, location, residents }) => {
+//     if (location === info) {
+//       acc.push({ [name]: residents
+//         .filter(({ sex }) => sex === 'female')
+//         .map((animal) => animal.name).sort() }); }
+//       return acc;
+//   }, []);
 
-const femaleSort = (info) => species
-  .reduce((acc, { name, location, residents }) => {
-    if (location === info) { acc.push({ [name]: residents
-      .filter(({ sex }) => sex === 'female')
-      .map((animal) => animal.name).sort() }) };
-    return acc;
-  }, []);
-
-
-function getAnimalMap(options) {
-  const location = ['NE', 'NW', 'SW', 'SE'];
-  return location.reduce((acc, curr) => {
-    if (!options) { acc[curr] = getNamesLoc(curr);
-      return acc };
-    {
-      const { includeNames, sorted, sex } = options;
-      if (includeNames === true && !sorted && !sex) { acc[curr] = getAnimalName(curr);
-        return acc };
-      if (includeNames === true && sorted === true && !sex) { acc[curr] = sortedNames(curr);
-        return acc };
-      if (includeNames === true && sex === 'female' && !sorted) { acc[curr] = femaleNames(curr);
-        return acc };
-      if (includeNames === true && sorted === true && sex === 'female') { 
-        acc[curr] = femaleSort(curr); return acc; }
-      acc[curr] = getNamesLoc(curr);
-      return acc;
-    };
-  }, {});
-};
+// function getAnimalMap(options) {
+//   const location = ['NE', 'NW', 'SW', 'SE'];
+//   return location.reduce((acc, curr) =>
+//   { if (!options) { acc[curr] = getNamesLoc(curr);return acc; }
+//     {
+//       const { includeNames, sorted, sex } = options;
+//       if (includeNames === true && !sorted && !sex)
+//       { acc[curr] = getAnimalName(curr);return acc; }
+//       if (includeNames === true && sorted === true && !sex)
+//       { acc[curr] = sortedNames(curr);return acc; }
+//       if (includeNames === true && sex === 'female' && !sorted)
+//       { acc[curr] = femaleNames(curr);return acc; }
+//       if (includeNames === true && sorted === true && sex === 'female') {
+//         acc[curr] = femaleSort(curr);
+//         return acc; }
+//       acc[curr] = getNamesLoc(curr);
+//       return acc;
+//     }
+//   }, {});
+// }
 
 function getSchedule(dayName) {
   const schedule = Object.entries(hours).reduce((acc, [day, hour]) => {
@@ -126,9 +126,11 @@ function getOldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  prices.Adult = Math.ceil(prices.Adult * (100 + percentage)) / 100;
-  prices.Child = Math.ceil(prices.Child * (100 + percentage)) / 100;
-  prices.Senior = Math.ceil(prices.Senior * (100 + percentage)) / 100;
+  const newPrices = Object.entries(prices).reduce((acc, [sector, value]) => {
+    acc[sector] = (Math.ceil(value * (100 + percentage)) / 100);
+    return acc;
+  }, {});
+  return Object.assign(prices, newPrices);
 }
 
 const getName = (...idAnimal) => idAnimal.map((id) => species
@@ -154,7 +156,7 @@ module.exports = {
   calculateEntry,
   getSchedule,
   countAnimals,
-  getAnimalMap,
+  // getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
   getEmployeeCoverage,
