@@ -191,12 +191,10 @@ const validateEntry = (string) => {
   return aux;
 };
 
-const noParams = () => {
-  return employees
-    .reduce((acc, { firstName, lastName, responsibleFor }) => {
-      acc[`${firstName} ${lastName}`] = getAnimalsByEmployee(responsibleFor); return acc;
-    }, {});
-};
+const noParams = () => employees
+  .reduce((acc, { firstName, lastName, responsibleFor }) => {
+    acc[`${firstName} ${lastName}`] = getAnimalsByEmployee(responsibleFor); return acc;
+  }, {});
 
 const getEmployeeCoverage = (idOrName) => {
   if (!idOrName) {
