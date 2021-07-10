@@ -1,5 +1,5 @@
-const { species, employees, hours } = require("./data");
-const data = require("./data");
+const { species, employees, hours } = require('./data');
+const data = require('./data');
 
 function getSpeciesByIds(...ids) {
   return ids.map((id) => data.species.find((param) => param.id === id));
@@ -12,11 +12,8 @@ function getAnimalsOlderThan(animal, age) {
 }
 
 function getEmployeeByName(employeeName) {
-  return (
-    employees.find(
-      ({ firstName, lastName }) =>
-        firstName === employeeName || lastName === employeeName
-    ) || {}
+  return (employees.find(({ firstName, lastName }) =>
+    firstName === employeeName || lastName === employeeName) || {}
   );
 }
 // nesta função caso o return não satisfaça a condição passada pelo find retorna automagicamente  o array vazio.
@@ -35,7 +32,7 @@ function addEmployee(
   firstName,
   lastName,
   managers = [],
-  responsibleFor = []
+  responsibleFor = [],
 ) {
   const newObj = {
     id,
@@ -55,9 +52,8 @@ function countAnimals(speciesAgain) {
   if (!speciesAgain) {
     return createObj;
   }
-  const getIndividual = Object.entries(createObj).find(
-    (element) => element[0] === speciesAgain
-  );
+  const getIndividual = Object.entries(createObj)
+    .find((element) => element[0] === speciesAgain);
   return getIndividual[1];
 }
 
@@ -68,8 +64,7 @@ function makeCalc(entrantsAgain) {
     Child: childEntrant = 0,
     Senior: seniorEntrant = 0,
   } = entrantsAgain;
-  const getTotalValue =
-    Adult * adultEntrant + Child * childEntrant + Senior * seniorEntrant;
+  const getTotalValue = Adult * adultEntrant + Child * childEntrant + Senior * seniorEntrant;
   return getTotalValue;
 }
 
