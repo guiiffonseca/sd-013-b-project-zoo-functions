@@ -11,9 +11,8 @@ function getAnimalsOlderThan(animal, age) {
 
 function getEmployeeByName(employeeName) {
   if (!employeeName) return {};
-  const employeeObj = data.employees.find((employee) => employee.firstName === employeeName
+  return data.employees.find((employee) => employee.firstName === employeeName
   || employee.lastName === employeeName);
-  return (employeeObj);
 }
 
 function createEmployee(personalInfo, associatedWith) {
@@ -183,8 +182,26 @@ function increasePrices(percentage) {
   return (data.prices);
 }
 
+function getEmployeeById(id) {
+  return data.employees.find((employee) => employee.id === id);
+}
+
+function getByIdOrName(idOrName) {
+  if (!getEmployeeByName(idOrName)) return getEmployeeById(idOrName);
+  return (getEmployeeByName(idOrName));
+}
+
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+  const employeesPlusAnimals = data.employees.reduce((acc, curr) => {
+    const animals = getSpeciesByIds(...curr.responsibleFor).map((e) => e.name);
+    return { ...acc, ...{ [`${curr.firstName} ${curr.lastName}`]: animals } };
+  }, {});
+
+  if (!idOrName) return employeesPlusAnimals;
+
+  const employeeObj = getByIdOrName(idOrName);
+  const fullname = `${employeeObj.firstName} ${employeeObj.lastName}`;
+  return { [fullname]: employeesPlusAnimals[fullname] };
 }
 
 module.exports = {
