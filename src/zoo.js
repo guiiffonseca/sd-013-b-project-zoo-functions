@@ -54,7 +54,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 // Criei um objeto vazio para receber a espécie e a respectiva quantidade de animais
 // Usei o .forEach para percorrer o nome das espécies e os residentes de cada espécie
 // .forEach adiciona ao objeto animals uma chave = nome dos animais e um valor = .length dos residentes(quantos são)
-// Se não for passado nenhum parâmetro eu retorno todo o objeto animals, senão eu retorno somente o valor da chave passada por parâmetro(nº de residentes)
+// Se não for passado nenhum parâmetro eu retorno todo o objeto animals, senão eu retorno somente o valor da chave passada por parâmetro(nº de residentes).
 function countAnimals(animalsSpecies) {
   const animals = {};
   species.forEach(({ name, residents }) => {
@@ -83,8 +83,23 @@ function getAnimalMap(options) {
   // seu código aqui
 }
 
+// Criei um objeto com todas as informações de dias e horários referentes ao funcionamento
+// Caso não seja passado nenhum parâmetro para a função, retorna o objeto inteiro
+// Se o parâmetro for passado, ele é retornado como a chave e seu valor será o valor da chave do fullSchedule que coincida com o parâmetro.
 function getSchedule(dayName) {
-  // seu código aqui
+  const fullSchedule = {
+    Monday: 'CLOSED',
+    Tuesday: 'Open from 8am until 6pm',
+    Wednesday: 'Open from 8am until 6pm',
+    Thursday: 'Open from 10am until 8pm',
+    Friday: 'Open from 10am until 8pm',
+    Saturday: 'Open from 8am until 10pm',
+    Sunday: 'Open from 8am until 8pm',
+  };
+  if (!dayName) {
+    return fullSchedule;
+  }
+  return { [dayName]: fullSchedule[dayName] };
 }
 
 function getOldestFromFirstSpecies(id) {
