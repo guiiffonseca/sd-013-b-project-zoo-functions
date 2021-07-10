@@ -1,4 +1,4 @@
-const { species, employees, prices } = require('./data');
+const { species, employees, prices, hours } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -44,7 +44,7 @@ function countAnimals(speciess) {
   }
   return animalsCount;
 }
-
+// Video explicativo sobre Object.keys,  https://www.youtube.com/watch?v=CO29CxeRMx4
 function calculateEntry(entrants) {
   if (!entrants) return 0;
   return Object.keys(entrants)
@@ -55,8 +55,28 @@ function getAnimalMap(options) {
   // seu código aqui
 }
 
+function daySchedule(day) {
+  const object = {};
+
+  object[day] = (day === 'Monday') ? 'CLOSED'
+    : `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`;
+  console.log(object);
+  return object;
+}
+
 function getSchedule(dayName) {
-  // seu código aqui
+  const object = {};
+  const week = Object.keys(hours);
+
+  if (!dayName) {
+    week.forEach((day) => {
+      object[day] = `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`;
+      if (hours[day].open === 0 && hours[day].close === 0) object[day] = 'CLOSED';
+    });
+    console.log(object);
+    return object;
+  }
+  return daySchedule(dayName);
 }
 
 function getOldestFromFirstSpecies(id) {
