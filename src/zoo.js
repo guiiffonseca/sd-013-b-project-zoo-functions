@@ -231,7 +231,24 @@ function getSchedule(dayName) {
 }
 
 function getOldestFromFirstSpecies(id) {
-  // 11
+  let idadeInicial = 0;
+  let idDaEspecie = '';
+  let arrayDoMaisVelho = [];
+  empregados.find((empregado) => {
+    if (empregado.id === id) idDaEspecie = empregado.responsibleFor[0];
+  });
+  const primeiraEspecie = especies.find((especie) => {
+    if (idDaEspecie === especie.id) {
+      return especie;
+    }
+  });
+  primeiraEspecie.residents.filter((residente) => {
+    if (residente.age > idadeInicial) {
+      idadeInicial = residente.age;
+      arrayDoMaisVelho = [residente.name, residente.sex, residente.age];
+    }
+  });
+  return arrayDoMaisVelho;
 }
 
 function increasePrices(percentage) {
