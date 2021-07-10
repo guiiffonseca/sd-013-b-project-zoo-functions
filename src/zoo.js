@@ -233,14 +233,14 @@ function getSchedule(dayName) {
 function getOldestFromFirstSpecies(id) {
   let idadeInicial = 0;
   let idDaEspecie = '';
+  let primeiraEspecie = {};
   let arrayDoMaisVelho = [];
-  empregados.find((empregado) => {
+
+  empregados.forEach((empregado) => {
     if (empregado.id === id) idDaEspecie = empregado.responsibleFor[0];
   });
-  const primeiraEspecie = especies.find((especie) => {
-    if (idDaEspecie === especie.id) {
-      return especie;
-    }
+  especies.forEach((especie) => {
+    if (idDaEspecie === especie.id) primeiraEspecie = especie;
   });
   primeiraEspecie.residents.filter((residente) => {
     if (residente.age > idadeInicial) {
