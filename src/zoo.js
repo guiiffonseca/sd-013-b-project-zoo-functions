@@ -266,35 +266,57 @@ function increasePrices(percentage) {
   });
 }
 
-/**
-     const expected = {
-      'Nigel Nelson': ['lions', 'tigers'],
-      'Burl Bethea': ['lions', 'tigers', 'bears', 'penguins'],
-      'Ola Orloff': ['otters', 'frogs', 'snakes', 'elephants'],
-      'Wilburn Wishart': ['snakes', 'elephants'],
-      'Stephanie Strauss': ['giraffes', 'otters'],
-      'Sharonda Spry': ['otters', 'frogs'],
-      'Ardith Azevado': ['tigers', 'bears'],
-      'Emery Elser': ['elephants', 'bears', 'lions']
-    }; 
- *
- */
-function getEmployeeCoverage(idOrName) {
-  // 13
-  const responsabilidade = empregados.reduce((acumulador, empregadoAtual) => {
-    let empregadoResponsavelPor = acumulador;
+/* function getEmployeeCoverage(idOrName) {
+  let responsabilidade = {};
+  responsabilidade = empregados.reduce((acumulador, empregadoAtual) => {
+    const empregadoResponsavelPor = acumulador;
     const animaisDoEmpregado = [];
-    const {firstName, lastName, responsibleFor} = empregadoAtual;
-    // procura na especie o id correspondente no responsibleFor e capta o nome da especie, criando um array com todas as especie do empregadoAtual 
+    const { id, firstName, lastName, responsibleFor } = empregadoAtual;
     responsibleFor.forEach((idAnimal) => {
       especies.forEach((especie) => {
-        if (idAnimal === especie.id) {
-          animaisDoEmpregado.push(especie.name);
-        }
+        if (idAnimal === especie.id) animaisDoEmpregado.push(especie.name);
       });
     });
+    if (idOrName) {
+      if (idOrName === id || idOrName === firstName || idOrName === lastName) {
+        empregadoResponsavelPor[`${firstName} ${lastName}`] = animaisDoEmpregado;
+      }
+    } else {
+      empregadoResponsavelPor[`${firstName} ${lastName}`] = animaisDoEmpregado;
+    }
+    return empregadoResponsavelPor;
+  }, {});
+  return responsabilidade;
+} */
 
+function auxCriaObjeto(idOrName, id, firstName, lastName, animaisDoEmpregado, empregadoResponsavelPor){
+
+  if (idOrName) {
+    if (idOrName === id || idOrName === firstName || idOrName === lastName) {
+      empregadoResponsavelPor[`${firstName} ${lastName}`] = animaisDoEmpregado;
+    }
+  } else {
     empregadoResponsavelPor[`${firstName} ${lastName}`] = animaisDoEmpregado;
+  }
+console.log('objeto da função aux ' + empregadoResponsavelPor);
+  return empregadoResponsavelPor;
+}
+
+function getEmployeeCoverage(idOrName) {
+  let responsabilidade = {};
+
+  responsabilidade = empregados.reduce((acumulador, empregadoAtual) => {
+    let empregadoResponsavelPor = acumulador;
+    const animaisDoEmpregado = [];
+    const { id, firstName, lastName, responsibleFor } = empregadoAtual;
+
+    responsibleFor.forEach((idAnimal) => {
+      especies.forEach((especie) => {
+        if (idAnimal === especie.id) animaisDoEmpregado.push(especie.name);
+      });
+    });
+    empregadoResponsavelPor = auxCriaObjeto(idOrName, id, firstName, lastName, animaisDoEmpregado, empregadoResponsavelPor);
+
     return empregadoResponsavelPor;
   }, {});
 
