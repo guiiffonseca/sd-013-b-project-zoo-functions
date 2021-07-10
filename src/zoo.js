@@ -1,5 +1,6 @@
 const data = require('./data');
 
+// Requisito 1
 // Refer1: https://pt.stackoverflow.com/questions/232954/como-passar-um-array-como-par%C3%A2metro-para-fun%C3%A7%C3%A3o
 // Refer2: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/includes
 function getSpeciesByIds(...ids) {
@@ -7,13 +8,17 @@ function getSpeciesByIds(...ids) {
   return data.species.filter(({ id }) => ids.includes(id));
 }
 
+// Requisito 2
 function getAnimalsOlderThan(animalIn, ageIn) {
   return data.species.find(({ name }) => animalIn === name)
     .residents.every(({ age }) => age >= ageIn);
 }
 
+// Requisito 3
 function getEmployeeByName(employeeName) {
-  // seu código aqui
+  if (employeeName === undefined) return {};
+  return data.employees.find(({ firstName, lastName }) =>
+    employeeName === firstName || employeeName === lastName);
 }
 
 function createEmployee(personalInfo, associatedWith) {
