@@ -1,4 +1,4 @@
-const { species, employees } = require('./data');
+const { species, employees, prices } = require('./data');
 
 const data = require('./data');
 // ----------- REQUISITO 01 ----------- //
@@ -37,20 +37,27 @@ const countAnimals = (especies) => {
 };
 
 // ----------- REQUISITO 08 ----------- //
-const calculateEntry = (entrants) => {};
+const calculateEntry = (entrants) => {
+  if (!entrants || Object.keys(entrants).length === 0) {
+    return 0;
+  }
+  return Object.entries(entrants).reduce((acc, [chave, valor]) =>
+    acc + prices[chave] * valor, 0);
+};
 
+// ----------- REQUISITO 09 ----------- //
 function getAnimalMap(options) {
   // seu código aqui
 }
-
+// ----------- REQUISITO 10 ----------- //
 function getSchedule(dayName) {
   // seu código aqui
 }
-
+// ----------- REQUISITO 11 ----------- //
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
 }
-
+// ----------- REQUISITO 12 ----------- //
 function increasePrices(percentage) {
   // seu código aqui
 }
