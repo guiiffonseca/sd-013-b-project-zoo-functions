@@ -175,26 +175,47 @@ const getAnimalsByEmployee = (idByEmployee) => {
   const list = [];
   idByEmployee.forEach((element) => {
     list.push(species
-      .reduce((acc, { id, name }) => (id === element || name === element ? name : acc)));
+      .reduce((acc, { id, name }) => (id === element || name === element ? name : acc), 0));
   });
   return list;
 };
 
-const getEmployeeCoverage = (idOrName) => {
+const validateEntry = (string) => {
   let aux = '';
-  const idFilter = employees.filter(({ id }) => id === idOrName);
+  const idFilter = employees.filter(({ id }) => id === string);
   const nameFilter = employees.filter(({ firstName, lastName }) => `${firstName} ${lastName}`
-    .includes(idOrName));
+    .includes(string));
   if (idFilter.length !== 0) {
     aux = idFilter;
   } else aux = nameFilter;
-  // console.log(aux);
-  const animalIdsArray = getAnimalsByEmployee(aux.map(({ responsibleFor }) => responsibleFor)
-    .reduce((acc, item) => acc + item));
-  return animalIdsArray;
+  return aux;
 };
 
+const noParams = () => {
+  return employees
+    .reduce((acc, { firstName, lastName, responsibleFor }) => {
+      acc[`${firstName} ${lastName}`] = getAnimalsByEmployee(responsibleFor); return acc;
+    }, {});
+};
+
+const getEmployeeCoverage = (idOrName) => {
+  if (!idOrName) {
+    return noParams();
+  }
+  const aux = validateEntry(idOrName);
+  const obj = {};
+  const animalIdsArray = getAnimalsByEmployee(aux.map(({ responsibleFor }) => responsibleFor)
+    .reduce((acc, item) => acc + item));
+  obj[`${aux[0].firstName} ${aux[0].lastName}`] = animalIdsArray;
+  return obj;
+};
+
+getEmployeeCoverage('Orloff');
+// console.log(getAnimalsByEmployee('Orloff'));
+
 // console.log(getEmployeeCoverage('Elser'));
+// getAnimalsByEmployee(getEmployeeCoverage('Stephanie'));
+// getAnimalsByEmployee(getEmployeeCoverage('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
 // console.log(getAnimalsByEmployee(getEmployeeCoverage('Azevado')));
 
 module.exports = {
