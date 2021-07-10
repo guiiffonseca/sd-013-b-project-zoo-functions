@@ -1,7 +1,7 @@
 const data = require('./data');
 // Desestruturei o objeto contido no arquivo data.js
-// Transformar suas chaves em variáveis.
-const { species, employees } = require('./data');
+// Transformei suas chaves em variáveis.
+const { species, employees, prices } = require('./data');
 
 // Usei rest para que fosse possível passar vários parâmetros ao mesmo tempo.
 // Usei o .filter pois retorna um novo array com os objetos que passam na regra de negócio
@@ -54,7 +54,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 // Criei um objeto vazio para receber a espécie e a respectiva quantidade de animais
 // Usei o .forEach para percorrer o nome das espécies e os residentes de cada espécie
 // .forEach adiciona ao objeto animals uma chave = nome dos animais e um valor = .length dos residentes(quantos são)
-// Se não for passado nenhum parâmetro eu retorno todo o objeto animals, senão eu retorno somente o número de residentes
+// Se não for passado nenhum parâmetro eu retorno todo o objeto animals, senão eu retorno somente o valor da chave passada por parâmetro(nº de residentes)
 function countAnimals(animalsSpecies) {
   const animals = {};
   species.forEach(({ name, residents }) => {
@@ -66,8 +66,17 @@ function countAnimals(animalsSpecies) {
   return animals[animalsSpecies];
 }
 
+// Se a função não receber nenhum parâmetro retorna 0
+// Coloquei as keys de entrants com um default value = 0(se o objeto for vazio, por default os valor de cada chave será 0)
+// Desestruturei as chaves do objeto prices para mudar seu nome
+// Retornei o valor total dos ingressos vendidos
 function calculateEntry(entrants) {
-  // seu código aqui
+  if (!entrants) {
+    return 0;
+  }
+  const { Adult = 0, Child = 0, Senior = 0 } = entrants;
+  const { Adult: grownUp, Child: kid, Senior: elder } = prices;
+  return (grownUp * Adult) + (kid * Child) + (elder * Senior);
 }
 
 function getAnimalMap(options) {
