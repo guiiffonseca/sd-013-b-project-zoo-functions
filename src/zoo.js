@@ -1,5 +1,5 @@
 const data = require('./data');
-const { species, employees, prices } = require('./data');
+const { species, employees, prices, hours } = require('./data');
 
 function getSpeciesByIds(...ids) {
   // Perdi oras para entender como funciona o includes(). Complicado.
@@ -49,11 +49,27 @@ function calculateEntry({ Adult = 0, Child = 0, Senior = 0 } = 0) {
 }
 
 function getAnimalMap(options) {
-
+  // seu código aqui
 }
 
 function getSchedule(dayName) {
+  // Consegui fazer isso fazendo code Review do projeto do PedroSehn. Eu sei por que foi feito dessa forma.
+  // Peguei a ideia e fiz da minha forma.
+  // (https://github.com/tryber/sd-013-b-project-zoo-functions/pull/9/commits/fc613f527933daddc6841ddf91dda718c1ea5147)
+  const values = Object.values(hours);
+  const days = Object.keys(hours);
+  const obj = {};
+  for (let index = 0; index < days.length; index += 1) {
+    obj[days[index]] = `Open from ${values[index].open}am until ${values[index].close - 12}pm`;
+  }
 
+  obj.Monday = 'CLOSED';
+
+  if (!dayName) {
+    return obj;
+  }
+
+  return { [dayName]: obj[dayName] };
 }
 
 function getOldestFromFirstSpecies(id) {
