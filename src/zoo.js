@@ -5,6 +5,10 @@ const especies = data.species;
 const empregados = data.employees;
 const precos = data.prices;
 
+let idDaEspecie = '';
+let primeiraEspecie = {};
+let arrayDoMaisVelho = [];
+
 const getSpeciesByIds = (...ids) => {
   // seu código aqui
   const busca = especies
@@ -232,12 +236,11 @@ function getSchedule(dayName) {
 
 function getOldestFromFirstSpecies(id) {
   let idadeInicial = 0;
-  let idDaEspecie = '';
-  let primeiraEspecie = {};
-  let arrayDoMaisVelho = [];
-
   empregados.forEach((empregado) => {
-    if (empregado.id === id) idDaEspecie = empregado.responsibleFor[0];
+    if (empregado.id === id) {
+      const [primeiroID] = empregado.responsibleFor;
+      idDaEspecie = primeiroID;
+    }
   });
   especies.forEach((especie) => {
     if (idDaEspecie === especie.id) primeiraEspecie = especie;
