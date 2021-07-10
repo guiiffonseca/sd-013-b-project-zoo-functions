@@ -69,7 +69,9 @@ function calculateEntry(entrants) {
   return Adult * 49.99 + Child * 20.99 + Senior * 24.99;
 }
 
-function getAnimalMap(options) {}
+function getAnimalMap(options) {
+  // seu código aqui
+}
 
 function getSchedule(dayName) {
   const hoursDay = Object.keys(hours);
@@ -86,14 +88,22 @@ function getSchedule(dayName) {
       Monday: 'CLOSED',
     };
   }
-  if (dayName === 'Monday') return { Monday: 'CLOSED' };
+  if (dayName === 'Monday') return { [dayName]: 'CLOSED' };
   return {
     [dayName]: `Open from ${hours[(findDay)].open}am until ${(hours[(findDay)].close - 12)}pm`,
   };
 }
 
 function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+  const findSpecie = employees
+    .find((employee) => employee.id === id).responsibleFor
+    .find((specie) => specie[0]);
+  let findAnimal = species
+    .find((animal) => animal.id === findSpecie)
+    .residents.sort((preAge, currAge) => currAge.age - preAge.age)
+    .reduce((preAnm, currAnm) => ((preAnm.age > currAnm.age) ? preAnm : currAnm));
+  const { name, sex, age } = findAnimal;
+  return [name, sex, age];
 }
 
 function increasePrices(percentage) {
