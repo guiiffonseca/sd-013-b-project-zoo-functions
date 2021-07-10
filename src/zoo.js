@@ -98,7 +98,7 @@ function getOldestFromFirstSpecies(id) {
   const findSpecie = employees
     .find((employee) => employee.id === id).responsibleFor
     .find((specie) => specie[0]);
-  let findAnimal = species
+  const findAnimal = species
     .find((animal) => animal.id === findSpecie)
     .residents.sort((preAge, currAge) => currAge.age - preAge.age)
     .reduce((preAnm, currAnm) => ((preAnm.age > currAnm.age) ? preAnm : currAnm));
