@@ -289,17 +289,18 @@ function increasePrices(percentage) {
   return responsabilidade;
 } */
 
-function auxCriaObjeto(idOrName, id, firstName, lastName, animaisDoEmpregado, empregadoResponsavelPor){
-
+function auxCriaObjeto(idOrName, id, firstName, lastName, animaisDoEmpregado,
+  empregadoResponsavelPor) {
+  let empregadoRespPor = empregadoResponsavelPor;
   if (idOrName) {
     if (idOrName === id || idOrName === firstName || idOrName === lastName) {
-      empregadoResponsavelPor[`${firstName} ${lastName}`] = animaisDoEmpregado;
+      empregadoRespPor[`${firstName} ${lastName}`] = animaisDoEmpregado;
     }
   } else {
-    empregadoResponsavelPor[`${firstName} ${lastName}`] = animaisDoEmpregado;
+    empregadoRespPor[`${firstName} ${lastName}`] = animaisDoEmpregado;
   }
-console.log('objeto da função aux ' + empregadoResponsavelPor);
-  return empregadoResponsavelPor;
+
+  return empregadoRespPor;
 }
 
 function getEmployeeCoverage(idOrName) {
@@ -315,7 +316,8 @@ function getEmployeeCoverage(idOrName) {
         if (idAnimal === especie.id) animaisDoEmpregado.push(especie.name);
       });
     });
-    empregadoResponsavelPor = auxCriaObjeto(idOrName, id, firstName, lastName, animaisDoEmpregado, empregadoResponsavelPor);
+    empregadoResponsavelPor = auxCriaObjeto(idOrName, id, firstName, lastName,
+      animaisDoEmpregado, empregadoResponsavelPor);
 
     return empregadoResponsavelPor;
   }, {});
