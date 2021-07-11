@@ -147,8 +147,16 @@ function getSchedule(dayName) {
   return scheguleZoo;
 }
 
-function getOldestFromFirstSpecies(id) {
+function getOldestFromFirstSpecies(id) { // 11
   // seu código aqui
+  const responsibleFor = data.employees
+    .filter((employee) => employee.id === id)
+    .map((employeeMap) => employeeMap.responsibleFor);
+  const firstAnimal = data.species
+    .find((animal) => animal.id === responsibleFor[0][0])
+    .residents
+    .sort((a, b) => b.age - a.age)[0];
+  return [firstAnimal.name, firstAnimal.sex, firstAnimal.age];
 }
 
 function increasePrices(percentage) {
