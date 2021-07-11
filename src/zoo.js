@@ -66,7 +66,7 @@ function animalsByLocation() {
 }
 
 function getResidents(animal) {
-  return species.find(({ name, residents }) => animal === name).residents
+  return species.find(({ name }) => animal === name).residents
     .map(({ name }) => name);
 }
 
@@ -100,22 +100,23 @@ function animalsSortedBySex(currentSex) {
 
 function getAnimalMap(options) {
   let result = animalsByLocation();
-  if (options === undefined) {
+  if (!options) {
     return result;
   }
   const { includeNames: name, sorted, sex } = options;
   if (name) {
-    return animalsWithNames(result);
+    let namedAnimals = animalsWithNames(result);
+    if (sex) {
+      result = animalsSortedBySex(sex);
+    }
+  //   if (sorted) {
+  //     return animalsSortedByName();
+  //   }
   }
-  if (sex) {
-    result = animalsSortedBySex(sex);
-  }
-  if (sorted) {
-    return animalsSortedByName();
-  }
-
-  return result;
+  // return result;
 }
+// const options = { includeNames: true };
+// console.dir(getAnimalMap(options), { depth: null });
 
 function showAllSchedule() {
   const result = {};
@@ -137,8 +138,16 @@ function getSchedule(dayName) {
   return schedule;
 }
 
-function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+function getOldestFromFirstSpecies(InputtedID) {
+  const firstAnimalId = employees.find(({ id }) => InputtedID === id).responsibleFor[0];
+  const residentsInfo = species.find(({ id }) => id === firstAnimalId).residents;
+  let oldestOne = residentsInfo[0];
+  residentsInfo.forEach((element) => {
+    if (element.age > oldestOne.age) {
+      oldestOne = element;
+    }
+  });
+  return Object.values(oldestOne);
 }
 
 function increasePrices(percentage) {
@@ -168,8 +177,6 @@ function getEmployeeCoverage(idOrName) {
   }
   return result;
 }
-
-console.log(getEmployeeCoverage('Nigel'));
 
 module.exports = {
   calculateEntry,
