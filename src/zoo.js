@@ -101,16 +101,13 @@ function increasePrices(percentage) {
 
 function getEmployeeCoverage(idOrName) {
   // if (arguments.length === 0) {
-  //   return employees.map((employeesValue) => { 
-  //     delete employeesValue.lastName
-  //     delete employeesValue.managers
-  //     delete employeesValue.id
-  //     return employeesValue
-  //   })
-
-    
-  }
-  
+  //   return employees.map((employeesValue) => {
+  //   delete employeesValue.lastName
+  //   delete employeesValue.managers
+  //   delete employeesValue.id
+  //   return employeesValue
+  //   });
+} 
 // }
 // console.log(getEmployeeCoverage())
 
