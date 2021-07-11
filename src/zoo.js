@@ -35,17 +35,26 @@ function createEmployee(personalInfo, associatedWith) {
     responsibleFor: associatedWith.responsibleFor,
   };
 }
-
+// procura em ids dos employees se algum deles pertence a um manager nos outros employees
 function isManager(id) {
-  // seu código aqui
+  return employees.some((managerId) =>
+    managerId.managers.find((identity) =>
+      identity === id));
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+// troquei para array os dois para passar no teste.
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  employees.push({
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  });
 }
 
 // function countAnimals(species) {
-//   // seu código aqui
+//    // seu código aqui
 // }
 
 function calculateEntry(entrants) {
