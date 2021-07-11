@@ -78,10 +78,28 @@ function getSchedule(dayName) {
   }
   return daySchedule(dayName);
 }
-
+// Função Math.max (retorna o maior numero no array) https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Math/max
 function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+// encontrar o funcionario que corresponde ao id
+  const employee = employees.find((collaborator) => collaborator.id === id);
+
+  // encontrar o primeiro animal sob a gestão dele
+  const getSpecies = species.find((specie) => specie.id === employee.responsibleFor[0]);
+
+  // percorrer todos os residentes e descobrir qual o mais velho. Ao descobrir, retornar um array com nome, sexo e idade.
+  const ages = getSpecies.residents.map((specie) => (specie.age));
+  console.log(ages);
+
+  const olderAnimalAge = ages.reduce((acc, curr) => Math.max(acc, curr));
+  console.log(olderAnimalAge);
+
+  const animal = getSpecies.residents.find((specie) => specie.age === olderAnimalAge);
+  console.log(animal);
+
+  const animalInfo = [animal.name, animal.sex, animal.age];
+  return animalInfo;
 }
+getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992');
 
 function increasePrices(percentage) {
   // seu código aqui
