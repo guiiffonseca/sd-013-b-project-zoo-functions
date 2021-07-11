@@ -1,19 +1,39 @@
 const data = require('./data');
 
-function getSpeciesByIds(ids) {
-  // seu código aqui
+const { species } = data; // dica do code review do panta(?, not sure)
+const { employees } = data;
+
+// devolve o novo array com todos os species.id
+// o include testa se existe o parametro dentro do obj e retorna true;
+function getSpeciesByIds(...ids) {
+  return species.filter((specie) =>
+    ids.includes(specie.id));
 }
 
+// devolve se todos os animais de uma mesma espécie(animal) que possuem idade superior ao input 'age'
+// procura dentro do obj species o animal com nome igual ao input, que por sua vez procura dentro da struct/obj dentro de residents
 function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
+  return species.find((specie) =>
+    specie === animal.name)
+    .residents.every((resident) =>
+      resident.age > age);
 }
-
+// retorna o obj do empregado baseado em seu nome ou sobrenome, ou se não, devolve vazio
 function getEmployeeByName(employeeName) {
-  // seu código aqui
+  if (!employeeName) return {};
+  return employees.find(({ firstName, lastName }) =>
+    firstName === employeeName
+  || lastName === employeeName);
 }
-
+// acho que preciso de uma maneira mais esperta de fazer isso
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  return {
+    id: personalInfo.id,
+    firstName: personalInfo.firstName,
+    lastName: personalInfo.lastName,
+    managers: associatedWith.managers,
+    responsibleFor: associatedWith.responsibleFor,
+  };
 }
 
 function isManager(id) {
