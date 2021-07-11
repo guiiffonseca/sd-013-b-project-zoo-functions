@@ -1,5 +1,4 @@
-const { species, employees, prices } = require('./data');
-const data = require('./data');
+const { species, employees, prices, hours } = require('./data');
 
 // A colega de turma Mayu fez um code review e indicou usar o Rest no 1º Desafio
 function getSpeciesByIds(...ids) { // 1º Filtrar as espécies de acordo com o ID especificado;
@@ -65,7 +64,21 @@ function getAnimalMap(options) {
 }
 
 function getSchedule(dayName) {
-  // seu código aqui
+  const dayArray = Object.keys(hours); // Retorna um array dos nomes das propriedade enumeráveis do próprio objeto, ou seja, as chaves
+  const schedule = dayArray.reduce((accumulator, day) => { // Referência: https://www.devmedia.com.br/javascript-reduce-reduzindo-uma-colecao-em-um-unico-objeto/37981
+    const dayObj = accumulator;
+    if (day === 'Monday') { // Caso o Valor Atual é igual a 'Monday', então criar a chave e atribuir o valor de 'Closed';
+      dayObj[day] = 'CLOSED';
+    } else { // Criar chave dos dias e atribuir o valor em relação ao funcionamento
+      dayObj[day] = `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`;
+    }
+    return dayObj;
+  }, {}); // Retorna o objeto do funcionamento;
+
+  if (dayName in schedule) { // Com a ajuda da colega de turma Camila Dornas, consegui realizar o 2º parâmetro.
+    return { [dayName]: schedule[dayName] }; // Cria chave e valor com o parâmetro passado(dayName);
+  }
+  return schedule;
 }
 
 function getOldestFromFirstSpecies(id) {
