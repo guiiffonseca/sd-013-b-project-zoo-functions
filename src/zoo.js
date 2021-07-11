@@ -64,8 +64,74 @@ function calculateEntry(entrants) {
   return result;
 }
 
+function noOptions() {
+  return species.reduce((acc, specie) => {
+    const key = specie.location;
+    if (!acc[key]) {
+      acc[key] = [];
+    }
+    acc[key].push(specie.name);
+    return acc;
+  }, {});
+}
+
+function namesNoSortGender() {
+  return species.reduce((acc, specie) => {
+    const key = specie.location;
+    const residentsList = specie.residents
+      .reduce((listNames, resident) => listNames.concat(resident.name), []);
+    const index = acc[key].indexOf(specie.name, 0);
+    acc[key][index] = { [specie.name]: residentsList };
+    return acc;
+  }, noOptions());
+}
+
+function namesSortNoGender() {
+  return species.reduce((acc, specie) => {
+    const key = specie.location;
+    const residentsList = specie.residents
+      .reduce((listNames, resident) => listNames.concat(resident.name), []);
+    const index = acc[key].indexOf(specie.name, 0);
+    acc[key][index] = { [specie.name]: residentsList.sort() };
+    return acc;
+  }, noOptions());
+}
+
+function namesNoSort(gender) {
+  return species.reduce((acc, specie) => {
+    const key = specie.location;
+    const residentsList = specie.residents
+      .filter((resident) => resident.sex === gender)
+      .reduce((listNames, resident) => listNames.concat(resident.name), []);
+    const index = acc[key].indexOf(specie.name, 0);
+    acc[key][index] = { [specie.name]: residentsList };
+    return acc;
+  }, noOptions());
+}
+
+function allOptions(gender) {
+  return species.reduce((acc, specie) => {
+    const key = specie.location;
+    const residentsList = specie.residents
+      .filter((resident) => resident.sex === gender)
+      .reduce((listNames, resident) => listNames.concat(resident.name), []);
+    const index = acc[key].indexOf(specie.name, 0);
+    acc[key][index] = { [specie.name]: residentsList.sort() };
+    return acc;
+  }, noOptions());
+}
+
+function includeNames(sorted, sex) {
+  if (!sorted && !sex) return namesNoSortGender();
+  if (!sex) return namesSortNoGender();
+  if (!sorted) return namesNoSort(sex);
+  return allOptions(sex);
+}
+
 function getAnimalMap(options) {
-  // seu código aqui
+  if (!options || !options.includeNames) return noOptions();
+  const { sorted = false, sex = false } = options;
+  return includeNames(sorted, sex);
 }
 
 function getSchedule(dayName) {
