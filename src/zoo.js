@@ -26,13 +26,13 @@ function getEmployeeByName(employeeName) {
 // console.log(getEmployeeByName('Emery'));
 
 function createEmployee(personalInfo, associatedWith) {
-  const newColaborator = {  // montamos o objeto newColaborator passando as informações contidas no objeto personalInfo(parametro) que segundo o enunciado continha (id, firstName e LastName) E passamos o maneger e responsibility que estavão contidos no objeto do parametro associatedWith.
-  id: personalInfo.id,
-  firstName: personalInfo.firstName,
-  lastName: personalInfo.lastName,
-  managers:  associatedWith.managers,
-  responsibleFor: associatedWith.responsibleFor,
-  }
+  const newColaborator = {// montamos o objeto newColaborator passando as informações contidas no objeto personalInfo(parametro) que segundo o enunciado continha (id, firstName e LastName) E passamos o maneger e responsibility que estavão contidos no objeto do parametro associatedWith.
+    id: personalInfo.id,
+    firstName: personalInfo.firstName,
+    lastName: personalInfo.lastName,
+    managers:  associatedWith.managers,
+    responsibleFor: associatedWith.responsibleFor,
+  };
   return newColaborator;
 }
 
@@ -49,7 +49,7 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
     firstName,
     lastName,
     managers: managers || [], // atenção aqui pois alguns emplooyes não tem maneger ou responsibleFOr, desta forma deve-se passar a possibilidade do vazio.
-    responsibleFor: responsibleFor || [],// atenção aqui pois alguns emplooyes não tem maneger ou responsibleFOr, desta forma deve-se passar a possibilidade do vazio.
+    responsibleFor: responsibleFor || [], // atenção aqui pois alguns emplooyes não tem maneger ou responsibleFOr, desta forma deve-se passar a possibilidade do vazio.
   };
   employees.push(employee);
 }
@@ -58,9 +58,7 @@ function countAnimals(species1) {
   // let obj = {};
   // if (arguments.length === 0) {
   //   return species.forEach((speciesValue) => speciesValue.popularity)
-    
   // }  
-  
 }
 // console.log(countAnimals());
 
