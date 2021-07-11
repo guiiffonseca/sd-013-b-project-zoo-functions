@@ -26,11 +26,11 @@ function getEmployeeByName(employeeName) {
 // console.log(getEmployeeByName('Emery'));
 
 function createEmployee(personalInfo, associatedWith) {
-  const newColaborator = {// montamos o objeto newColaborator passando as informações contidas no objeto personalInfo(parametro) que segundo o enunciado continha (id, firstName e LastName) E passamos o maneger e responsibility que estavão contidos no objeto do parametro associatedWith.
+  const newColaborator = { // montamos o objeto newColaborator passando as informações contidas no objeto personalInfo(parametro) que segundo o enunciado continha (id, firstName e LastName) E passamos o maneger e responsibility que estavão contidos no objeto do parametro associatedWith.
     id: personalInfo.id,
     firstName: personalInfo.firstName,
     lastName: personalInfo.lastName,
-    managers:  associatedWith.managers,
+    managers: associatedWith.managers,
     responsibleFor: associatedWith.responsibleFor,
   };
   return newColaborator;
@@ -58,7 +58,7 @@ function countAnimals(species1) {
   // let obj = {};
   // if (arguments.length === 0) {
   //   return species.forEach((speciesValue) => speciesValue.popularity)
-  // }  
+  //}
 }
 // console.log(countAnimals());
 
@@ -66,10 +66,10 @@ function calculateEntry(entrants) {
   if (arguments.length === 0 || entrants === {}) {
     return 0;
   }
-  const {Adult = 0, Child = 0, Senior = 0 } = entrants;// Ajuda na sala de estudos, mas não ficou muito claro (voltar para rever!!): Precisamos igualar a 0 para fazer um acumulador? ou porque o valor passado pode ser 0? (porque eu não poderia fazer direto como nas duas linhas seguintes?)
+  const { Adult = 0, Child = 0, Senior = 0 } = entrants; // Ajuda na sala de estudos, mas não ficou muito claro (voltar para rever!!): Precisamos igualar a 0 para fazer um acumulador? ou porque o valor passado pode ser 0? (porque eu não poderia fazer direto como nas duas linhas seguintes?)
   // const calculateValue = (entrants.Adult * prices.Adult) + (entrants.Child * prices.Child) + (entrants.Senior * prices.Senior);
   //   return calculateValue
-    return (Adult * prices.Adult) + (Child * prices.Child) + (Senior * prices.Senior);
+  return (Adult * prices.Adult) + (Child * prices.Child) + (Senior * prices.Senior);
 }
 
 function getAnimalMap(options) {
@@ -81,19 +81,18 @@ function getSchedule(dayName) {
 }
 
 function getOldestFromFirstSpecies(id) {
-  const takeCare = employees.find((employeesValue) => employeesValue.id === id).responsibleFor// usamos o find para encontrar o funcionario com o id passado por parametro. Depois de acessado o objeto do emplooye acessamos suas responsabiliddes.
+  const takeCare = employees.find((employeesValue) => employeesValue.id === id).responsibleFor // usamos o find para encontrar o funcionario com o id passado por parametro. Depois de acessado o objeto do emplooye acessamos suas responsabiliddes.
     .find((animalValue) => animalValue); // despois de estamos dentro das responsabilidades usamos o find para acessar o primeiro animal, pois ele retorna o primeiro que encontrar.
-  const olderAnimal = species.find((speciesValue) => speciesValue.id === takeCare)//agora usamos o id salvo na consta 'takecare' para encontrar o animal que o emplooye cuida primeiro. 
-    .reduce((giraffesAcumulator, giraffesValue) => {// A girafa é encontrada, nela usamos o reduce para encontrar o animal mais velho, se valendo do acumulador e do valor para fazer as comparaçoes.
-    if (giraffesAcumulator.age > giraffesValue.age ) {
-      return giraffesAcumulator;
-    } else {
-      return giraffesValue;
-    }
-  });
+  const olderAnimal = species.find((speciesValue) => speciesValue.id === takeCare) //agora usamos o id salvo na consta 'takecare' para encontrar o animal que o emplooye cuida primeiro. 
+    .reduce((giraffesAcumulator, giraffesValue) => { // A girafa é encontrada, nela usamos o reduce para encontrar o animal mais velho, se valendo do acumulador e do valor para fazer as comparaçoes.
+      if (giraffesAcumulator.age > giraffesValue.age ) {
+        return giraffesAcumulator;
+      }
+        return giraffesValue;
+      });
   return Object.values(olderAnimal); // "Object.values" retirado de: 'https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Object/values'
-  
 };
+
 // console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
 
 function increasePrices(percentage) {
