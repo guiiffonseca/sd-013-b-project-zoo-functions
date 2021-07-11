@@ -101,10 +101,38 @@ function animalMapNoParameter() {
   return animalMap;
 }
 
-// function sortAnimalMap(mappedAnimals) {
-// }
+function sortNames(a, b) {
+  let result;
+  if (a.name < b.name) {
+    result = -1;
+  } else {
+    result = 1;
+  }
+  return result;
+}
 
-function animalMapIncludingNames(sort = false) {
+function animalMapIncludingNamesSorting() {
+  const animalMap = data.species.reduce((accumulator, specie) => {
+    const sortedNames = specie.residents.sort(sortNames);
+    if (specie.location in accumulator) {
+      // Para cada location existente
+      accumulator[specie.location].push({
+        [specie.name]: sortedNames.map((animal) => animal.name),
+      });
+    } else {
+      // Para cada nova location, criar um array:
+      // Array deve armazenar um objeto (specie.Name: [specie.residents.name](declarar antes))
+      accumulator[specie.location] = [{
+        [specie.name]: sortedNames.map((animal) => animal.name),
+        /** Objeto: specie.Name: specie.residents.name */
+      }];
+    }
+    return accumulator;
+  }, {});
+  return animalMap;
+}
+
+function animalMapIncludingNames() {
   const animalMap = data.species.reduce((accumulator, currentValue) => {
     if (currentValue.location in accumulator) {
       // Adicionar ao valor de cv.loc
@@ -119,33 +147,104 @@ function animalMapIncludingNames(sort = false) {
     }
     return accumulator;
   }, {});
-  // if (sort) {
-  //   animalMap = sortAnimalMap(animalMap);
-  // }
   return animalMap;
 }
 
-// eslint-disable-next-line max-lines-per-function
+function animalMapWithSex(sex) {
+  const animalMap = data.species.reduce((accumulator, currentValue) => {
+    if (!accumulator[currentValue.location]) {
+      // Adicionar ao valor de cv.loc
+      // Criar nova key no formato de objeto
+      accumulator[currentValue.location] = [{
+        [currentValue.name]: currentValue.residents.filter((animal) => animal.sex === sex)
+          .map((resident) => resident.name),
+      }];
+    } else {
+      accumulator[currentValue.location].push({
+        [currentValue.name]: currentValue.residents.filter((animal) => animal.sex === sex)
+          .map((resident) => resident.name),
+      });
+    }
+    return accumulator;
+  }, {});
+  return animalMap;
+}
+
+function animalMapWithParameters(options, animalMap) {
+  let animalMapAUX = animalMap;
+  if (options.some((option) => option.sorted === true)) {
+    animalMapAUX = animalMapIncludingNamesSorting();
+  } else if (options.some((option) => option.sex === 'male')) {
+    animalMapAUX = animalMapWithSex('male');
+  } else if (options.some((option) => option.sex === 'female')) {
+    animalMapAUX = animalMapWithSex('female');
+  } else {
+    // Com a opção includeNames: true especificada, retorna nomes de animais
+    animalMapAUX = animalMapIncludingNames();
+  }
+  return animalMapAUX;
+}
+
 function getAnimalMap(...options) {
   // seu código aqui
-  // Sem parâmetros, retorna um object com array de value
   let animalMap;
   if (options.length === 0) {
     animalMap = animalMapNoParameter();
   } else if (options.some((option) => option.includeNames === true)) {
-    if (options.some((option) => option.sorted === true)) {
-      animalMap = animalMapIncludingNames(true);
-    }
-    // Com a opção includeNames: true especificada, retorna nomes de animais
-    animalMap = animalMapIncludingNames();
+    animalMap = animalMapWithParameters(options, animalMap);
   } else {
     animalMap = options;
   }
   return animalMap;
 }
 
+function rewriteNumber(day) {
+  const dayOfTheWeek = { open: 0, close: 0 };
+  if (day.close > 12) {
+    dayOfTheWeek.close = `${(day.close - 12).toString()}pm`;
+  } else {
+    dayOfTheWeek.close = `${day.close.toString()}am`;
+  }
+  if (day.open > 12) {
+    dayOfTheWeek.open = `${(day.open - 12).toString()}pm`;
+  } else {
+    dayOfTheWeek.open = `${day.open.toString()}am`;
+  }
+
+  return dayOfTheWeek;
+}
+
+function scheduleWithParameters(dayName, schedule) {
+  const wantedDay = {};
+  wantedDay[dayName] = schedule[dayName];
+  return wantedDay;
+}
+
+function scheduleNoParameters() {
+  const legibleSchedule = {};
+  const schedule = data.hours;
+  const keys = Object.keys(schedule);
+  const values = Object.values(schedule);
+
+  for (let index = 0; index < keys.length; index += 1) {
+    values[index] = rewriteNumber(values[index]);
+    if (values[index].close === values[index].open) {
+      legibleSchedule[keys[index]] = 'CLOSED';
+    } else {
+      legibleSchedule[keys[index]] = `Open from ${values[index].open} until ${values[index].close}`;
+    }
+  }
+
+  return legibleSchedule;
+}
+
 function getSchedule(dayName) {
   // seu código aqui
+  let schedule = scheduleNoParameters();
+  if (dayName !== undefined) {
+    schedule = scheduleWithParameters(dayName, schedule);
+  }
+  return schedule;
 }
 
 function getOldestFromFirstSpecies(id) {
