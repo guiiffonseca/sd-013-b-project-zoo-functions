@@ -1,4 +1,4 @@
-const { species, employees, prices } = require('./data');
+const { species, employees, prices, hours } = require('./data');
 
 // Com a ajuda da Mariana Nogueira, consegui fazer o primeiro requisito:
 // Usei o rest para que independente de quantos parâmetros a função funcione;
@@ -64,7 +64,17 @@ function getAnimalMap(options) {
 }
 
 function getSchedule(dayName) {
-  // seu código aqui
+  const days = Object.keys(hours);
+  const schedule = {};
+  days.forEach((day) => {
+    if (day === 'Monday') {
+      schedule[day] = 'CLOSED';
+    } else {
+      schedule[day] = (`Open from ${hours[day].open}am until ${hours[day].close - 12}pm`);
+    }
+  });
+  if (dayName === undefined) return schedule;
+  return { [dayName]: schedule[dayName] };
 }
 
 function getOldestFromFirstSpecies(id) {
