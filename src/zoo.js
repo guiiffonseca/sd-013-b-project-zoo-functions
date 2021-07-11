@@ -19,7 +19,8 @@ function getEmployeeByName(employeeName) {
   if (arguments.length === 0) { // usamos o arguments.lengh === 0 para checar se existe algum argumento.
     return {};
   }
-  const filterName = employees.find((employeesValue) => employeesValue.firstName === employeeName || employeesValue.lastName === employeeName); // como precisamos encontrar o emplooye que coincida ou com o name ou last name usamos o find, pois ele retornará o primeiro resultado.
+  const filterName = employees.find((employeesValue) => 
+  employeesValue.firstName === employeeName || employeesValue.lastName === employeeName); // como precisamos encontrar o emplooye que coincida ou com o name ou last name usamos o find, pois ele retornará o primeiro resultado.
   return filterName;
 }
 // console.log(getEmployeeByName('Emery'));
@@ -31,7 +32,6 @@ function createEmployee(personalInfo, associatedWith) {
 function isManager(id) {
   const checkManeger = employees.find((employeesValue) => employeesValue.id).managers // encontramos com o find o employeer com id passado no parametro, depois acessamos a chave menager e com o some verificamos se existe algum valor com o id passado.
     .some((managersValue) => managersValue === id);
-  
   return checkManeger;
 }
 // console.log(isManager('stephanieId'));
