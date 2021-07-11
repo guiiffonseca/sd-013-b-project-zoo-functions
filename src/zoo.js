@@ -101,7 +101,15 @@ function getOldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  const percentageCalc = percentage / 100;
+  const valueTochange = Object.entries(data.prices);
+  let newObj = {};
+  valueTochange.forEach((value) => {
+    let [nwValue] = value;
+    nwValue = parseFloat((value[1] + percentageCalc * value[1] + 0.001).toFixed(2));
+    newObj = { [value[0]]: nwValue };
+    Object.assign(data.prices, newObj);
+  });
 }
 
 function animalsNames(arrayOfIds) {
@@ -118,7 +126,8 @@ function animalsNames(arrayOfIds) {
 function getEmployeeCoverage(idOrName) {
   const getEmployeesNames = {};
   data.employees.forEach((employee) => {
-    if (!idOrName || employee.firstName === idOrName
+    if (!idOrName
+      || employee.firstName === idOrName
       || employee.lastName === idOrName
       || employee.id === idOrName) {
       const fullName = `${employee.firstName} ${employee.lastName}`;
