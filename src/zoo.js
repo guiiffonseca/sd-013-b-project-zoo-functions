@@ -75,7 +75,7 @@ function getEmployeeCoverage(idOrName) {
 module.exports = {
   calculateEntry,
   getSchedule,
-  countAnimals,
+  // countAnimals,
   getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
