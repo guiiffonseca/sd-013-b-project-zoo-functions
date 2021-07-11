@@ -80,9 +80,12 @@ const getSchedule = (dayName) => {
   return agenda;
 };
 // ----------- REQUISITO 11 ----------- //
-function getOldestFromFirstSpecies(id) {
-  // seu código aqui
-}
+const getOldestFromFirstSpecies = (ids) => {
+  const funcionario = employees.find(((employ) => employ.id === ids)).responsibleFor[0];
+  const especie = species.find((animal) => animal.id === funcionario).residents;
+  const idade = especie.reduce((acc, curr) => ((acc.age < curr.age) ? curr : acc));
+  return Object.values(idade);
+};
 // ----------- REQUISITO 12 ----------- //
 // 1. Realizar o cálculo da porcentagem passada como parâmetro
 // 2. Acessar o objeto do arquivo "data" e alterar o seus dados
