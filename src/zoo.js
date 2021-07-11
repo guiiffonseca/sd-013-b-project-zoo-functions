@@ -1,4 +1,3 @@
-const { prices, hours } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -85,10 +84,8 @@ function getSchedule(dayName) {
   if (!dayName) return fullSchedule;
   const selectDay = (name) => {
     const day = Object.entries(fullSchedule).filter((element) => element.includes(dayName));
-    console.log(day);
     const objectDay = day.reduce((acc, [key, value]) => {
       acc[key] = value;
-      console.log(value);
       return acc;
     }, {});
     return objectDay;
