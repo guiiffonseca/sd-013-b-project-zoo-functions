@@ -9,7 +9,7 @@ const getAnimalsOlderThan = (animal, age) => species.find((specie) => specie.nam
 
 const getEmployeeByName = (employeeName) => ((employeeName === undefined) ? {} : employees.find((employee) => employee.firstName === employeeName || employee.lastName === employeeName));
 
-const createEmployee = (personalInfo, associatedWith) => {};
+const createEmployee = (personalInfo, associatedWith) => ({ ...personalInfo, ...associatedWith });
 
 function isManager(id) {}
 
