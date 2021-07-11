@@ -14,7 +14,7 @@ function getSpeciesByIds(...ids) {
 // procura dentro do obj species o animal com nome igual ao input, que por sua vez procura dentro da struct/obj dentro de residents
 function getAnimalsOlderThan(animal, age) {
   return species.find((specie) =>
-    specie === animal.name)
+    specie.name === animal)
     .residents.every((resident) =>
       resident.age > age);
 }
