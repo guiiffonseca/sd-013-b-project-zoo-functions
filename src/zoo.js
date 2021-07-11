@@ -83,7 +83,7 @@ function getSchedule(dayName) {
 function getOldestFromFirstSpecies(id) {
   const takeCare = employees.find((employeesValue) => employeesValue.id === id).responsibleFor // usamos o find para encontrar o funcionario com o id passado por parametro. Depois de acessado o objeto do emplooye acessamos suas responsabiliddes.
     .find((animalValue) => animalValue); // despois de estamos dentro das responsabilidades usamos o find para acessar o primeiro animal, pois ele retorna o primeiro que encontrar.
-  const olderAnimal = species.find((speciesValue) => speciesValue.id === takeCare) // agora usamos o id salvo na consta 'takecare' para encontrar o animal que o emplooye cuida primeiro.
+  const olderAnimal = species.find((speciesValue) => speciesValue.id === takeCare).residents // agora usamos o id salvo na consta 'takecare' para encontrar o animal que o emplooye cuida primeiro.
     .reduce((giraffesAcumulator, giraffesValue) => { // A girafa é encontrada, nela usamos o reduce para encontrar o animal mais velho, se valendo do acumulador e do valor para fazer as comparaçoes.
       if (giraffesAcumulator.age > giraffesValue.age) {
         return giraffesAcumulator;
@@ -100,8 +100,19 @@ function increasePrices(percentage) {
 }
 
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
-}
+  // if (arguments.length === 0) {
+  //   return employees.map((employeesValue) => { 
+  //     delete employeesValue.lastName
+  //     delete employeesValue.managers
+  //     delete employeesValue.id
+  //     return employeesValue
+  //   })
+
+    
+  }
+  
+// }
+// console.log(getEmployeeCoverage())
 
 module.exports = {
   calculateEntry,
