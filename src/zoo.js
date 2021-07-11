@@ -5,11 +5,11 @@ const { species, employees, prices, hours } = data;
 
 const getSpeciesByIds = (...ids) => ids.map((id) => species.find((specie) => specie.id === id));
 
-const getAnimalsOlderThan = (animal, age) => species.find((sp) => sp.name === animal).residents.every((res) => res.age >= age);
+const getAnimalsOlderThan = (animal, age) => species.find((specie) => specie.name === animal).residents.every((resident) => resident.age >= age);
 
-function getEmployeeByName(employeeName) {}
+const getEmployeeByName = (employeeName) => ((employeeName === undefined) ? {} : employees.find((employee) => employee.firstName === employeeName || employee.lastName === employeeName));
 
-function createEmployee(personalInfo, associatedWith) {}
+const createEmployee = (personalInfo, associatedWith) => {};
 
 function isManager(id) {}
 
