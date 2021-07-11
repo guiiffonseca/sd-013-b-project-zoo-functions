@@ -1,6 +1,6 @@
 const { employees, species } = require('./data');
 
-function getSpeciesByIds(ids) {
+function getSpeciesByIds(...ids) {
   return species.filter((specie) => ids.includes(specie.id));
 }
 
