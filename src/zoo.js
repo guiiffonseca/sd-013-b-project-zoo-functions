@@ -81,8 +81,14 @@ function getSchedule(dayName) {
   return schedule;
 }
 
-function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+function getOldestFromFirstSpecies(id1) { // Com a ajuda do Ygor consegui realizar esse requisito;
+  const employee1 = employees.find(({ id }) => id === id1).responsibleFor[0]; // 1º Verificar se o id é igual ao argumento. Após isso, acessar a 1ª posição do responsibler;
+  const animal = species.find((idAnimal) => idAnimal.id === employee1).residents; // 2º Verificar se o id do Animal é igual ao do Employee1. Após isso, acessar a chave REsidentes que possui um Array;
+
+  const animalOldest = animal.reduce((accAge, currtAge) => // 3º Analisar qual é o maior valor(idade);
+    ((accAge.age < currtAge.age) ? currtAge : accAge));
+
+  return Object.values(animalOldest); // Retorna um array do Animal;
 }
 
 function increasePrices(percentage) {
