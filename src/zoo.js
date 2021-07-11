@@ -1,4 +1,4 @@
-const {species, employees} = require('./data');
+const { species, employees } = require('./data');
 const data = require('./data');
 
   function getSpeciesByIds(...ids) { //... = Parâmetro REST => Faz com que a função receba n parâmetros. Como pega todos os animais, fica mais de 1 parâmetro, aí puxa tudo com o rest.
