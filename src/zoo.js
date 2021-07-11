@@ -1,4 +1,4 @@
-const { species, employees } = require('./data');
+const { species, employees, prices } = require('./data');
 
 // Com a ajuda da Mariana Nogueira, consegui fazer o primeiro requisito:
 // Usei o rest para que independente de quantos parâmetros a função funcione;
@@ -54,7 +54,9 @@ function countAnimals(species1) {
 }
 
 function calculateEntry(entrants) {
-  // seu código aqui
+  if (entrants === undefined || entrants === {}) return 0;
+  const { Adult = 0, Child = 0, Senior = 0 } = entrants;
+  return (Adult * prices.Adult) + (Child * prices.Child) + (Senior * prices.Senior);
 }
 
 function getAnimalMap(options) {
