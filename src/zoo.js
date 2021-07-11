@@ -62,12 +62,28 @@ function calculateEntry(entrants = 0) {
 }
 
 function getAnimalMap(options) {
-  // seu código aqui
+  
 }
 
 function getSchedule(dayName) {
-  // seu código aqui
-}
+  const daysOfWeek = Object.keys(data.hours);
+  const allDays = daysOfWeek.reduce((acc, day) => {
+    const days = data.hours[day];
+    acc[day] = `Open from ${days.open}am until ${days.close - 12}pm`;
+
+    return acc;
+  }, {});
+  allDays.Monday = 'CLOSED';
+
+  if (!dayName) {
+    return allDays;
+  }
+
+  const oneDay = {};
+  oneDay[dayName] = allDays[dayName];
+
+  return oneDay;
+};
 
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
