@@ -8,7 +8,7 @@ function getSpeciesByIds(...ids) {
 }
 
 function getAnimalsOlderThan(animal, age) {
-  // So conseguir fazer graças a o code review do amigo Rafael Ne da Turma 13-B
+  // So conseguir fazer graças a o code review do amigo Rafael Nery da Turma 13-B
   // com isso aprendi a a juntar duas HOF para ter um resultado mais direto. Perdi 4hs sem sair do lugar antes de lembrar do code review.
   return species.find((specie) => specie.name === animal).residents.every((res) =>
     res.age >= age);
@@ -53,7 +53,7 @@ function getAnimalMap(options) {
 }
 
 function getSchedule(dayName) {
-  // Consegui fazer isso fazendo code Review do projeto do PedroSehn. Eu sei por que foi feito dessa forma.
+  // Consegui fazer isso, fazendo code Review do projeto do PedroSehn. Eu sei por que foi feito dessa forma.
   // Peguei a ideia e fiz da minha forma.
   // (https://github.com/tryber/sd-013-b-project-zoo-functions/pull/9/commits/fc613f527933daddc6841ddf91dda718c1ea5147)
   const values = Object.values(hours);
@@ -86,8 +86,32 @@ function increasePrices(percentage) {
   prices.Senior = S;
 }
 
+function objEmployee(idOrName) {
+  // Elaborado atravez do code review do colega Manoel de Souza.
+  // (https://github.com/tryber/sd-013-b-project-zoo-functions/pull/122/commits/efb76b8dfb6ab3aad82cd4bae7ea73dcb29a3f08)
+  const obEm = employees.find((spe) => idOrName === spe.id
+  || idOrName === spe.firstName || idOrName === spe.lastName);
+  const obj = {};
+  const nameAnimal = [];
+  obEm.responsibleFor.forEach((id) => {
+    nameAnimal.push(species.find((animal) => animal.id === id).name);
+    obj[`${obEm.firstName} ${obEm.lastName}`] = nameAnimal;
+  });
+  return obj;
+}
+
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+  const obj = {};
+  if (!idOrName) {
+    employees.forEach(({ firstName, lastName, responsibleFor }) => {
+      const nameAnimal = [];
+      responsibleFor.forEach((id) =>
+        nameAnimal.push(species.find((animal) => animal.id === id).name));
+      obj[`${firstName} ${lastName}`] = nameAnimal;
+    });
+    return obj;
+  }
+  return objEmployee(idOrName);
 }
 
 module.exports = {
