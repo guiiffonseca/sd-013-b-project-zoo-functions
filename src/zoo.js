@@ -61,8 +61,6 @@ function calculateEntry(entrants) {
   if (!entrants || Object.values(entrants).length === 0) {
     return 0;
   }
-  // console.log(data.prices);
-  // console.log(Object.entries(entrants));
   const calculate = Object.entries(entrants).reduce((acc, [type, quantity]) => {
     const totalPrice = data.prices[type] * quantity;
     return acc + totalPrice;
@@ -74,15 +72,29 @@ function getAnimalMap(options) {
   // seu código aqui
 }
 
+const fullSchedule = {
+  Tuesday: 'Open from 8am until 6pm',
+  Wednesday: 'Open from 8am until 6pm',
+  Thursday: 'Open from 10am until 8pm',
+  Friday: 'Open from 10am until 8pm',
+  Saturday: 'Open from 8am until 10pm',
+  Sunday: 'Open from 8am until 8pm',
+  Monday: 'CLOSED',
+};
 function getSchedule(dayName) {
-  // if (!dayName) {
-  //     return const fullSchedule = `${Object.keys(hours)[index]}``:``
-  //     Open from ${Object.values(hours).open}am until ${Object.values(hours).close}pm`;
-  //     console.log(a);
-  //   }
-  //   return a;
+  if (!dayName) return fullSchedule;
+  const selectDay = (name) => {
+    const day = Object.entries(fullSchedule).filter((element) => element.includes(dayName));
+    console.log(day);
+    const objectDay = day.reduce((acc, [key, value]) => {
+      acc[key] = value;
+      console.log(value);
+      return acc;
+    }, {});
+    return objectDay;
+  };
+  return (selectDay(dayName));
 }
-
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
 }
