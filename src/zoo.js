@@ -58,7 +58,7 @@ function countAnimals(species1) {
   // let obj = {};
   // if (arguments.length === 0) {
   //   return species.forEach((speciesValue) => speciesValue.popularity)
-  //}
+  // }
 }
 // console.log(countAnimals());
 
@@ -83,15 +83,15 @@ function getSchedule(dayName) {
 function getOldestFromFirstSpecies(id) {
   const takeCare = employees.find((employeesValue) => employeesValue.id === id).responsibleFor // usamos o find para encontrar o funcionario com o id passado por parametro. Depois de acessado o objeto do emplooye acessamos suas responsabiliddes.
     .find((animalValue) => animalValue); // despois de estamos dentro das responsabilidades usamos o find para acessar o primeiro animal, pois ele retorna o primeiro que encontrar.
-  const olderAnimal = species.find((speciesValue) => speciesValue.id === takeCare) //agora usamos o id salvo na consta 'takecare' para encontrar o animal que o emplooye cuida primeiro. 
+  const olderAnimal = species.find((speciesValue) => speciesValue.id === takeCare) // agora usamos o id salvo na consta 'takecare' para encontrar o animal que o emplooye cuida primeiro. 
     .reduce((giraffesAcumulator, giraffesValue) => { // A girafa é encontrada, nela usamos o reduce para encontrar o animal mais velho, se valendo do acumulador e do valor para fazer as comparaçoes.
-      if (giraffesAcumulator.age > giraffesValue.age ) {
+      if (giraffesAcumulator.age > giraffesValue.age) {
         return giraffesAcumulator;
       }
-        return giraffesValue;
-      });
+      return giraffesValue;
+    });
   return Object.values(olderAnimal); // "Object.values" retirado de: 'https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Object/values'
-};
+}
 
 // console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
 
