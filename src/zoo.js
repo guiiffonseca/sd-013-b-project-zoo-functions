@@ -1,4 +1,4 @@
-const { species, employees, prices } = require('./data');
+const { species, employees, prices, hours } = require('./data');
 
 function getSpeciesByIds(id1, id2) {
   return species.filter((especie) => especie.id === id1 || especie.id === id2);
@@ -51,7 +51,22 @@ function getAnimalMap(options) {
 }
 
 function getSchedule(dayName) {
-  // seu código aqui
+  const newObject = {};
+  if (!dayName) {
+    Object.entries(hours).forEach((day) => {
+      newObject[day[0]] = `Open from ${day[1].open}am until ${day[1].close - 12}pm`;
+      if (day[0] === 'Monday') {
+        newObject[day[0]] = 'CLOSED';
+      }
+    });
+    return newObject;
+  }
+  const hourDay = Object.entries(hours).find((day) => day[0] === dayName);
+  newObject[hourDay[0]] = `Open from ${hourDay[1].open}am until ${hourDay[1].close - 12}pm`;
+  if (hourDay[0] === 'Monday') {
+    newObject[hourDay[0]] = 'CLOSED';
+  }
+  return newObject;
 }
 
 function getOldestFromFirstSpecies(idEmployee) {
@@ -69,12 +84,21 @@ function getOldestFromFirstSpecies(idEmployee) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
 }
 
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+
 }
+// {
+//   'Nigel Nelson': ['lions', 'tigers'],
+//   'Burl Bethea': ['lions', 'tigers', 'bears', 'penguins'],
+//   'Ola Orloff': ['otters', 'frogs', 'snakes', 'elephants'],
+//   'Wilburn Wishart': ['snakes', 'elephants'],
+//   'Stephanie Strauss': ['giraffes', 'otters'],
+//   'Sharonda Spry': ['otters', 'frogs'],
+//   'Ardith Azevado': ['tigers', 'bears'],
+//   'Emery Elser': ['elephants', 'bears', 'lions']
+// };
 
 module.exports = {
   calculateEntry,
