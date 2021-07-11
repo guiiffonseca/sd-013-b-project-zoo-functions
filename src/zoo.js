@@ -1,4 +1,4 @@
-const { species, employees } = require('./data');
+const { species, employees, prices } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -13,7 +13,7 @@ function getAnimalsOlderThan(animal, age) {
 
 function getEmployeeByName(employeeName) {
   if (employeeName === undefined) return {};
-  return data.employees.find((employee) =>
+  return employees.find((employee) =>
     (employeeName === employee.firstName || employeeName === employee.lastName));
 }
 
@@ -32,12 +32,12 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 function countAnimals(pecies) {
   if (pecies === undefined) {
     const allSpecies = {};
-    data.species.forEach((specie) => {
+    species.forEach((specie) => {
       allSpecies[specie.name] = specie.residents.length;
     });
     return allSpecies;
   }
-  return data.species.find((specie) => specie.name === pecies).residents.length;
+  return species.find((specie) => specie.name === pecies).residents.length;
 }
 
 function calculateEntry(entrants) {
@@ -67,20 +67,21 @@ function getSchedule(dayName) {
 }
 
 function getOldestFromFirstSpecies(id) {
-  const responsavelPor = data.employees.find((employee) => employee.id === id).responsibleFor[0];
+  const responsavelPor = employees.find((employee) => employee.id === id).responsibleFor[0];
   const animal = data.species.find((specie) => specie.id === responsavelPor).residents;
   const animalMaisVelho = animal.sort((animalA, animalB) => animalB.age - animalA.age)[0];
   return [animalMaisVelho.name, animalMaisVelho.sex, animalMaisVelho.age];
 }
 
-console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
-
 function increasePrices(percentage) {
-  // seu código aqui
+  Object.entries(prices).map(([string, price]) => {
+    prices[string] = Math.round((price + (percentage / 100) * price) * 100) / 100;
+    return prices;
+  });
 }
 
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+  // sssd
 }
 
 module.exports = {
