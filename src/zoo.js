@@ -107,7 +107,7 @@ function getEmployeeCoverage(idOrName) {
   //   delete employeesValue.id
   //   return employeesValue
   //   });
-} 
+}
 // }
 // console.log(getEmployeeCoverage())
 
