@@ -1,13 +1,16 @@
 /* eslint-disable max-len */
 const data = require('./data');
 
-const { species, employees, prices, hours } = data;
+const { species, employees /* prices, hours */ } = data;
 
 const getSpeciesByIds = (...ids) => ids.map((id) => species.find((specie) => specie.id === id));
 
-const getAnimalsOlderThan = (animal, age) => species.find((specie) => specie.name === animal).residents.every((resident) => resident.age >= age);
+const getAnimalsOlderThan = (animal, age) => species.find((specie) => specie.name === animal)
+  .residents.every((resident) => resident.age >= age);
 
-const getEmployeeByName = (employeeName) => ((employeeName === undefined) ? {} : employees.find((employee) => employee.firstName === employeeName || employee.lastName === employeeName));
+const getEmployeeByName = (employeeName) => ((employeeName === undefined) ? {}
+  : employees.find((employee) => employee.firstName === employeeName
+|| employee.lastName === employeeName));
 
 const createEmployee = (personalInfo, associatedWith) => ({ ...personalInfo, ...associatedWith });
 
@@ -15,7 +18,7 @@ function isManager(id) {}
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {}
 
-function countAnimals(species) {}
+function countAnimals(spec) {}
 
 function calculateEntry(entrants) {}
 
