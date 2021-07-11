@@ -135,11 +135,20 @@ function getAnimalMap(options) {
 }
 
 function getSchedule(dayName) {
-  // seu código aqui
+  //
 }
 
 function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+  const firstSpecie = employees.find((employe) => employe.id === id).responsibleFor[0];
+  const specie = getSpeciesByIds(firstSpecie)
+    .map((animals) => animals.residents)[0];
+  return specie.reduce((acc, animal) => {
+    let verify = Object.values(acc);
+    if (verify[2] < animal.age) {
+      verify = Object.values(animal);
+    }
+    return verify;
+  });
 }
 
 function increasePrices(percentage) {
