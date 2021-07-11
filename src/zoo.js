@@ -159,8 +159,11 @@ function getOldestFromFirstSpecies(id) { // 11
   return [firstAnimal.name, firstAnimal.sex, firstAnimal.age];
 }
 
-function increasePrices(percentage) {
+function increasePrices(percentage) { // 12
   // seu código aqui
+  data.prices.Adult = (Math.ceil(data.prices.Adult * (percentage + 100)) / 100); // ceil e não round, para arredondar sempra para cima
+  data.prices.Senior = (Math.ceil(data.prices.Senior * (percentage + 100)) / 100);
+  data.prices.Child = (Math.ceil(data.prices.Child * (percentage + 100)) / 100);
 }
 
 function getEmployeeCoverage(idOrName) {
