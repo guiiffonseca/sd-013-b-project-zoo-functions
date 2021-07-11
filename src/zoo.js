@@ -21,10 +21,12 @@ function getEmployeeByName(employeeName) {
     employeeName === firstName || employeeName === lastName);
 }
 
+// Requisito 4 - Using an object spread instead of `Object.assign`
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  return { ...personalInfo, ...associatedWith };
 }
 
+// Requisito 5
 function isManager(id) {
   // seu código aqui
 }
