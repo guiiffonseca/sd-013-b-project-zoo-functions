@@ -75,40 +75,11 @@ const animalsName = (arg, sorted, sex) => filterAnimalLocation(arg)
     }
     return ({ [specie.name]: specie.residents.map((resident) => resident.name) });
   });
-console.dir(animalsName('NE', true, 'female'), { depth: null });
 
 const animalsLocationWithoutArgs = species.reduce((acc, value) => (Object.assign(acc,
   { [value.location]: filterAnimalLocation(value.location)
     .reduce((acu, valueF) => acu.concat(valueF.name), []) })
 ), {});
-
-// const getAnimalMapSideHelper = (sex, sorted) => {
-//   // if (sex && sorted) {
-//   //   return species.reduce((acc, value) => {
-//   //     return Object.assign(acc, { [value.location]: animalsName(value.location, sex, sorted) })
-//   //   }, {});
-//   // } if (sorted) {
-//   //   return species.reduce((acc, value) => {
-//   //     return Object.assign(acc, { [value.location]: animalsName(value.location, sorted) })
-//   //   }, {});
-//   // } if (sex) {
-//   //   return species.reduce((acc, value) => {
-//   //     return Object.assign(acc, { [value.location]: animalsName(value.location, sex) })
-//   //   }, {});
-//   // }
-//   // return species.reduce((acc, value) =>
-//   //   Object.assign(acc, { [value.location]: animalsName(value.location) }), {});
-// };
-// console.dir(getAnimalMapSideHelper(true), { depth: null });
-// function getAnimalMap({ includeNames = false, sex = '', sorted = false } = {}) {
-//   // if (includeNames) {
-//   //   if (sex && sorted) return getAnimalMapSideHelper(sex, sorted);
-//   //   if (sorted) return getAnimalMapSideHelper(sorted);
-//   //   if (sex) return getAnimalMapSideHelper(sex);
-//   //   return getAnimalMapSideHelper();
-//   // }
-//   // return animalsLocationWithoutArgs;
-// }
 
 function getAnimalMap({ includeNames = false, sorted = false, sex } = {}) {
   if (includeNames) {
