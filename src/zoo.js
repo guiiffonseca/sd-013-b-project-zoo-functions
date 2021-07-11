@@ -1,4 +1,4 @@
-const {species} = require('./data');
+const {species, employees} = require('./data');
 const data = require('./data');
 
   function getSpeciesByIds(...ids) { //... = Parâmetro REST => Faz com que a função receba n parâmetros. Como pega todos os animais, fica mais de 1 parâmetro, aí puxa tudo com o rest.
@@ -8,15 +8,20 @@ const data = require('./data');
 console.log(species);
 
 function getAnimalsOlderThan(animal, age) {
-  // seu código aqu
+  const animalsOlder = species.find((specie) => specie.name === animal);
+  return animalsOlder.residents.every((resident) => resident.age >= age);
+  
 }
 
 function getEmployeeByName(employeeName) {
-  // seu código aqui
-}
+  if (!employeeName) return {};
+
+  const employeeObject = employees.find((employee) => employee.firstName === employeeName || employee.lastName === employeeName);
+    return employeeObject;
+};
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  return { ...personalInfo, ...associatedWith};
 }
 
 function isManager(id) {
