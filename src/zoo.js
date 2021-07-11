@@ -84,21 +84,66 @@ function getOldestFromFirstSpecies(idEmployee) {
 }
 
 function increasePrices(percentage) {
+  // seu código aqui
+}
+
+function idByName(arrayId) {
+  return arrayId.map((especie) => species.find((specie) => specie.id === especie).name);
+}
+
+function nameFirst(idOrName) {
+  const employResp = {};
+  const nome = employees.find((employee) => employee.firstName === idOrName);
+  if (idOrName === nome.firstName) {
+    Object.entries(nome).forEach(() => {
+      employResp[`${nome.firstName} ${nome.lastName}`] = idByName(nome.responsibleFor);
+    });
+    return employResp;
+  }
+}
+
+function nameLast(idOrName) {
+  const employResp = {};
+  const nomeId = employees.find((employee) => employee.lastName === idOrName);
+  if (idOrName === nomeId.lastName) {
+    Object.entries(nomeId).forEach(() => {
+      employResp[`${nomeId.firstName} ${nomeId.lastName}`] = idByName(nomeId.responsibleFor);
+    });
+    return employResp;
+  }
+}
+
+function employeeId(idOrName) {
+  const employResp = {};
+  const nomeId = employees.find((employee) => employee.id === idOrName);
+  if (idOrName === nomeId.id) {
+    Object.entries(nomeId).forEach(() => {
+      employResp[`${nomeId.firstName} ${nomeId.lastName}`] = idByName(nomeId.responsibleFor);
+    });
+    return employResp;
+  }
 }
 
 function getEmployeeCoverage(idOrName) {
-
+  const employResp = {};
+  if (!idOrName) {
+    employees.forEach((employee) => {
+      employResp[`${employee.firstName} ${employee.lastName}`] = idByName(employee.responsibleFor);
+    });
+    return employResp;
+  }
+  const nomeId = employees.find((employee) => employee.firstName === idOrName
+  || employee.lastName === idOrName || employee.id === idOrName);
+  if (idOrName === nomeId.firstName) {
+    return nameFirst(idOrName);
+  }
+  if (idOrName === nomeId.lastName) {
+    return nameLast(idOrName);
+  }
+  if (idOrName === nomeId.id) {
+    return employeeId(idOrName);
+  }
 }
-// {
-//   'Nigel Nelson': ['lions', 'tigers'],
-//   'Burl Bethea': ['lions', 'tigers', 'bears', 'penguins'],
-//   'Ola Orloff': ['otters', 'frogs', 'snakes', 'elephants'],
-//   'Wilburn Wishart': ['snakes', 'elephants'],
-//   'Stephanie Strauss': ['giraffes', 'otters'],
-//   'Sharonda Spry': ['otters', 'frogs'],
-//   'Ardith Azevado': ['tigers', 'bears'],
-//   'Emery Elser': ['elephants', 'bears', 'lions']
-// };
 
 module.exports = {
   calculateEntry,
