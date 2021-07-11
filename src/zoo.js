@@ -64,7 +64,8 @@ function getAnimalMap(options) {
   // seu código aqui
 }
 // ----------- REQUISITO 10 ----------- //
-// transformar o valor de hours['Tuesday'] em uma string que contém os valores das chaves.
+// 1. Transformar o valor de hours['diaDaSemana'] em uma string que contém os valores das chaves.
+// 2. Foi "construida" uma agenda com os dias e horáiros para que depois pudesse ser mais fácil a manipulação dos dados.
 const getSchedule = (dayName) => {
   const agenda = Object.entries(hours).reduce((acc, [dia]) => {
     if (dia === 'Monday') { // [dia] = uma variável da desestruturação do array retornado de object.entries(hours).
@@ -83,14 +84,21 @@ function getOldestFromFirstSpecies(id) {
   // seu código aqui
 }
 // ----------- REQUISITO 12 ----------- //
-function increasePrices(percentage) {
-  // seu código aqui
-}
+// 1. Realizar o cálculo da porcentagem passada como parâmetro
+// 2. Acessar o objeto do arquivo "data" e alterar o seus dados
+const increasePrices = (percentage) => {
+  Object.entries(prices)
+    .map(([string, preco]) => {
+      prices[string] = Math.round((preco + (percentage / 100) * preco) * 100) / 100;
+      return prices;
+    });
+};
 
+// ----------- REQUISITO 13 ----------- //
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
 }
-// Todo este projeto foi realizado com a ajuda da turma 13-b. Em especial, tive ajuda para entender os processos, com os colegas Mayu, Lucas Caribé, Gustavo Braga, Jeferson e ROdirgo Augusto.
+// Todo este projeto foi realizado com a ajuda da turma 13-b. Em especial, tive ajuda para entender os processos, com os colegas Mayu, Lucas Caribé, Gustavo Braga, Jeferson, Ygor, Rodirgo Augusto e Thaís Sampaio.
 
 module.exports = {
   calculateEntry,
