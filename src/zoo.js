@@ -110,7 +110,7 @@ function getAnimalMap(options) {
   if (!options || !options.includeNames) {
     return base;
   }
-  const { includeNames: name, sorted, sex } = options;
+  const { sorted, sex } = options;
   let namedAnimals = animalsWithNames(base);
   if (sex) {
     namedAnimals = animalsSortedBySex(base, sex);
