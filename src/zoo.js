@@ -1,3 +1,4 @@
+const { species } = require('./data');
 const data = require('./data');
 // inicio do projeto
 function getSpeciesByIds(...ids) {
@@ -5,11 +6,13 @@ function getSpeciesByIds(...ids) {
   // para retornar um array é preciso usar a função map.
   const { species } = data;
   return ids.map((id) => species.find((specie) => specie.id === id));
-}
+};
 
 function getAnimalsOlderThan(animal, age) {
   // seu código aqui
-}
+const acharOAnimal = species.find((specie) => specie.name === animal);
+return acharOAnimal.residents.every((resident) => resident.age > age);
+};
 
 function getEmployeeByName(employeeName) {
   // seu código aqui
