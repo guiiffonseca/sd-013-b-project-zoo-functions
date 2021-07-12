@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 const data = require('./data');
 
-const { species, employees /* prices, hours */ } = data;
+const { species, employees, prices /* hours */ } = data;
 
 const getSpeciesByIds = (...ids) => ids.map((id) => species.find((specie) => specie.id === id));
 
@@ -30,7 +30,11 @@ const countAnimals = (spec) => {
   // atribuir um chave nova ou comparar se a chave ja existe (pegar o animal na chave passada);
 };
 
-function calculateEntry(entrants) {}
+const calculateEntry = (entrants = 0) => {
+  const { Adult = 0, Senior = 0, Child = 0 } = entrants;
+  const total = (Adult * prices.Adult) + (Senior * prices.Senior) + (Child * prices.Child);
+  return total;
+};
 
 function getAnimalMap(options) {}
 
