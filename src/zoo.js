@@ -18,14 +18,20 @@ function getEmployeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
   // personalInfo = {id, firstName, lastName}
   // associatedWith = {managers, responsibleFor}
   return { ...personalInfo, ...associatedWith };
 }
 
 function isManager(id) {
-  // seu código aqui
+  let boolean = false;
+  const mg1 = '9e7d4524-363c-416a-8759-8aa7e50c0992';
+  const mg2 = 'fdb2543b-5662-46a7-badc-93d960fdc0a8';
+  const mg3 = '0e7b460e-acf4-4e17-bcb3-ee472265db83';
+  if (id === mg1 || id === mg2 || id === mg3) {
+    boolean = true;
+  }
+  return boolean;
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
