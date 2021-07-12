@@ -64,14 +64,14 @@ function getAnimalMap(options) {
   if (!options) {
     const byLocation = () => ({
       NE: species.filter((specie) => specie.location === 'NE')
-      .map((atualSpecie) => atualSpecie.name),
+        .map((atualSpecie) => atualSpecie.name),
       NW: species.filter((specie) => specie.location === 'NW')
-      .map((atualSpecie) => atualSpecie.name),
+        .map((atualSpecie) => atualSpecie.name),
       SE: species.filter((specie) => specie.location === 'SE')
-      .map((atualSpecie) => atualSpecie.name),
+        .map((atualSpecie) => atualSpecie.name),
       SW: species.filter((specie) => specie.location === 'SW')
-      .map((atualSpecie) => atualSpecie.name),
-    })
+        .map((atualSpecie) => atualSpecie.name),
+    });
     return byLocation();
   }
 }
