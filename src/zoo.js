@@ -1,4 +1,4 @@
-const { species, employees, prices } = require('./data');
+const { species, employees, prices, hours } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) { // o parâmetro rest "...ids" permite que um número infedinido de argumentos seja passado para a função. isto é necessário caso a função receba mais de um argumento, como acontece no requisito 3.
@@ -78,9 +78,24 @@ function getAnimalMap(options) {
   // seu código aqui
 }
 
-function getSchedule(dayName) {
-  // seu código aqui
+function getSchedule(dayName) { // Pessoal da sala da estudo me ajudou a fazer (VOLTAR E REFAZER COM CALMA!!!)
+  const weekDay = {};
+  const selectDay = Object.keys(hours); // Pegamos todas as chaves do objeto hours (Os dias da semana)
+// console.log(selectDay);
+  selectDay.forEach((hourValue) => { // pegamos o array com os dias da semana e iteramos ele com forEach, tomando cuidado pois a segunda feira é um caso diferente pois está closed.
+    if (hourValue === 'Monday') {
+      return weekDay[hourValue] = 'CLOSED';
+    } else {
+      return weekDay[hourValue] = (`Open from ${hours[hourValue].open}am until ${hours[hourValue].close - 12}pm`); // montamos a template literal com as possíveis saidas iterando com o forEach.
+    }
+  });
+  if (arguments.length === 0) { // montamos a lógica para caso não seja retornado nenhum parametro, será retornado o objeto weekday que já foi preenchido com os dias na parte de cima do código.
+  return weekDay;
+  } else { 
+  return { [dayName]: weekDay[dayName] }; // lógica para se apenas um dia for passado.
+  }
 }
+console.log(getSchedule());
 
 function getOldestFromFirstSpecies(id) {
   const takeCare = employees.find((employeesValue) => employeesValue.id === id).responsibleFor // usamos o find para encontrar o funcionario com o id passado por parametro. Depois de acessado o objeto do emplooye acessamos suas responsabiliddes.
