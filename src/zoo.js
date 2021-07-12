@@ -107,6 +107,7 @@ function getSchedule(dayName) {
   }
   dias[dayName] = horario(dayName);
   return dias;
+}
 
   function getOldestFromFirstSpecies(id) {
     // seu código aqui
