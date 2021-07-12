@@ -101,10 +101,14 @@ function getOldestFromFirstSpecies(id) {
 }
 getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992');
 
+// Função Math.round() para arrendondamento https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Math/round
+// Alguem deu a dica de multiplicar e dividir por 100 no whatsapp para acertar o arredondamento, mas nao lembro quem foi.
 function increasePrices(percentage) {
-  // seu código aqui
+  Object.entries(prices).map(([string, price]) => {
+    prices[string] = Math.round((price + (percentage / 100) * price) * 100) / 100;
+    return prices;
+  });
 }
-
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
 }
