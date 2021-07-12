@@ -1,3 +1,4 @@
+const { employees } = require('./data');
 const data = require('./data');
 
 const especies = data.species;
@@ -31,18 +32,40 @@ function getEmployeeByName(employeeName) {
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
+  return {
+    ...personalInfo,
+    ...associatedWith,
+  };
 }
 
 function isManager(id) {
   // seu código aqui
+  return empregados.some(
+    (empregado) => empregado.managers.includes(id));
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
+  return empregados.push({
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  });
 }
 
 function countAnimals(species) {
   // seu código aqui
+  const contarAnimais = especies.reduce((accumulator, current) => {
+    accumulator[current.name] = current.residents.length;
+    return accumulator;
+  });
+  if (species) {
+    const animal = especies.find((especie) => especie.name === species);
+    return species.residents.length;
+  }
+  return contarAnimais;
 }
 
 function calculateEntry(entrants) {
