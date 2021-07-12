@@ -166,8 +166,29 @@ function increasePrices(percentage) { // 12
   data.prices.Child = (Math.ceil(data.prices.Child * (percentage + 100)) / 100);
 }
 
-function getEmployeeCoverage(idOrName) {
+function getSpeciesByEmployee(employee) {
+  const findEmployee = data.employees
+    .find((emplF) =>
+      (emplF.id === employee || emplF.firstName === employee || emplF.lastName === employee));
+  const species = findEmployee.responsibleFor
+    .reduce((acc, currentValue) => acc.concat(getSpecieById(currentValue)[0].name), []);
+  const newKey = `${findEmployee.firstName} ${findEmployee.lastName}`;
+  return { [newKey]: species };
+}
+
+function getEmployeeCoverage(idOrName) { // 13
   // seu código aqui
+  const employeeCoverage = {};
+  if (idOrName === undefined) {
+    const employees = data.employees
+      .map((employeeMap) => getSpeciesByEmployee(employeeMap.id))
+      .reduce((acc, currentValue) => Object.assign(acc, currentValue), {});
+    Object.assign(employeeCoverage, employees);
+  } else {
+    const employee = getSpeciesByEmployee(idOrName);
+    Object.assign(employeeCoverage, employee);
+  }
+  return employeeCoverage;
 }
 
 module.exports = {
