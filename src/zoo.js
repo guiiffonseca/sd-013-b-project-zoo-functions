@@ -1,4 +1,4 @@
-const { prices, hours, species } = require('./data');
+const { prices, hours } = require('./data');
 const data = require('./data');
 
 const especies = data.species;
@@ -133,28 +133,27 @@ function increasePrices(percentage) {
   prices.Adult = Math.round(newAdult * 100) / 100;
   prices.Senior = Math.round(newSenior * 100) / 100;
   prices.Child = Math.round(newChild * 100) / 100;
-  return prices
+  return prices;
 }
 
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
   if (idOrName) {
-    const funcionario = empregados.find((empregado) => 
-    empregado.id === idOrName || empregado.firstName === idOrName 
-    || empregado.lastName === idOrName);
+    const funcionario = empregados.find((empregado) =>
+      empregado.id === idOrName || empregado.firstName === idOrName
+      || empregado.lastName === idOrName);
     return {
       [`${funcionario.firstName} ${funcionario.lastName}`]: funcionario.responsibleFor
-      .map((animal) => especies.find((especie) => especie.id === animal).name),
+        .map((animal) => especies.find((especie) => especie.id === animal).name),
     };
   }
   const trabalhador = empregados.reduce((accumulator, currentVal) => {
     accumulator[`${currentVal.firstName} ${currentVal.lastName}`] = currentVal.responsibleFor
-    .map((animal) => especies.find((especie) => especie.id === animal).name);
-}, {});
-return trabalhador;
+      .map((animal) => especies.find((especie) => especie.id === animal).name);
+      return accumulator;
+  }, {});
+  return trabalhador;
 }
-
-
 
 module.exports = {
   calculateEntry,
