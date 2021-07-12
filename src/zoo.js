@@ -1,25 +1,28 @@
-const { species } = require('./data');
+const { species, employees } = require('./data');
 const data = require('./data');
 // inicio do projeto
 function getSpeciesByIds(...ids) {
   // seu código aqui
   // para retornar um array é preciso usar a função map.
-  const { species } = data;
   return ids.map((id) => species.find((specie) => specie.id === id));
-};
+}
 
 function getAnimalsOlderThan(animal, age) {
   // seu código aqui
-const acharOAnimal = species.find((specie) => specie.name === animal);
-return acharOAnimal.residents.every((resident) => resident.age > age);
-};
+  const acharOAnimal = species.find((specie) => specie.name === animal);
+  return acharOAnimal.residents.every((resident) => resident.age > age);
+}
 
 function getEmployeeByName(employeeName) {
   // seu código aqui
+  if (!employeeName) return {};
+  return employees.find((employee) => employee.firstName === employeeName
+  || employee.lastName === employeeName);
 }
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
+  return { ...personalInfo, ...associatedWith };
 }
 
 function isManager(id) {
@@ -30,7 +33,7 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
 }
 
-function countAnimals(species) {
+function countAnimals(speciesAnimals) {
   // seu código aqui
 }
 
