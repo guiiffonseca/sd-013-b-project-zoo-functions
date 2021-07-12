@@ -84,10 +84,11 @@ function getSchedule(dayName) { // Pessoal da sala da estudo me ajudou a fazer (
   // console.log(selectDay);
   selectDay.forEach((hourValue) => { // pegamos o array com os dias da semana e iteramos ele com forEach, tomando cuidado pois a segunda feira é um caso diferente pois está closed.
     if (hourValue === 'Monday') {
-    return weekDay[hourValue] = 'CLOSED';
-    }
-    return weekDay[hourValue] = 
-    (`Open from ${hours[hourValue].open}am until ${hours[hourValue].close - 12}pm`); // montamos a template literal com as possíveis saidas iterando com o forEach. 
+      weekDay[hourValue] = 'CLOSED';
+      } else { 
+      weekDay[hourValue] = 
+      (`Open from ${hours[hourValue].open}am until ${hours[hourValue].close - 12}pm`); // montamos a template literal com as possíveis saidas iterando com o forEach.
+      }
   });
   if (arguments.length === 0) { // montamos a lógica para caso não seja retornado nenhum parametro, será retornado o objeto weekday que já foi preenchido com os dias na parte de cima do código.
   return weekDay;
