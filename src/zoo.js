@@ -76,7 +76,8 @@ function calculateEntry(entrants) {
     return 0;
   }
   const totalValue = Object.entries(entrants).reduce(
-    (accumulator, [people, value]) => accumulator + prices[people] * value);
+    (accumulator, [people, value]) => accumulator + prices[people] * value
+    );
   return totalValue;
 }
 
