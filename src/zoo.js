@@ -81,8 +81,49 @@ function calculateEntry(entrants) {
 // }
 // console.log(calculateEntry(test));
 
+function sexFilter(residents, sexSearched) {
+  return residents.filter(({ sex }) => sex === sexSearched);
+}
+
+function sortByName(residents) {
+  return residents.sort((name1, name2) => {
+    if (name1.name > name2.name) return 1;
+    if (name1.name < name2.name) return -1;
+    return 0;
+  });
+}
+
+function includeNames({ sorted, sex }) {
+  species.forEach(({ name, location, residents }) => {
+    let actualResidents = [...residents];
+
+    if (sorted) actualResidents = sortByName(actualResidents);
+
+    if (sex) actualResidents = sexFilter(actualResidents, sex);
+  
+    animalsRegions[location].push({
+      [name]: actualResidents.map((animal) => animal.name),
+    });
+  });
+}
+
 function getAnimalMap(options) {
-  // seu código aqui
+  animalsRegions = {
+    NE: [],
+    NW: [],
+    SE: [],
+    SW: [],
+  };
+
+  if (!options || !options.includeNames) {
+    species.every(({ name, location }) => animalsRegions[location].push(name));
+    return animalsRegions;
+  }
+
+  includeNames({ animalsRegions, sorted: options.sorted, sex: options.sex });
+
+  return animalsRegions;
+
 }
 
 function getSchedule(dayName) {
