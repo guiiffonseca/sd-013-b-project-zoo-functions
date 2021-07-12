@@ -1,15 +1,14 @@
-const { employees } = require('./data');
-const data = require('./data');
+const { species, employees, prices } = require('./data');
 
 function getSpeciesByIds(...ids) {
   if (typeof ids === 'undefined') {
     return [];
   }
-  return data.species.filter((specie) => ids.includes(specie.id));
+  return species.filter((specie) => ids.includes(specie.id));
 }
 
 function getAnimalsOlderThan(animal, age) {
-  return data.species.find((specie) => specie.name === animal)
+  return species.find((specie) => specie.name === animal)
     .residents.every((specie) => specie.age > age);
 }
 
@@ -42,7 +41,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 
 function countAnimals(input) {
   const count = {};
-  data.species.forEach(({ name, residents }) => {
+  species.forEach(({ name, residents }) => {
     count[name] = residents.length;
   });
   if (typeof input === 'undefined') {
@@ -56,9 +55,7 @@ function calculateEntry(entrants) {
     return 0;
   }
   const { Adult = 0, Child = 0, Senior = 0 } = entrants;
-  return (
-    (Adult * data.prices.Adult) + (Senior * data.prices.Senior) + (Child * data.prices.Child)
-  );
+  return ((Adult * prices.Adult) + (Senior * prices.Senior) + (Child * prices.Child));
 }
 
 function getAnimalMap(options) {
@@ -70,11 +67,14 @@ function getSchedule(dayName) {
 }
 
 function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+
+  // prices.Child = (Math.round((prices.Child * (1 + (percentage / 100))) * 100)) / 100;
+  // prices.Adult = (Math.round((prices.Adult * (1 + (percentage / 100))) * 100)) / 100;
+  // prices.Senior = (Math.round((prices.Senior * (1 + (percentage / 100))) * 100)) / 100;
 }
 
 function getEmployeeCoverage(idOrName) {
