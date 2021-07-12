@@ -8,7 +8,7 @@ const getSpeciesByIds = (...ids) => ids.map((id) => species.find((specie) => spe
 const getAnimalsOlderThan = (animal, age) => species.find((specie) => specie.name === animal)
   .residents.every((resident) => resident.age >= age);
 
-const getEmployeeByName = (employeeName) => ((employeeName === undefined) ? {}
+const getEmployeeByName = (employeeName) => ((!employeeName) ? {}
   : employees.find((employee) => employee.firstName === employeeName
   || employee.lastName === employeeName));
 console.log(getEmployeeByName());
@@ -19,7 +19,15 @@ const isManager = (id) => employees.some((employee) => employee.managers.include
 
 const addEmployee = (id, firstName, lastName, managers = [], responsibleFor = []) => employees.push({ id, firstName, lastName, managers, responsibleFor });
 
-function countAnimals(spec) {}
+const countAnimals = (spec) => {
+  const empty = {};
+  species.forEach((specie) => { empty[specie.name] = specie.residents.length; });
+  if (!spec) {
+    return empty;
+  }
+  return empty[spec];
+  // atribuir um chave nova ou comparar se a chave ja existe (pegar o animal na chave passada);
+};
 
 function calculateEntry(entrants) {}
 
