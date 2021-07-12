@@ -25,8 +25,14 @@ function getEmployeeByName(employeeName) {
 const createEmployee = (personalInfo, associatedWith) => ({ ...personalInfo, ...associatedWith });
 
 function isManager(id) {
-  // seu código aqui
+  // return employees.forEach((employee) => (employee.managers.some((managerId) => managerId === id)));
+  return employees.some(({ managers }) => managers.includes(id));
+  // const managerId = employees.values(employees.managers);
+  // console.log(managerId);
+  // return managerId;
 }
+
+// console.log(isManager());
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
