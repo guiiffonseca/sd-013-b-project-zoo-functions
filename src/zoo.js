@@ -1,7 +1,7 @@
 const data = require('./data');
 const { species, employees, prices, hours } = require('./data');
 
-function getSpeciesByIds(...ids) {
+function getSpeciesByIds(...ids) { // (Parâmetro Dinâmico [Rest]) ...ids transforma a entrada em array variável / mais de 1 parametro
   if (!ids) return []; // retorna vazio se não entrar parametro
   return data.species.filter((specie) => ids.some((id) => id === specie.id));
 }
@@ -17,10 +17,10 @@ function getEmployeeByName(employeeName) {
     || {};
 }
 
-function createEmployee(personalInfo, associatedWith) {
+function createEmployee(personalInfo, associatedWith) { // Feito na monitoria do Cajueiro
   return { ...personalInfo, ...associatedWith };
 }
-
+ 
 function isManager(id) {
   return !!employees.find(({ managers }) => managers.includes(id));
 }
@@ -38,7 +38,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 function countAnimals(speciess = {}) {
-  let animals = {};
+  let animals = {}; // sem parametro retorna um objeto
   if (typeof (speciess) === 'object') {
     data.species.forEach((specie) => {
       animals[specie.name] = specie.residents.length;
@@ -57,10 +57,10 @@ function calculateEntry(entrants) {
 }
 
 function getAnimalMap(options) {
-  // seu código aqui
+  
 }
 
-function getSchedule(dayName) {
+function getSchedule(dayName) { // Feito na monitoria do Cajueiro
   const hour = Object.keys(hours);
   const days = hour.reduce((acc, currValue) => {
     acc[currValue] = `Open from ${hours[currValue].open}am until ${hours[currValue].close - 12}pm`;
@@ -74,8 +74,16 @@ function getSchedule(dayName) {
 }
 
 function getOldestFromFirstSpecies(employeeId) {
-// const foundOldAnimal = employee.find((employeeId) => employee.id === id);
-}
+  const speciesId = employees.find((employee) => employee.id === employeeId)
+    .responsibleFor[0];
+
+  const animalResident = species.find((spc) => spc.id === speciesId).residents;
+
+  const oldest = animalResident.reduce((older, resident) =>
+    (resident.age > older.age ? resident : older));
+
+  return Object.values(oldest);
+  }
 
 function increasePrices(percentage) { // Feito na monitoria do Cajueiro
   prices.Adult = (Math.round((prices.Adult * (1 + (percentage / 100))) * 100)) / 100;
