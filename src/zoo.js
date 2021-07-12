@@ -98,7 +98,20 @@ function getOldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  const formatValue = (numberAsString) => {
+    let returnedNumber = Number(numberAsString);
+    if (numberAsString.endsWith('5')) {
+      returnedNumber += 0.001;
+      return returnedNumber.toPrecision(4);
+    }
+    return returnedNumber.toPrecision(4);
+  };
+  prices.Adult *= (1 + (percentage / 100));
+  prices.Senior *= (1 + (percentage / 100));
+  prices.Child *= (1 + (percentage / 100));
+  prices.Adult = Number(formatValue(prices.Adult.toString()));
+  prices.Senior = Number(formatValue(prices.Senior.toString()));
+  prices.Child = Number(formatValue(prices.Child.toString()));
 }
 
 function getEmployeeCoverage(idOrName) {
