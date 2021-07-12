@@ -85,46 +85,48 @@ function getAnimalMap(options) {
   // seu código aqui
 }
 
-const openHours = (day) => {
-  const horario = `Open from ${hours[day].open}am until ${hours[day].close}pm`;
-  return horario;
+const horario = (dia) => {
+  const funcionamento = `Open from ${hours[dia].open}am until ${hours[dia].close - 12}pm`;
+  return funcionamento;
 };
 
 function getSchedule(dayName) {
   // seu código aqui
   const arr = Object.keys(hours);
-  const funcionamento = {};
+  const dias = {};
   if (dayName === undefined) {
     for (let i = 0; i < arr.length - 1; i += 1) {
-      funcionamento[arr[i]] = openHours(arr[i]);
+      dias[arr[i]] = horario(arr[i]);
     }
-    funcionamento.Monday = 'CLOSED';
-    return funcionamento;
+    dias.Monday = 'CLOSED';
+    return dias;
   }
   if (dayName === 'Monday') {
-    funcionamento.Monday = 'CLOSED';
-    return funcionamento;
+    dias.Monday = 'CLOSED';
+    return dias;
   }
-  funcionamento[dayName] = openHours(dayName);
-  return funcionamento;
-}
+  dias[dayName] = horario(dayName);
+  return dias;
 
-function getOldestFromFirstSpecies(id) {
-  // seu código aqui
-  const funcionario = empregados.find((empregado) => empregado.id === id);
-  const idEspecie = especies.find((especie) => especie.id === funcionario.responsibleFor[0]);
-  let age = 0;
-  const arr = [];
-  idEspecie.residents.forEach((bicho) => {
-    if (age < bicho.age) {
-      age = bicho.age;
-      arr.push(bicho.name);
-      arr.push(bicho.sex);
-      arr.push(bicho.age);
-      return arr;
-    }
-  });
-}
+  function getOldestFromFirstSpecies(id) {
+    // seu código aqui
+    const funcionario = empregados.find((empregado) => empregado.id === id);
+    const especieId = especies.find((especie) => especie.id === funcionario.responsibleFor[0]);
+    let age = 0;
+    let arr;
+    especieId.residents.forEach((bicho) => {
+      if (age < bicho.age) {
+        age = bicho.age;
+        arr = [];
+        arr.push(bicho.name);
+        arr.push(bicho.sex);
+        arr.push(bicho.age);
+        return arr;
+      }
+    });
+    console.log(arr);
+    return arr;
+  }
 
 function increasePrices(percentage) {
   // seu código aqui
