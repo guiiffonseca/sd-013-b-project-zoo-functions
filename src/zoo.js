@@ -1,4 +1,3 @@
-const { employees } = require('./data');
 const data = require('./data');
 
 const especies = data.species;
@@ -41,8 +40,8 @@ function createEmployee(personalInfo, associatedWith) {
 function isManager(id) {
   // seu código aqui
   return empregados.some(
-    (empregado) => empregado.managers.includes(id)
-    );
+    (empregado) => empregado.managers.includes(id),
+  );
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
