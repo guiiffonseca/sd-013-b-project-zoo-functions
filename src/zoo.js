@@ -62,7 +62,7 @@ function getOldestFromFirstSpecies(ids) {
   const employeNow = employees.find((id) => id.id === ids).responsibleFor[0];
   const especiesNew = species.find((animal) => animal.id === employeNow).residents;
   const Oldier = especiesNew.reduce((acc, curr) => ((acc.age < curr.age) ? curr : acc));
-  return Object.entries(Oldier);
+  return Object.values(Oldier);
 }
 
 function increasePrices(percentage) {
