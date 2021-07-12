@@ -94,7 +94,7 @@ function getSchedule(dayName) { // Pessoal da sala da estudo me ajudou a fazer (
   }
   return { [dayName]: day[dayName] }; // lógica para se apenas um dia for passado.
 }
-console.log(getSchedule());
+// console.log(getSchedule());
 
 function getOldestFromFirstSpecies(id) {
   const takeCare = employees.find((employeesValue) => employeesValue.id === id).responsibleFor // usamos o find para encontrar o funcionario com o id passado por parametro. Depois de acessado o objeto do emplooye acessamos suas responsabiliddes.
@@ -111,20 +111,17 @@ function getOldestFromFirstSpecies(id) {
 
 // console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
 
-function increasePrices(percentage) {
-  // seu código aqui
+function increasePrices(percentage) { // fizemos um for in para percorrer os valores dentro do prices, depois bastou fazer a regra matemática
+  for (const key in prices) {
+    (prices[key] = Math.round((prices[key] * 100) * ((percentage / 100) + 1)) / 100);  // VOTLAR NESTA LÓGICA MATEMÁTICA, PESSOAL ME AJUDOU NO GRUPO DO ZAP, ENTENDI A LÓGICA TODA, PORÉM NÃO ESTÁ CLARO O PORQUE DO JS NÃO ACEITAR ISSO POR EXEMPLO: prices[key] = (prices[key] + (prices[key] * (20 / 100)))) OU PORQUE DIVIDIR E MULTIPLICAR POR 100 ANTES E DEPOIS. VOLTAR PARA REVER O CONTEÚDO E SE APROFUNDAR MAIS.
+  }
+}
+// increasePrices()
+
+function getEmployeeCoverage(idOrName) { // VOLTAR PARA TENTAR FAZER NOVAMENTE, A LÓGICA ESTAVA QUASE SAINDO!!!
+
 }
 
-function getEmployeeCoverage(idOrName) {
-  // if (arguments.length === 0) {
-  //   return employees.map((employeesValue) => {
-  //   delete employeesValue.lastName
-  //   delete employeesValue.managers
-  //   delete employeesValue.id
-  //   return employeesValue
-  //   });
-}
-// }
 // console.log(getEmployeeCoverage())
 
 module.exports = {
