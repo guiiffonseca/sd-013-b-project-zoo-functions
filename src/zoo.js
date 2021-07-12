@@ -48,7 +48,9 @@ function countAnimals(animalSpecies) {
   species.forEach((specie) => {
     allAnimalsAndQuantity[specie.name] = specie.residents.length;
   });
-  if (animalSpecies) { return allAnimalsAndQuantity[animalSpecies]; }
+  if (animalSpecies) {
+    return allAnimalsAndQuantity[animalSpecies];
+  }
   return allAnimalsAndQuantity;
 }
 
@@ -75,7 +77,24 @@ function getSchedule(dayName) {
 }
 
 function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+  const responsibleEmployee = employees.find(
+    (elementEmployee) => elementEmployee.id === id,
+  );
+  const firstAnimalInResponsability = responsibleEmployee.responsibleFor[0];
+  const animalResponsible = species.find(
+    (specie) => specie.id === firstAnimalInResponsability,
+  );
+  const oldestResidentAge = animalResponsible.residents.reduce(
+    (oldest, elementAnimal) => {
+      if (elementAnimal.age > oldest) {
+        return elementAnimal.age;
+      }
+      return oldest;
+    }, 0,
+  );
+  const oldestResident = animalResponsible.residents.find(
+    (elementAnimal) => elementAnimal.age === oldestResidentAge,
+  ); return Object.values(oldestResident);
 }
 
 function increasePrices(percentage) {
