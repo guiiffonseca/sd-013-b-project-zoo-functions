@@ -1,10 +1,16 @@
-const data = require('./data');
+const { species } = require('./data');
+// const { species, employees, prices, hours } = require('./data');
 
-function getSpeciesByIds(ids) {
+function getSpeciesByIds(...speciesIds) {
+  return speciesIds.map((specieId) => species.find((specie) => specie.id === specieId));
 }
 
+//  console.log(getSpeciesByIds('0938aa23-f153-4937-9f88-4858b24d6bce', 'e8481c1d-42ea-4610-8e11-1752cfc05a46'));
+
 function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
+  const specie = species.find((grup) => grup.name === animal).residents;
+  console.log(specie);
+  return specie.every((specieGrup) => specieGrup.age >= age);
 }
 
 function getEmployeeByName(employeeName) {
