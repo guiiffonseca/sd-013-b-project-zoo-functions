@@ -90,13 +90,33 @@ function getSchedule(dayName) {
 }
 
 // Requisito 11
-function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+function findOldest(animals) {
+  let oldest = { age: -Infinity };
+  animals.forEach((animal) => {
+    if (animal.age > oldest.age) {
+      oldest = animal;
+    }
+  });
+  return oldest;
 }
+
+function getOldestFromFirstSpecies(id) {
+  const employee = employees.find((person) => person.id === id);
+  const firstId = employee.responsibleFor[0];
+  const firstSpecies = species.find((kind) => kind.id === firstId);
+
+  return Object.values(findOldest(firstSpecies.residents));
+}
+
+getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992');
 
 // Requisito 12
 function increasePrices(percentage) {
-  // seu código aqui
+  const percentNumber = percentage / 100;
+  Object.entries(prices).forEach(([key]) => {
+    prices[key] += (prices[key] * percentNumber) + 0.001;
+    return (prices[key]).toFixed(2);
+  });
 }
 
 // Requisito 13
