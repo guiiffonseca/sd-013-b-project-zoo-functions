@@ -150,7 +150,7 @@ function getEmployeeCoverage(idOrName) {
   const trabalhador = empregados.reduce((accumulator, currentVal) => {
     accumulator[`${currentVal.firstName} ${currentVal.lastName}`] = currentVal.responsibleFor
       .map((animal) => especies.find((especie) => especie.id === animal).name);
-  return accumulator;
+    return accumulator;
   }, {});
   return trabalhador;
 }
