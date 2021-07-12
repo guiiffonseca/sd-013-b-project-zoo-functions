@@ -40,8 +40,15 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   employees.push(newEmployee);
 }
 
-function countAnimals(species) {
-  // seu código aqui
+function countAnimals(input) {
+  const count = {};
+  data.species.forEach(({ name, residents }) => {
+    count[name] = residents.length;
+  });
+  if (typeof input === 'undefined') {
+    return count;
+  }
+  return count[input];
 }
 
 function calculateEntry(entrants) {
