@@ -41,7 +41,8 @@ function createEmployee(personalInfo, associatedWith) {
 function isManager(id) {
   // seu código aqui
   return empregados.some(
-    (empregado) => empregado.managers.includes(id));
+    (empregado) => empregado.managers.includes(id)
+    );
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
@@ -63,7 +64,7 @@ function countAnimals(species) {
   });
   if (species) {
     const animal = especies.find((especie) => especie.name === species);
-    return species.residents.length;
+    return animal.residents.length;
   }
   return contarAnimais;
 }
