@@ -101,15 +101,25 @@ function increasePrices(percentage) {
   });
 }
 
-// function increasePrices(percentage) {
-//   const percent = (percentage / 100);
-//   const valor = prices.Adult + (prices.Adult * percent);
-//   prices.Adult = valor;
-//   return prices.Adult;
-// }
-
+// 1- Sem pârametros,retorna uma lista de funcionários e os animais pelos quais eles são responsáveis;
+// 2- Com o id, nome ou sobrenome do funcionário, retornar os animais pelos quais eles são responsáveis;
+function getSpeciesIds(...ids) {
+  return ids.map((id) => species.find((specie) => specie.id === id).name);
+}
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+  const workers = {};
+  if (idOrName === undefined) {
+    employees.forEach(({ firstName, lastName, responsibleFor }) => {
+      workers[`${firstName} ${lastName}`] = getSpeciesIds(...responsibleFor);
+    });
+    return workers;
+  }
+  employees.forEach(({ firstName, lastName, id, responsibleFor }) => {
+    if (firstName === idOrName || id === idOrName || lastName === idOrName) {
+      workers[`${firstName} ${lastName}`] = getSpeciesIds(...responsibleFor);
+    }
+  });
+  return workers;
 }
 
 module.exports = {
