@@ -69,12 +69,21 @@ function calculateEntry(entrants) {
   return Adult * prices.Adult + Child * prices.Child + Senior * prices.Senior;
 }
 
-function getAnimalMap(options) {
-  // seu código aqui
-}
+function getAnimalMap(options = {}) {}
 
 function getSchedule(dayName) {
-  // seu código aqui
+  const { hours } = data;
+  const schedule = {};
+  Object.keys(hours).forEach((day) => {
+    schedule[day] = day === 'Monday'
+      ? 'CLOSED'
+      : `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`;
+  });
+
+  if (!dayName) return schedule;
+
+  const output = [[dayName, schedule[dayName]]];
+  return Object.fromEntries(output);
 }
 
 function getOldestFromFirstSpecies(id) {
