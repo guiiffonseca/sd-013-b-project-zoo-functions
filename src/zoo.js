@@ -19,6 +19,9 @@ function getEmployeeByName(employeeName) {
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
+  // personalInfo = {id, firstName, lastName}
+  // associatedWith = {managers, responsibleFor}
+  return { ...personalInfo, ...associatedWith };
 }
 
 function isManager(id) {
