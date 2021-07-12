@@ -1,10 +1,11 @@
 const { species } = require('./data');
 const data = require('./data');
 
-function getSpeciesByIds(ids) {
-  species.filter((specie) => {
-
-  })
+// para receber um ou mais ids, será usado rest
+function getSpeciesByIds(...ids) {
+  return species.filter((specie) => {
+    specie.id === specie
+  });
 }
 
 function getAnimalsOlderThan(animal, age) {
