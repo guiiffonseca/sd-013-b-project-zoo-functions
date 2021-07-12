@@ -108,14 +108,17 @@ function getOldestFromFirstSpecies(id) {
   return Object.values(findOldest(firstSpecies.residents));
 }
 
-getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992');
-
 // Requisito 12
 function increasePrices(percentage) {
-  const percentNumber = percentage / 100;
-  Object.entries(prices).forEach(([key]) => {
-    prices[key] += (prices[key] * percentNumber) + 0.001;
-    return (prices[key]).toFixed(2);
+  // const percentNumber = percentage / 100;
+  // Object.entries(prices).forEach(([key]) => {
+  //   prices[key] += ((prices[key] * percentNumber) + 0.001).toFixed(2);
+  //   console.log(prices);
+  //   return prices
+  Object.entries(prices).forEach((elemento) => {
+    const chave = elemento[0];
+    const incremento = (elemento[1] + (percentage / 100) * elemento[1]);
+    prices[chave] = Math.ceil(incremento * 100) / 100;
   });
 }
 
