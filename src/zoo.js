@@ -1,3 +1,4 @@
+// Dica recebida na sala de estudo
 const { species, employees, prices } = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -63,7 +64,7 @@ function getAnimalMap(options) {
 }
 
 function getSchedule(dayName) {
-  // seu código aqui
+
 }
 
 function getOldestFromFirstSpecies(id) {
@@ -71,10 +72,10 @@ function getOldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-
-  // prices.Child = (Math.round((prices.Child * (1 + (percentage / 100))) * 100)) / 100;
-  // prices.Adult = (Math.round((prices.Adult * (1 + (percentage / 100))) * 100)) / 100;
-  // prices.Senior = (Math.round((prices.Senior * (1 + (percentage / 100))) * 100)) / 100;
+  // Resolvido com a ajuda de João Franca em thread aberta no Slack
+  prices.Adult = (Math.round(prices.Adult * ((percentage / 100) + 1) * 100)) / 100;
+  prices.Child = (Math.round(prices.Child * ((percentage / 100) + 1) * 100)) / 100;
+  prices.Senior = (Math.round(prices.Senior * ((percentage / 100) + 1) * 100)) / 100;
 }
 
 function getEmployeeCoverage(idOrName) {
