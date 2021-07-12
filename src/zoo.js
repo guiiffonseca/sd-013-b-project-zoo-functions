@@ -114,8 +114,20 @@ function getOldestFromFirstSpecies(id) {
   return Object.values(dataFromResidents[dataFromResidents.length - 1]);
 }
 
+// Criei uma função para calcular um incremento ao preço dos ingressos
+// Para realizar o arredondamento em duas casas decimais consultei as seguintes fontes:
+// https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Math/round
+// https://stackoverflow.com/questions/11832914/how-to-round-to-at-most-2-decimal-places-if-necessary
+// Usei o Object.entries para retornar um array dos pares chave e valor
+// .forEach percorreu o array e aplicou a regra de negócio(da função newPrice) em cada um dos pares chave e valor
+function newPrice(previousPrice, percentage) {
+  const updatePrice = (previousPrice + (previousPrice * (percentage / 100)));
+  return Math.round((updatePrice + Number.EPSILON) * 100) / 100;
+}
 function increasePrices(percentage) {
-  // seu código aqui
+  Object.entries(prices).forEach(([lifeStages, price]) => {
+    prices[lifeStages] = newPrice(price, percentage);
+  });
 }
 
 function getEmployeeCoverage(idOrName) {
