@@ -1,11 +1,10 @@
 const { species, employees } = require('./data');
 const data = require('./data');
 
-function getSpeciesByIds(...ids) { // ... = Parâmetro REST => Faz com que a função receba n parâmetros. Como pega todos os animais, fica mais de 1 parâmetro, aí puxa tudo com o rest.
-  const animalList = species.filter((index) => species.id === ids[index]);
-  return animalList;
+function getSpeciesByIds(...ids) {
+  if (!ids) return [];
+  return species.filter((specie) => ids.includes(specie.id));
 }
-console.log(species);
 
 function getAnimalsOlderThan(animal, age) {
   const animalsOlder = species.find((specie) => specie.name === animal);
