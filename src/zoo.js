@@ -57,7 +57,7 @@ function calculateEntry(entrants) {
 }
 
 function getAnimalMap(options) {
-  
+  // meu código
 }
 
 function getSchedule(dayName) { // Feito na monitoria do Cajueiro
@@ -83,7 +83,7 @@ function getOldestFromFirstSpecies(employeeId) {
     (resident.age > older.age ? resident : older));
 
   return Object.values(oldest);
-  }
+}
 
 function increasePrices(percentage) { // Feito na monitoria do Cajueiro
   prices.Adult = (Math.round((prices.Adult * (1 + (percentage / 100))) * 100)) / 100;
