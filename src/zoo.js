@@ -79,21 +79,21 @@ function getAnimalMap(options) {
 }
 
 function getSchedule(dayName) { // Pessoal da sala da estudo me ajudou a fazer (VOLTAR E REFAZER COM CALMA!!!)
-  const weekDay = {};
+  const day = {};
   const selectDay = Object.keys(hours); // Pegamos todas as chaves do objeto hours (Os dias da semana)
   // console.log(selectDay);
-  selectDay.forEach((hourValue) => { // pegamos o array com os dias da semana e iteramos ele com forEach, tomando cuidado pois a segunda feira é um caso diferente pois está closed.
-    if (hourValue === 'Monday') {
-      weekDay[hourValue] = 'CLOSED';
+  selectDay.forEach((hour) => { // pegamos o array com os dias da semana e iteramos ele com forEach, tomando cuidado pois a segunda feira é um caso diferente pois está closed.
+    if (hour === 'Monday') {
+      day[hour] = 'CLOSED';
     } else {
-      weekDay[hourValue] = (`Open from ${hours[hourValue].open}am until ${hours[hourValue].close - 12}pm`); // montamos a template literal com as possíveis saidas iterando com o forEach.
+      day[hour] = (`Open from ${hours[hour].open}am until ${hours[hour].close - 12}pm`); // montamos a template literal com as possíveis saidas iterando com o forEach.
     }
   });
   if (arguments.length === 0) { // montamos a lógica para caso não seja retornado nenhum parametro, será retornado o objeto weekday que já foi preenchido com os dias na parte de cima do código.
-    return weekDay;
-  } else {
-    return { [dayName]: weekDay[dayName] }; // lógica para se apenas um dia for passado.
+    return day;
   }
+    return { [dayName]: day[dayName] }; // lógica para se apenas um dia for passado.
+  
 }
 console.log(getSchedule());
 
