@@ -1,4 +1,5 @@
 const data = require('./data');
+const managerList = require('./managerList');
 
 function getSpeciesByIds(...ids) {
   const { species } = data;
@@ -34,11 +35,13 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  // seu código aqui
+  return managerList.some((managerId) => managerId === id);
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+  // const { employees } = data;
+  // employees.push({ id, firstName, lastName, managers, responsibleFor });
+  // return employees;
 }
 
 function countAnimals(species) {
