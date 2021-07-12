@@ -3,7 +3,8 @@ const data = require('./data');
 const { species, employees, prices } = data;
 const { Adult, Senior, Child } = prices;
 
-function getSpeciesByIds(ids) {
+function getSpeciesByIds(...ids) {
+  console.log(ids);
   return ids.map((id) => species.find((element) => element.id === id));
 }
 
@@ -24,7 +25,7 @@ function isManager(id) {
   return !!employees.find(({ managers }) => managers.includes(id));
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   return employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
 
