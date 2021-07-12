@@ -54,12 +54,14 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   employees.push(employee);
 }
 
-function countAnimals(species1) {
-  // let obj = {};
-  // if (arguments.length === 0) {
-  //   return species.forEach((speciesValue) => speciesValue.popularity)
-  // }
+function countAnimals(specieAnimal) {
+  if (specieAnimal === undefined) {
+    return species.reduce((obj, speciesValue) => 
+    ({ ...obj, [speciesValue.name]: speciesValue.residents.length }),{},); // junção de objetos encontrada em: var object = arr.reduce((obj, item) => ({...obj, [item.key]: item.value}) ,{}); VOLTAR PARA ANALISAR DEPOIS ENTENDI + OU - !!!!!!!!!!!!!!
+  }
+  return species.find((speciesValue) => speciesValue.name === specieAnimal).residents.length; //usamos o find para encontrar o objeto com o nome do animal passado como parametro, depois com o objeto selecionado utilizamos a chave residents com '.length' par descobrir a quantidade de chaves e assim o número de animais.
 }
+
 // console.log(countAnimals());
 
 function calculateEntry(entrants) {
