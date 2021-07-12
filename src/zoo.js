@@ -3,8 +3,8 @@ const data = require('./data');
 
 // para receber um ou mais ids, será usado rest
 function getSpeciesByIds(...ids) {
-  return species.filter((specie) => {
-    specie.id === specie
+  return speciesId.filter((specie) => {
+    return specie.id === specie;
   });
 }
 
