@@ -27,8 +27,10 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 // Requisito 5
-function isManager(id) {
-  // seu código aqui
+function isManager(idInput) {
+  const ownerId = '9e7d4524-363c-416a-8759-8aa7e50c0992';
+  return data.employees.some(({ id, managers }) =>
+    id === idInput && managers.includes(ownerId));
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
