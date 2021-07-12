@@ -44,7 +44,7 @@ function isManager(id) {
   );
 }
 
-function addEmployee(id, firstName, lastName, managers = [], responsibleFor =[]) {
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   // seu código aqui
   return empregados.push({
     id,
@@ -60,9 +60,9 @@ function countAnimals(species) {
   const obj = {};
   especies.map((especie) => {
     obj[especie.name] = especie.residents.length;
-    return true
+    return true;
   });
-  if (species == undefined) {
+  if (species === undefined) {
     return obj;
   }
   const objPeloNome = especies.find((especie) => especie.name === species);
