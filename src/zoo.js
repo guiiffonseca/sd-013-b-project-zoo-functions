@@ -70,6 +70,12 @@ function getResidents(animal) {
     .map(({ name }) => name);
 }
 
+function getResidentsBySex(animal, inputedSex) {
+  return species.find(({ name }) => animal === name).residents
+    .filter(({ sex }) => inputedSex === sex)
+    .map(({ name }) => name);
+}
+
 function animalsWithNames(object) {
   const animals = { ...object };
   Object.keys(object).forEach((location) => {
@@ -78,45 +84,45 @@ function animalsWithNames(object) {
   return animals;
 }
 
-function animalsSortedByName() {
+function animalsSortedByName(object) {
+  const animals = { ...object };
+  Object.keys(object).forEach((location) => {
+    animals[location].forEach((animal, index) => {
+      const name = Object.keys(animal)[0];
+      const residents = Object.values(animal)[0];
+      animals[location][index][name] = residents.sort();
+    });
+  });
+  return animals;
 }
 
-function animalsSortedBySex(currentSex) {
-  const animals = species.reduce((acc, current) => {
-    if (acc[current.location]) {
-      acc[current.location].push({ [current.name]:
-        current.residents.filter((element) =>
-          element.sex === currentSex).map((element) => element.name) });
-    } else {
-      acc[current.location] = [{ [current.name]:
-        current.residents.filter((element) =>
-          element.sex === currentSex).map((element) => element.name) }];
-    }
-    return acc;
-  }, {});
-
+function animalsSortedBySex(object, sex) {
+  const animals = { ...object };
+  Object.keys(object).forEach((location) => {
+    animals[location] = object[location].map((element) =>
+      (({ [element]: getResidentsBySex(element, sex) })));
+  });
   return animals;
 }
 
 function getAnimalMap(options) {
-  let result = animalsByLocation();
-  if (!options) {
-    return result;
+  const base = animalsByLocation();
+  if (!options || !options.includeNames) {
+    return base;
   }
   const { includeNames: name, sorted, sex } = options;
-  if (name) {
-    let namedAnimals = animalsWithNames(result);
-    if (sex) {
-      result = animalsSortedBySex(sex);
-    }
-  //   if (sorted) {
-  //     return animalsSortedByName();
-  //   }
+  let namedAnimals = animalsWithNames(base);
+  if (sex) {
+    namedAnimals = animalsSortedBySex(base, sex);
   }
-  // return result;
+  if (sorted) {
+    return animalsSortedByName(namedAnimals);
+  }
+  return namedAnimals;
 }
-// const options = { includeNames: true };
-// console.dir(getAnimalMap(options), { depth: null });
+
+// const options = { includeNames: true, sorted: true };
+console.dir(getAnimalMap(), { depth: null });
 
 function showAllSchedule() {
   const result = {};
