@@ -70,7 +70,7 @@ function countAnimals(species) {
   return objPeloNome.residents.length;
 }
 
-function calculateEntry(entrants) {
+function calculateEntry(entrants = {}) {
   // seu código aqui
   if (entrants === undefined || Object.keys(entrants).length === 0) {
     return 0;
