@@ -1,7 +1,10 @@
 const data = require('./data');
 // inicio do projeto
-function getSpeciesByIds(ids) {
+function getSpeciesByIds(...ids) {
   // seu código aqui
+  // para retornar um array é preciso usar a função map.
+  const { species } = data;
+  return ids.map((id) => species.find((specie) => specie.id === id));
 }
 
 function getAnimalsOlderThan(animal, age) {
