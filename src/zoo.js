@@ -10,13 +10,14 @@ const getAnimalsOlderThan = (animal, age) => species.find((specie) => specie.nam
 
 const getEmployeeByName = (employeeName) => ((employeeName === undefined) ? {}
   : employees.find((employee) => employee.firstName === employeeName
-|| employee.lastName === employeeName));
+  || employee.lastName === employeeName));
+console.log(getEmployeeByName());
 
 const createEmployee = (personalInfo, associatedWith) => ({ ...personalInfo, ...associatedWith });
 
-function isManager(id) {}
+const isManager = (id) => employees.some((employee) => employee.managers.includes(id));
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {}
+const addEmployee = (id, firstName, lastName, managers = [], responsibleFor = []) => employees.push({ id, firstName, lastName, managers, responsibleFor });
 
 function countAnimals(spec) {}
 
