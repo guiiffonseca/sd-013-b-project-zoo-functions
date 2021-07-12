@@ -1,27 +1,27 @@
 const { species, employees } = require('./data');
 const data = require('./data');
 
-function getSpeciesByIds(...ids) { //... = Parâmetro REST => Faz com que a função receba n parâmetros. Como pega todos os animais, fica mais de 1 parâmetro, aí puxa tudo com o rest.
-    const animalList = species.filter((species, index) => species.id === ids[index]);
-    return animalList
-  }
+function getSpeciesByIds(...ids) { // ... = Parâmetro REST => Faz com que a função receba n parâmetros. Como pega todos os animais, fica mais de 1 parâmetro, aí puxa tudo com o rest.
+  const animalList = species.filter(( species, index ) => species.id === ids[index]);
+  return animalList;
+}
 console.log(species);
 
 function getAnimalsOlderThan(animal, age) {
   const animalsOlder = species.find((specie) => specie.name === animal);
   return animalsOlder.residents.every((resident) => resident.age >= age);
-  
 }
 
 function getEmployeeByName(employeeName) {
   if (!employeeName) return {};
 
-  const employeeObject = employees.find((employee) => employee.firstName === employeeName || employee.lastName === employeeName);
-    return employeeObject;
-};
+  const employeeObject = employees.find((employee) => 
+  employee.firstName === employeeName || employee.lastName === employeeName);
+  return employeeObject;
+}
 
 function createEmployee(personalInfo, associatedWith) {
-  return { ...personalInfo, ...associatedWith};
+  return { ...personalInfo, ...associatedWith };
 }
 
 function isManager(id) {
@@ -41,7 +41,7 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 }
 
 function countAnimals(specie) {
-  const allAnimals = species.reduce((acc,current) => {
+  const allAnimals = species.reduce((acc, current) => {
     acc[current.name] = current.residents.length;
     return acc;
   }, {});
@@ -49,7 +49,7 @@ function countAnimals(specie) {
   if (!specie) return allAnimals;
 
   return allAnimals[specie];
-};
+}
 
 function calculateEntry(entrants = 0) {
   if (entrants === {}) return 0;
@@ -57,12 +57,12 @@ function calculateEntry(entrants = 0) {
   const valorAdulto = data.prices.Adult * entrants.Adult || 0;
   const valorJovem = data.prices.Senior * entrants.Senior || 0;
   const valorCrianca = data.prices.Child * entrants.Child || 0;
-  
+
   return valorAdulto + valorJovem + valorCrianca;
 }
 
 function getAnimalMap(options) {
-  
+
 }
 
 function getSchedule(dayName) {
@@ -83,7 +83,7 @@ function getSchedule(dayName) {
   oneDay[dayName] = allDays[dayName];
 
   return oneDay;
-};
+}
 
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
