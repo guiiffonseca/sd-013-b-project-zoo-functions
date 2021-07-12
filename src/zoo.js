@@ -78,7 +78,7 @@ function getSchedule(dayName) {
 }
 
 // Obtive ajuda dos colegas Alan Freitas e Felipe Ventorim para entender como funciona o reduce e;
-// Ajuda do colega Rafael Nery para lembrar como usar o objeto dentro da Array;
+// ajuda do colega Rafael Nery para lembrar como usar o objeto dentro da Array;
 function getOldestFromFirstSpecies(employeeId) {
   const employee = employees.find(({ id }) => (id === employeeId));
   const animal = employee.responsibleFor[0];
@@ -92,9 +92,21 @@ function getOldestFromFirstSpecies(employeeId) {
   return Object.values(result);
 }
 
+// 1 - Pegar os valores da entrada;
+// 2 - Multiplicar os valores pela porcentagem;
 function increasePrices(percentage) {
-  // seu código aqui
+  Object.keys(prices).forEach((price) => {
+    const value = prices[price];
+    prices[price] = (Math.ceil((value * (percentage / 100) + value) * 100)) / 100;
+  });
 }
+
+// function increasePrices(percentage) {
+//   const percent = (percentage / 100);
+//   const valor = prices.Adult + (prices.Adult * percent);
+//   prices.Adult = valor;
+//   return prices.Adult;
+// }
 
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
