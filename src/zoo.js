@@ -20,7 +20,7 @@ function getEmployeeByName(employeeName) {
 function createEmployee(personalInfo, associatedWith) { // Feito na monitoria do Cajueiro
   return { ...personalInfo, ...associatedWith };
 }
- 
+
 function isManager(id) {
   return !!employees.find(({ managers }) => managers.includes(id));
 }
