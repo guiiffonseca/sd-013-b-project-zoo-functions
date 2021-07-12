@@ -38,10 +38,8 @@ function isManager(id) {
   return managerList.some((managerId) => managerId === id);
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // const { employees } = data;
-  // employees.push({ id, firstName, lastName, managers, responsibleFor });
-  // return employees;
+function addEmployee(id = '', firstName = '', lastName = '', managers = [], responsibleFor = []) {
+  data.employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
 
 function countAnimals(species) {
