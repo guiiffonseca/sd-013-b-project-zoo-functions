@@ -102,8 +102,16 @@ function getSchedule(dayName) {
   return { [dayName]: fullSchedule[dayName] };
 }
 
+//  Usei o .find para achar o objeto funcionário pelo id passado no parâmetro e "guardei" em uma constante
+// Criei uma constante que pega a primeira espécie pela qual esse funcionário é responsável
+// Usando o .find busquei as informações dos animais da espécie de referência e com o .sort coloquei o array de objetos em ordem crescente de idade
+// Retornei em forma de array os valores do último objeto dataFromResidents, referente ao animal mais velho, usando o Object.values.
 function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+  const workerById = employees.find((employee) => employee.id === id);
+  const workerFistSpecie = workerById.responsibleFor[0];
+  const dataFromResidents = species.find((specie) => specie.id === workerFistSpecie).residents
+    .sort((younger, older) => younger.age - older.age);
+  return Object.values(dataFromResidents[dataFromResidents.length - 1]);
 }
 
 function increasePrices(percentage) {
