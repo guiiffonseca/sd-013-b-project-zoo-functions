@@ -1,3 +1,4 @@
+const { prices, hours } = require('./data');
 const data = require('./data');
 
 const especies = data.species;
@@ -71,6 +72,11 @@ function countAnimals(species) {
 
 function calculateEntry(entrants) {
   // seu código aqui
+  if (entrants === undefined || Object.keys(entrants).length === 0) {
+    return 0;
+  }
+  const totalValue = Object.entries(entrants).reduce((accumulator, [people, value]) => accumulator + prices[people] * value);
+  return totalValue;
 }
 
 function getAnimalMap(options) {
@@ -79,10 +85,42 @@ function getAnimalMap(options) {
 
 function getSchedule(dayName) {
   // seu código aqui
+  const openHours = (day) => {
+    const horario = `Open from ${hours[day].open}am until ${hours[day].close}pm`;
+  return horario;
+}; 
+const arr = Object.keys(hours);
+const funcionamento = {};
+if (dayName === undefined) {
+  for (let i = 0; i < arr.length - 1; i += 1) {
+    funcionamento[arr[i]] = openHours(arr[i]);
+  }
+  funcionamento.Monday = 'CLOSED';
+  return funcionamento;
+}
+if (dayName === 'Monday') {
+  funcionamento.Monday = 'CLOSED';
+  return funcionamento;
+}
+funcionamento[dayName] = openHours(dayName);
+return funcionamento;
 }
 
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
+  const funcionario = empregados.find((empregado) => empregado.id === id);
+  const idEspecie = especies.find((especie) => especie.id === funcionario.responsibleFor[0]);
+  let age = 0;
+  let arr = [];
+  idEspecie.residents.forEach((bicho) => {
+    if (age < bicho.age) {
+      age = bicho.age;
+      arr.push(bicho.name);
+      arr.push(bicho.sex);
+      arr.push(bicho.age);
+      return arr;
+    }
+  });
 }
 
 function increasePrices(percentage) {
