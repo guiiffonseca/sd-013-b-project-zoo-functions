@@ -1,6 +1,6 @@
 const data = require('./data');
 
-const { employees, hours } = data;
+const { employees, hours, prices } = data;
 
 function getSpeciesByIds(...ids) {
   const request = [];
@@ -101,7 +101,11 @@ function getOldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  Object.entries(prices).map(([typePerson, price]) => {
+    const roundPrice = (price * (percentage / 100 + 1));
+    prices[typePerson] = (Math.ceil(roundPrice * 100) / 100);
+    return prices;
+  });
 }
 
 function getEmployeeCoverage(idOrName) {
