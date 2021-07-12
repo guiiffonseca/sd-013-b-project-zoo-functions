@@ -77,8 +77,19 @@ function getSchedule(dayName) {
   return { [dayName]: schedule[dayName] };
 }
 
-function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+// Obtive ajuda dos colegas Alan Freitas e Felipe Ventorim para entender como funciona o reduce e;
+// Ajuda do colega Rafael Nery para lembrar como usar o objeto dentro da Array;
+function getOldestFromFirstSpecies(employeeId) {
+  const employee = employees.find(({ id }) => (id === employeeId));
+  const animal = employee.responsibleFor[0];
+  const result = ((getSpeciesByIds(animal))[0].residents).reduce((acc, crvl) => {
+    // (acc.age > crvl.age) ? acc : crvl;
+    if (acc.age > crvl.age) {
+      return acc;
+    }
+    return crvl;
+  });
+  return Object.values(result);
 }
 
 function increasePrices(percentage) {
