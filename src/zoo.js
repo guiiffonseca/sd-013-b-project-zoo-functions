@@ -93,14 +93,14 @@ function sortByName(residents) {
   });
 }
 
-function includeNames({ sorted, sex }) {
+function includeNames({ animalsRegions, sorted, sex }) {
   species.forEach(({ name, location, residents }) => {
     let actualResidents = [...residents];
 
     if (sorted) actualResidents = sortByName(actualResidents);
 
     if (sex) actualResidents = sexFilter(actualResidents, sex);
-  
+
     animalsRegions[location].push({
       [name]: actualResidents.map((animal) => animal.name),
     });
@@ -108,7 +108,7 @@ function includeNames({ sorted, sex }) {
 }
 
 function getAnimalMap(options) {
-  animalsRegions = {
+  const animalsRegions = {
     NE: [],
     NW: [],
     SE: [],
@@ -123,7 +123,6 @@ function getAnimalMap(options) {
   includeNames({ animalsRegions, sorted: options.sorted, sex: options.sex });
 
   return animalsRegions;
-
 }
 
 function getSchedule(dayName) {
