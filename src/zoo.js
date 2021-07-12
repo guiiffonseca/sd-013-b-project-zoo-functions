@@ -56,10 +56,10 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 
 function countAnimals(specieAnimal) {
   if (specieAnimal === undefined) {
-    return species.reduce((obj, speciesValue) => 
-    ({ ...obj, [speciesValue.name]: speciesValue.residents.length }),{},); // junção de objetos encontrada em: var object = arr.reduce((obj, item) => ({...obj, [item.key]: item.value}) ,{}); VOLTAR PARA ANALISAR DEPOIS ENTENDI + OU - !!!!!!!!!!!!!!
+    return species.reduce((obj, speciesValue) =>
+      ({ ...obj, [speciesValue.name]: speciesValue.residents.length }), {}); // junção de objetos encontrada em: var object = arr.reduce((obj, item) => ({...obj, [item.key]: item.value}) ,{}); VOLTAR PARA ANALISAR DEPOIS ENTENDI + OU - !!!!!!!!!!!!!!
   }
-  return species.find((speciesValue) => speciesValue.name === specieAnimal).residents.length; //usamos o find para encontrar o objeto com o nome do animal passado como parametro, depois com o objeto selecionado utilizamos a chave residents com '.length' par descobrir a quantidade de chaves e assim o número de animais.
+  return species.find((speciesValue) => speciesValue.name === specieAnimal).residents.length; // usamos o find para encontrar o objeto com o nome do animal passado como parametro, depois com o objeto selecionado utilizamos a chave residents com '.length' par descobrir a quantidade de chaves e assim o número de animais.
 }
 
 // console.log(countAnimals());
@@ -81,13 +81,12 @@ function getAnimalMap(options) {
 function getSchedule(dayName) { // Pessoal da sala da estudo me ajudou a fazer (VOLTAR E REFAZER COM CALMA!!!)
   const weekDay = {};
   const selectDay = Object.keys(hours); // Pegamos todas as chaves do objeto hours (Os dias da semana)
-// console.log(selectDay);
+  // console.log(selectDay);
   selectDay.forEach((hourValue) => { // pegamos o array com os dias da semana e iteramos ele com forEach, tomando cuidado pois a segunda feira é um caso diferente pois está closed.
-    if (hourValue === 'Monday') {
-      return weekDay[hourValue] = 'CLOSED';
-    } else {
-      return weekDay[hourValue] = (`Open from ${hours[hourValue].open}am until ${hours[hourValue].close - 12}pm`); // montamos a template literal com as possíveis saidas iterando com o forEach.
-    }
+    if (hourValue === 'Monday') 
+    return weekDay[hourValue] = 'CLOSED';
+    return weekDay[hourValue] = 
+    (`Open from ${hours[hourValue].open}am until ${hours[hourValue].close - 12}pm`); // montamos a template literal com as possíveis saidas iterando com o forEach. 
   });
   if (arguments.length === 0) { // montamos a lógica para caso não seja retornado nenhum parametro, será retornado o objeto weekday que já foi preenchido com os dias na parte de cima do código.
   return weekDay;
