@@ -92,7 +92,7 @@ function getSchedule(dayName) { // Pessoal da sala da estudo me ajudou a fazer (
   if (arguments.length === 0) { // montamos a lógica para caso não seja retornado nenhum parametro, será retornado o objeto weekday que já foi preenchido com os dias na parte de cima do código.
     return day;
   }
-  return {[dayName]: day[dayName]}; // lógica para se apenas um dia for passado.  
+  return { [dayName]: day[dayName] }; // lógica para se apenas um dia for passado.
 }
 console.log(getSchedule());
 
