@@ -115,7 +115,7 @@ function increasePrices(percentage) { // fizemos um for in para percorrer os val
   // for (const key in prices) { // primeiro eu fiz com for in, no npm test passou, mas o lint não deixou, não entendi exatamente porque. VOLTAR TIRAR ESA DÚVIDA.
   const price = Object.keys(prices);
   price.forEach((priveValue) => {
-    prices[priveValue] = Math.round((prices[priveValue] * 100) * ((percentage / 100) + 1)) / 100 // VOTLAR NESTA LÓGICA MATEMÁTICA, PESSOAL ME AJUDOU NO GRUPO DO ZAP, ENTENDI A LÓGICA TODA, PORÉM NÃO ESTÁ CLARO O PORQUE DO JS NÃO ACEITAR ISSO POR EXEMPLO: prices[key] = (prices[key] + (prices[key] * (20 / 100)))) OU PORQUE DIVIDIR E MULTIPLICAR POR 100 ANTES E DEPOIS. VOLTAR PARA REVER O CONTEÚDO E SE APROFUNDAR MAIS.
+    prices[priveValue] = Math.round((prices[priveValue] * 100) * ((percentage / 100) + 1)) / 100; // VOTLAR NESTA LÓGICA MATEMÁTICA, PESSOAL ME AJUDOU NO GRUPO DO ZAP, ENTENDI A LÓGICA TODA, PORÉM NÃO ESTÁ CLARO O PORQUE DO JS NÃO ACEITAR ISSO POR EXEMPLO: prices[key] = (prices[key] + (prices[key] * (20 / 100)))) OU PORQUE DIVIDIR E MULTIPLICAR POR 100 ANTES E DEPOIS. VOLTAR PARA REVER O CONTEÚDO E SE APROFUNDAR MAIS.
   });
 }
 
