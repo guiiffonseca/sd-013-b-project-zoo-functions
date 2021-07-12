@@ -61,7 +61,19 @@ function calculateEntry(entrants = 0) {
 }
 
 function getAnimalMap(options) {
-
+  if (!options) {
+    const byLocation = () => ({
+      NE: species.filter((specie) => specie.location === 'NE')
+      .map((atualSpecie) => atualSpecie.name),
+      NW: species.filter((specie) => specie.location === 'NW')
+      .map((atualSpecie) => atualSpecie.name),
+      SE: species.filter((specie) => specie.location === 'SE')
+      .map((atualSpecie) => atualSpecie.name),
+      SW: species.filter((specie) => specie.location === 'SW')
+      .map((atualSpecie) => atualSpecie.name),
+    })
+    return byLocation();
+  }
 }
 
 function getSchedule(dayName) {
@@ -85,7 +97,12 @@ function getSchedule(dayName) {
 }
 
 function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+  const thisEmployee = employees.find((employee) => employee.id === id);
+  const firstAnimal = thisEmployee.responsibleFor[0];
+  const allResidents = species.find((specie) => specie.id === firstAnimal).residents;
+  const oldestAnimal = Object.values(allResidents.sort((a, b) => b.age - a.age)[0]);
+
+  return oldestAnimal;
 }
 
 function increasePrices(percentage) {
