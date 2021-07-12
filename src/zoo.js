@@ -22,9 +22,7 @@ function getEmployeeByName(employeeName) {
 
 // console.log(getEmployeeByName('Emery'));
 
-function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
-}
+const createEmployee = (personalInfo, associatedWith) => ({ ...personalInfo, ...associatedWith });
 
 function isManager(id) {
   // seu código aqui
