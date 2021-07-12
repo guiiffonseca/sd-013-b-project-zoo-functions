@@ -1,3 +1,4 @@
+const { species, employees } = require('./data');
 const data = require('./data');
 
 // Requisito 1
@@ -5,19 +6,19 @@ const data = require('./data');
 // Refer2: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/includes
 function getSpeciesByIds(...ids) {
   if (ids.length === 0) return [];
-  return data.species.filter(({ id }) => ids.includes(id));
+  return species.filter(({ id }) => ids.includes(id));
 }
 
 // Requisito 2
 function getAnimalsOlderThan(animalIn, ageIn) {
-  return data.species.find(({ name }) => animalIn === name)
+  return species.find(({ name }) => animalIn === name)
     .residents.every(({ age }) => age >= ageIn);
 }
 
 // Requisito 3
 function getEmployeeByName(employeeName) {
   if (employeeName === undefined) return {};
-  return data.employees.find(({ firstName, lastName }) =>
+  return employees.find(({ firstName, lastName }) =>
     employeeName === firstName || employeeName === lastName);
 }
 
@@ -29,14 +30,15 @@ function createEmployee(personalInfo, associatedWith) {
 // Requisito 5
 function isManager(idInput) {
   const ownerId = '9e7d4524-363c-416a-8759-8aa7e50c0992';
-  return data.employees.some(({ id, managers }) =>
+  return employees.some(({ id, managers }) =>
     id === idInput && managers.includes(ownerId));
 }
 
 // Requisito 6
 // Refer: https://ui.dev/shorthand-properties/
+// Refer: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Functions/Default_parameters
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-  return data.employees.push({
+  return employees.push({
     id,
     firstName,
     lastName,
@@ -45,10 +47,19 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   });
 }
 
-function countAnimals(species) {
-  // seu código aqui
+// Requisito 7
+function countAnimals(speciesInput) {
+  const countResidents = {};
+  species.forEach(({ name, residents }) => {
+    countResidents[name] = residents.length;
+  });
+  if (speciesInput === undefined) {
+    return countResidents;
+  }
+  return countResidents[speciesInput];
 }
 
+// Requisito 8
 function calculateEntry(entrants) {
   // seu código aqui
 }
