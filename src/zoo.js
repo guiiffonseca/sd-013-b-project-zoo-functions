@@ -33,8 +33,16 @@ function isManager(idInput) {
     id === idInput && managers.includes(ownerId));
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+// Requisito 6
+// Refer: https://ui.dev/shorthand-properties/
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  return data.employees.push({
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  });
 }
 
 function countAnimals(species) {
