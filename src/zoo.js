@@ -44,7 +44,11 @@ function countAnimals(speciesEach) {
 }
 
 function calculateEntry(entrants) {
-  // seu código aqui
+  if (!entrants || Object.keys(entrants).length === 0) {
+    return 0;
+  }
+  return Object.entries(entrants).reduce((acc, [key, valor]) =>
+    acc + prices[key] * valor, 0);
 }
 
 function getAnimalMap(options) {
