@@ -36,8 +36,17 @@ function isManager(id) {
   return allManagers.some((managerId) => managerId === id);
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-
+function addEmployee(id, firstName, lastName, managersParameter, responsibleForParameter) {
+  const personalInfo = {
+    id,
+    firstName,
+    lastName,
+  };
+  const associatedWith = {
+    managers: (managersParameter === undefined) ? [] : managersParameter,
+    responsibleFor: (responsibleForParameter === undefined) ? [] : responsibleForParameter,
+  };
+  employees.push(createEmployee(personalInfo, associatedWith));
 }
 
 function countAnimals(speciesToCount) {
