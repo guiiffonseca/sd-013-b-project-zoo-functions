@@ -1,4 +1,4 @@
-const { species, employees } = require('./data');
+const { species, employees, prices } = require('./data');
 const data = require('./data');
 // inicio do projeto
 function getSpeciesByIds(...ids) {
@@ -35,12 +35,26 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
 
-function countAnimals(speciesAnimals) {
+function countAnimals() {
   // seu código aqui
+  // a função é sem parametros e deve retornar um objeto que vai conter o nome e a quantidade deles
+  const animals = {};
+  species.forEach((specie) => {
+    const specieAnimals = specie.name;
+    const quantifyAnimals = specie.residents.length;
+    animals[specieAnimals] = quantifyAnimals;
+    console.log(animals);
+  });
 }
 
-function calculateEntry(entrants) {
+function calculateEntry(entrants = {}) {
   // seu código aqui
+  const { Adult = 0, Senior = 0, Child = 0 } = entrants;
+  // Retorna 0 se nenhum argumento for passado
+  // Retorna 0 se um objeto vazio for passado
+  if (!entrants || !Object.entries(entrants).length) {
+    return 0;
+  } return (prices.Adult * Adult) + (prices.Senior * Senior) + (prices.Child * Child);
 }
 
 function getAnimalMap(options) {
