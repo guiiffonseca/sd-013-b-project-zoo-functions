@@ -30,10 +30,9 @@ function isManager(id) {
   // para verificar o objeto é necessário acessa-lo
   return employees.find((employee) => employee.id).managers.some((manager) => manager === id);
 }
-
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   // seu código aqui
-
+  employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
 
 function countAnimals(speciesAnimals) {
