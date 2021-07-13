@@ -20,14 +20,17 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  // seu código aqui
+  let allManagers = employees.map((employee) => employee.managers);
+  allManagers = allManagers.reduce((acc, curr) => acc.concat(curr));
+  allManagers = allManagers.filter((elem, index) => (allManagers.indexOf(elem) === index));
+  return allManagers.some((managerId) => managerId === id);
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
 }
 
-function countAnimals() {
+function countAnimals(speciesToCount) {
   // seu código aqui
 }
 
