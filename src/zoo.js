@@ -50,7 +50,14 @@ function addEmployee(id, firstName, lastName, managersParameter, responsibleForP
 }
 
 function countAnimals(speciesToCount) {
-  // seu código aqui
+  const allSpeciesName = species.map((animalFound) => animalFound.name);
+  const allSpeciesCount = species.map((animalQuery) => animalQuery.residents.length);
+  const allCounted = {};
+  for (let index = 0; index < allSpeciesName.length; index += 1) {
+    allCounted[allSpeciesName[index]] = allSpeciesCount[index];
+  }
+  const countedSpecies = species.find((speciesToFind) => (speciesToFind.name === speciesToCount));
+  return (speciesToCount === undefined) ? allCounted : countedSpecies.residents.length;
 }
 
 function calculateEntry(entrants) {
