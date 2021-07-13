@@ -52,7 +52,7 @@ function calculateEntry(entrants) {
 }
 
 function getAnimalMap(options) {
-  // seu código aqui
+
 }
 
 function getSchedule(dayName) {
@@ -69,8 +69,14 @@ function getSchedule(dayName) {
   return schedule;
 }
 
-function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+function getOldestFromFirstSpecies(idOne) {
+  const employeeOne = employees.find(({ id }) => id === idOne).responsibleFor[0];
+  const animal = species.find((idAnimal) => idAnimal.id === employeeOne).residents;
+
+  const oldestAnimal = animal.reduce((accAge, currtAge) =>
+    ((accAge.age < currtAge.age) ? currtAge : accAge));
+
+  return Object.values(oldestAnimal);
 }
 
 function increasePrices(percentage) {
