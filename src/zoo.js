@@ -2,7 +2,16 @@ const { species, employees } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
-  console.log(species.name);
+  const outputArray = [];
+  const checkDatabase  = (parameter) => {
+    outputArray.push(species.find((speciesElement) => (speciesElement.id === parameter)));
+  };
+
+  for (let singleId of ids) {
+    checkDatabase(singleId);
+  }
+
+  return outputArray;
 }
 
 function getAnimalsOlderThan(animal, age) {
