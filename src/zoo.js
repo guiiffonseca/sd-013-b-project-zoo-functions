@@ -1,7 +1,7 @@
 const data = require('./data');
 const { species, employees, prices, hours } = require('./data');
 
-function getSpeciesByIds(...ids) { // (Parâmetro Dinâmico [Rest]) ...ids transforma a entrada em array variável / mais de 1 parametro
+function getSpeciesByIds(...ids) { // Parâmetro Dinâmico [Rest]) ...ids transforma a entrada em array variável / mais de 1 parametro
   if (!ids) return []; // retorna vazio se não entrar parametro
   return data.species.filter((specie) => ids.some((id) => id === specie.id));
 }
@@ -58,6 +58,14 @@ function calculateEntry(entrants) {
 
 function getAnimalMap(options) {
   // meu código
+  // const NEspecie = []
+  // const NWspecie = []
+  // const SEspecie = []
+  // const SWspecie = []
+
+  // species.forEach((specie) => {
+
+  // })
 }
 
 function getSchedule(dayName) { // Feito na monitoria do Cajueiro
