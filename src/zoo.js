@@ -16,7 +16,7 @@ function getAnimalsOlderThan(animal, age) {
 }
 
 function getEmployeeByName(employeeName) {
-  // Retorna o empregado 
+  // Retorna o empregado
   if (employeeName === undefined) return {};
   return employees.find((thing) =>
     thing.firstName === employeeName || thing.lastName === employeeName);
@@ -46,8 +46,8 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   return data.employees;
 }
 
-function countAnimals() {
-  // seu código aqui
+function countAnimals(speecies) {
+  // Retorna a contagem dos animais
 }
 
 function calculateEntry(entrants) {
