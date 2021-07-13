@@ -1,5 +1,5 @@
 const data = require('./data');
-const { species, employees, prices } = require('./data');
+const { species, employees, prices, hours } = require('./data');
 
 function getSpeciesByIds(...ids) {
   return ids.map((id) => species.find((animalSpecie) => animalSpecie.id === id));
@@ -54,7 +54,14 @@ function getAnimalMap(options) {
 }
 
 function getSchedule(dayName) {
-  // seu código aqui
+  const schedule = {};
+  Object.keys(hours).forEach((day) => {
+    if (dayName === undefined || (day === dayName)) {
+      schedule[day] = `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`;
+    }
+  });
+  if (dayName === undefined || (dayName === 'Monday')) schedule.Monday = 'CLOSED';
+  return schedule;
 }
 
 function getOldestFromFirstSpecies(id) {
@@ -62,7 +69,9 @@ function getOldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  return Object.keys(prices).forEach((price) => {
+    prices[price] = parseFloat(((Math.round(prices[price] * percentage) / 100) + prices[price]).toFixed(2));
+  });
 }
 
 function getEmployeeCoverage(idOrName) {
