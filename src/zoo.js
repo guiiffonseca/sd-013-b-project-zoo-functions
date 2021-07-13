@@ -110,16 +110,13 @@ function getOldestFromFirstSpecies(id) {
 
 // Requisito 12
 function increasePrices(percentage) {
-  // const percentNumber = percentage / 100;
-  // Object.entries(prices).forEach(([key]) => {
-  //   prices[key] += ((prices[key] * percentNumber) + 0.001).toFixed(2);
-  //   console.log(prices);
-  //   return prices
-  Object.entries(prices).forEach((elemento) => {
-    const chave = elemento[0];
-    const incremento = (elemento[1] + (percentage / 100) * elemento[1]);
-    prices[chave] = Math.ceil(incremento * 100) / 100;
+  Object.entries(prices).forEach(([key]) => {
+    const percentNumber = percentage / 100;
+    // prices[key] += (parseFloat(((prices[key] * percentNumber) + 0.007).toFixed(2)));
+    prices[key] += (prices[key] * percentNumber) + 0.007;
+    prices[key] = parseFloat((prices[key]).toFixed(2));
   });
+  return prices;
 }
 
 // Requisito 13
