@@ -1,11 +1,22 @@
+const { species } = require('./data');
 const data = require('./data');
 
-function getSpeciesByIds(ids) {
-  // seu código aqui
-}
+function getSpeciesByIds(...ids) {
+  const newArray = species.filter((specie) => ids.includes(specie.id))
+    return newArray
+} 
 
 function getAnimalsOlderThan(animal, age) {
   // seu código aqui
+  species.filter((specie) => {
+    if(specie.name === animal) {
+      specie.residents.every((idade) => {
+        if(idade >= age){
+          return true
+        }
+      })
+    }
+  })
 }
 
 function getEmployeeByName(employeeName) {
