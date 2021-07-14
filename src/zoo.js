@@ -86,8 +86,28 @@ function increasePrices(percentage) {
   });
 }
 
+function getAssignedAnimals(animals) {
+  return animals.map(
+    (animalId) => species.find(({ id }) => id === animalId).name,
+  );
+}
+function findByIdOrName({ id, firstName, lastName }, idOrName) {
+  return id === idOrName || firstName === idOrName || lastName === idOrName;
+}
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+  const assignedAnimals = {};
+
+  employees.forEach(({ firstName, lastName, responsibleFor }) => {
+    const key = `${firstName} ${lastName}`;
+    assignedAnimals[key] = getAssignedAnimals(responsibleFor);
+  });
+  if (idOrName) {
+    const { firstName, lastName } = employees
+      .find((employee) => findByIdOrName(employee, idOrName));
+    const key = `${firstName} ${lastName}`;
+    return { [key]: assignedAnimals[key] };
+  }
+  return assignedAnimals;
 }
 
 module.exports = {
