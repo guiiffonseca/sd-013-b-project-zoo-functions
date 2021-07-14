@@ -1,7 +1,6 @@
 const { species, employees, prices } = require('./data');
-const data = require('./data');
 
-// Requisito 1
+// Requirement 1
 // Refer1: https://pt.stackoverflow.com/questions/232954/como-passar-um-array-como-par%C3%A2metro-para-fun%C3%A7%C3%A3o
 // Refer2: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/includes
 function getSpeciesByIds(...ids) {
@@ -9,57 +8,49 @@ function getSpeciesByIds(...ids) {
   return species.filter(({ id }) => ids.includes(id));
 }
 
-// Requisito 2
+// Requirement 2
 function getAnimalsOlderThan(animalIn, ageIn) {
   return species.find(({ name }) => animalIn === name)
     .residents.every(({ age }) => age >= ageIn);
 }
 
-// Requisito 3
+// Requirement 3
 function getEmployeeByName(employeeName) {
   if (employeeName === undefined) return {};
   return employees.find(({ firstName, lastName }) =>
     employeeName === firstName || employeeName === lastName);
 }
 
-// Requisito 4 - Using an object spread instead of `Object.assign`
+// Requirement 4 - Using an object spread instead of `Object.assign`
 function createEmployee(personalInfo, associatedWith) {
   return { ...personalInfo, ...associatedWith };
 }
 
-// Requisito 5
+// Requirement 5
 function isManager(idInput) {
   const ownerId = '9e7d4524-363c-416a-8759-8aa7e50c0992';
   return employees.some(({ id, managers }) =>
     id === idInput && managers.includes(ownerId));
 }
 
-// Requisito 6
+// Requirement 6
 // Refer: https://ui.dev/shorthand-properties/
 // Refer: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Functions/Default_parameters
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-  return employees.push({
-    id,
-    firstName,
-    lastName,
-    managers,
-    responsibleFor,
-  });
+  return employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
 
-// Requisito 7
+// Requirement 7
 function countAnimals(speciesInput) {
   const countResidents = {};
   species.forEach(({ name, residents }) => {
     countResidents[name] = residents.length;
   });
-  if (speciesInput === undefined) {
-    return countResidents;
-  }
+  if (speciesInput === undefined) return countResidents;
   return countResidents[speciesInput];
 }
 
-// Requisito 8
+// Requirement 8
 function calculateEntry(entrants) {
   if (entrants === undefined || entrants === {}) return 0;
   const { Adult = 0, Senior = 0, Child = 0 } = entrants;
@@ -69,12 +60,12 @@ function calculateEntry(entrants) {
   return totalEntrants;
 }
 
-// Requisito 9
+// Requirement 9
 function getAnimalMap(options) {
   // seu código aqui
 }
 
-// Requisito 10
+// Requirement 10
 function getSchedule(dayName) {
   const fullSchedule = {
     Tuesday: 'Open from 8am until 6pm',
@@ -89,25 +80,26 @@ function getSchedule(dayName) {
   return { [dayName]: fullSchedule[dayName] };
 }
 
-// Requisito 11
-function findOldest(animals) {
-  let oldest = { age: -Infinity };
-  animals.forEach((animal) => {
-    if (animal.age > oldest.age) {
-      oldest = animal;
+// Requirement 11
+// Assistant Function
+function findOldest(animalList) {
+  let oldestAge = { age: 0 };
+  animalList.forEach((animalAge) => {
+    if (animalAge.age > oldestAge.age) {
+      oldestAge = animalAge;
     }
   });
-  return oldest;
+  return oldestAge;
 }
 
+// Main Function
 function getOldestFromFirstSpecies(id) {
-  const employee = employees.find((person) => person.id === id);
-  const firstId = employee.responsibleFor[0];
-  const firstSpecies = species.find((kind) => kind.id === firstId);
-  return Object.values(findOldest(firstSpecies.residents));
+  const selectEmployee = employees.find((employee) => employee.id === id);
+  const firstAnimal = species.find((animal) => (selectEmployee.responsibleFor[0]) === animal.id);
+  return Object.values(findOldest(firstAnimal.residents));
 }
 
-// Requisito 12
+// Requirement 12
 // Refer1: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/parseFloat
 // Refer2: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed
 function increasePrices(percentage) {
@@ -119,7 +111,7 @@ function increasePrices(percentage) {
   return prices;
 }
 
-// Requisito 13
+// Requirement 13
 const employeesList = {
   'Nigel Nelson': ['lions', 'tigers'],
   'Burl Bethea': ['lions', 'tigers', 'bears', 'penguins'],
@@ -131,13 +123,13 @@ const employeesList = {
   'Emery Elser': ['elephants', 'bears', 'lions'],
 };
 
-// Função Auxiliar
+// Assistant Function
 function findAnimal(arrayAnimals) {
   return arrayAnimals.map((animalId) => species.find((animalData) =>
     animalId === animalData.id).name);
 }
 
-// Função Principal
+// Main Function
 function getEmployeeCoverage(idOrName) {
   if (idOrName === undefined) return employeesList;
   const selectEmp = employees.find(({ id, firstName, lastName }) =>
