@@ -17,13 +17,12 @@ function getEmployeeByName(employeeName) {
   if (employeeName === undefined) return {};
 
   return employees.find((employee) =>
-    employee.firstName === employeeName || employee.lastName === employeeName)
-};
+    employee.firstName === employeeName || employee.lastName === employeeName);
+}
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
-  console.log(personalInfo, associatedWith)
-  return ({ personalInfo, associatedWith })
+  console.log(personalInfo, associatedWith);
 }
 
 function isManager(id) {
