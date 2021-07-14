@@ -8,15 +8,7 @@ function getSpeciesByIds(...ids) {
 
 function getAnimalsOlderThan(animal, age) {
   // seu código aqui
-  species.filter((specie) => {
-    if(specie.name === animal) {
-      specie.residents.every((idade) => {
-        if(idade >= age){
-          return true
-        }
-      })
-    }
-  })
+    return species.find((specie) => specie.name === animal).residents.every((ageAnimals) => ageAnimals.age >= age)
 }
 
 function getEmployeeByName(employeeName) {
