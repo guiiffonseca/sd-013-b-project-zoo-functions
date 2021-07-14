@@ -63,7 +63,13 @@ const getOldestFromFirstSpecies = (id) => {
   return Object.values(foundSpecie[0]);
 };
 
-function increasePrices(percentage) {}
+const increasePrices = (fee) => {
+  // altera o objeto prices.
+  // incrementa os valores, arredondando em 2 casas dec.
+  Object.keys(prices).forEach((i) => {
+    prices[i] = Math.ceil((prices[i] + (fee / 100) * prices[i]) * 100) / 100;
+  });
+};
 
 function getEmployeeCoverage(idOrName) {}
 
