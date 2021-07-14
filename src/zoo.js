@@ -98,33 +98,28 @@ function increasePrices(percentage) {
   return data.prices;
 }
 
+const getEmployeesTodos = () => data.employees.reduce((acc, { firstName, lastName, responsibleFor }) => {
+  acc[`${firstName} ${lastName}`] = animal(responsibleFor);
+  return acc;
+}, {});
+
+const animal = (responsibleFor) =>
+  responsibleFor.map((animal) =>
+    data.species.find((especie) => especie.id === animal).name);
+
+console.log(getEmployeesTodos());
+
 function getEmployeeCoverage(idOrName) {
   if (!idOrName) return getEmployeesTodos();
 
   const employeesTodos = data.employees.find((id) => id.id === idOrName
   || id.firstName === idOrName
   || id.lastName === idOrName);
-
   const name = { [`${employeesTodos.firstName} ${employeesTodos.lastName}`]:
   animal(employeesTodos.responsibleFor),
-
   };
-  return name;
-  
+  return name;  
 }
-
-const animal = (responsibleFor) =>
-  responsibleFor.map((animal) =>
-    data.species.find((especie) => especie.id === animal).name);
-
-const getEmployeesTodos = () => data.employees.reduce((acc, { firstName, lastName, responsibleFor }) => {
-  acc[`${firstName} ${lastName}`] = animal(responsibleFor);
-  return acc;
-}, {});
-
-console.log(getEmployeesTodos());
-
-
 
 module.exports = {
   calculateEntry,
