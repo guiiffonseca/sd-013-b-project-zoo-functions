@@ -104,11 +104,12 @@ function getOldestFromFirstSpecies(id) {
   const employee = employees.find((person) => person.id === id);
   const firstId = employee.responsibleFor[0];
   const firstSpecies = species.find((kind) => kind.id === firstId);
-
   return Object.values(findOldest(firstSpecies.residents));
 }
 
 // Requisito 12
+// Refer1: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/parseFloat
+// Refer2: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed
 function increasePrices(percentage) {
   Object.entries(prices).forEach(([key]) => {
     const percentNumber = percentage / 100;
@@ -138,14 +139,11 @@ function findAnimal(arrayAnimals) {
 
 // Função Principal
 function getEmployeeCoverage(idOrName) {
-  if (idOrName === undefined) {
-    return employeesList;
-  }
+  if (idOrName === undefined) return employeesList;
   const selectEmp = employees.find(({ id, firstName, lastName }) =>
     id === idOrName || firstName === idOrName || lastName === idOrName);
-  const nameEmp = `${selectEmp.firstName} ${selectEmp.lastName}`;
-  const animalEmp = findAnimal(selectEmp.responsibleFor);
-  return { [nameEmp]: animalEmp };
+  return ({ [`${selectEmp.firstName} ${selectEmp.lastName}`]:
+    findAnimal(selectEmp.responsibleFor) });
 }
 
 module.exports = {
