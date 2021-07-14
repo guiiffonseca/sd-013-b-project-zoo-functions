@@ -98,7 +98,7 @@ function increasePrices(percentage) {
   return data.prices;
 }
 
-const getEmployeesTodos = () => data.employees.reduce((acc, { firstName, lastName, responsibleFor }) => {
+const EmployeesTo = () => data.employees.reduce((acc, { firstName, lastName, responsibleFor }) => {
   acc[`${firstName} ${lastName}`] = animal(responsibleFor);
   return acc;
 }, {});
@@ -106,11 +106,10 @@ const getEmployeesTodos = () => data.employees.reduce((acc, { firstName, lastNam
 const animal = (responsibleFor) =>
   responsibleFor.map((animal) =>
     data.species.find((especie) => especie.id === animal).name);
-
-console.log(getEmployeesTodos());
+console.log(EmployeesTo());
 
 function getEmployeeCoverage(idOrName) {
-  if (!idOrName) return getEmployeesTodos();
+  if (!idOrName) return EmployeesTo();
 
   const employeesTodos = data.employees.find((id) => id.id === idOrName
   || id.firstName === idOrName
