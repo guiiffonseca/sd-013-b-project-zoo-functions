@@ -112,7 +112,6 @@ function getOldestFromFirstSpecies(id) {
 function increasePrices(percentage) {
   Object.entries(prices).forEach(([key]) => {
     const percentNumber = percentage / 100;
-    // prices[key] += (parseFloat(((prices[key] * percentNumber) + 0.007).toFixed(2)));
     prices[key] += (prices[key] * percentNumber) + 0.007;
     prices[key] = parseFloat((prices[key]).toFixed(2));
   });
@@ -120,8 +119,33 @@ function increasePrices(percentage) {
 }
 
 // Requisito 13
+const employeesList = {
+  'Nigel Nelson': ['lions', 'tigers'],
+  'Burl Bethea': ['lions', 'tigers', 'bears', 'penguins'],
+  'Ola Orloff': ['otters', 'frogs', 'snakes', 'elephants'],
+  'Wilburn Wishart': ['snakes', 'elephants'],
+  'Stephanie Strauss': ['giraffes', 'otters'],
+  'Sharonda Spry': ['otters', 'frogs'],
+  'Ardith Azevado': ['tigers', 'bears'],
+  'Emery Elser': ['elephants', 'bears', 'lions'],
+};
+
+// Função Auxiliar
+function findAnimal(arrayAnimals) {
+  return arrayAnimals.map((animalId) => species.find((animalData) =>
+    animalId === animalData.id).name);
+}
+
+// Função Principal
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+  if (idOrName === undefined) {
+    return employeesList;
+  }
+  const selectEmp = employees.find(({ id, firstName, lastName }) =>
+    id === idOrName || firstName === idOrName || lastName === idOrName);
+  const nameEmp = `${selectEmp.firstName} ${selectEmp.lastName}`;
+  const animalEmp = findAnimal(selectEmp.responsibleFor);
+  return { [nameEmp]: animalEmp };
 }
 
 module.exports = {
