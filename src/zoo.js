@@ -35,7 +35,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
 
-function countAnimals() {
+function countAnimals(speciesAnimals) {
   // seu código aqui
   // a função é sem parametros e deve retornar um objeto que vai conter o nome e a quantidade deles
   const animals = {};
@@ -43,8 +43,10 @@ function countAnimals() {
     const specieAnimals = specie.name;
     const quantifyAnimals = specie.residents.length;
     animals[specieAnimals] = quantifyAnimals;
-    console.log(animals);
   });
+  if (speciesAnimals) {
+    return animals[speciesAnimals];
+  } return animals;
 }
 
 function calculateEntry(entrants = {}) {
