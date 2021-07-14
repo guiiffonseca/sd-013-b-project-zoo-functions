@@ -89,6 +89,13 @@ function getOldestFromFirstSpecies(id) {
 
 function increasePrices(percentage) {
   // seu código aqui
+  // altera objeto prices
+  // ao passar a porcentagem incrementa o preço, arrendondar em duas casas decimais
+  Object.keys(prices).forEach((price) => {
+    let increasePrice = prices[price];
+    increasePrice = Math.ceil((increasePrice + (percentage / 100) * increasePrice) * 100) / 100;
+    prices[price] = increasePrice;
+  });
 }
 
 function getEmployeeCoverage(idOrName) {
