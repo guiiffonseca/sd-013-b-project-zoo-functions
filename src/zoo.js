@@ -30,7 +30,7 @@ function createEmployee(personalInfo, associatedWith) {
 
 function isManager(id) {
   // Verifica se o employee e gerente
-  return employees.some((employee) => employee.manager === id);
+  return data.employees.some((employee) => employee.managers.some((value) => value === id));
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
