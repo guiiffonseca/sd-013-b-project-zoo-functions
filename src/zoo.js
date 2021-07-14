@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 const data = require('./data');
 
-const { species, employees, prices, hours } = data;
+const { species, employees, prices } = data;
 
 const getSpeciesByIds = (...ids) => ids.map((id) => species.find((specie) => specie.id === id));
 
@@ -54,7 +54,14 @@ const getSchedule = (dayName) => {
   return { [dayName]: schedule[dayName] };
 };
 
-function getOldestFromFirstSpecies(id) {}
+const getOldestFromFirstSpecies = (id) => {
+// find busca por informaçoes.
+// retornar um [].
+  const foundEmployees = employees.find((el) => el.id === id).responsibleFor[0]; // passado o id do funcionario, encontra o primeiro animal(por isso o indice [0]).
+  const foundSpecie = species.find((sp) => sp.id === foundEmployees)
+    .residents.sort((a, b) => b.age - a.age); // encontra o species.id que da match com o employee.id e ordena as idades do maior para o menor. O mais velho estara na posiçao [0]
+  return Object.values(foundSpecie[0]);
+};
 
 function increasePrices(percentage) {}
 
