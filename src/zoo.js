@@ -98,26 +98,24 @@ function increasePrices(percentage) {
   return data.prices;
 }
 
+const nvAnimal = (responsibleFor) =>
+  responsibleFor.map((animal) =>
+    data.species.find((especie) => especie.id === animal).name);
+
 const EmployeesTo = () => data.employees.reduce((acc, { firstName, lastName, responsibleFor }) => {
-  acc[`${firstName} ${lastName}`] = animal(responsibleFor);
+  acc[`${firstName} ${lastName}`] = nvAnimal(responsibleFor);
   return acc;
 }, {});
 
-const animal = (responsibleFor) =>
-  responsibleFor.map((animal) =>
-    data.species.find((especie) => especie.id === animal).name);
-console.log(EmployeesTo());
-
 function getEmployeeCoverage(idOrName) {
   if (!idOrName) return EmployeesTo();
-
   const employeesTodos = data.employees.find((id) => id.id === idOrName
   || id.firstName === idOrName
   || id.lastName === idOrName);
   const name = { [`${employeesTodos.firstName} ${employeesTodos.lastName}`]:
-  animal(employeesTodos.responsibleFor),
+  nvAnimal(employeesTodos.responsibleFor),
   };
-  return name;  
+  return name;
 }
 
 module.exports = {
