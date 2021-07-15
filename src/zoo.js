@@ -71,7 +71,25 @@ const increasePrices = (fee) => {
   });
 };
 
-function getEmployeeCoverage(idOrName) {}
+const getEmployeeCoverage = (idOrName) => {
+  // sem o id ou o name, retornar um objeto com todos os funcionarios e todos os animais no formato employeeName : animalId.
+  const animalsById = {};
+  species.forEach((sp) => { animalsById[sp.id] = sp.name; });
+  const employeeById = {};
+  employees.forEach((employee) => {
+    employeeById[`${employee.firstName} ${employee.lastName}`] = employee
+      .responsibleFor.map((name) => animalsById[name]);
+  });
+  if (!idOrName) return employeeById;
+  const selectedEmployee = employees
+    .find(({ id, firstName, lastName }) => idOrName === id
+  || idOrName === firstName || idOrName === lastName);
+  return {
+    [`${selectedEmployee.firstName} ${selectedEmployee.lastName}`]:
+    selectedEmployee.responsibleFor.map((animalName) =>
+      animalsById[animalName]),
+  };
+};
 
 module.exports = {
   calculateEntry,
