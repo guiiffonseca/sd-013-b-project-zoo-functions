@@ -1,4 +1,4 @@
-const { species, employees, prices } = require('./data');
+const { species, employees, prices, hours } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -81,8 +81,8 @@ function calculateEntry(entrants) {
 // }
 // console.log(calculateEntry(test));
 
-function sexFilter(residents, sexSearched) {
-  return residents.filter(({ sex }) => sex === sexSearched);
+function sexFilter(actualResidents, sexSearched) {
+  return actualResidents.filter(({ sex }) => sex === sexSearched);
 }
 
 function sortByName(residents) {
@@ -126,12 +126,44 @@ function getAnimalMap(options) {
 }
 
 function getSchedule(dayName) {
-  // seu código aqui
+  const newSchedule = {};
+
+  const days = Object.keys(hours);
+  days.forEach((day) => {
+    const openTime = hours[day].open;
+    const closeTime = hours[day].close - 12;
+
+    if (openTime && closeTime) {
+      newSchedule[day] = `Open from ${openTime}am until ${closeTime}pm`;
+    } else {
+      newSchedule[day] = 'CLOSED';
+    }
+  });
+
+  if (!dayName) return newSchedule;
+
+  return { [dayName]: newSchedule[dayName] };
+}
+
+function sortByAge(residents) {
+  return residents.sort((age1, age2) => {
+    if (age1.age > age2.age) return 1;
+    if (age1.age < age2.age) return -1;
+    return 0;
+  });
 }
 
 function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+  const employee = employees.find((person) => person.id === id);
+  const firstAnimalId = employee.responsibleFor[0];
+  const firstSpecies = species.find((specie) => specie.id === firstAnimalId);
+
+  const ordenedByAge = sortByAge(firstSpecies.residents);
+  const lastAnimal = ordenedByAge[ordenedByAge.length - 1];
+  return [lastAnimal.name, lastAnimal.sex, lastAnimal.age];
 }
+
+console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
 
 function increasePrices(percentage) {
   // seu código aqui
