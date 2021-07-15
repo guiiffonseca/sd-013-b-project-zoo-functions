@@ -92,7 +92,6 @@ function sexFilter(actualResidents, sexSearched) {
   return actualResidents.filter(({ sex }) => sex === sexSearched);
 }
 
-
 function includeNames({ animalsRegions, sorted, sex }) {
   species.forEach(({ name, location, residents }) => {
     let actualResidents = [...residents];
@@ -126,7 +125,6 @@ function getAnimalMap(options) {
 
 function getSchedule(dayName) {
   const newSchedule = {};
-
   const days = Object.keys(hours);
   days.forEach((day) => {
     const openTime = hours[day].open;
@@ -140,9 +138,8 @@ function getSchedule(dayName) {
   });
 
   if (!dayName) return newSchedule;
-
-  return { 
-    [dayName]: newSchedule[dayName] 
+  return {
+    [dayName]: newSchedule[dayName],
   };
 }
 
