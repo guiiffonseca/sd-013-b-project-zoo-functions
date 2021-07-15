@@ -80,26 +80,25 @@ function calculateEntry(entrants) {
 //   Adult: 2,
 // }
 // console.log(calculateEntry(test));
+function sortByName(residents) {
+  return residents.sort((name1, name2) => {
+    if (name1.name < name2.name) return -1;
+    if (name1.name > name2.name) return 1;
+    return 0;
+  });
+}
 
 function sexFilter(actualResidents, sexSearched) {
   return actualResidents.filter(({ sex }) => sex === sexSearched);
 }
 
-function sortByName(residents) {
-  return residents.sort((name1, name2) => {
-    if (name1.name > name2.name) return 1;
-    if (name1.name < name2.name) return -1;
-    return 0;
-  });
-}
 
 function includeNames({ animalsRegions, sorted, sex }) {
   species.forEach(({ name, location, residents }) => {
     let actualResidents = [...residents];
 
-    if (sorted) actualResidents = sortByName(actualResidents);
-
     if (sex) actualResidents = sexFilter(actualResidents, sex);
+    if (sorted) actualResidents = sortByName(actualResidents);
 
     animalsRegions[location].push({
       [name]: actualResidents.map((animal) => animal.name),
@@ -116,7 +115,7 @@ function getAnimalMap(options) {
   };
 
   if (!options || !options.includeNames) {
-    species.every(({ name, location }) => animalsRegions[location].push(name));
+    species.forEach(({ name, location }) => animalsRegions[location].push(name));
     return animalsRegions;
   }
 
@@ -142,7 +141,9 @@ function getSchedule(dayName) {
 
   if (!dayName) return newSchedule;
 
-  return { [dayName]: newSchedule[dayName] };
+  return { 
+    [dayName]: newSchedule[dayName] 
+  };
 }
 
 function sortByAge(residents) {
@@ -163,7 +164,7 @@ function getOldestFromFirstSpecies(id) {
   return [lastAnimal.name, lastAnimal.sex, lastAnimal.age];
 }
 
-console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
+// console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
 
 function increasePrices(percentage) {
   // seu código aqui
