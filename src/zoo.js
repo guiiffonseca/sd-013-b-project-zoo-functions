@@ -65,8 +65,9 @@ function countAnimals(species2) {
     const arrayNames = creatingArrayAnimalNames();
     const arrayLength = createArrayAnimalCount();
     const animalCount = {};
-    // eslint-disable-next-line no-return-assign
-    arrayNames.forEach((animalName, i) => animalCount[animalName] = arrayLength[i]);
+    arrayNames.forEach((animalName, i) => {
+      animalCount[animalName] = arrayLength[i];
+    });
     return animalCount;
     // console.log(animalCount);
   }
