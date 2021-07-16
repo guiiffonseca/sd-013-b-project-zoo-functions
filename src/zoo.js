@@ -50,30 +50,30 @@ function creatingArrayAnimalNames() {
   species.map((specie) => array.push(specie.name));
   return array;
 }
-
-console.log(creatingArrayAnimalNames());
-
 // ^^ funcao de dependecia do countAnimals ^^
-function createArrayAnimalCount(array) {
+
+function createArrayAnimalCount() {
+  const array = [];
   species.map((specie) => array.push(specie.residents.length));
+  return array;
 }
 // ^^ funcao de dependecia do countAnimals ^^
 
 function countAnimals(species2) {
   // quando vazio retornar um objeto desse tipo: key = name ; value = residents.length for each
   if (species2 === undefined) {
-    const arr = [];
-    // creatingArrayAnimalNames(arr);
-
-    // const allAnimaisCount = ;
-  } else {
-    // resgatar o objeto da specie desejada pelo nome
-    const eachSpecie = species.find((specie) => specie.name === species2).residents;
-    // retornar o residents.length
-    return eachSpecie.length;
+    const arrayNames = creatingArrayAnimalNames();
+    const arrayLength = createArrayAnimalCount();
+    const animalCount = {};
+    arrayNames.forEach((animalName, i) => animalCount[animalName] = arrayLength[i]);
+    return animalCount;
+    // console.log(animalCount);
   }
+  // resgatar o objeto da specie desejada pelo nome
+  const eachSpecie = species.find((specie) => specie.name === species2).residents;
+  // retornar o residents.length
+  return eachSpecie.length;
 }
-
 countAnimals();
 // {
 //   'lions': 4,
