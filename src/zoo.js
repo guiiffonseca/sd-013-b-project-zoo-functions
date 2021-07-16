@@ -65,6 +65,7 @@ function countAnimals(species2) {
     const arrayNames = creatingArrayAnimalNames();
     const arrayLength = createArrayAnimalCount();
     const animalCount = {};
+    // eslint-disable-next-line no-return-assign
     arrayNames.forEach((animalName, i) => animalCount[animalName] = arrayLength[i]);
     return animalCount;
     // console.log(animalCount);
@@ -74,48 +75,6 @@ function countAnimals(species2) {
   // retornar o residents.length
   return eachSpecie.length;
 }
-countAnimals();
-// {
-//   'lions': 4,
-//   'tigers': 2,
-//   'bears': 3,
-//   'penguins': 4,
-//   'otters': 4,
-//   'frogs': 2,
-//   'snakes': 2,
-//   'elephants': 4,
-//   'giraffes': 6
-// };
-
-// const student1 = {
-//   Html: 'Muito Bom',
-//   Css: 'Bom',
-//   JavaScript: 'Ótimo',
-//   SoftSkills: 'Ótimo',
-// };
-
-// const student2 = {
-//   Html: 'Bom',
-//   Css: 'Ótimo',
-//   JavaScript: 'Ruim',
-//   SoftSkills: 'Ótimo',
-//   Git: 'Bom', // chave adicionada
-// };
-
-// const listSkills = (student) => {
-//   const arrayOfSkills = Object.keys(student);
-//   for(index in arrayOfSkills){
-//     console.log(`${arrayOfSkills[index]}, Nível: ${student[arrayOfSkills[index]]}`);
-//   }
-// };
-
-// console.log('Estudante 1');
-// listSkills(student1);
-
-// console.log('Estudante 2');
-// listSkills(student2);
-
-// // /////////////////////////////////////////////////////////////
 
 function calculateEntry(entrants) {
   // seu código aqui
