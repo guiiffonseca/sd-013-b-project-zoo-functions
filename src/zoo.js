@@ -78,12 +78,10 @@ function countAnimals(species2) {
 }
 
 function calculateEntry(entrants) {
-  // if (entrants === undefined || {}) {
-  //   return 0;
-  // }
+  if (entrants === undefined || null) {
+    return 0;
+  }
   const { Adult: A = 0, Child: C = 0, Senior: S = 0 } = entrants;
-  // const arrayPrices = Object.values(prices);
-  // console.log((prices.Adult) * A, C, S);
   return ((prices.Adult) * A) + ((prices.Child) * C) + ((prices.Senior) * S);
 }
 
