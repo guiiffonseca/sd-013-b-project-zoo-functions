@@ -68,7 +68,11 @@ function getSchedule(dayName) {
 }
 
 function getOldestFromFirstSpecies(id) {
-
+  const responsibleFor = employees.filter((employee) => employee.id === id)
+    .map((employeeMap) => employeeMap.responsibleFor);
+  const firstAnimal = species.find((animal) => animal.id === responsibleFor[0][0])
+    .residents.sort((a, b) => b.age - a.age)[0];
+  return [firstAnimal.name, firstAnimal.sex, firstAnimal.age];
 }
 
 function increasePrices(percentage) {
@@ -79,7 +83,7 @@ function increasePrices(percentage) {
 }
 
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+
 }
 
 module.exports = {
