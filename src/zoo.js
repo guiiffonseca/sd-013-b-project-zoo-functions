@@ -33,7 +33,6 @@ function isManager(id) {
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   // seu código aqui
   employees.push({ id, firstName, lastName, managers, responsibleFor });
-
 }
 // A chave na frente do objeto cria uma nova chave
 function countAnimals(specieAnimals) {
