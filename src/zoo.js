@@ -92,25 +92,25 @@ function getAnimalMap(options) {
 }
 
 function getSchedule(dayName) {
+  const objOpenTimes = {};
+  const arrayDay = Object.keys(hours);
+  const arrayValues = Object.values(hours);
+  const openTimes = arrayValues.map((i) => i.open);
+  const closeTimes = arrayValues.map((i) => i.close);
+  arrayDay.forEach((weekDay, i) => {
+    if (i !== 6) {
+      objOpenTimes[weekDay] = `Open from ${openTimes[i]}am until ${closeTimes[i] - 12}pm`;
+    }
+    objOpenTimes[weekDay] = 'CLOSED';
+  });
   if (dayName === undefined) {
-    const objOpenTimes = {};
-    const arrayDay = Object.keys(hours);
-    const arrayValues = Object.values(hours);
-    const openTimes = arrayValues.map((i) => i.open);
-    const closeTimes = arrayValues.map((i) => i.close);
-
-    arrayDay.forEach((weekDay, i) => {
-      objOpenTimes[weekDay] = openTimes[i];
-    });
-
-    // openTimes ${openTimes}, closeTimes ${closeTimes}
-    // console.log(`arrayDay ${arrayDay}, openTimes ${hours.Tuesday.open}, geral ${objOpenTimes}`);
-    console.log(objOpenTimes, arrayValues, openTimes);
+    return objOpenTimes;
   }
+  const singleOpenTime = {};
+  singleOpenTime[dayName] = objOpenTimes[dayName];
+  return singleOpenTime;
 }
-// 'Sunday' = ´Open from ${8}am until ${8}pm´;
-// 'Monday':'CLOSED'
-getSchedule();
+console.log(getSchedule('Monday'));
 
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
