@@ -22,7 +22,7 @@ function getEmployeeByName(employeeName) {
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
-  return { ...personalInfo, ...associatedWith }; 
+  return { ...personalInfo, ...associatedWith };
 }
 
 function isManager(id) {
@@ -34,7 +34,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   // seu código aqui
   employees.push({ id, firstName, lastName, managers, responsibleFor });
 
-};
+}
 // A chave na frente do objeto cria uma nova chave
 function countAnimals(specieAnimals) {
   // seu código aqui
@@ -42,7 +42,7 @@ function countAnimals(specieAnimals) {
   species.forEach((specie) => { newObject[specie.name] = specie.residents.length; });
   if (specieAnimals === undefined) {
     return newObject;
-  }; 
+  }
   return newObject[specieAnimals];
 }
 
