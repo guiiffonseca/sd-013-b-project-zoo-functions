@@ -20,7 +20,9 @@ function getAnimalsOlderThan(animal, age) {
 }
 // retorna o obj do empregado baseado em seu nome ou sobrenome, ou se não, devolve vazio
 function getEmployeeByName(employeeName) {
-  if (!employeeName) return {};
+  if (!employeeName) {
+    return {};
+  }
   return employees.find(({ firstName, lastName }) =>
     firstName === employeeName
   || lastName === employeeName);
@@ -53,9 +55,19 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   });
 }
 
-// function countAnimals(species) {
-//    // seu código aqui
-// }
+function countAnimals(animal) {
+  const overallAnimalsCount = {};
+
+  if (!animal) {
+    species.forEach((animals) => {
+      overallAnimalsCount[animals.name] = animals.residents.length;
+    });
+    return overallAnimalsCount;
+  }
+  const animalCount = species.find(({ name }) => (name === animal));
+  // nao entendi a necessidade desses () no fim da linha anterior
+  return animalCount.residents.length;
+}
 
 function calculateEntry(entrants) {
   // seu código aqui
@@ -84,7 +96,7 @@ function getEmployeeCoverage(idOrName) {
 module.exports = {
   calculateEntry,
   getSchedule,
-  // countAnimals,
+  countAnimals,
   getAnimalMap,
   getSpeciesByIds,
   getEmployeeByName,
