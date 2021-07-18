@@ -98,10 +98,9 @@ function getSchedule(dayName) {
   const openTimes = arrayValues.map((i) => i.open);
   const closeTimes = arrayValues.map((i) => i.close);
   arrayDay.forEach((weekDay, i) => {
+    objOpenTimes[weekDay] = `Open from ${openTimes[i]}am until ${closeTimes[i] - 12}pm`;
     if (weekDay === 'Monday') {
       objOpenTimes[weekDay] = 'CLOSED';
-    } else {
-      objOpenTimes[weekDay] = `Open from ${openTimes[i]}am until ${closeTimes[i] - 12}pm`;
     }
   });
   if (dayName === undefined) {
@@ -111,19 +110,53 @@ function getSchedule(dayName) {
   singleOpenTime[dayName] = objOpenTimes[dayName];
   return singleOpenTime;
 }
+// console.log(getSchedule());
 
 function getOldestFromFirstSpecies(id) {
   const firtSpecie = employees.find((emp) => emp.id === id).responsibleFor[0];
   const specie = species.find((s) => s.id === firtSpecie).residents;
   const sorted = specie.sort((a, b) => b.age - a.age)[0];
   return Object.values(sorted);
-  // console.log(sorted);
 }
-console.log(getOldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
 
 function increasePrices(percentage) {
-  // seu código aqui
+  const values = Object.values(prices);
+  const keys = Object.keys(prices);
+  const increasedPrices = {};
+  function increasing(array) {
+    const x = array.map((each) => (Math.ceil(each * (percentage + 100)) / 100));
+    keys.forEach((key, i) => {
+      increasedPrices[key] = x[i];
+    });
+  }
+  // const increasedValues = Object.values(increasedPrices);
+  increasing(values);
+  return increasedPrices;
+  // if (increasedPrices === {}) {
+  // }
+  // increasing(increasedValues);
+  // return increasedPrices;
 }
+console.log(increasePrices(50));
+
+// ------------------------- opicao 1 ---------
+// const increasedPrices = {};
+// const values = Object.values(prices);
+// const keys = Object.keys(prices);
+// function increasing(array) {
+//   const x = array.map((each) => (Math.ceil(each * (percentage + 100)) / 100));
+//   keys.forEach((key, i) => {
+//     increasedPrices[key] = x[i];
+//   });
+// }
+// const increasedValues = Object.values(increasedPrices);
+// if (increasedPrices === {}) {
+//   increasing(values);
+//   console.log(values);
+//   return increasedPrices;
+// }
+// increasing(increasedValues);
+// return increasedPrices;
 
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
