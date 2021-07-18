@@ -2,6 +2,7 @@ const data = require('./data');
 
 const { species } = data; // dica do code review do panta(?, not sure)
 const { employees } = data;
+const { prices } = data;
 
 // devolve o novo array com todos os species.id
 // o include testa se existe o parametro dentro do obj e retorna true;
@@ -57,7 +58,6 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 
 function countAnimals(animal) {
   const overallAnimalsCount = {};
-
   if (!animal) {
     species.forEach((animals) => {
       overallAnimalsCount[animals.name] = animals.residents.length;
@@ -69,8 +69,15 @@ function countAnimals(animal) {
   return animalCount.residents.length;
 }
 
-function calculateEntry(entrants) {
-  // seu código aqui
+function calculateEntry(customer) {
+  if (!customer || !Object.keys(customer).length) {
+    return 0;
+  }
+  // perguntar pq essa desestruturacao precisa do zer0
+  const { Child = 0, Adult = 0, Senior = 0 } = customer;
+  return Child * prices.Child
+    + Adult * prices.Adult
+    + Senior * prices.Senior;
 }
 
 function getAnimalMap(options) {
