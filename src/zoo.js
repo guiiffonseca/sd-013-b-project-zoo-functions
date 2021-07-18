@@ -122,22 +122,22 @@ function getOldestFromFirstSpecies(id) {
 function increasePrices(percentage) {
   const values = Object.values(prices);
   const keys = Object.keys(prices);
-  const increasedPrices = {};
+  // const increasedPrices = {};
   function increasing(array) {
     const x = array.map((each) => (Math.ceil(each * (percentage + 100)) / 100));
     keys.forEach((key, i) => {
-      increasedPrices[key] = x[i];
+      prices[key] = x[i];
     });
   }
   // const increasedValues = Object.values(increasedPrices);
   increasing(values);
-  return increasedPrices;
+  return prices;
   // if (increasedPrices === {}) {
   // }
   // increasing(increasedValues);
   // return increasedPrices;
 }
-console.log(increasePrices(50));
+// console.log(increasePrices(50));
 
 // ------------------------- opicao 1 ---------
 // const increasedPrices = {};
