@@ -22,19 +22,28 @@ function getEmployeeByName(employeeName) {
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
-  console.log(personalInfo, associatedWith);
+   return { ...personalInfo, ...associatedWith }   
 }
 
 function isManager(id) {
   // seu código aqui
+  return employees.some((employee) => employee.managers.includes(id))
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   // seu código aqui
-}
+  employees.push({ id, firstName, lastName, managers, responsibleFor })
 
-function countAnimals() {
+}
+// A chave na frente do objeto cria uma nova chave
+function countAnimals(specieAnimals) {
   // seu código aqui
+  const newObject = {}
+  species.forEach((specie) => { newObject[specie.name] = specie.residents.length; });
+  if (specieAnimals === undefined) {
+    return newObject
+  } 
+  return newObject[specieAnimals]
 }
 
 function calculateEntry(entrants) {
