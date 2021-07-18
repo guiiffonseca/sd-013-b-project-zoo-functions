@@ -3,6 +3,7 @@ const data = require('./data');
 const { species } = data; // dica do code review do panta(?, not sure)
 const { employees } = data;
 const { prices } = data;
+const { hours } = data;
 
 // devolve o novo array com todos os species.id
 // o include testa se existe o parametro dentro do obj e retorna true;
@@ -80,12 +81,44 @@ function calculateEntry(customer) {
     + Senior * prices.Senior;
 }
 
-function getAnimalMap(options) {
-  // seu código aqui
+// resolver essa aqui para seguir na 9
+function toFindAllLocations(animals) {
+  const localization = [];
+  species.forEach((animal) => {
+    localization.push(species.location);
+  });
+  return localization;
 }
+// muita coisa, deixar para depois
+function getAnimalMap(options) {
+  const animalLocation = toFindAllLocations(species);
 
-function getSchedule(dayName) {
-  // seu código aqui
+  if (!options) {
+    species.forEach(({ name, location }) => animalLocation[location].push(name));
+    return animalLocation;
+  }
+}
+// funcao auxiliar de getSchedule
+const operatingHours = (day) => {
+  let workingHours = `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`;
+  if (day === 'Monday') {
+    workingHours = 'CLOSED';
+  }
+  return workingHours;
+};
+
+// pq nao ta funcionando?
+function getSchedule(dayOfTheWeek) {
+  const days = Object.keys(hours);
+  const schedule = {};
+
+  if (!dayOfTheWeek) {
+    days.forEach((day) => {
+      schedule[day] = operatingHours(day);
+    });
+    return schedule;
+  }
+  return { [dayOfTheWeek]: operatingHours(dayOfTheWeek) };
 }
 
 function getOldestFromFirstSpecies(id) {
