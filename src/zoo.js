@@ -1,7 +1,6 @@
 const { species, employees } = require('./data');
 const data = require('./data');
 
-// eslint-disable-next-line no-shadow
 function getSpeciesByIds(...ids) {
   // Retorna o id das especies
   const idReturn = species.filter((specie) => ids.includes(specie.id));
@@ -48,6 +47,13 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 
 function countAnimals(speecies) {
   // Retorna a contagem dos animais
+  if (!speecies) {
+    const something = { };
+    species.forEach(({ name, residents }) => { something[name] = residents.length; });
+    return something;
+  }
+  const getCount = species.find(({ name }) => name === speecies);
+  return getCount.residents.length;
 }
 
 function calculateEntry(entrants) {
