@@ -70,7 +70,7 @@ function getAnimalMap(options) {
 }
 
 function getSchedule(dayName) {
-  // Pega a agenda do dia, diz quando o zologico abre e quando fecha 
+  // Pega a agenda do dia, diz quando o zologico abre e quando fecha
   const schedule = {};
   Object.keys(hours).forEach((day) => {
     schedule[day] = `Open from ${hours[day].open}am until ${(hours[day].close) - 12}pm`;
