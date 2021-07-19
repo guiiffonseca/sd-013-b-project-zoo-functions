@@ -104,9 +104,59 @@ function increasePrices(percentage) {
   return prices;
 }
 
-function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+//  Bloco de funções auxiliares a getEmployeeCoverage()
+function getSpeciesName(id) {
+  const foundAnimal = species.find((elem) => elem.id === id);
+  return foundAnimal.name;
 }
+
+function idQuery(idMatch) {
+  const output = {};
+  const keyName = `${idMatch.firstName} ${idMatch.lastName}`;
+  const keyValue = idMatch.responsibleFor.map((elem) => getSpeciesName(elem));
+  output[keyName] = keyValue;
+  return output;
+}
+
+function firstNameQuery(firstNameMatch) {
+  const output = {};
+  const keyName = `${firstNameMatch.firstName} ${firstNameMatch.lastName}`;
+  const keyValue = firstNameMatch.responsibleFor.map((elem) => getSpeciesName(elem));
+  output[keyName] = keyValue;
+  return output;
+}
+
+function lastNameQuery(lastNameMatch) {
+  const output = {};
+  const keyName = `${lastNameMatch.firstName} ${lastNameMatch.lastName}`;
+  const keyValue = lastNameMatch.responsibleFor.map((elem) => getSpeciesName(elem));
+  output[keyName] = keyValue;
+  return output;
+}
+//  Fim do bloco auxiliar
+
+function getEmployeeCoverage(idOrName) {
+  const fullCoverage = {};
+  const firstNameMatch = employees.find((param) => param.firstName === idOrName);
+  const lastNameMatch = employees.find((param) => param.lastName === idOrName);
+  const idMatch = employees.find((param) => param.id === idOrName);
+  if (idMatch !== undefined) { return idQuery(idMatch); }
+  if (firstNameMatch !== undefined) { return firstNameQuery(firstNameMatch); }
+  if (lastNameMatch !== undefined) { return lastNameQuery(lastNameMatch); }
+
+  const allEmployees = employees.map((parameter) => `${parameter.firstName} ${parameter.lastName}`);
+  const allCoverage = employees.map((elem) => elem.responsibleFor);
+
+  for (let index = 0; index < allCoverage.length; index += 1) {
+    const keyName = allEmployees[index];
+    fullCoverage[keyName] = allCoverage[index].map((elem) => getSpeciesName(elem));
+  }
+  return fullCoverage;
+}
+
+getEmployeeCoverage('Azevado');
+getEmployeeCoverage('Stephanie');
+getEmployeeCoverage('4b40a139-d4dc-4f09-822d-ec25e819a5ad');
 
 module.exports = {
   calculateEntry,
