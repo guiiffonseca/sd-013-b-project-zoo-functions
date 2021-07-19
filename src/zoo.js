@@ -139,8 +139,15 @@ function getOldestFromFirstSpecies(employeeID) {
   return Object.values(getOldest(animalSpecie.residents));
 }
 
+// DESGRAÇA DE TESTEEEEEEEEEEEEEEEEE
+function calculateIncresedPrice(oldPrice, percentage) {
+  return Math.ceil(oldPrice * (percentage / 100 + 1) * 100) / 100;
+}
+
 function increasePrices(percentage) {
-  // seu código aqui
+  prices.Adult = calculateIncresedPrice(prices.Adult, percentage);
+  prices.Senior = calculateIncresedPrice(prices.Senior, percentage);
+  prices.Child = calculateIncresedPrice(prices.Child, percentage);
 }
 
 function getEmployeeCoverage(idOrName) {
