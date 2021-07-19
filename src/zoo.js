@@ -98,7 +98,7 @@ function getAnimalMap(options) {
     return animalLocation;
   }
 }
-// funcao auxiliar de getSchedule
+// funcao auxiliar de getSchedule (lint)
 const operatingHours = (day) => {
   let workingHours = `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`;
   if (day === 'Monday') {
@@ -107,7 +107,6 @@ const operatingHours = (day) => {
   return workingHours;
 };
 
-// pq nao ta funcionando?
 function getSchedule(dayOfTheWeek) {
   const days = Object.keys(hours);
   const schedule = {};
@@ -120,9 +119,24 @@ function getSchedule(dayOfTheWeek) {
   }
   return { [dayOfTheWeek]: operatingHours(dayOfTheWeek) };
 }
+// funcao auxiliar de getOldestFromFirstSpecies (lint)
+function getOldest(animals) {
+  let oldestAnimal = { age: 0 };
+  animals.forEach((resident) => {
+    if (resident.age > oldestAnimal.age) {
+      oldestAnimal = resident;
+    }
+  });
+  return oldestAnimal;
+}
 
-function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+function getOldestFromFirstSpecies(employeeID) {
+  // não precisa de todas essas linhas, mas assim fica mais didático
+  const employee = employees.find((ID) => (ID.id === employeeID));
+  const firstResponsibleFor = employee.responsibleFor[0];
+  const animalSpecie = species.find((animal) => animal.id === firstResponsibleFor);
+
+  return Object.values(getOldest(animalSpecie.residents));
 }
 
 function increasePrices(percentage) {
