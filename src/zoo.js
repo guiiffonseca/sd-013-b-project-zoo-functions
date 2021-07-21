@@ -135,25 +135,27 @@ function increasePrices(percentage) {
 // console.log(increasePrices(50));
 
 function getEmployeeCoverage(idOrName) {
-  // const animalNames = employees.reduce((acc, employee) => {
-  //   getSpeciesByIds(employee.responsibleFor)
-  //   return employee.responsibleFor.map((animmalId) => {
+  const animalNames = employees.reduce((acc, employee) => {
+    acc.push(employee.responsibleFor
+      .map((specieId) => species.find((specie) => specie.id === specieId))
+      .map((specie) => specie.name));
+    return acc;
+  }, []);
 
-  //   })
-  // },[]);
-  console.log(employees[0].responsibleFor);
-  const speciesIds = employees[0].responsibleFor;
-  const speciesArrObj = speciesIds.map((specieId) => species.find((specie) => specie.id === specieId));
-  console.log(speciesArrObj.map((specie) => specie.name));
-
-  const objReturn = employees.reduce((acc, employee) => {
-    acc[`${employee.firstName} ${employee.lastName}`] = 'animalNames';
+  const objReturn = employees.reduce((acc, employee, i) => {
+    acc[`${employee.firstName} ${employee.lastName}`] = animalNames[i];
     return acc;
   }, {});
-  
+
   return objReturn;
 }
-console.log(getEmployeeCoverage());
+// console.log(employees[0].responsibleFor);
+// const speciesIds = employees[0].responsibleFor;
+// const speciesArrObj = speciesIds.map((specieId) => species.find((specie) => specie.id === specieId));
+// const arrSpecieNames = speciesArrObj.map((specie) => specie.name);
+// console.log();
+
+// console.log(getEmployeeCoverage());
 
 module.exports = {
   calculateEntry,
