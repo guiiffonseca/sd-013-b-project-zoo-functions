@@ -53,8 +53,9 @@ function countAnimals(species) {
   return Object.fromEntries(arrayCountAnimals);
 }
 
-function calculateEntry(entrants) {
+function calculateEntry({ Adult = 0, Child = 0, Senior = 0 } = 0) {
   // seu código aqui
+  return (Adult * 49.99 + Child * 20.99 + Senior * 24.99);
 }
 
 function getAnimalMap(options) {
