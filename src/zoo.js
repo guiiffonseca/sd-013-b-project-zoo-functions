@@ -133,29 +133,46 @@ function increasePrices(percentage) {
   return prices;
 }
 // console.log(increasePrices(50));
-
-function getEmployeeCoverage(idOrName) {
+function employeeCoverageObj() {
   const animalNames = employees.reduce((acc, employee) => {
     acc.push(employee.responsibleFor
       .map((specieId) => species.find((specie) => specie.id === specieId))
       .map((specie) => specie.name));
     return acc;
   }, []);
-
   const objReturn = employees.reduce((acc, employee, i) => {
     acc[`${employee.firstName} ${employee.lastName}`] = animalNames[i];
     return acc;
   }, {});
-
   return objReturn;
 }
-// console.log(employees[0].responsibleFor);
-// const speciesIds = employees[0].responsibleFor;
-// const speciesArrObj = speciesIds.map((specieId) => species.find((specie) => specie.id === specieId));
-// const arrSpecieNames = speciesArrObj.map((specie) => specie.name);
-// console.log();
 
-// console.log(getEmployeeCoverage());
+function createFullName(idOrName) {
+  const empById = employees.find((emp) => emp.id === idOrName);
+  if (empById === undefined) {
+    const empByName = employees.find((emp) => emp.firstName === idOrName);
+    if (empByName === undefined) {
+      const empByLastName = employees.find((emp) => emp.lastName === idOrName);
+      const empByLastNameObj = `${empByLastName.firstName} ${empByLastName.lastName}`;
+      return empByLastNameObj;
+    }
+    const empByNameObj = `${empByName.firstName} ${empByName.lastName}`;
+    return empByNameObj;
+  }
+  const empByIdjObj = `${empById.firstName} ${empById.lastName}`;
+  return empByIdjObj;
+}
+
+function getEmployeeCoverage(idOrName) {
+  const fullObj = employeeCoverageObj();
+  if (idOrName === undefined) {
+    return fullObj;
+  }
+  const fullName = createFullName(idOrName);
+  return { [fullName]: fullObj[fullName] };
+}
+
+console.log(getEmployeeCoverage('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
 
 module.exports = {
   calculateEntry,
