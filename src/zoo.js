@@ -2,15 +2,15 @@ const data = require('./data');
 
 function getSpeciesByIds(...ids) {
   // seu código aqui
-  let searchedIds = [];
-  ids.forEach((id) => {
-    searchedIds = [...searchedIds, ...(data.species.filter(({ id: ID }) => ID === id))];
-  });
-  return searchedIds;
+  return ids.reduce((species, id) => {
+    return [...species, data.species.find(({ id: ID }) => ID === id)];
+  }, []);
 }
 
 function getAnimalsOlderThan(animal, age) {
   // seu código aqui
+  const filteredAnimals = data.species.filter(({ name }) => (name === animal));
+  console.log(filteredAnimals);
 }
 
 function getEmployeeByName(employeeName) {
