@@ -1,9 +1,9 @@
-const { employees } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
   // seu código aqui
-  return ids.reduce((array, targetId) => [...array, data.species.find(({ id }) => targetId === id)], []);
+  const { species } = data;
+  return ids.reduce((array, targetId) => [...array, species.find(({ id }) => targetId === id)], []);
 }
 
 function getAnimalsOlderThan(animal, age) {
@@ -12,10 +12,10 @@ function getAnimalsOlderThan(animal, age) {
   return filteredAnimals.residents.every(({ age: AGE }) => AGE >= age);
 }
 
-function getEmployeeByName(employeeName) {
+function getEmployeeByName(name) {
   // seu código aqui
-  const findEmployeeByName = ({ firstName, lastName }) => firstName === employeeName || lastName === employeeName;
-  const employee = data.employees.find(findEmployeeByName);
+  const findEmployee = ({ firstName, lastName }) => firstName === name || lastName === name;
+  const employee = data.employees.find(findEmployee);
   return (employee !== undefined ? employee : {});
 }
 
@@ -26,7 +26,10 @@ function createEmployee(personalInfo, associatedWith) {
 
 function isManager(id) {
   // seu código aqui
-  return data.employees.reduce((managerState, employee) => employee.managers.some((managerId) => managerId === id) ? true : managerState, false);
+  return data.employees.reduce((managerState, employee) => {
+    const state = employee.managers.some((managerId) => managerId === id) ? true : managerState;
+    return state;
+  }, false);
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
@@ -58,7 +61,7 @@ function calculateEntry({ Adult = 0, Child = 0, Senior = 0 } = 0) {
   return (Adult * 49.99 + Child * 20.99 + Senior * 24.99);
 }
 
-function getAnimalMap(options) {
+function getAnimalMap({ includeNames = false, sorted = false, sex }) {
   // seu código aqui
 }
 
