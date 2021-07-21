@@ -29,8 +29,18 @@ function isManager(id) {
   return data.employees.reduce((managerState, employee) => employee.managers.some((managerId) => managerId === id) ? true : managerState, false);
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   // seu código aqui
+  const newEmployee = {
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  };
+
+  console.log(newEmployee);
+  data.employees.push(newEmployee);
 }
 
 function countAnimals(species) {
