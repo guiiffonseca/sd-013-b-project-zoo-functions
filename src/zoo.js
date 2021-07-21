@@ -2,9 +2,7 @@ const data = require('./data');
 
 function getSpeciesByIds(...ids) {
   // seu código aqui
-  return ids.reduce((species, id) => {
-    return [...species, data.species.find(({ id: ID }) => ID === id)];
-  }, []);
+  return ids.reduce((array, targetId) => [...array, data.species.find(({ id }) => targetId === id)], []);
 }
 
 function getAnimalsOlderThan(animal, age) {
@@ -15,10 +13,14 @@ function getAnimalsOlderThan(animal, age) {
 
 function getEmployeeByName(employeeName) {
   // seu código aqui
+  const findEmployeeByName = ({ firstName, lastName }) => firstName === employeeName || lastName === employeeName;
+  const employee = data.employees.find(findEmployeeByName);
+  return (employee !== undefined ? employee : {});
 }
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
+  return { ...personalInfo, ...associatedWith };
 }
 
 function isManager(id) {
