@@ -129,38 +129,31 @@ function increasePrices(percentage) {
       prices[key] = x[i];
     });
   }
-  // const increasedValues = Object.values(increasedPrices);
   increasing(values);
   return prices;
-  // if (increasedPrices === {}) {
-  // }
-  // increasing(increasedValues);
-  // return increasedPrices;
 }
 // console.log(increasePrices(50));
 
-// ------------------------- opicao 1 ---------
-// const increasedPrices = {};
-// const values = Object.values(prices);
-// const keys = Object.keys(prices);
-// function increasing(array) {
-//   const x = array.map((each) => (Math.ceil(each * (percentage + 100)) / 100));
-//   keys.forEach((key, i) => {
-//     increasedPrices[key] = x[i];
-//   });
-// }
-// const increasedValues = Object.values(increasedPrices);
-// if (increasedPrices === {}) {
-//   increasing(values);
-//   console.log(values);
-//   return increasedPrices;
-// }
-// increasing(increasedValues);
-// return increasedPrices;
-
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+  // const animalNames = employees.reduce((acc, employee) => {
+  //   getSpeciesByIds(employee.responsibleFor)
+  //   return employee.responsibleFor.map((animmalId) => {
+
+  //   })
+  // },[]);
+  console.log(employees[0].responsibleFor);
+  const speciesIds = employees[0].responsibleFor;
+  const speciesArrObj = speciesIds.map((specieId) => species.find((specie) => specie.id === specieId));
+  console.log(speciesArrObj.map((specie) => specie.name));
+
+  const objReturn = employees.reduce((acc, employee) => {
+    acc[`${employee.firstName} ${employee.lastName}`] = 'animalNames';
+    return acc;
+  }, {});
+  
+  return objReturn;
 }
+console.log(getEmployeeCoverage());
 
 module.exports = {
   calculateEntry,
