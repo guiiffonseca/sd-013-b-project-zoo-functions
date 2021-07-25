@@ -1,5 +1,5 @@
 // Dica recebida na sala de estudo
-const { species, employees, prices } = require('./data');
+const { species, employees, prices, hours } = require('./data');
 
 function getSpeciesByIds(...ids) {
   if (typeof ids === 'undefined') {
@@ -64,7 +64,16 @@ function getAnimalMap(options) {
 }
 
 function getSchedule(dayName) {
-
+  const hour = Object.keys(hours);
+  const days = hour.reduce((accumulator, currentValue) => {
+    accumulator[currentValue] = `Open from ${hours[currentValue].open}am until ${hours[currentValue].close - 12}pm`;
+    return accumulator;
+  }, {});
+  days.Monday = 'CLOSED';
+  if (dayName in days) {
+    return { [dayName]: days[dayName] };
+  }
+  return days;
 }
 
 function getOldestFromFirstSpecies(id) {
