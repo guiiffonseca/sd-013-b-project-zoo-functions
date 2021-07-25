@@ -1,4 +1,4 @@
-const { species, employees } = require('./data');
+const { species, employees, prices } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -53,18 +53,53 @@ function countAnimals(specieName) {
     : species.find((specie) => specie.name === specieName).residents.length;
 }
 
-console.log(countAnimals());
-
-function calculateEntry(entrants) {
-  // seu código aqui
+function entry(entrants) {
 }
 
+function calculateEntry(entrants) {
+  return (!entrants) ? 0
+    : entry();
+}
+
+// function getAnimalsByLocation() {
+//   return ({
+//     NE: species.filter((specie) => specie.location === 'NE').map((specie) => specie.name),
+//     NW: species.filter((specie) => specie.location === 'NW').map((specie) => specie.name),
+//     SE: species.filter((specie) => specie.location === 'SE').map((specie) => specie.name),
+//     SW: species.filter((specie) => specie.location === 'SW').map((specie) => specie.name),
+//   });
+// }
+//
+// function whatever(...options) {
+//   const { includeNames, sorted, sex } = options;
+//   if (includeNames) {
+//     return ({
+//       NE: species.filter((specie) => specie.location === 'NW').map((specie) => specie.name),
+//       NW: species.filter((specie) => specie.location === 'NW').map((specie) => specie.name),
+//       SE: species.filter((specie) => specie.location === 'SE').map((specie) => specie.name),
+//       SW: species.filter((specie) => specie.location === 'SW').map((specie) => specie.name),
+//     });
+//   }
+// }
+//
 function getAnimalMap(options) {
-  // seu código aqui
+//   return (!options) ? getAnimalsByLocation()
+//     : whatever();
 }
 
 function getSchedule(dayName) {
-  // seu código aqui
+  const schedule = {
+    Tuesday: 'Open from 8am until 6pm',
+    Wednesday: 'Open from 8am until 6pm',
+    Thursday: 'Open from 10am until 8pm',
+    Friday: 'Open from 10am until 8pm',
+    Saturday: 'Open from 8am until 10pm',
+    Sunday: 'Open from 8am until 8pm',
+    Monday: 'CLOSED',
+  };
+  if (dayName) {
+    return { [dayName]: schedule[dayName] };
+  } return schedule;
 }
 
 function getOldestFromFirstSpecies(id) {
