@@ -1,12 +1,21 @@
-const data = require('./data');
+const { species, employees, prices } = require('./data');
 
 function getSpeciesByIds(ids) {
   // seu código aqui
 }
 
 function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
+  const specie = species.find((element) => element.name === animal);
+  const residents = specie.residents;
+  const verificarAge = residents.every((specie) => specie.age > age -1);
+  // (1) CAPTURAR o ARRAY que contem o NAME DAS ESPECIES: FIND
+  // está dentro da chave > Especies > NAME > RESIDENTS
+  // (2) VERIFICAR e retornar um valor boleano: não
+  // (2.1) array.every       
+  // console.log(specie);
+ return verificarAge; 
 }
+console.log(getAnimalsOlderThan('lions', 7));
 
 function getEmployeeByName(employeeName) {
   // seu código aqui
