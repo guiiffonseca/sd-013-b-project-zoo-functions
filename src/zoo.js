@@ -47,12 +47,10 @@ function countAnimals(specieAnimals) {
 
 function calculateEntry(entrants) {
   if (!entrants) {
-    return 0
+    return 0;
   }
-  const keys = Object.keys(entrants)
-  return keys.reduce((acc, curr) => {
-    return acc + data.prices[curr] * entrants[curr]
-  }, 0) 
+  const keys = Object.keys(entrants);
+  return keys.reduce((acc, curr) => acc + data.prices[curr] * entrants[curr], 0);
 }
 
 function getAnimalMap(options) {
