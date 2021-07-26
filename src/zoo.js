@@ -63,17 +63,44 @@ function countAnimals(animal) {
   return output;
 }
 
+const adultsCount = (givenAdultsCount) => {
+  let output;
+  if (givenAdultsCount !== undefined) {
+    output = givenAdultsCount;
+  } else {
+    output = 0;
+  }
+  return output;
+};
+
+const childrenCount = (givenChildrenCount) => {
+  let output;
+  if (givenChildrenCount !== undefined) {
+    output = givenChildrenCount;
+  } else {
+    output = 0;
+  }
+  return output;
+};
+
+const seniorsCount = (givenSeniorsCount) => {
+  let output;
+  if (givenSeniorsCount !== undefined) {
+    output = givenSeniorsCount;
+  } else {
+    output = 0;
+  }
+  return output;
+};
+
 function calculateEntry(entrants) {
   let output;
   if (entrants === undefined || entrants === {}) {
     output = 0;
   } else {
-    let adult;
-    let child;
-    let senior;
-    entrants.Adult !== undefined ? adult = entrants.Adult : adult = 0;
-    entrants.Child !== undefined ? child = entrants.Child : child = 0;
-    entrants.Senior !== undefined ? senior = entrants.Senior : senior = 0;
+    const adult = adultsCount(entrants.Adult);
+    const child = childrenCount(entrants.Child);
+    const senior = seniorsCount(entrants.Senior);
     output = (adult * prices.Adult) + (child * prices.Child) + (senior * prices.Senior);
   }
   return output;
@@ -84,15 +111,15 @@ function getAnimalMap(options) {
 }
 
 function getSchedule(dayName) {
-  let object = {};
+  const object = {};
   let output;
-  object['Tuesday'] = `Open from ${hours.Tuesday.open}am until ${hours.Tuesday.close - 12}pm`;
-  object['Wednesday'] = `Open from ${hours.Wednesday.open}am until ${hours.Wednesday.close - 12}pm`;
-  object['Thursday'] = `Open from ${hours.Thursday.open}am until ${hours.Thursday.close - 12}pm`;
-  object['Friday'] = `Open from ${hours.Friday.open}am until ${hours.Friday.close - 12}pm`;
-  object['Saturday'] = `Open from ${hours.Saturday.open}am until ${hours.Saturday.close - 12}pm`;
-  object['Sunday'] = `Open from ${hours.Sunday.open}am until ${hours.Sunday.close - 12}pm`;
-  object['Monday'] = `CLOSED`;
+  object.Tuesday = `Open from ${hours.Tuesday.open}am until ${hours.Tuesday.close - 12}pm`;
+  object.Wednesday = `Open from ${hours.Wednesday.open}am until ${hours.Wednesday.close - 12}pm`;
+  object.Thursday = `Open from ${hours.Thursday.open}am until ${hours.Thursday.close - 12}pm`;
+  object.Friday = `Open from ${hours.Friday.open}am until ${hours.Friday.close - 12}pm`;
+  object.Saturday = `Open from ${hours.Saturday.open}am until ${hours.Saturday.close - 12}pm`;
+  object.Sunday = `Open from ${hours.Sunday.open}am until ${hours.Sunday.close - 12}pm`;
+  object.Monday = 'CLOSED';
   if (dayName === undefined) {
     output = object;
   } else {
@@ -104,59 +131,75 @@ function getSchedule(dayName) {
 
 function getOldestFromFirstSpecies(id) {
   const employeeInfo = employees.find((employee) =>
-    employee.id === id
-  );
+    employee.id === id);
   const animalId = employeeInfo.responsibleFor[0];
   const specieObject = species.find((specie) =>
-    specie.id === animalId
-  );
+    specie.id === animalId);
   const animalsArray = specieObject.residents;
   const ageArray = [];
-  animalsArray.forEach((animal) => { ageArray.push(animal.age) });
+  animalsArray.forEach((animal) => { ageArray.push(animal.age); });
   const sortedAgeArray = ageArray.sort((a, b) => a - b);
   const oldestAnimal = sortedAgeArray[sortedAgeArray.length - 1];
   const oldestAnimalObject = animalsArray.find((animal) =>
-    animal.age === oldestAnimal
-  );
-  return [ oldestAnimalObject.name, oldestAnimalObject.sex, oldestAnimalObject.age ];
+    animal.age === oldestAnimal);
+  return [oldestAnimalObject.name, oldestAnimalObject.sex, oldestAnimalObject.age];
 }
 
-// A função round foi obtida através do link abaixo:
-// https://pt.stackoverflow.com/questions/114740/como-arredondar-com-2-casas-decimais-no-javascript-utilizando-uma-regra-espec%C3%ADfi
-var round = (number, digits) => {
-  digits = typeof digits !== 'undefined' ?  digits : 2;
-  return +(Math.floor(number + ('e+' + digits)) + ('e-' + digits));
+// Arredondar números
+const round = (num, places) => {
+  let roundNumber;
+  if (!(` ${num}`).includes('e')) {
+    roundNumber = +(`${Math.round(`${num}e+${places}`)}e-${places}`);
+  } else {
+    const arr = (` ${num}`).split('e');
+    let sig = '';
+    if (+arr[1] + places > 0) {
+      sig = '+';
+    }
+    roundNumber = +(`${Math.round(`${+arr[0]}e${sig}${+arr[1] + places}`)}e-${places}`);
+  }
+  return roundNumber;
 };
+// A função round foi obtida através do link abaixo:
+// https://metring.com.br/arredondar-numero-em-javascript
 
 function increasePrices(percentage) {
   if (percentage !== undefined) {
-    prices.Adult = round(prices.Adult + (prices.Adult / 100 * percentage) + 0.01, 2);
-    prices.Senior = round(prices.Senior + (prices.Senior / 100 * percentage) + 0.01, 2);
-    prices.Child = round(prices.Child + (prices.Child / 100 * percentage) + 0.01, 2);
+    prices.Adult = round(prices.Adult + ((prices.Adult / 100) * percentage), 2);
+    prices.Senior = round(prices.Senior + ((prices.Senior / 100) * percentage), 2);
+    prices.Child = round(prices.Child + ((prices.Child / 100) * percentage), 2);
   }
 }
 
-function getEmployeeCoverage(idOrName) {
+const wholeList = () => {
   const output = {};
+  const namesArray = [];
+  const animalsArrayOfArrays = [];
+  employees.forEach((employee) => {
+    namesArray.push(`${employee.firstName} ${employee.lastName}`);
+    const animalsArray = [];
+    employee.responsibleFor.forEach((animalId) => {
+      const animalObject = species.find((specie) => specie.id === animalId);
+      animalsArray.push(animalObject.name);
+    });
+    animalsArrayOfArrays.push(animalsArray);
+  });
+  namesArray.forEach((employeeName, index) => {
+    output[employeeName] = animalsArrayOfArrays[index];
+  });
+  return output;
+};
+
+function getEmployeeCoverage(idOrName) {
+  let output;
   if (idOrName === undefined) {
-    const namesArray = [];
-    const animalsArrayOfArrays = [];
-    employees.forEach((employee) => {
-      namesArray.push(`${employee.firstName} ${employee.lastName}`);
-      const animalsArray = [];
-      employee.responsibleFor.forEach((animalId) => {
-        const animalObject = species.find((specie) => specie.id === animalId);
-        animalsArray.push(animalObject.name);
-      });
-      animalsArrayOfArrays.push(animalsArray);
-    });
-    namesArray.forEach((employeeName, index) => {
-      output[employeeName] = animalsArrayOfArrays[index];
-    });
+    output = wholeList();
   } else {
+    output = {};
     const employeeObject = employees.find((employee) =>
-      employee.id == idOrName || employee.firstName == idOrName || employee.lastName == idOrName
-    );
+      employee.id === idOrName
+      || employee.firstName === idOrName
+      || employee.lastName === idOrName);
     const animalsArray = [];
     employeeObject.responsibleFor.forEach((animalId) => {
       const animalObject = species.find((specie) => specie.id === animalId);
