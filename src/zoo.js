@@ -59,8 +59,35 @@ function calculateEntry(entrants) {
   return ((Adult * prices.Adult) + (Senior * prices.Senior) + (Child * prices.Child));
 }
 
-function getAnimalMap(options) {
-  // seu código aqui
+function gender(animal, sex) {
+  if (animal.sex === sex || typeof sex === 'undefined') {
+    return animal.name;
+  }
+}
+
+function sortAnimals(sort, animalsList) {
+  if (sort) animalsList.sort();
+}
+
+function getAnimalMap(options = {}) {
+  const location = { NE: [], NW: [], SE: [], SW: [] };
+  species.forEach((animal) => {
+    if (options.includeNames) {
+      const animalName = animal.name;
+      const animalObject = {};
+      const animalListedNames = [];
+      animal.residents.forEach((element) => {
+        const sex = gender(element, options.sex);
+        if (typeof sex !== 'undefined') {
+          animalListedNames.push(sex);
+        }
+      });
+      sortAnimals(options.sorted, animalListedNames);
+      animalObject[animalName] = animalListedNames;
+      location[animal.location].push(animalObject);
+    } else { location[animal.location].push(animal.name); }
+  });
+  return location;
 }
 
 function getSchedule(dayName) {
@@ -70,7 +97,7 @@ function getSchedule(dayName) {
     return acc;
   }, {});
   days.Monday = 'CLOSED';
-  if (dayName in days) {
+  if (typeof dayName !== 'undefined') {
     return { [dayName]: days[dayName] };
   }
   return days;
@@ -79,9 +106,9 @@ function getSchedule(dayName) {
 function getOldestFromFirstSpecies(id) {
   const responsibleFor = employees.filter((employee) => employee.id === id)
     .map((employeeMap) => employeeMap.responsibleFor);
-  const firstAnimal = species.find((animal) => animal.id === responsibleFor[0][0])
-    .residents.sort((a, b) => b.age - a.age)[0];
-  return [firstAnimal.name, firstAnimal.sex, firstAnimal.age];
+  const oldest = species.find((animal) => animal.id === responsibleFor[0][0])
+    .residents.sort((animal1, animal2) => animal2.age - animal1.age)[0];
+  return [oldest.name, oldest.sex, oldest.age];
 }
 
 function increasePrices(percentage) {
