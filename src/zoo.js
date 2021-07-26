@@ -79,7 +79,7 @@ function getOldestFromFirstSpecies(id) {
 
 function increasePrices(percentage) {
   // seu código aqui
-  const { Adult, Senior, Child} = data.prices;
+  const { Adult, Senior, Child } = data.prices;
   data.prices.Adult = parseFloat((Adult * ((percentage / 100) + 1) + 0.001).toFixed(2));
   data.prices.Senior = parseFloat((Senior * ((percentage / 100) + 1) + 0.001).toFixed(2));
   data.prices.Child = parseFloat((Child * ((percentage / 100) + 1) + 0.001).toFixed(2));
