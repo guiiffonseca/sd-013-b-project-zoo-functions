@@ -53,12 +53,12 @@ function countAnimals(specieName) {
     : species.find((specie) => specie.name === specieName).residents.length;
 }
 
-function entry(entrants) {
-}
-
 function calculateEntry(entrants) {
   return (!entrants) ? 0
-    : entry();
+    : Object.entries(entrants).reduce(
+      (total, [key, value]) => total + prices[key] * value,
+      0,
+    );
 }
 
 // function getAnimalsByLocation() {
@@ -97,9 +97,8 @@ function getSchedule(dayName) {
     Sunday: 'Open from 8am until 8pm',
     Monday: 'CLOSED',
   };
-  if (dayName) {
-    return { [dayName]: schedule[dayName] };
-  } return schedule;
+  return (!dayName) ? schedule
+    : { [dayName]: schedule[dayName] };
 }
 
 function getOldestFromFirstSpecies(id) {
@@ -115,8 +114,15 @@ function increasePrices(percentage) {
   });
 }
 
+function getResponsibleAnimals(employeeName) {
+  employees.find((employee) => employee === employeeName)
+    .responsibleFor.map((animals) => animals.find((specie) => specie.id === animals).name);
+}
+
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+  if (!idOrName) {
+    return employees.forEach((employee) => getResponsibleAnimals(employee));
+  }
 }
 
 module.exports = {
