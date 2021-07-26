@@ -65,9 +65,9 @@ function getAnimalMap(options) {
 
 function getSchedule(dayName) {
   const hour = Object.keys(hours);
-  const days = hour.reduce((accumulator, currentValue) => {
-    accumulator[currentValue] = `Open from ${hours[currentValue].open}am until ${hours[currentValue].close - 12}pm`;
-    return accumulator;
+  const days = hour.reduce((acc, cValue) => {
+    acc[cValue] = `Open from ${hours[cValue].open}am until ${hours[cValue].close - 12}pm`;
+    return acc;
   }, {});
   days.Monday = 'CLOSED';
   if (dayName in days) {
