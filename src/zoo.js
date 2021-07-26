@@ -83,7 +83,7 @@ function getSchedule(dayName) {
   if (dayName === undefined) {
     return schedule;
   }
-  return { [dayName]: schedule[dayName]};
+  return { [dayName]: schedule[dayName] };
 }
 
 function getOldestFromFirstSpecies(id) {
