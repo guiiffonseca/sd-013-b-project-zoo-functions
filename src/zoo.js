@@ -87,11 +87,15 @@ function increasePrices(percentage) {
 
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
+  if (idOrName === undefined) {
+    return {};
+  }
   const searchEmployee = data.employees.find(({ id, firstName, lastName }) =>
     id === idOrName || firstName === idOrName || lastName === idOrName);
   const searchAnimal = data.employees.responsibleFor.map((animal) =>
     data.species.find((animalInfo) => animal === animalInfo));
-  return { `${searchEmployee.firstName} ${searchEmployee.lastName} : ${searchAnimal}`};
+  const employeeName = `${searchEmployee.firstName} ${searchEmployee.lastName}`;
+  return { [employeeName]: searchAnimal };
 }
 
 module.exports = {
