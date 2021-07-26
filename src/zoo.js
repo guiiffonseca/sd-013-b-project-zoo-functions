@@ -1,5 +1,7 @@
 const { species } = require('./data');
 const { employees } = require('./data');
+const { prices } = require('./data');
+const { hours } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -62,7 +64,19 @@ function countAnimals(animal) {
 }
 
 function calculateEntry(entrants) {
-  // seu código aqui
+  let output;
+  if (entrants === undefined || entrants === {}) {
+    output = 0;
+  } else {
+    let adult;
+    let child;
+    let senior;
+    entrants.Adult !== undefined ? adult = entrants.Adult : adult = 0;
+    entrants.Child !== undefined ? child = entrants.Child : child = 0;
+    entrants.Senior !== undefined ? senior = entrants.Senior : senior = 0;
+    output = (adult * prices.Adult) + (child * prices.Child) + (senior * prices.Senior);
+  }
+  return output;
 }
 
 function getAnimalMap(options) {
@@ -70,19 +84,87 @@ function getAnimalMap(options) {
 }
 
 function getSchedule(dayName) {
-  // seu código aqui
+  let object = {};
+  let output;
+  object['Tuesday'] = `Open from ${hours.Tuesday.open}am until ${hours.Tuesday.close - 12}pm`;
+  object['Wednesday'] = `Open from ${hours.Wednesday.open}am until ${hours.Wednesday.close - 12}pm`;
+  object['Thursday'] = `Open from ${hours.Thursday.open}am until ${hours.Thursday.close - 12}pm`;
+  object['Friday'] = `Open from ${hours.Friday.open}am until ${hours.Friday.close - 12}pm`;
+  object['Saturday'] = `Open from ${hours.Saturday.open}am until ${hours.Saturday.close - 12}pm`;
+  object['Sunday'] = `Open from ${hours.Sunday.open}am until ${hours.Sunday.close - 12}pm`;
+  object['Monday'] = `CLOSED`;
+  if (dayName === undefined) {
+    output = object;
+  } else {
+    output = {};
+    output[dayName] = object[dayName];
+  }
+  return output;
 }
 
 function getOldestFromFirstSpecies(id) {
-  // seu código aqui
+  const employeeInfo = employees.find((employee) =>
+    employee.id === id
+  );
+  const animalId = employeeInfo.responsibleFor[0];
+  const specieObject = species.find((specie) =>
+    specie.id === animalId
+  );
+  const animalsArray = specieObject.residents;
+  const ageArray = [];
+  animalsArray.forEach((animal) => { ageArray.push(animal.age) });
+  const sortedAgeArray = ageArray.sort((a, b) => a - b);
+  const oldestAnimal = sortedAgeArray[sortedAgeArray.length - 1];
+  const oldestAnimalObject = animalsArray.find((animal) =>
+    animal.age === oldestAnimal
+  );
+  return [ oldestAnimalObject.name, oldestAnimalObject.sex, oldestAnimalObject.age ];
 }
 
+// A função round foi obtida através do link abaixo:
+// https://pt.stackoverflow.com/questions/114740/como-arredondar-com-2-casas-decimais-no-javascript-utilizando-uma-regra-espec%C3%ADfi
+var round = (number, digits) => {
+  digits = typeof digits !== 'undefined' ?  digits : 2;
+  return +(Math.floor(number + ('e+' + digits)) + ('e-' + digits));
+};
+
 function increasePrices(percentage) {
-  // seu código aqui
+  if (percentage !== undefined) {
+    prices.Adult = round(prices.Adult + (prices.Adult / 100 * percentage) + 0.01, 2);
+    prices.Senior = round(prices.Senior + (prices.Senior / 100 * percentage) + 0.01, 2);
+    prices.Child = round(prices.Child + (prices.Child / 100 * percentage) + 0.01, 2);
+  }
 }
 
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+  const output = {};
+  if (idOrName === undefined) {
+    const namesArray = [];
+    const animalsArrayOfArrays = [];
+    employees.forEach((employee) => {
+      namesArray.push(`${employee.firstName} ${employee.lastName}`);
+      const animalsArray = [];
+      employee.responsibleFor.forEach((animalId) => {
+        const animalObject = species.find((specie) => specie.id === animalId);
+        animalsArray.push(animalObject.name);
+      });
+      animalsArrayOfArrays.push(animalsArray);
+    });
+    namesArray.forEach((employeeName, index) => {
+      output[employeeName] = animalsArrayOfArrays[index];
+    });
+  } else {
+    const employeeObject = employees.find((employee) =>
+      employee.id == idOrName || employee.firstName == idOrName || employee.lastName == idOrName
+    );
+    const animalsArray = [];
+    employeeObject.responsibleFor.forEach((animalId) => {
+      const animalObject = species.find((specie) => specie.id === animalId);
+      animalsArray.push(animalObject.name);
+    });
+    output[`${employeeObject.firstName} ${employeeObject.lastName}`] = animalsArray;
+  }
+  return output;
 }
 
 module.exports = {
