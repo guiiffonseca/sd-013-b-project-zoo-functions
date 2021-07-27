@@ -61,12 +61,13 @@ function calculateEntry({ Adult = 0, Child = 0, Senior = 0 } = 0) {
   return (Adult * 49.99 + Child * 20.99 + Senior * 24.99);
 }
 
-function getAnimalMap({ includeNames = false, sorted = false, sex }) {
+function getAnimalMap({ includeNames = false, sorted = false, sex } = {}) {
   // seu código aqui
 }
 
 function getSchedule(dayName) {
   // seu código aqui
+
 }
 
 function getOldestFromFirstSpecies(id) {
@@ -75,6 +76,9 @@ function getOldestFromFirstSpecies(id) {
 
 function increasePrices(percentage) {
   // seu código aqui
+  data.prices.Adult = Math.ceil(data.prices.Adult * (100 + percentage)) / 100;
+  data.prices.Senior = Math.ceil(data.prices.Senior * (100 + percentage)) / 100;
+  data.prices.Child = Math.ceil(data.prices.Child * (100 + percentage)) / 100;
 }
 
 function getEmployeeCoverage(idOrName) {
