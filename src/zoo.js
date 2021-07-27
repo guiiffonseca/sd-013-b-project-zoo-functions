@@ -85,9 +85,8 @@ function increasePrices(percentage) {
   });
 }
 
-
-function getEmployeeCoverage(idOrName) {
   // Com suporte de outros trybers
+function getEmployeeCoverage(idOrName) {
   let employees = data.employees.reduce((acc, { id, firstName, lastName }) => {
     const speciesId = data.employees.find((employee) => employee.id === id).responsibleFor;
     const anml = getSpeciesByIds(...speciesId);
@@ -107,7 +106,6 @@ function getEmployeeCoverage(idOrName) {
   });
   return employees;
 }
-
 
 module.exports = {
   calculateEntry,
