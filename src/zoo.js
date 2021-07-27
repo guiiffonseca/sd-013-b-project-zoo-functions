@@ -4,24 +4,18 @@ function getSpeciesByIds(...ids) {
   const { species } = data;
 
   return species.filter((specie) => ids.includes(specie.id));
-
 }
 
-function getAnimalsOlderThan(animal, age) { 
-
+function getAnimalsOlderThan(animal, age) {
   const { species } = data;
 
   const acharOAnimal = species.find((specie) => specie.name === animal);
   return acharOAnimal.residents.every((resident) => resident.age > age);
-
 }
 
 function getEmployeeByName(employeeName) {
-
   const { employees } = data;
-
   if (!employeeName) return {};
-
   return employees.find((employee) => employee.firstName === employeeName
   || employee.lastName === employeeName);
 }
