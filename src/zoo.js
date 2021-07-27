@@ -1,7 +1,6 @@
 const data = require('./data');
 
-function getSpeciesByIds(...ids) { 
-
+function getSpeciesByIds(...ids) {
   const { species } = data;
 
   return species.filter((specie) => ids.includes(specie.id));
@@ -22,7 +21,7 @@ function getEmployeeByName(employeeName) {
   const { employees } = data;
 
   if (!employeeName) return {};
-  
+
   return employees.find((employee) => employee.firstName === employeeName
   || employee.lastName === employeeName);
 }
