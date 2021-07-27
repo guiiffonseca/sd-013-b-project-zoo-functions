@@ -3,7 +3,7 @@ const data = require('./data');
 function getSpeciesByIds(...ids) {
   const { species } = data;
 
-  return species.filter((specie) => ids.includes(specie.id));
+  return spc = ids.map((id) => (data.species.find((speciesId) => speciesId.id === id)));;
 }
 
 function getAnimalsOlderThan(animal, age) {
@@ -105,6 +105,7 @@ function getEmployeeCoverage(idOrName) {
   });
   return employees;
 }
+
 
 module.exports = {
   calculateEntry,
