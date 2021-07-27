@@ -34,9 +34,9 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 }
 
 function countAnimals(species) {
-  const { species: allSpecies } = data;
-  return species ? allSpecies.find(({ name }) => name === species).residents.length
-  : allSpecies.reduce((speciesCounter, { name, residents }) => ({ ...speciesCounter, [name]: residents.length }), {});
+  const { species: alp } = data;
+  return species ? alp.find(({ name }) => name === species).residents.length : alp.reduce((Counter,
+  { name, residents }) => ({ ...Counter, [name]: residents.length }), {});
 }
 
 function calculateEntry(entrants = {}) {
