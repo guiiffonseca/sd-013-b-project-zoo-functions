@@ -21,7 +21,7 @@ function getEmployeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  return { ...personalInfo, ...associatedWith };
 }
 
 function isManager(id) {
@@ -37,8 +37,13 @@ function countAnimals(species) {
   // seu código aqui
 }
 
-function calculateEntry(entrants) {
-  // seu código aqui
+function calculateEntry(entrants = {}) {
+  const { Adult = 0, Senior = 0, Child = 0 } = entrants;
+  const { prices } = data;
+  if (!entrants || !Object.entries(entrants).length) {
+    return 0;
+  }
+  return (Adult * prices.Adult) + (Child * prices.Child) + (Senior * prices.Senior);
 }
 
 function getAnimalMap(options) {
