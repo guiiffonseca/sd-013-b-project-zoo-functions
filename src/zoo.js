@@ -42,7 +42,6 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
     responsibleFor,
   };
 
-  console.log(newEmployee);
   data.employees.push(newEmployee);
 }
 
@@ -96,6 +95,17 @@ function increasePrices(percentage) {
 
 function getEmployeeCoverage(idOrName) {
   // seu código aqui
+  if (idOrName === undefined) {
+    return data.employees
+      .reduce((output, employee) => ({ ...output,
+        [`${employee.firstName} ${employee.lastName}`]: employee.responsibleFor
+          .map((id) => data.species.find((animal) => animal.id === id).name) }), {});
+  }
+  return data.employees
+    .filter(({ id, firstName, lastName }) => id === idOrName
+      || firstName === idOrName || lastName === idOrName)
+    .map((employee) => ({ [`${employee.firstName} ${employee.lastName}`]: employee.responsibleFor
+      .map((id) => data.species.find((animal) => animal.id === id).name) }))[0];
 }
 
 module.exports = {
