@@ -90,6 +90,12 @@ function getOldestFromFirstSpecies(id) {
 
 function increasePrices(percentage) {
   // seu código aqui
+  const precos = Object.entries(data.prices);
+  const valorVisita = precos.forEach((valorUnidade) => {
+    const novoPreco = (valorUnidade[1] * percentage) / 100 + valorUnidade[1];
+    data.prices[valorUnidade[0]] = Math.round(novoPreco * 100) / 100;
+  });
+  return valorVisita;
 }
 
 function getEmployeeCoverage(idOrName) {
