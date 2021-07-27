@@ -60,33 +60,32 @@ function getAnimalMap(options) {
 function getSchedule(dayName) {
   // seu código aqui
   const horariosFuncionamento = {
-    Tuesday: `Open from ${data.hours.Tuesday.open}am until ${data.hours.Tuesday.close - 12}pm`,
-    Wednesday: `Open from ${data.hours.Wednesday.open}am until ${data.hours.Wednesday.close - 12}pm`,
-    Thursday: `Open from ${data.hours.Thursday.open}am until ${data.hours.Thursday.close - 12}pm`,
-    Friday: `Open from ${data.hours.Friday.open}am until ${data.hours.Friday.close - 12}pm`,
-    Saturday: `Open from ${data.hours.Saturday.open}am until ${data.hours.Saturday.close - 12}pm`,
-    Sunday: `Open from ${data.hours.Sunday.open}am until ${data.hours.Sunday.close - 12}pm`,
-    Monday: `CLOSED`,
+    Tuesday: `Open from ${hours.Tuesday.open}am until ${hours.Tuesday.close - 12}pm`,
+    Wednesday: `Open from ${hours.Wednesday.open}am until ${hours.Wednesday.close - 12}pm`,
+    Thursday: `Open from ${hours.Thursday.open}am until ${hours.Thursday.close - 12}pm`,
+    Friday: `Open from ${hours.Friday.open}am until ${hours.Friday.close - 12}pm`,
+    Saturday: `Open from ${hours.Saturday.open}am until ${hours.Saturday.close - 12}pm`,
+    Sunday: `Open from ${hours.Sunday.open}am until ${hours.Sunday.close - 12}pm`,
+    Monday: 'CLOSED',
   };
 
-  if(!dayName) {
-    return horariosFuncionamento
-  } else {
-    return { [dayName]: horariosFuncionamento[dayName] }
+  if (!dayName) {
+    return horariosFuncionamento;
   }
+  return { [dayName]: horariosFuncionamento[dayName] };
 }
 
 function getOldestFromFirstSpecies(id) {
   // seu código aqui
-  const primeiraSpecie = data.employees.find((funcionarioId) => funcionarioId.id === id).responsibleFor[0];
+  const primeiraSpecie = data.employees.find((funcId) => funcId.id === id).responsibleFor[0];
   const animalSpecie = species.find((specie) => specie.id === primeiraSpecie).residents;
   let resultadoFinal = ['name', 'sex', 0];
   animalSpecie.forEach((specie) => {
     if (specie.age > resultadoFinal[2]) {
       resultadoFinal = [specie.name, specie.sex, specie.age];
     }
-  })
-  return resultadoFinal
+  });
+  return resultadoFinal;
 }
 
 function increasePrices(percentage) {
