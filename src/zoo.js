@@ -1,9 +1,10 @@
-const data = require('./data');
+// desestruturação de obj/array
+const { species } = require('./data');;
 
-function getSpeciesByIds(ids) {
- if (ids.length === 0) {
-   return ids;
- }
+function getSpeciesByIds(ids) { 
+
+  return species.filter((specie) => ids.includes(specie.id));
+
 }
 
 function getAnimalsOlderThan(animal, age) {
