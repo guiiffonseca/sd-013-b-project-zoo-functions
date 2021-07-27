@@ -85,9 +85,29 @@ function increasePrices(percentage) {
   });
 }
 
+
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+  // Com suporte de outros trybers
+  let employees = data.employees.reduce((acc, { id, firstName, lastName }) => {
+    const speciesId = data.employees.find((employee) => employee.id === id).responsibleFor;
+    const anml = getSpeciesByIds(...speciesId);
+    const rsd = anml.reduce((count, curr) => { count.push(curr.name); return count; }, []);
+    acc[`${firstName} ${lastName}`] = rsd;
+    return acc;
+  }, {});
+  const eNames = Object.keys(employees);
+  let eName;
+  if (data.employees.some((employee) => employee.id === idOrName)) {
+    eName = data.employees.find((element) => element.id === idOrName).firstName;
+  }
+  eNames.forEach((name) => {
+    if (name.includes(idOrName) || name.includes(eName)) {
+      employees = { [name]: employees[name] };
+    }
+  });
+  return employees;
 }
+
 
 module.exports = {
   calculateEntry,
