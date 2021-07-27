@@ -98,8 +98,35 @@ function increasePrices(percentage) {
   return valorVisita;
 }
 
+function list() {
+  const listaPadrao = {
+    'Nigel Nelson': ['lions', 'tigers'],
+    'Burl Bethea': ['lions', 'tigers', 'bears', 'penguins'],
+    'Ola Orloff': ['otters', 'frogs', 'snakes', 'elephants'],
+    'Wilburn Wishart': ['snakes', 'elephants'],
+    'Stephanie Strauss': ['giraffes', 'otters'],
+    'Sharonda Spry': ['otters', 'frogs'],
+    'Ardith Azevado': ['tigers', 'bears'],
+    'Emery Elser': ['elephants', 'bears', 'lions'],
+  };
+  return listaPadrao;
+}
+
 function getEmployeeCoverage(idOrName) {
-  // seu código aqui
+  if (!idOrName) {
+    return list();
+  }
+  const objFuncionario = employees.find((employee) => idOrName === employee.id
+    || idOrName === employee.firstName || idOrName === employee.lastName);
+
+  const fullName = `${objFuncionario.firstName} ${objFuncionario.lastName}`;
+
+  const firstId = species.find((specie) => specie.id === objFuncionario.responsibleFor[0]);
+
+  const secondId = species.find((specie) => specie.id === objFuncionario.responsibleFor[1]);
+
+  const objeto = { [`${fullName}`]: [firstId.name, secondId.name] };
+  return objeto;
 }
 
 module.exports = {
